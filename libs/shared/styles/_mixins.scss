@@ -1,0 +1,54 @@
+@import './variables';
+
+@mixin button-primary() {
+  color: $white;
+  font-family: 'Gilroy';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  background-color: $primary;
+  border-radius: 5px;
+  border: none;
+  transition: 0.35s background-color;
+  cursor: pointer;
+  &:hover {
+    background-color: $primaryHover;
+  }
+  &:disabled {
+    background-color: $grey;
+    cursor: default;
+  }
+}
+
+@mixin button-secondary() {
+  color: $primary;
+  font-family: 'Gilroy';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid $primary;
+  transition: 0.35s background-color;
+  cursor: pointer;
+  &:hover {
+    color: $white;
+    background-color: $primary;
+  }
+  &:disabled {
+    color: $grey;
+    border: 1px solid $grey;
+    cursor: default;
+    &:hover {
+      color: $grey;
+      background-color: transparent;
+    }
+  }
+}
+
+@mixin text($fs, $lh) {
+  font-size: $fs;
+  line-height: $lh;
+  font-family: 'Gilroy';
+  font-weight: 400;
+}

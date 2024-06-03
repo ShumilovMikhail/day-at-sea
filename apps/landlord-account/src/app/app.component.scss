@@ -1,0 +1,8 @@
+@import 'mixins';
+.btn {
+  @include button-secondary();
+  padding: 8px 16px;
+}
+.btn2 {
+  @include button-primary();
+}

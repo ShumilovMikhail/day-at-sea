@@ -34,6 +34,15 @@
 @font-face {
   font-family: 'Gilroy';
   font-style: normal;
+  font-weight: 600;
+  src: local('Gilroy');
+  src: url('../assets/fonts/Gilroy-Semibold.woff2') format('woff2');
+  src: url('../assets/fonts/Gilroy-Semibold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
   font-weight: 700;
   src: local('Gilroy');
   src: url('../assets/fonts/Gilroy-Bold.woff2') format('woff2');
