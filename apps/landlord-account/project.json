@@ -19,10 +19,14 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/landlord-account/public"
+            "input": "./libs/shared-assets/",
+            "output": "./assets"
           }
         ],
         "styles": ["apps/landlord-account/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared-assets/styles"]
+        },
         "scripts": []
       },
       "configurations": {
