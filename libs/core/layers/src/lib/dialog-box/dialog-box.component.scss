@@ -1,0 +1,51 @@
+@import 'variables';
+
+:host {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal {
+  position: fixed;
+  padding: 35px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $white;
+  z-index: 1000;
+  border-radius: 20px;
+}
+
+.cross {
+  position: absolute;
+  width: 13.5px;
+  height: 13.5px;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    width: 13.5px;
+    height: 1px;
+    background-color: $black;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    transform: rotate(45deg);
+  }
+
+  &::before {
+    content: '';
+    width: 13.5px;
+    height: 1px;
+    background-color: $black;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    transform: rotate(135deg);
+  }
+}
