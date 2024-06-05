@@ -7,14 +7,14 @@ import {
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'layers-dialog-box',
+  selector: 'layers-modal',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './dialog-box.component.html',
-  styleUrl: './dialog-box.component.scss',
+  templateUrl: './modal.component.html',
+  styleUrl: './modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogBoxComponent {
+export class ModalComponent {
   @Output() closeDialogBoxEvent = new EventEmitter<void>();
   public onCrossClick(): void {
     this.closeDialogBoxEvent.emit();
