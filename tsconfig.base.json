@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@auth/feature-register": [
+        "libs/core/auth/feature-register/src/index.ts"
+      ],
       "@layers": ["libs/core/layers/src/index.ts"]
     }
   },
