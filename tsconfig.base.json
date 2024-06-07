@@ -22,7 +22,8 @@
       "@http": ["libs/core/http/src/index.ts"],
       "@layers": ["libs/core/layers/src/index.ts"],
       "@pipes": ["libs/core/utils/pipes/src/index.ts"],
-      "@ui": ["libs/core/ui/src/index.ts"]
+      "@ui": ["libs/core/ui/src/index.ts"],
+      "@utils/validators": ["libs/core/utils/util-validators/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
