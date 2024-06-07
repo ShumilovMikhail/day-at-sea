@@ -18,6 +18,7 @@
       "@auth/feature-register": [
         "libs/core/auth/feature-register/src/index.ts"
       ],
+      "@http": ["libs/core/http/src/index.ts"],
       "@layers": ["libs/core/layers/src/index.ts"],
       "@pipes": ["libs/core/utils/pipes/src/index.ts"],
       "@ui": ["libs/core/ui/src/index.ts"]
