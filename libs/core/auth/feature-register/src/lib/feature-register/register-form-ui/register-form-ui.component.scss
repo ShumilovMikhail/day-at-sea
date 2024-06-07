@@ -1,0 +1,33 @@
+@import 'mixins';
+
+:host {
+  width: 100%;
+}
+
+ui-form-input-ui {
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  button {
+    @include button-primary();
+    padding: 10px 16.8px;
+  }
+
+  p {
+    text-align: center;
+  }
+}

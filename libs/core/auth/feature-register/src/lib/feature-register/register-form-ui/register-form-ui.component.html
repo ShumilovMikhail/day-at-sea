@@ -1,0 +1,56 @@
+<form [formGroup]="form" (ngSubmit)="onNextStep()">
+  @if (step === 1) {
+  <div class="step">
+    <div class="inputs-container">
+      <ui-form-input-ui
+        [control]="form.get('login')! | utilFormControl"
+        [label]="'Имя пользователя'"
+        [required]="true"
+        [placeholder]="'Имя пользователя'"
+      ></ui-form-input-ui>
+      <ui-form-input-ui
+        [control]="form.get('email')! | utilFormControl"
+        [label]="'Email'"
+        [required]="true"
+        [placeholder]="'Введите ваш email'"
+      ></ui-form-input-ui>
+    </div>
+    <button
+      type="submit"
+      [disabled]="
+        !(this.form.get('login')?.valid && this.form.get('email')?.valid)
+      "
+    >
+      Продолжить
+    </button>
+  </div>
+  } @if (step === 2) {
+  <div class="step">
+    <p>
+      Похоже, что вы здесь впервые. Укажите ваши ФИО, чтобы мы могли вас
+      запомнить.
+    </p>
+    <ui-form-input-ui
+      [control]="form.get('fullName')! | utilFormControl"
+      [label]="'ФИО'"
+      [required]="true"
+      [placeholder]="'Введите ваше ФИО'"
+    ></ui-form-input-ui>
+    <button type="submit">Продолжить</button>
+  </div>
+  } @if (step === 3) {
+  <div class="step">
+    <p>
+      Безопасность ваших данных — наш приоритет. Пожалуйста, введите надёжный
+      пароль для входа
+    </p>
+    <ui-form-password-ui
+      [control]="form.get('password')! | utilFormControl"
+      [label]="'Пароль'"
+      [required]="true"
+      [placeholder]="'password'"
+    ></ui-form-password-ui>
+    <button type="submit">Сохранить</button>
+  </div>
+  }
+</form>

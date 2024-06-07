@@ -64,6 +64,37 @@ a {
   text-decoration: none;
 }
 
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    &.required {
+      position: relative;
+      &::after {
+        content: '*';
+        margin-left: 2px;
+        color: red;
+      }
+    }
+  }
+  input {
+    padding: 11px 15px;
+    background-color: $white;
+    border: 1px solid $blueLight;
+    border-radius: 7px;
+  }
+
+  span {
+    margin-top: 2px;
+    color: $red;
+    font-size: 12px;
+    margin-left: 5px;
+  }
+}
+
 @media (max-width: 320px) {
   h1 {
     font-size: 24px;

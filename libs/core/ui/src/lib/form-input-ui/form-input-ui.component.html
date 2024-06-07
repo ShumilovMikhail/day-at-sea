@@ -1,0 +1,18 @@
+<div class="input-container">
+  @if (label) {
+  <label
+    [ngClass]="{
+      required: required
+    }"
+    >{{ label }}</label
+  >
+  }
+  <input
+    type="text"
+    [formControl]="control"
+    [placeholder]="placeholder ?? ''"
+  />
+  @if (errors) { @for (error of errors; track error) {
+  <span>{{ error }}</span>
+  } }
+</div>
