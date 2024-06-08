@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
@@ -14,4 +20,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class RegisterUiComponent {
   @Input({ required: true }) registerForm!: FormGroup;
+  @Output() submitEvent = new EventEmitter<void>();
+
+  public onSubmit(): void {
+    this.submitEvent.emit();
+  }
 }

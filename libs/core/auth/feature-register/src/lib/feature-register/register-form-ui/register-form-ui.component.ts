@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
+  Output,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -35,14 +37,16 @@ const STEP_COUNT = 3;
 })
 export class RegisterFormUiComponent {
   @Input({ required: true }) form!: FormGroup<RegisterForm>;
+  @Output() submitEvent = new EventEmitter<void>();
   public step = 1;
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   public onNextStep(): void {
-    this.step = this.step > STEP_COUNT ? this.step : ++this.step;
-    if (this.step > STEP_COUNT) {
-      console.log(this.form.get('login')?.errors);
+    if (this.step === STEP_COUNT) {
+      this.submitEvent.emit();
+      return;
     }
+    this.step = this.step === STEP_COUNT ? this.step : ++this.step;
     this.changeDetectorRef.detectChanges();
   }
 }

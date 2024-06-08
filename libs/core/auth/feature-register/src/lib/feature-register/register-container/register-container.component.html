@@ -1,3 +1,6 @@
 <layers-modal>
-  <auth-register-ui [registerForm]="form"></auth-register-ui>
+  <auth-register-ui
+    [registerForm]="form"
+    (submitEvent)="onSubmit()"
+  ></auth-register-ui>
 </layers-modal>

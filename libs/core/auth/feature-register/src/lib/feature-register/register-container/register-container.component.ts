@@ -11,9 +11,17 @@ import {
   latinLettersValidator,
 } from '@utils/validators';
 import {
+  AuthFacade,
   emailAvailableValidator,
   loginAvailableValidator,
 } from '@auth/data-access';
+
+interface RegisterForm {
+  login: string;
+  password: string;
+  email: string;
+  fullName: string;
+}
 
 @Component({
   selector: 'auth-register-container',
@@ -25,6 +33,7 @@ import {
 })
 export class RegisterContainerComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly authFacade = inject(AuthFacade);
   public readonly form = this.fb.group({
     login: [
       '',
@@ -47,4 +56,10 @@ export class RegisterContainerComponent {
       ],
     ],
   });
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      this.authFacade.register(this.form.value as RegisterForm);
+    }
+  }
 }
