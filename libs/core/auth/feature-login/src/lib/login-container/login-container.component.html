@@ -1,3 +1,7 @@
 <layers-modal>
-  <auth-login-ui [form]="form" (submitEvent)="onSubmit()"></auth-login-ui>
+  <auth-login-ui
+    [form]="form"
+    (submitEvent)="onSubmit()"
+    [error]="errors$ | async"
+  ></auth-login-ui>
 </layers-modal>

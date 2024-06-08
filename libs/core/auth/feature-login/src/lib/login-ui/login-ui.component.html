@@ -16,6 +16,9 @@
       [required]="true"
       [placeholder]="'Введите пароль'"
     ></ui-forms-password>
+    @if (error) {
+    <span>{{ error }}</span>
+    }
     <button
       type="submit"
       [disabled]="

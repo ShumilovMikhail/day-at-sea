@@ -28,6 +28,7 @@ import { FormControlPipe } from '@utils/pipes';
 })
 export class LoginUiComponent {
   @Input({ required: true }) form!: FormGroup;
+  @Input() error!: string | null;
   @Output() submitEvent = new EventEmitter<void>();
 
   public onSubmit(): void {
