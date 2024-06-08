@@ -7,7 +7,13 @@ import {
   selectAuthStatus,
   selectAuthToken,
 } from './auth.selectors';
-import { RegisterData, RegisterDataDTO } from './auth.models';
+import {
+  EmailLoginDataDTO,
+  LoginData,
+  LoginDataDTO,
+  RegisterData,
+  RegisterDataDTO,
+} from './auth.models';
 import { authDTOAdapter } from './auth-dto.adapter';
 
 @Injectable({ providedIn: 'root' })
@@ -26,5 +32,11 @@ export class AuthFacade {
     const data: RegisterDataDTO =
       authDTOAdapter.registerDataToDTO(registerData);
     this.store.dispatch(authActions.register({ data }));
+  }
+
+  public login(loginData: LoginData): void {
+    const data: LoginDataDTO | EmailLoginDataDTO =
+      authDTOAdapter.loginDataToDTO(loginData);
+    this.store.dispatch(authActions.login({ data }));
   }
 }

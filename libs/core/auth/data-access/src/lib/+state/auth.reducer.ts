@@ -5,6 +5,8 @@ import {
   AuthError,
   AuthResponse,
   AuthState,
+  EmailLoginDataDTO,
+  LoginDataDTO,
   RegisterDataDTO,
 } from './auth.models';
 import { Token } from '../types';
@@ -19,6 +21,7 @@ export const initialAuthState: AuthState = {
   authStatus: null,
   authToken: null,
   error: null,
+  isAuthenticate: false,
 };
 
 export const authFeature = createFeature({
@@ -46,6 +49,7 @@ export const authFeature = createFeature({
         ...state,
         authStatus: 'loaded',
         authToken: payload.authToken,
+        isAuthenticate: true,
       })
     ),
     on(
@@ -70,10 +74,40 @@ export const authFeature = createFeature({
         ...state,
         authStatus: 'loaded',
         authToken: payload.authToken,
+        isAuthenticate: true,
       })
     ),
     on(
       authActions.registerFailure,
+      (state, payload: { error: AuthError }): AuthState => ({
+        ...state,
+        authStatus: 'error',
+        error: payload.error,
+      })
+    ),
+    on(
+      authActions.login,
+      (
+        state,
+        payload: { data: LoginDataDTO | EmailLoginDataDTO }
+      ): AuthState => ({
+        ...state,
+        authStatus: 'loading',
+        error: null,
+        authToken: null,
+      })
+    ),
+    on(
+      authActions.loginSuccess,
+      (state, payload: AuthResponse): AuthState => ({
+        ...state,
+        authStatus: 'loaded',
+        authToken: payload.authToken,
+        isAuthenticate: true,
+      })
+    ),
+    on(
+      authActions.loginFailure,
       (state, payload: { error: AuthError }): AuthState => ({
         ...state,
         authStatus: 'error',

@@ -22,7 +22,22 @@ export const registerEffect$ = createEffect(
     ),
   { functional: true }
 );
-export const registerAfterEffect$ = createEffect(
+
+export const loginEffect$ = createEffect(
+  (actions$ = inject(Actions), api = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(authActions.login),
+      switchMap(({ data }) =>
+        api.post<AuthResponse>('auth/login', data).pipe(
+          map((response: AuthResponse) => authActions.loginSuccess(response)),
+          catchError(({ error }) => of(authActions.loginFailure({ error })))
+        )
+      )
+    ),
+  { functional: true }
+);
+
+export const authAfterEffect$ = createEffect(
   (
     actions$ = inject(Actions),
     localStorageJwtService = inject(LocalStorageJwtService)
