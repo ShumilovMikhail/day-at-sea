@@ -1,7 +1,7 @@
 import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 
-export function fullNameValidator(): ValidatorFn {
-  const pattern = /^(?:[а-яА-ЯёЁ]+(?:\s+[а-яА-ЯёЁ]+){2})$/;
+export function loginCorrectlyValidator(): ValidatorFn {
+  const pattern = /^[a-zA-Z0-9-_]+$/;
   return (control: AbstractControl): ValidationErrors | null => {
     if (control.value.length === 0) {
       return null;

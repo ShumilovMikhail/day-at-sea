@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ModalComponent } from '@layers';
 import { RegisterUiComponent } from '../register-ui/register-ui.component';
 import {
-  alphaNumericValidator,
+  loginCorrectlyValidator,
   containsSpacesValidator,
   fullNameValidator,
 } from '@utils/validators';
@@ -27,7 +27,7 @@ export class RegisterContainerComponent {
   public readonly form = this.fb.group({
     login: [
       '',
-      [Validators.required, Validators.minLength(5), alphaNumericValidator()],
+      [Validators.required, Validators.minLength(5), loginCorrectlyValidator()],
       [loginAvailableValidator()],
     ],
     email: [
