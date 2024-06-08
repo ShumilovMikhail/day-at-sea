@@ -45,4 +45,8 @@ export class RegisterFormUiComponent {
     }
     this.changeDetectorRef.detectChanges();
   }
+
+  console() {
+    console.log(this.form.get('login')!.errors);
+  }
 }

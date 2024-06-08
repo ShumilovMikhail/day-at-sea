@@ -4,6 +4,15 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { ModalComponent } from '@layers';
 import { RegisterUiComponent } from '../register-ui/register-ui.component';
+import {
+  alphaNumericValidator,
+  containsSpacesValidator,
+  fullNameValidator,
+} from '@utils/validators';
+import {
+  emailAvailableValidator,
+  loginAvailableValidator,
+} from '@auth/data-access';
 
 @Component({
   selector: 'auth-register-container',
@@ -16,9 +25,20 @@ import { RegisterUiComponent } from '../register-ui/register-ui.component';
 export class RegisterContainerComponent {
   private readonly fb = inject(FormBuilder);
   public readonly form = this.fb.group({
-    login: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    fullName: '',
-    password: '',
+    login: [
+      '',
+      [Validators.required, Validators.minLength(5), alphaNumericValidator()],
+      [loginAvailableValidator()],
+    ],
+    email: [
+      '',
+      [Validators.required, Validators.email],
+      [emailAvailableValidator()],
+    ],
+    fullName: ['', [Validators.required, fullNameValidator()]],
+    password: [
+      '',
+      [Validators.required, Validators.minLength(8), containsSpacesValidator()],
+    ],
   });
 }

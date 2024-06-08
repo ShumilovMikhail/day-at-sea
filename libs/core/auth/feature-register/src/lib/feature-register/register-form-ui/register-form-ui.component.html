@@ -7,12 +7,40 @@
         [label]="'Имя пользователя'"
         [required]="true"
         [placeholder]="'Имя пользователя'"
+        [errors]="
+          form.get('login')?.errors
+            ? [
+                (form.get('login')?.errors)!['isExist']
+                  ? 'Данное имя уже занято'
+                  : '',
+                (form.get('login')?.errors)!['minlength']
+                  ? 'Минимальная длина имени 5 символов'
+                  : '',
+                (form.get('login')?.errors)!['isIncorrectly']
+                  ? 'Имя пользователя может содержать только латинские буквы, цифры и знаки - и _'
+                  : ''
+              ]
+            : undefined
+        "
+        (input)="console()"
       ></ui-forms-input>
       <ui-forms-input
         [control]="form.get('email')! | formControl"
         [label]="'Email'"
         [required]="true"
         [placeholder]="'Введите ваш email'"
+        [errors]="
+          form.get('email')?.errors
+            ? [
+                (form.get('email')?.errors)!['isExist']
+                  ? 'Данный email уже занят'
+                  : '',
+                (form.get('email')?.errors)!['email']
+                  ? 'Введите корректный email'
+                  : ''
+              ]
+            : undefined
+        "
       ></ui-forms-input>
     </div>
     <button
@@ -35,6 +63,15 @@
       [label]="'ФИО'"
       [required]="true"
       [placeholder]="'Введите ваше ФИО'"
+      [errors]="
+        form.get('fullName')?.errors
+          ? [
+              (form.get('fullName')?.errors)!['isIncorrectly']
+                ? 'Введите корректное ФИО'
+                : ''
+            ]
+          : undefined
+      "
     ></ui-forms-input>
     <button type="submit">Продолжить</button>
   </div>
@@ -49,6 +86,18 @@
       [label]="'Пароль'"
       [required]="true"
       [placeholder]="'password'"
+      [errors]="
+        form.get('password')?.errors
+          ? [
+              (form.get('password')?.errors)!['minlength']
+                ? 'Пароль должен содержать минимум 8 символов'
+                : '',
+              (form.get('password')?.errors)!['containsSpaces']
+                ? 'Пароль не должен содержать пробелов'
+                : ''
+            ]
+          : undefined
+      "
     ></ui-forms-password>
     <button type="submit">Сохранить</button>
   </div>
