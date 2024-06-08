@@ -2,18 +2,18 @@
   @if (step === 1) {
   <div class="step">
     <div class="inputs-container">
-      <ui-form-input-ui
-        [control]="form.get('login')! | utilFormControl"
+      <ui-forms-input
+        [control]="form.get('login')! | formControl"
         [label]="'Имя пользователя'"
         [required]="true"
         [placeholder]="'Имя пользователя'"
-      ></ui-form-input-ui>
-      <ui-form-input-ui
-        [control]="form.get('email')! | utilFormControl"
+      ></ui-forms-input>
+      <ui-forms-input
+        [control]="form.get('email')! | formControl"
         [label]="'Email'"
         [required]="true"
         [placeholder]="'Введите ваш email'"
-      ></ui-form-input-ui>
+      ></ui-forms-input>
     </div>
     <button
       type="submit"
@@ -30,12 +30,12 @@
       Похоже, что вы здесь впервые. Укажите ваши ФИО, чтобы мы могли вас
       запомнить.
     </p>
-    <ui-form-input-ui
-      [control]="form.get('fullName')! | utilFormControl"
+    <ui-forms-input
+      [control]="form.get('fullName')! | formControl"
       [label]="'ФИО'"
       [required]="true"
       [placeholder]="'Введите ваше ФИО'"
-    ></ui-form-input-ui>
+    ></ui-forms-input>
     <button type="submit">Продолжить</button>
   </div>
   } @if (step === 3) {
@@ -44,12 +44,12 @@
       Безопасность ваших данных — наш приоритет. Пожалуйста, введите надёжный
       пароль для входа
     </p>
-    <ui-form-password-ui
-      [control]="form.get('password')! | utilFormControl"
+    <ui-forms-password
+      [control]="form.get('password')! | formControl"
       [label]="'Пароль'"
       [required]="true"
       [placeholder]="'password'"
-    ></ui-form-password-ui>
+    ></ui-forms-password>
     <button type="submit">Сохранить</button>
   </div>
   }

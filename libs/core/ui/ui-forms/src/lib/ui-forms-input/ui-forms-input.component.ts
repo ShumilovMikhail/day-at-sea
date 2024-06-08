@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'ui-form-input-ui',
+  selector: 'ui-forms-input',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './form-input-ui.component.html',
-  styleUrl: './form-input-ui.component.scss',
+  templateUrl: './ui-forms-input.component.html',
+  styleUrl: './ui-forms-input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormInputUiComponent {
+export class UiFormsInputComponent {
   @Input({ required: true }) control!: FormControl;
   @Input() label: string | undefined;
   @Input() required: boolean | undefined;

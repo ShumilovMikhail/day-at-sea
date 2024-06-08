@@ -8,8 +8,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { FormInputUiComponent, FormPasswordUiComponent } from '@ui';
-import { UtilFormControlPipe } from '@pipes';
+import { UiFormsInputComponent, UiFormsPasswordComponent } from '@ui/forms';
+import { FormControlPipe } from '@utils/pipes';
 
 interface RegisterForm {
   login: FormControl<string>;
@@ -24,9 +24,9 @@ const STEP_COUNT = 3;
   standalone: true,
   imports: [
     CommonModule,
-    FormInputUiComponent,
-    UtilFormControlPipe,
-    FormPasswordUiComponent,
+    UiFormsInputComponent,
+    FormControlPipe,
+    UiFormsPasswordComponent,
     ReactiveFormsModule,
   ],
   templateUrl: './register-form-ui.component.html',

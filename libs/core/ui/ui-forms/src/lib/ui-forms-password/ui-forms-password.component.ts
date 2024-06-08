@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'ui-form-password-ui',
+  selector: 'ui-forms-password',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './form-password-ui.component.html',
-  styleUrl: './form-password-ui.component.scss',
+  templateUrl: './ui-forms-password.component.html',
+  styleUrl: './ui-forms-password.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormPasswordUiComponent {
+export class UiFormsPasswordComponent {
   @Input({ required: true }) control!: FormControl;
   @Input() label: string | undefined;
   @Input() required: boolean | undefined;
