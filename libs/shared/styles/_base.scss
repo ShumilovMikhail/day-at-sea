@@ -85,13 +85,23 @@ a {
     background-color: $white;
     border: 1px solid $blueLight;
     border-radius: 7px;
+    transition: 0.25s border ease-in;
+    &.error {
+      border: 1px solid $red;
+    }
   }
 
-  span {
+  ul {
     margin-top: 2px;
-    color: $red;
-    font-size: 12px;
     margin-left: 5px;
+    list-style: inside;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    li {
+      color: $red;
+      font-size: 12px;
+    }
   }
 }
 

@@ -21,4 +21,7 @@ export class UiFormsPasswordComponent {
   public onPasswordToggle(): void {
     this.passwordHide = !this.passwordHide;
   }
+  public onFocus(): void {
+    this.control.markAsUntouched();
+  }
 }

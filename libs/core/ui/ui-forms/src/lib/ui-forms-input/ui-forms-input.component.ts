@@ -16,4 +16,8 @@ export class UiFormsInputComponent {
   @Input() required: boolean | undefined;
   @Input() placeholder: string | undefined;
   @Input() errors: string[] | undefined;
+
+  public onFocus(): void {
+    this.control.markAsUntouched();
+  }
 }
