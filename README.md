@@ -12,11 +12,11 @@ comes with a LSP for Vim users.
 
 ## Start the application
 
-Run `npx nx serve landlord-account` to start the development server. Happy coding!
+Run `npx nx serve account` to start the development server. Happy coding!
 
 ## Build for production
 
-Run `npx nx build landlord-account` to build the application. The build artifacts are stored in the output directory (e.g. `dist/` or `build/`), ready to be deployed.
+Run `npx nx build account` to build the application. The build artifacts are stored in the output directory (e.g. `dist/` or `build/`), ready to be deployed.
 
 ## Running tasks
 

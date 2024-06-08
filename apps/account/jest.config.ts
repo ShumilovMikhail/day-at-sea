@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'landlord-account',
+  displayName: 'account',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/landlord-account',
+  coverageDirectory: '../../coverage/apps/account',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

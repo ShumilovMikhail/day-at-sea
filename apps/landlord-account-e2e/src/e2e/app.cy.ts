@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('landlord-account-e2e', () => {
+describe('account-e2e', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
