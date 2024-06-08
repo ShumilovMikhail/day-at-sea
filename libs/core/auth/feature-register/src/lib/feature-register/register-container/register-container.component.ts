@@ -8,6 +8,7 @@ import {
   loginCorrectlyValidator,
   containsSpacesValidator,
   fullNameValidator,
+  latinLettersValidator,
 } from '@utils/validators';
 import {
   emailAvailableValidator,
@@ -38,7 +39,12 @@ export class RegisterContainerComponent {
     fullName: ['', [Validators.required, fullNameValidator()]],
     password: [
       '',
-      [Validators.required, Validators.minLength(8), containsSpacesValidator()],
+      [
+        Validators.required,
+        Validators.minLength(8),
+        containsSpacesValidator(),
+        latinLettersValidator(),
+      ],
     ],
   });
 }

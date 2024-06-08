@@ -6,6 +6,6 @@ export function latinLettersValidator(): ValidatorFn {
     if (control.value.length === 0) {
       return null;
     }
-    return pattern.test(control.value) ? null : { isIncorrectly: true };
+    return pattern.test(control.value) ? null : { latinLetters: true };
   };
 }

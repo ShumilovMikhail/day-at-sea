@@ -72,7 +72,9 @@
           : undefined
       "
     ></ui-forms-input>
-    <button type="submit">Продолжить</button>
+    <button type="submit" [disabled]="!form.get('fullName')?.valid">
+      Продолжить
+    </button>
   </div>
   } @if (step === 3) {
   <div class="step">
@@ -93,12 +95,20 @@
                 : '',
               (form.get('password')?.errors)!['containsSpaces']
                 ? 'Пароль не должен содержать пробелов'
+                : '',
+              (form.get('password')?.errors)!['latinLetters']
+                ? 'Пароль может содержать буквы только из латинского алфавита'
                 : ''
             ]
           : undefined
       "
     ></ui-forms-password>
-    <button type="submit">Сохранить</button>
+    <button
+      type="submit"
+      [disabled]="!form.valid || !form.get('password')?.valid"
+    >
+      Сохранить
+    </button>
   </div>
   }
 </form>
