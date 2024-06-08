@@ -1,0 +1,54 @@
+@import 'variables';
+@import 'mixins';
+
+.login {
+  width: 310px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  h2 {
+    font-size: 24px;
+    text-align: center;
+  }
+  span a {
+    color: $primary;
+    cursor: pointer;
+    transition: 0.25s color;
+    &:hover {
+      color: $primaryHover;
+    }
+  }
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    button {
+      @include button-primary();
+      padding: 10px 16.8px;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+
+  p {
+    text-align: center;
+    font-size: 12px;
+    color: $grey;
+    a {
+      color: $grey;
+      text-decoration-line: underline;
+      cursor: pointer;
+      transition: 0.25s color;
+      &:hover {
+        color: $black;
+      }
+    }
+    span {
+      font-weight: 600;
+    }
+  }
+}

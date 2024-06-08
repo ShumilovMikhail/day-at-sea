@@ -10,7 +10,7 @@
   <input
     type="text"
     [ngClass]="{
-      error: errors && control.touched
+      error: control.errors && control.touched
     }"
     [formControl]="control"
     [placeholder]="placeholder ?? ''"
