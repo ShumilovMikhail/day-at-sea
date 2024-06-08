@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'pipes',
+  displayName: 'util-pipes',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/core/utils/pipes',
+  coverageDirectory: '../../../../coverage/libs/core/utils/util-pipes',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
