@@ -7,3 +7,4 @@ export * from './lib/types/auth-state.models';
 export * from './lib/types/auth.models';
 export * from './lib/types/login.models';
 export * from './lib/types/register.models';
+export * from './lib/services/token.interceptor';
