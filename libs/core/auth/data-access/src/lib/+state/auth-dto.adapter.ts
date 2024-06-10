@@ -2,9 +2,8 @@ import {
   EmailLoginDataDTO,
   LoginData,
   LoginDataDTO,
-  RegisterData,
-  RegisterDataDTO,
-} from './auth.models';
+} from '../types/login.models';
+import { RegisterData, RegisterDataDTO } from '../types/register.models';
 
 export interface AuthDTOAdapter {
   registerDataToDTO: (registerData: RegisterData) => RegisterDataDTO;

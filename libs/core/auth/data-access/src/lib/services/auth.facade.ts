@@ -1,20 +1,19 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { authActions } from './auth.actions';
+import { authActions } from '../+state/auth.actions';
 import {
   selectAuthError,
   selectAuthStatus,
   selectAuthToken,
-} from './auth.selectors';
+} from '../+state/auth.selectors';
+import { authDTOAdapter } from '../+state/auth-dto.adapter';
+import { RegisterData, RegisterDataDTO } from '../types/register.models';
 import {
   EmailLoginDataDTO,
   LoginData,
   LoginDataDTO,
-  RegisterData,
-  RegisterDataDTO,
-} from './auth.models';
-import { authDTOAdapter } from './auth-dto.adapter';
+} from '../types/login.models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {

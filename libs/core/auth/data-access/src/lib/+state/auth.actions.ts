@@ -1,13 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-
-import {
-  AuthError,
-  AuthResponse,
-  EmailLoginDataDTO,
-  LoginDataDTO,
-  RegisterDataDTO,
-} from './auth.models';
-import { Token } from '../types';
+import { RegisterDataDTO } from '../types/register.models';
+import { EmailLoginDataDTO, LoginDataDTO } from '../types/login.models';
+import { AuthError, AuthResponse, Token } from '../types/auth.models';
 
 export const authActions = createActionGroup({
   source: 'Auth',

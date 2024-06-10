@@ -1,8 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { authFeature } from './auth.reducer';
-import { AuthState } from './auth.models';
-
+import { AuthState } from '../types/auth-state.models';
 // Lookup the 'Auth' feature state managed by NgRx
 export const selectAuthState = createFeatureSelector<AuthState>(
   authFeature.name

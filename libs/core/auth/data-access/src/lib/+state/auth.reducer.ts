@@ -1,15 +1,10 @@
 import { createReducer, on, createFeature } from '@ngrx/store';
 
 import { authActions } from './auth.actions';
-import {
-  AuthError,
-  AuthResponse,
-  AuthState,
-  EmailLoginDataDTO,
-  LoginDataDTO,
-  RegisterDataDTO,
-} from './auth.models';
-import { Token } from '../types';
+import { AuthState } from '../types/auth-state.models';
+import { RegisterDataDTO } from '../types/register.models';
+import { AuthError, AuthResponse, Token } from '../types/auth.models';
+import { EmailLoginDataDTO, LoginDataDTO } from '../types/login.models';
 
 export const AUTH_FEATURE_KEY = 'auth';
 

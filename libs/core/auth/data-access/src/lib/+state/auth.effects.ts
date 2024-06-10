@@ -4,8 +4,8 @@ import { switchMap, catchError, of, map, tap } from 'rxjs';
 
 import { authActions } from './auth.actions';
 import { ApiService } from '@http';
-import { AuthResponse } from './auth.models';
 import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
+import { AuthResponse } from '../types/auth.models';
 
 export const registerEffect$ = createEffect(
   (actions$ = inject(Actions), api = inject(ApiService)) =>

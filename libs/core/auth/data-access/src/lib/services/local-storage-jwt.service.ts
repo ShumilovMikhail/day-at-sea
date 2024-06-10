@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Token } from '../types';
+import { Token } from '../types/auth.models';
 
 @Injectable({ providedIn: 'root' })
 export class LocalStorageJwtService {
