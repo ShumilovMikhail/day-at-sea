@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { authFeature } from './auth.reducer';
-import { AuthState } from '../types/auth-state.models';
+import { AuthState, AuthStatus } from '../types/auth-state.models';
 // Lookup the 'Auth' feature state managed by NgRx
 export const selectAuthState = createFeatureSelector<AuthState>(
   authFeature.name
@@ -25,4 +25,9 @@ export const selectAuthError = createSelector(
 export const selectIsAuthenticate = createSelector(
   selectAuthState,
   (state: AuthState) => state.isAuthenticate
+);
+
+export const selectLoading = createSelector(
+  selectAuthStatus,
+  (authStatus: AuthStatus | null) => authStatus === 'loading'
 );
