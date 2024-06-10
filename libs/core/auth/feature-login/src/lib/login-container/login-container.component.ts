@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, map } from 'rxjs';
+import { PushPipe } from '@ngrx/component';
 
 import { ModalComponent } from '@layers';
 import { LoginUiComponent } from '../login-ui/login-ui.component';
@@ -20,7 +21,7 @@ interface FormError {
 @Component({
   selector: 'auth-login-container',
   standalone: true,
-  imports: [CommonModule, ModalComponent, LoginUiComponent],
+  imports: [CommonModule, ModalComponent, LoginUiComponent, PushPipe],
   templateUrl: './login-container.component.html',
   styleUrl: './login-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,6 +29,7 @@ interface FormError {
 export class LoginContainerComponent {
   private readonly authFacade = inject(AuthFacade);
   private readonly fb = inject(FormBuilder);
+  public readonly isLoading: Observable<boolean> = this.authFacade.loading$;
   public readonly form = this.fb.group({
     loginOrEmail: ['', [Validators.required]],
     password: ['', [Validators.required]],

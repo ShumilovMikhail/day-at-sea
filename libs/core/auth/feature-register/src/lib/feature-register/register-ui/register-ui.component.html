@@ -2,6 +2,7 @@
   <h2>Регистрация на портале Сутки на море.ру</h2>
   <auth-register-form-ui
     [form]="registerForm"
+    [isLoading]="isLoading"
     (submitEvent)="onSubmit()"
   ></auth-register-form-ui>
   <span>Уже есть профиль? <a>Войти</a></span>

@@ -37,6 +37,7 @@ const STEP_COUNT = 3;
 })
 export class RegisterFormUiComponent {
   @Input({ required: true }) form!: FormGroup<RegisterForm>;
+  @Input() isLoading!: boolean | undefined;
   @Output() submitEvent = new EventEmitter<void>();
   public step = 1;
   private readonly changeDetectorRef = inject(ChangeDetectorRef);

@@ -1,7 +1,8 @@
 <layers-modal>
   <auth-login-ui
     [form]="form"
-    (submitEvent)="onSubmit()"
     [error]="errors$ | async"
+    [isLoading]="isLoading | ngrxPush"
+    (submitEvent)="onSubmit()"
   ></auth-login-ui>
 </layers-modal>

@@ -105,9 +105,10 @@
     ></ui-forms-password>
     <button
       type="submit"
-      [disabled]="!form.valid || !form.get('password')?.valid"
+      [disabled]="!form.valid || !form.get('password')?.valid || isLoading"
     >
       Сохранить
+      <div class="spinner-loader" *ngIf="isLoading"></div>
     </button>
   </div>
   }

@@ -1,6 +1,7 @@
 <layers-modal>
   <auth-register-ui
     [registerForm]="form"
+    [isLoading]="isLoading$ | ngrxPush"
     (submitEvent)="onSubmit()"
   ></auth-register-ui>
 </layers-modal>

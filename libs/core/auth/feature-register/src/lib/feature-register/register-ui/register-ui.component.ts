@@ -6,10 +6,9 @@ import {
   Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
 import { FormGroup } from '@angular/forms';
 
+import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
 @Component({
   selector: 'auth-register-ui',
   standalone: true,
@@ -20,6 +19,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class RegisterUiComponent {
   @Input({ required: true }) registerForm!: FormGroup;
+  @Input() isLoading!: boolean | undefined;
   @Output() submitEvent = new EventEmitter<void>();
 
   public onSubmit(): void {

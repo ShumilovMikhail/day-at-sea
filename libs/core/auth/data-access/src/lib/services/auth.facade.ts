@@ -1,9 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable, tap } from 'rxjs';
 
 import { authActions } from '../+state/auth.actions';
 import {
   selectAuthError,
+  selectAuthLoading,
   selectAuthStatus,
   selectAuthToken,
 } from '../+state/auth.selectors';
@@ -14,14 +16,21 @@ import {
   LoginData,
   LoginDataDTO,
 } from '../types/login.models';
+import { AuthError, Token } from '../types/auth.models';
+import { AuthStatus } from '../types/auth-state.models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
   private readonly store = inject(Store);
 
-  public readonly status$ = this.store.select(selectAuthStatus);
-  public readonly token$ = this.store.select(selectAuthToken);
-  public readonly error$ = this.store.select(selectAuthError);
+  public readonly status$: Observable<AuthStatus | null> =
+    this.store.select(selectAuthStatus);
+  public readonly token$: Observable<Token | null> =
+    this.store.select(selectAuthToken);
+  public readonly error$: Observable<AuthError | null> =
+    this.store.select(selectAuthError);
+  public readonly loading$: Observable<boolean> =
+    this.store.select(selectAuthLoading);
 
   public init(): void {
     this.store.dispatch(authActions.init());

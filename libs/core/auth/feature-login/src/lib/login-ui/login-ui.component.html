@@ -25,10 +25,11 @@
         !(
           this.form.get('loginOrEmail')?.valid &&
           this.form.get('password')?.valid
-        )
+        ) || isLoading
       "
     >
       Авторизация
+      <div class="spinner-loader" *ngIf="isLoading"></div>
     </button>
   </form>
   <span>У вас нет аккаунта? <a>Регистрация</a></span>
@@ -37,19 +38,3 @@
     <span> Sutkinamore.ru</span> и <a>политикой конфиденциальности</a>
   </p>
 </div>
-
-<!-- [errors]="
-          form.get('login')?.errors
-            ? [
-                (form.get('login')?.errors)!['isExist']
-                  ? 'Данное имя уже занято'
-                  : '',
-                (form.get('login')?.errors)!['minlength']
-                  ? 'Минимальная длина имени 5 символов'
-                  : '',
-                (form.get('login')?.errors)!['isIncorrectly']
-                  ? 'Имя пользователя может содержать только латинские буквы, цифры и знаки - и _'
-                  : ''
-              ]
-            : undefined
-        " -->

@@ -28,6 +28,7 @@ import { FormControlPipe } from '@utils/pipes';
 })
 export class LoginUiComponent {
   @Input({ required: true }) form!: FormGroup;
+  @Input() isLoading!: boolean | undefined;
   @Input() error!: string | null;
   @Output() submitEvent = new EventEmitter<void>();
 

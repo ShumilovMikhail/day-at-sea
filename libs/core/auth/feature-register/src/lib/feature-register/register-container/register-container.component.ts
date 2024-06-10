@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { PushPipe } from '@ngrx/component';
 
 import { ModalComponent } from '@layers';
 import { RegisterUiComponent } from '../register-ui/register-ui.component';
@@ -26,7 +28,7 @@ interface RegisterForm {
 @Component({
   selector: 'auth-register-container',
   standalone: true,
-  imports: [CommonModule, ModalComponent, RegisterUiComponent],
+  imports: [CommonModule, ModalComponent, RegisterUiComponent, PushPipe],
   templateUrl: './register-container.component.html',
   styleUrl: './register-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,6 +36,7 @@ interface RegisterForm {
 export class RegisterContainerComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authFacade = inject(AuthFacade);
+  public readonly isLoading$: Observable<boolean> = this.authFacade.loading$;
   public readonly form = this.fb.group({
     login: [
       '',

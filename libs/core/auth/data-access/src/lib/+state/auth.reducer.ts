@@ -6,12 +6,6 @@ import { RegisterDataDTO } from '../types/register.models';
 import { AuthError, AuthResponse, Token } from '../types/auth.models';
 import { EmailLoginDataDTO, LoginDataDTO } from '../types/login.models';
 
-export const AUTH_FEATURE_KEY = 'auth';
-
-export interface AuthPartialState {
-  readonly [AUTH_FEATURE_KEY]: AuthState;
-}
-
 export const initialAuthState: AuthState = {
   authStatus: null,
   authToken: null,

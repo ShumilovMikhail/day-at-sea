@@ -26,6 +26,10 @@
     gap: 15px;
     button {
       @include button-primary();
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
       padding: 10px 16.8px;
     }
 
