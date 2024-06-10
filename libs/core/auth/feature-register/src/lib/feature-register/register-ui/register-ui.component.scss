@@ -36,3 +36,21 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  .register {
+    width: 242px;
+    max-height: 80vh;
+    overflow-y: auto;
+    gap: 15px;
+    h2 {
+      font-size: 18px;
+    }
+  }
+  span {
+    font-size: 14px;
+    &a {
+      font-size: 14px;
+    }
+  }
+}

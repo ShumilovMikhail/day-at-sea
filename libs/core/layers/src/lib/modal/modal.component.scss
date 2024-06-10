@@ -59,3 +59,13 @@
     transform: rotate(135deg);
   }
 }
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 25px;
+  }
+  .cross {
+    top: 15px;
+    right: 15px;
+  }
+}

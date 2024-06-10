@@ -35,3 +35,9 @@ form {
     text-align: center;
   }
 }
+
+@media (max-width: 480px) {
+  .inputs-container {
+    gap: 5px;
+  }
+}
