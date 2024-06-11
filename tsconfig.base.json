@@ -18,6 +18,9 @@
       "@account/layers/header": [
         "libs/account/layers/feature-header/src/index.ts"
       ],
+      "@account/layers/side-menu": [
+        "libs/account/layers/feature-side-menu/src/index.ts"
+      ],
       "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
       "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
       "@auth/feature-register": [

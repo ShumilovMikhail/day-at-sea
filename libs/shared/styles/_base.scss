@@ -15,7 +15,9 @@ body {
 html,
 body {
   height: 100%;
+  width: 100vw;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 p {
