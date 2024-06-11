@@ -4,10 +4,11 @@ import { filter, take } from 'rxjs';
 
 import { AuthFacade } from '@auth/data-access';
 import { UserFacade } from '@user/data-access';
+import { HeaderContainerComponent } from '@account/layers/header';
 
 @Component({
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, HeaderContainerComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

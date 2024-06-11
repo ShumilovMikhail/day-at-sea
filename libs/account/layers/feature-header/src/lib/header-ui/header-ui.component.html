@@ -1,0 +1,73 @@
+<header class="header">
+  <a class="logo">
+    <img src="/assets/images/logo.png" alt="logo" class="logo-img" />
+    <span class="text">
+      Сутки на <br />
+      <span>море.ру</span>
+    </span>
+  </a>
+
+  <div class="user-action">
+    <a class="user-action__link-primary">
+      <svg
+        width="11"
+        height="11"
+        viewBox="0 0 11 11"
+        fill="#ffffff"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.22 3.98V6.68H6.9V10.2H4.04V6.68H0.7V3.98H4.04V0.559999H6.9V3.98H10.22Z"
+        />
+      </svg>
+
+      Добавить объект</a
+    >
+    <a class="user-action__link-secondary">
+      <svg
+        width="11"
+        height="11"
+        viewBox="0 0 11 11"
+        fill="#3CBADE"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.22 3.98V6.68H6.9V10.2H4.04V6.68H0.7V3.98H4.04V0.559999H6.9V3.98H10.22Z"
+        />
+      </svg>
+
+      Добавить бронь</a
+    >
+    <a class="user-action__link-secondary">
+      <svg
+        width="11"
+        height="11"
+        viewBox="0 0 11 11"
+        fill="#3CBADE"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.22 3.98V6.68H6.9V10.2H4.04V6.68H0.7V3.98H4.04V0.559999H6.9V3.98H10.22Z"
+        />
+      </svg>
+
+      Добавить расход</a
+    >
+  </div>
+  <div class="user-panel">
+    <div class="user-info">
+      <div class="user-info__image">
+        <img src="/assets/images/user-default-photo.png" alt="user-icon" />
+      </div>
+      <div class="user-info__inner">
+        <p>{{ userVM.name }}</p>
+        <span>id: {{ userVM.id }}</span>
+      </div>
+    </div>
+    <button class="menu-button" (click)="onMenuButtonClick()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>

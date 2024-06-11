@@ -1,0 +1,13 @@
+@if (user$ | async; as user) {
+<ng-container
+  *ngrxLet="{
+    name: user.fullName.split(' ')[0],
+    id: user.id,
+  } as vm"
+>
+  <account-header-ui
+    [userVM]="vm"
+    (menuButtonEvent)="onMenuOpen()"
+  ></account-header-ui>
+</ng-container>
+}
