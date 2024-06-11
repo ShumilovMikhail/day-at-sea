@@ -7,12 +7,9 @@ export const userActions = createActionGroup({
   events: {
     init: emptyProps(),
     getUser: emptyProps(),
-    loadUserFromStorage: emptyProps(),
 
     getUserSuccess: props<{ user: UserEntity }>(),
-    loadUserFromStorageSuccess: props<{ user: UserEntity }>(),
 
     getUserFailure: props<{ error: UserError }>(),
-    loadUserFromStorageFailure: emptyProps(),
   },
 });

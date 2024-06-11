@@ -8,6 +8,7 @@ import {
   selectAuthLoading,
   selectAuthStatus,
   selectAuthToken,
+  selectIsAuthenticate,
 } from '../+state/auth.selectors';
 import { authDTOAdapter } from '../+state/auth-dto.adapter';
 import { RegisterData, RegisterDataDTO } from '../types/register.models';
@@ -31,6 +32,8 @@ export class AuthFacade {
     this.store.select(selectAuthError);
   public readonly loading$: Observable<boolean> =
     this.store.select(selectAuthLoading);
+  public readonly isAuthenticate$: Observable<boolean> =
+    this.store.select(selectIsAuthenticate);
 
   public init(): void {
     this.store.dispatch(authActions.init());

@@ -22,29 +22,6 @@ export const userFeature = createFeature({
       })
     ),
     on(
-      userActions.loadUserFromStorage,
-      (state): UserState => ({
-        ...state,
-        userStatus: 'loading',
-        error: null,
-      })
-    ),
-    on(
-      userActions.loadUserFromStorageSuccess,
-      (state, payload: { user: UserEntity }): UserState => ({
-        ...state,
-        userStatus: 'loaded',
-        loggedUser: payload.user,
-      })
-    ),
-    on(
-      userActions.loadUserFromStorageFailure,
-      (state): UserState => ({
-        ...state,
-        userStatus: 'init',
-      })
-    ),
-    on(
       userActions.getUser,
       (state): UserState => ({
         ...state,
