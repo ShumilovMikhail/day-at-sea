@@ -1,0 +1,18 @@
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+
+import { UserEntity, UserError } from '../types/user.models';
+
+export const userActions = createActionGroup({
+  source: 'User',
+  events: {
+    init: emptyProps(),
+    getUser: emptyProps(),
+    loadUserFromStorage: emptyProps(),
+
+    getUserSuccess: props<{ user: UserEntity }>(),
+    loadUserFromStorageSuccess: props<{ user: UserEntity }>(),
+
+    getUserFailure: props<{ error: UserError }>(),
+    loadUserFromStorageFailure: emptyProps(),
+  },
+});

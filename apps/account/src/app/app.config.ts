@@ -8,17 +8,19 @@ import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
-import { appRoutes } from './app.routes';
 
+import { appRoutes } from './app.routes';
 import { environment } from '../environments/environment.development';
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import { API_URL } from '@http';
+import { userEffects, userFeature } from '@user/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(authEffects),
+    provideEffects(authEffects, userEffects),
     provideStore({
       [authFeature.name]: authFeature.reducer,
+      [userFeature.name]: userFeature.reducer,
     }),
     provideStoreDevtools({
       maxAge: 25,
