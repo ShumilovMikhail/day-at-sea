@@ -5,6 +5,10 @@
     id:  user ? user.id : '',
   } as vm"
   >
-    <account-side-menu-ui [userVM]="user ? vm : null"></account-side-menu-ui>
+    <account-side-menu-ui
+      [userVM]="user ? vm : null"
+      accountSideMenuMobile
+      [modalOpen]="isMobileOpen"
+    ></account-side-menu-ui>
   </ng-container>
 </ng-container>

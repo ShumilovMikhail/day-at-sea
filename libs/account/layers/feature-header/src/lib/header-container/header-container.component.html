@@ -7,7 +7,7 @@
   >
     <account-header-ui
       [userVM]="user ? vm : null"
-      (menuButtonEvent)="onMenuOpen()"
+      (menuButtonEvent)="onMenuToggle($event)"
     ></account-header-ui>
   </ng-container>
 </ng-container>

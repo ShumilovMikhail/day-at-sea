@@ -66,7 +66,13 @@
       </div>
     </div>
     }
-    <button class="menu-button" (click)="onMenuButtonClick()">
+    <button
+      class="menu-button"
+      (click)="onMenuButtonClick()"
+      [ngClass]="{
+        active: mobileButtonActive
+      }"
+    >
       <span></span>
       <span></span>
       <span></span>

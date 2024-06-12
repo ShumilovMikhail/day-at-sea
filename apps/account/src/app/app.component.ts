@@ -17,6 +17,7 @@ import { SideMenuContainerComponent } from '@account/layers/side-menu';
 export class AppComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
   public readonly userFacade = inject(UserFacade);
+  public isSideMenuMobileOpen = false;
 
   ngOnInit(): void {
     this.authFacade.init();
@@ -28,5 +29,9 @@ export class AppComponent implements OnInit {
       .subscribe(() => {
         this.userFacade.init();
       });
+  }
+
+  public onSideMenuMobileToggle(isMobileOpen: boolean) {
+    this.isSideMenuMobileOpen = isMobileOpen;
   }
 }

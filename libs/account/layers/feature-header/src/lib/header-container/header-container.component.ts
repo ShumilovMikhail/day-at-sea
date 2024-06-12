@@ -21,11 +21,11 @@ import { UserEntity, UserFacade } from '@user/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderContainerComponent {
-  @Output() menuOpenEvent = new EventEmitter<void>();
+  @Output() menuOpenEvent = new EventEmitter<boolean>();
   private readonly userFacade = inject(UserFacade);
   public readonly user$: Observable<UserEntity | null> = this.userFacade.user$;
 
-  public onMenuOpen(): void {
-    this.menuOpenEvent.emit();
+  public onMenuToggle(isMobileOpen: boolean): void {
+    this.menuOpenEvent.emit(isMobileOpen);
   }
 }

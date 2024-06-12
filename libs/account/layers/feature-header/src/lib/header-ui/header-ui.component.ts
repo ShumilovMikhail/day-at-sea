@@ -22,10 +22,12 @@ interface UserVM {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderUiComponent {
-  @Output() menuButtonEvent = new EventEmitter<void>();
+  @Output() menuButtonEvent = new EventEmitter<boolean>();
   @Input({ required: true }) userVM!: UserVM | null;
+  public mobileButtonActive = false;
 
   public onMenuButtonClick(): void {
-    this.menuButtonEvent.emit();
+    this.mobileButtonActive = !this.mobileButtonActive;
+    this.menuButtonEvent.emit(this.mobileButtonActive);
   }
 }

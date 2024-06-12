@@ -92,6 +92,23 @@
     height: 3px;
     border-radius: 5px;
     background-color: $primary;
+    transition: 0.2s all;
+  }
+  &.active {
+    span {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, 0);
+    }
+    span:nth-child(1) {
+      transform: rotate(45deg);
+    }
+    span:nth-child(2) {
+      display: none;
+    }
+    span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
   }
 }
 

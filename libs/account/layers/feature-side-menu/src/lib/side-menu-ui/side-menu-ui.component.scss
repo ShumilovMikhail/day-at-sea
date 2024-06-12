@@ -1,7 +1,6 @@
 @import 'variables';
 .side-menu {
   display: block;
-  border-right: 1px solid $greyBorder;
   width: 350px;
   height: 100%;
 }
@@ -17,6 +16,7 @@
   padding: 36px 30px 86px 30px;
   scrollbar-width: none;
   background-color: $white;
+  border-right: 1px solid $greyBorder;
 }
 
 .container::-webkit-scrollbar {
@@ -121,12 +121,12 @@ nav {
 
 @media (max-width: 480px) {
   .side-menu {
-    position: fixed;
     border-right: none;
     width: 100%;
   }
 
   .container {
+    position: static;
     width: 100%;
     padding: 36px 0 56px 0;
   }
