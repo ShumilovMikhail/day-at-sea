@@ -1,7 +1,6 @@
 import {
   Directive,
   ElementRef,
-  HostBinding,
   HostListener,
   Input,
   Renderer2,
@@ -14,10 +13,8 @@ import {
 })
 export class SideMenuMobileDirective {
   @Input() set modalOpen(isOpen: boolean) {
-    this.isOpen = isOpen;
-    this.onModalToggle(this.screenWidth <= 480 ? this.isOpen : true);
+    this.onModalToggle(this.screenWidth <= 480 ? isOpen : true);
   }
-  private isOpen = false;
   private screenWidth = window.innerWidth;
   private readonly renderer = inject(Renderer2);
   private readonly el = inject(ElementRef);
@@ -25,7 +22,6 @@ export class SideMenuMobileDirective {
   @HostListener('window:resize', ['$event.target.innerWidth'])
   onWindowResize(width: number) {
     this.screenWidth = width;
-    this.onModalToggle(width > 480 ? true : this.isOpen);
   }
 
   private onModalToggle(isOpen: boolean) {
