@@ -23,7 +23,7 @@ interface UserVM {
 })
 export class HeaderUiComponent {
   @Output() menuButtonEvent = new EventEmitter<void>();
-  @Input({ required: true }) userVM!: UserVM;
+  @Input({ required: true }) userVM!: UserVM | null;
 
   public onMenuButtonClick(): void {
     this.menuButtonEvent.emit();

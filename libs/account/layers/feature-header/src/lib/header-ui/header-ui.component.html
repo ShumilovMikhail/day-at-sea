@@ -55,6 +55,7 @@
     >
   </div>
   <div class="user-panel">
+    @if (userVM) {
     <div class="user-info">
       <div class="user-info__image">
         <img src="/assets/images/user-default-photo.png" alt="user-icon" />
@@ -64,6 +65,7 @@
         <span>id: {{ userVM.id }}</span>
       </div>
     </div>
+    }
     <button class="menu-button" (click)="onMenuButtonClick()">
       <span></span>
       <span></span>
