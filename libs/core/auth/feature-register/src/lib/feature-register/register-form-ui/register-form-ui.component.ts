@@ -50,4 +50,11 @@ export class RegisterFormUiComponent {
     this.step = this.step === STEP_COUNT ? this.step : ++this.step;
     this.changeDetectorRef.detectChanges();
   }
+  public onPreviousStep(): void {
+    if (this.step === 1) {
+      return;
+    }
+    this.step = this.step === 1 ? this.step : --this.step;
+    this.changeDetectorRef.detectChanges();
+  }
 }
