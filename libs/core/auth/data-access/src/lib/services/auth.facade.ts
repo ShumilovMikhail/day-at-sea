@@ -17,8 +17,9 @@ import {
   LoginData,
   LoginDataDTO,
 } from '../types/login.models';
-import { AuthError, Token } from '../types/auth.models';
+import { Token } from '../types/auth.models';
 import { AuthStatus } from '../types/auth-state.models';
+import { ResponseError } from '@http';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
@@ -28,7 +29,7 @@ export class AuthFacade {
     this.store.select(selectAuthStatus);
   public readonly token$: Observable<Token | null> =
     this.store.select(selectAuthToken);
-  public readonly error$: Observable<AuthError | null> =
+  public readonly error$: Observable<ResponseError | null> =
     this.store.select(selectAuthError);
   public readonly loading$: Observable<boolean> =
     this.store.select(selectAuthLoading);

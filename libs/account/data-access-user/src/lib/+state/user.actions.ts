@@ -1,6 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-import { UserEntity, UserError } from '../types/user.models';
+import { UserEntity } from '../types/user.models';
+import { ResponseError } from '@http';
 
 export const userActions = createActionGroup({
   source: 'User',
@@ -10,6 +11,6 @@ export const userActions = createActionGroup({
 
     getUserSuccess: props<{ user: UserEntity }>(),
 
-    getUserFailure: props<{ error: UserError }>(),
+    getUserFailure: props<{ error: ResponseError }>(),
   },
 });

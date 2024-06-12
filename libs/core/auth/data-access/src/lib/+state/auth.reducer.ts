@@ -3,8 +3,9 @@ import { createReducer, on, createFeature } from '@ngrx/store';
 import { authActions } from './auth.actions';
 import { AuthState } from '../types/auth-state.models';
 import { RegisterDataDTO } from '../types/register.models';
-import { AuthError, AuthResponse, Token } from '../types/auth.models';
+import { AuthResponse, Token } from '../types/auth.models';
 import { EmailLoginDataDTO, LoginDataDTO } from '../types/login.models';
+import { ResponseError } from '@http';
 
 export const initialAuthState: AuthState = {
   authStatus: null,
@@ -68,7 +69,7 @@ export const authFeature = createFeature({
     ),
     on(
       authActions.registerFailure,
-      (state, payload: { error: AuthError }): AuthState => ({
+      (state, payload: { error: ResponseError }): AuthState => ({
         ...state,
         authStatus: 'error',
         error: payload.error,
@@ -97,7 +98,7 @@ export const authFeature = createFeature({
     ),
     on(
       authActions.loginFailure,
-      (state, payload: { error: AuthError }): AuthState => ({
+      (state, payload: { error: ResponseError }): AuthState => ({
         ...state,
         authStatus: 'error',
         error: payload.error,

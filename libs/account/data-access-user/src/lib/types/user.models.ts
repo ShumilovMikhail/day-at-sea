@@ -13,10 +13,3 @@ export interface UserEntity {
   email: string;
   password: string;
 }
-
-export interface UserError {
-  code: string;
-  message: string;
-  traceId: string;
-  payload: unknown;
-}

@@ -1,7 +1,8 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { RegisterDataDTO } from '../types/register.models';
 import { EmailLoginDataDTO, LoginDataDTO } from '../types/login.models';
-import { AuthError, AuthResponse, Token } from '../types/auth.models';
+import { AuthResponse, Token } from '../types/auth.models';
+import { ResponseError } from '@http';
 
 export const authActions = createActionGroup({
   source: 'Auth',
@@ -15,8 +16,8 @@ export const authActions = createActionGroup({
     loginSuccess: props<AuthResponse>(),
     loadTokenFromStorageSuccess: props<{ authToken: Token }>(),
 
-    registerFailure: props<{ error: AuthError }>(),
-    loginFailure: props<{ error: AuthError }>(),
+    registerFailure: props<{ error: ResponseError }>(),
+    loginFailure: props<{ error: ResponseError }>(),
     loadTokenFromStorageFailure: emptyProps(),
   },
 });

@@ -1,9 +1,10 @@
-import { UserEntity, UserError } from './user.models';
+import { UserEntity } from './user.models';
+import { ResponseError } from '@http';
 
 export type UserStatus = 'init' | 'loading' | 'loaded' | 'error';
 
 export interface UserState {
   userStatus: UserStatus | null;
   loggedUser: UserEntity | null;
-  error: UserError | null;
+  error: ResponseError | null;
 }

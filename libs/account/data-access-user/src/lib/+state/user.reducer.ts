@@ -2,7 +2,8 @@ import { createFeature, on, createReducer } from '@ngrx/store';
 
 import { UserState } from '../types/user-state.models';
 import { userActions } from './user.actions';
-import { UserEntity, UserError } from '../types/user.models';
+import { UserEntity } from '../types/user.models';
+import { ResponseError } from '@http';
 
 export const initialUserState: UserState = {
   userStatus: null,
@@ -39,7 +40,7 @@ export const userFeature = createFeature({
     ),
     on(
       userActions.getUserFailure,
-      (state, payload: { error: UserError }): UserState => ({
+      (state, payload: { error: ResponseError }): UserState => ({
         ...state,
         error: payload.error,
         userStatus: 'error',
