@@ -1,7 +1,7 @@
 <ng-container *ngrxLet="user$ as user">
   <ng-container
     *ngrxLet="{
-    name: user ? user.fullName.split(' ')[0] : '',
+    name: user ? (user.fullName | firstName) : '',
     id:  user ? user.id : '',
   } as vm"
   >

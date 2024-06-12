@@ -11,11 +11,12 @@ import { Observable } from 'rxjs';
 
 import { HeaderUiComponent } from '../header-ui/header-ui.component';
 import { UserEntity, UserFacade } from '@user/data-access';
+import { FirstNamePipe } from '@utils/pipes';
 
 @Component({
   selector: 'account-header-container',
   standalone: true,
-  imports: [CommonModule, HeaderUiComponent, LetDirective],
+  imports: [CommonModule, HeaderUiComponent, LetDirective, FirstNamePipe],
   templateUrl: './header-container.component.html',
   styleUrl: './header-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

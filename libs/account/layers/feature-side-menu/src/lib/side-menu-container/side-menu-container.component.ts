@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { SideMenuUiComponent } from '../side-menu-ui/side-menu-ui.component';
 import { UserEntity, UserFacade } from '@user/data-access';
 import { SideMenuMobileDirective } from '../directives/side-menu-mobile.directive';
+import { FirstNamePipe } from '@utils/pipes';
 
 @Component({
   selector: 'account-side-menu-container',
@@ -20,6 +21,7 @@ import { SideMenuMobileDirective } from '../directives/side-menu-mobile.directiv
     SideMenuUiComponent,
     LetDirective,
     SideMenuMobileDirective,
+    FirstNamePipe,
   ],
   templateUrl: './side-menu-container.component.html',
   styleUrl: './side-menu-container.component.scss',
