@@ -1,12 +1,12 @@
-<ng-container *ngrxLet="user$ as user">
+<ng-container *ngrxLet="agency$ as agency">
   <ng-container
     *ngrxLet="{
-    name: user ? (user.fullName | firstName) : '',
-    id:  user ? user.id : '',
+    name: agency ? (agency.contactPerson| firstName) : '',
+    id:  agency ? agency.id : '',
   } as vm"
   >
     <account-side-menu-ui
-      [userVM]="user ? vm : null"
+      [agencyVM]="agency ? vm : null"
       accountSideMenuMobile
       [modalOpen]="isMobileOpen"
     ></account-side-menu-ui>

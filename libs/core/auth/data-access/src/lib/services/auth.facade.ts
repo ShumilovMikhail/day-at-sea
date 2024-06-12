@@ -9,6 +9,7 @@ import {
   selectAuthStatus,
   selectAuthToken,
   selectIsAuthenticate,
+  selectUser,
 } from '../+state/auth.selectors';
 import { authDTOAdapter } from '../+state/auth-dto.adapter';
 import { RegisterData, RegisterDataDTO } from '../types/register.models';
@@ -20,6 +21,7 @@ import {
 import { Token } from '../types/auth.models';
 import { AuthStatus } from '../types/auth-state.models';
 import { ResponseError } from '@http';
+import { UserEntity } from '../types/user.models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
@@ -35,6 +37,8 @@ export class AuthFacade {
     this.store.select(selectAuthLoading);
   public readonly isAuthenticate$: Observable<boolean> =
     this.store.select(selectIsAuthenticate);
+  public readonly user$: Observable<UserEntity | null> =
+    this.store.select(selectUser);
 
   public init(): void {
     this.store.dispatch(authActions.init());

@@ -2,12 +2,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-interface UserVM {
+interface AgencyVM {
   id: number | string;
   name: string;
   photo?: string;
 }
-
 @Component({
   selector: 'account-side-menu-ui',
   standalone: true,
@@ -17,5 +16,5 @@ interface UserVM {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideMenuUiComponent {
-  @Input() userVM!: UserVM | null;
+  @Input() agencyVM!: AgencyVM | null;
 }

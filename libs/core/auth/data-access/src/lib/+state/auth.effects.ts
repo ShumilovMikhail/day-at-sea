@@ -6,6 +6,7 @@ import { authActions } from './auth.actions';
 import { ApiService } from '@http';
 import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
 import { AuthResponse } from '../types/auth.models';
+import { UserEntity } from '../types/user.models';
 
 export const registerEffect$ = createEffect(
   (actions$ = inject(Actions), api = inject(ApiService)) =>
@@ -43,12 +44,13 @@ export const authAfterEffect$ = createEffect(
     localStorageJwtService = inject(LocalStorageJwtService)
   ) =>
     actions$.pipe(
-      ofType(authActions.registerSuccess),
-      tap(({ authToken }) => {
+      ofType(authActions.registerSuccess, authActions.loginSuccess),
+      map(({ authToken }) => {
         localStorageJwtService.setToken(authToken);
+        return authActions.getUser();
       })
     ),
-  { functional: true, dispatch: false }
+  { functional: true }
 );
 
 export const authInitEffect$ = createEffect(
@@ -74,6 +76,35 @@ export const loadTokenFromStorageEffect$ = createEffect(
         return authToken
           ? authActions.loadTokenFromStorageSuccess({ authToken })
           : authActions.loadTokenFromStorageFailure();
+      })
+    ),
+  { functional: true }
+);
+
+export const loadTokenFromStorageSuccessEffect$ = createEffect(
+  (actions$ = inject(Actions)) =>
+    actions$.pipe(
+      ofType(authActions.loadTokenFromStorageSuccess),
+      map(({ authToken }) => {
+        return authActions.getUser();
+      })
+    ),
+  { functional: true }
+);
+
+export const getUserEffect$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(authActions.getUser),
+      switchMap(() => {
+        return apiService.get<UserEntity>('auth/me').pipe(
+          map((user: UserEntity) => {
+            return authActions.getUserSuccess({ user });
+          }),
+          catchError(({ error }) => {
+            return of(authActions.getUserFailure(error));
+          })
+        );
       })
     ),
   { functional: true }

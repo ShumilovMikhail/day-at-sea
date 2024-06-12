@@ -13,14 +13,14 @@ import { appRoutes } from './app.routes';
 import { environment } from '../environments/environment.development';
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import { API_URL } from '@http';
-import { userEffects, userFeature } from '@user/data-access';
+import { agencyEffects, agencyFeature } from '@agency/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(authEffects, userEffects),
+    provideEffects(authEffects, agencyEffects),
     provideStore({
       [authFeature.name]: authFeature.reducer,
-      [userFeature.name]: userFeature.reducer,
+      [agencyFeature.name]: agencyFeature.reducer,
     }),
     provideStoreDevtools({
       maxAge: 25,

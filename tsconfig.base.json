@@ -21,6 +21,7 @@
       "@account/layers/side-menu": [
         "libs/account/layers/feature-side-menu/src/index.ts"
       ],
+      "@agency/data-access": ["libs/account/data-access-agency/src/index.ts"],
       "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
       "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
       "@auth/feature-register": [

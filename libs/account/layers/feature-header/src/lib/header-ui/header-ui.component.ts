@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-interface UserVM {
+interface AgencyVM {
   id: number | string;
   name: string;
   photo?: string;
@@ -23,7 +23,7 @@ interface UserVM {
 })
 export class HeaderUiComponent {
   @Output() menuButtonEvent = new EventEmitter<boolean>();
-  @Input({ required: true }) userVM!: UserVM | null;
+  @Input({ required: true }) agencyVM!: AgencyVM | null;
   public mobileButtonActive = false;
 
   public onMenuButtonClick(): void {

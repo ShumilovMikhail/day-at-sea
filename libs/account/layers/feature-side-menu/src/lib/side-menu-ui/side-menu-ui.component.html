@@ -1,13 +1,13 @@
 <div class="side-menu">
   <div class="container">
-    @if (userVM) {
+    @if (agencyVM) {
     <div class="user-info">
       <div class="user-info__image">
         <img src="/assets/images/user-default-photo.png" alt="user-icon" />
       </div>
       <div class="user-info__inner">
-        <p>{{ userVM.name }}</p>
-        <span>id: {{ userVM.id }}</span>
+        <p>{{ agencyVM.name }}</p>
+        <span>id: {{ agencyVM.id }}</span>
       </div>
     </div>
     }

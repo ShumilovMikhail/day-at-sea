@@ -6,10 +6,12 @@ import { RegisterDataDTO } from '../types/register.models';
 import { AuthResponse, Token } from '../types/auth.models';
 import { EmailLoginDataDTO, LoginDataDTO } from '../types/login.models';
 import { ResponseError } from '@http';
+import { UserEntity } from '../types/user.models';
 
 export const initialAuthState: AuthState = {
   authStatus: null,
   authToken: null,
+  loggedUser: null,
   error: null,
   isAuthenticate: false,
 };
@@ -98,6 +100,30 @@ export const authFeature = createFeature({
     ),
     on(
       authActions.loginFailure,
+      (state, payload: { error: ResponseError }): AuthState => ({
+        ...state,
+        authStatus: 'error',
+        error: payload.error,
+      })
+    ),
+    on(
+      authActions.getUser,
+      (state): AuthState => ({
+        ...state,
+        authStatus: 'loading',
+        error: null,
+      })
+    ),
+    on(
+      authActions.getUserSuccess,
+      (state, payload: { user: UserEntity }): AuthState => ({
+        ...state,
+        authStatus: 'loaded',
+        loggedUser: payload.user,
+      })
+    ),
+    on(
+      authActions.getUserFailure,
       (state, payload: { error: ResponseError }): AuthState => ({
         ...state,
         authStatus: 'error',

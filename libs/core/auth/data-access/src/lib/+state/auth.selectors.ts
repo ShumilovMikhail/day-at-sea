@@ -31,3 +31,8 @@ export const selectAuthLoading = createSelector(
   selectAuthStatus,
   (authStatus: AuthStatus | null) => authStatus === 'loading'
 );
+
+export const selectUser = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.loggedUser
+);
