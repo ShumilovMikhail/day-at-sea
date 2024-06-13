@@ -7,67 +7,16 @@
       </div>
       <div class="user-info__inner">
         <p>{{ agencyVM.name }}</p>
-        <span>id: {{ agencyVM.id }}</span>
+        <span>Личный кабинет</span>
       </div>
     </div>
     }
     <nav>
       <ul>
-        <li class="user-action">
-          <a>
-            <div class="icon">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 11 11"
-                fill="#000000"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.22 3.98V6.68H6.9V10.2H4.04V6.68H0.7V3.98H4.04V0.559999H6.9V3.98H10.22Z"
-                />
-              </svg>
-            </div>
-            Добавить объект
-          </a>
-        </li>
-        <li class="user-action">
-          <a>
-            <div class="icon">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 11 11"
-                fill="#000000"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.22 3.98V6.68H6.9V10.2H4.04V6.68H0.7V3.98H4.04V0.559999H6.9V3.98H10.22Z"
-                />
-              </svg>
-            </div>
-            Добавить бронь
-          </a>
-        </li>
-        <li class="user-action">
-          <a>
-            <div class="icon">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 11 11"
-                fill="#000000"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.22 3.98V6.68H6.9V10.2H4.04V6.68H0.7V3.98H4.04V0.559999H6.9V3.98H10.22Z"
-                />
-              </svg>
-            </div>
-            Добавить рассход
-          </a>
-        </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'objects']">
             <div class="icon">
               <img src="/assets/images/icons/keys.svg" alt="keys" />
@@ -75,7 +24,10 @@
             Мои обьекты
           </a>
         </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'booking-calendar']">
             <div class="icon">
               <img src="/assets/images/icons/calendar.svg" alt="calendar" />
@@ -83,7 +35,10 @@
             Календарь броней
           </a>
         </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'clients']">
             <div class="icon">
               <img src="/assets/images/icons/clients.svg" alt="clients" />
@@ -91,7 +46,10 @@
             Мои клиенты
           </a>
         </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'bookings']">
             <div class="icon">
               <img src="/assets/images/icons/document.svg" alt="document" />
@@ -99,7 +57,10 @@
             Мои брони
           </a>
         </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'move']">
             <div class="icon">
               <img src="/assets/images/icons/bed.svg" alt="bed" />
@@ -107,7 +68,10 @@
             Заезды/выезды
           </a>
         </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'costs']">
             <div class="icon">
               <img src="/assets/images/icons/costs.svg" alt="costs" />
@@ -115,7 +79,10 @@
             Расходы
           </a>
         </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'feedback']">
             <div class="icon">
               <img src="/assets/images/icons/feedback.svg" alt="feedback" />
@@ -123,7 +90,10 @@
             Отзывы
           </a>
         </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'statistics']">
             <div class="icon">
               <img src="/assets/images/icons/statistics.svg" alt="statistics" />
@@ -131,7 +101,10 @@
             Статистика
           </a>
         </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'trade']">
             <div class="icon">
               <img src="/assets/images/icons/trade.svg" alt="trade" />
@@ -139,7 +112,10 @@
             Каналы продаж
           </a>
         </li>
-        <li>
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <a [routerLink]="['/account', 'messages']">
             <div class="icon">
               <img src="/assets/images/icons/letter.svg" alt="letter" />
@@ -149,6 +125,54 @@
         </li>
       </ul>
     </nav>
+
+    <div class="user-action">
+      <a class="user-action__link-primary">
+        <svg
+          width="11"
+          height="11"
+          viewBox="0 0 11 11"
+          fill="#ffffff"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.22 3.98V6.68H6.9V10.2H4.04V6.68H0.7V3.98H4.04V0.559999H6.9V3.98H10.22Z"
+          />
+        </svg>
+
+        Добавить объект</a
+      >
+      <a class="user-action__link-secondary">
+        <svg
+          width="11"
+          height="11"
+          viewBox="0 0 11 11"
+          fill="#3CBADE"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.22 3.98V6.68H6.9V10.2H4.04V6.68H0.7V3.98H4.04V0.559999H6.9V3.98H10.22Z"
+          />
+        </svg>
+
+        Добавить бронь</a
+      >
+      <a class="user-action__link-secondary">
+        <svg
+          width="11"
+          height="11"
+          viewBox="0 0 11 11"
+          fill="#3CBADE"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.22 3.98V6.68H6.9V10.2H4.04V6.68H0.7V3.98H4.04V0.559999H6.9V3.98H10.22Z"
+          />
+        </svg>
+
+        Добавить расход</a
+      >
+    </div>
 
     <div class="account-menu">
       <ul>
