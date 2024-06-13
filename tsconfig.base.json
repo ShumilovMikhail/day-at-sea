@@ -35,6 +35,7 @@
       "@http": ["libs/core/http/src/index.ts"],
       "@layers": ["libs/core/layers/src/index.ts"],
       "@ui/forms": ["libs/core/ui/ui-forms/src/index.ts"],
+      "@ui/indicators": ["libs/core/ui/ui-indicators/src/index.ts"],
       "@user/data-access": ["libs/account/data-access-user/src/index.ts"],
       "@utils/pipes": ["libs/core/utils/util-pipes/src/index.ts"],
       "@utils/validators": ["libs/core/utils/util-validators/src/index.ts"]

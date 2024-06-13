@@ -1,16 +1,23 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LetDirective } from '@ngrx/component';
+import { Observable, map } from 'rxjs';
+
 import { SettingsUiComponent } from '../settings-ui/settings-ui.component';
 import { AuthFacade, UserEntity } from '@auth/data-access';
 import { AgencyFacade } from '@account/data-access-agency';
-import { Observable, map } from 'rxjs';
 import { AgencyVM, UserVM } from '../types/settings.models';
-import { LetDirective } from '@ngrx/component';
+import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 
 @Component({
   selector: 'account-settings-container',
   standalone: true,
-  imports: [CommonModule, SettingsUiComponent, LetDirective],
+  imports: [
+    CommonModule,
+    SettingsUiComponent,
+    LetDirective,
+    UiIndicatorsLoaderComponent,
+  ],
   templateUrl: './settings-container.component.html',
   styleUrl: './settings-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
