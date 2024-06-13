@@ -1,0 +1,15 @@
+@if ((agencyVM$| async) && (userVM$ | async)) {
+<ng-container
+  *ngrxLet="{
+    userVM: userVM$,
+    agencyVM: agencyVM$
+  } as vm"
+>
+  <account-settings-ui
+    [agencyVM]="vm.agencyVM!"
+    [userVM]="vm.userVM!"
+  ></account-settings-ui>
+</ng-container>
+} @else {
+<div>loading</div>
+}
