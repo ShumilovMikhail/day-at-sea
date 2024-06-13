@@ -102,7 +102,7 @@ export const getUserEffect$ = createEffect(
             return authActions.getUserSuccess({ user });
           }),
           catchError(({ error }) => {
-            return of(authActions.getUserFailure(error));
+            return of(authActions.getUserFailure({ error }));
           })
         );
       })

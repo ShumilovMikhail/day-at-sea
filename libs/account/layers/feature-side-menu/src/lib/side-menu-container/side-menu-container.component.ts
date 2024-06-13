@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { SideMenuUiComponent } from '../side-menu-ui/side-menu-ui.component';
 import { SideMenuMobileDirective } from '../directives/side-menu-mobile.directive';
 import { FirstNamePipe } from '@utils/pipes';
-import { AgencyEntity, AgencyFacade } from '@agency/data-access';
+import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
 
 @Component({
   selector: 'account-side-menu-container',

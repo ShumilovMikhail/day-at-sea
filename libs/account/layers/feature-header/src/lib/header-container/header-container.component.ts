@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 
 import { HeaderUiComponent } from '../header-ui/header-ui.component';
 import { FirstNamePipe } from '@utils/pipes';
-import { AgencyEntity, AgencyFacade } from '@agency/data-access';
+import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
 
 @Component({
   selector: 'account-header-container',

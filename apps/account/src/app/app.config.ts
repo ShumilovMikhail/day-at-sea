@@ -13,7 +13,7 @@ import { appRoutes } from './app.routes';
 import { environment } from '../environments/environment.development';
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import { API_URL } from '@http';
-import { agencyEffects, agencyFeature } from '@agency/data-access';
+import { agencyEffects, agencyFeature } from '@account/data-access-agency';
 
 export const appConfig: ApplicationConfig = {
   providers: [

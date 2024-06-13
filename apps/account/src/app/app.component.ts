@@ -5,7 +5,7 @@ import { filter, take } from 'rxjs';
 import { AuthFacade, UserEntity } from '@auth/data-access';
 import { HeaderContainerComponent } from '@account/layers/header';
 import { SideMenuContainerComponent } from '@account/layers/side-menu';
-import { AgencyFacade } from '@agency/data-access';
+import { AgencyFacade } from '@account/data-access-agency';
 
 @Component({
   standalone: true,
