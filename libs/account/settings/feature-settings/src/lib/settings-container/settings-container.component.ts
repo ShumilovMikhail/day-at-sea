@@ -5,9 +5,10 @@ import { Observable, map } from 'rxjs';
 
 import { SettingsUiComponent } from '../settings-ui/settings-ui.component';
 import { AuthFacade, UserEntity } from '@auth/data-access';
-import { AgencyFacade } from '@account/data-access-agency';
+import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
 import { AgencyVM, UserVM } from '../types/settings.models';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
+import { agencyEntityVMAdapter } from './agency-entity-vm.adapter';
 
 @Component({
   selector: 'account-settings-container',
@@ -38,5 +39,9 @@ export class SettingsContainerComponent {
       })
     );
   public readonly agencyVM$: Observable<AgencyVM | null> =
-    this.agencyFacade.agency$;
+    this.agencyFacade.agency$.pipe(
+      map((agency: AgencyEntity | null) =>
+        agencyEntityVMAdapter.entityToVM(agency)
+      )
+    );
 }

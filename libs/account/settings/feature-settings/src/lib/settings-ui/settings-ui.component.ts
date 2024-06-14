@@ -1,7 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AgencyVM, UserVM } from '../types/settings.models';
+import { AgencyVM, ContactsVM, UserVM } from '../types/settings.models';
 
 @Component({
   selector: 'account-settings-ui',
@@ -11,7 +16,12 @@ import { AgencyVM, UserVM } from '../types/settings.models';
   styleUrl: './settings-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsUiComponent {
+export class SettingsUiComponent implements OnInit {
   @Input({ required: true }) userVM!: UserVM;
   @Input({ required: true }) agencyVM!: AgencyVM;
+  public contactsVM!: ContactsVM;
+
+  ngOnInit(): void {
+    this.contactsVM = this.agencyVM.contacts;
+  }
 }

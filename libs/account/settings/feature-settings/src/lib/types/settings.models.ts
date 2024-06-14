@@ -4,7 +4,7 @@ export interface UserVM {
 }
 
 export interface ContactsVM {
-  phones: string[] | null;
+  phones: string | null;
   site: string | null;
   vk: string | null;
   ok: string | null;
