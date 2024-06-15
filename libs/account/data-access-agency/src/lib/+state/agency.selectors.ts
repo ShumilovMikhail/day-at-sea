@@ -2,6 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { AgencyState, AgencyStatus } from '../types/agency-state.models';
 import { agencyFeature } from './agency.reducer';
+import { AgencyEntity } from '../types/agency.models';
 
 // Lookup the 'Agency' feature state managed by NgRx
 export const selectAgencyState = createFeatureSelector<AgencyState>(
@@ -26,4 +27,9 @@ export const selectAgencyError = createSelector(
 export const selectAgencyLoading = createSelector(
   selectAgencyStatus,
   (status: AgencyStatus | null) => status === 'loading'
+);
+
+export const selectAgencyContacts = createSelector(
+  selectAgency,
+  (agency: AgencyEntity | null) => (agency ? agency.contacts : null)
 );

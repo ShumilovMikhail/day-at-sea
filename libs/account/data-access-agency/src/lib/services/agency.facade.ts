@@ -5,11 +5,12 @@ import { Observable } from 'rxjs';
 import { AgencyStatus } from '../types/agency-state.models';
 import {
   selectAgency,
+  selectAgencyContacts,
   selectAgencyError,
   selectAgencyLoading,
   selectAgencyStatus,
 } from '../+state/agency.selectors';
-import { AgencyEntity } from '../types/agency.models';
+import { AgencyEntity, Contacts } from '../types/agency.models';
 import { ResponseError } from '@http';
 import { agencyActions } from '../+state/agency.actions';
 
@@ -25,6 +26,9 @@ export class AgencyFacade {
     this.store.select(selectAgency);
   public readonly error$: Observable<ResponseError | null> =
     this.store.select(selectAgencyError);
+
+  public readonly contacts$: Observable<Contacts | null> =
+    this.store.select(selectAgencyContacts);
 
   public init(userId: number): void {
     this.store.dispatch(agencyActions.init({ userId }));

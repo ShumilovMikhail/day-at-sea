@@ -24,6 +24,9 @@
       "@account/layers/side-menu": [
         "libs/account/layers/feature-side-menu/src/index.ts"
       ],
+      "@account/settings/feature-contacts-edit": [
+        "libs/account/settings/feature-contacts-edit/src/index.ts"
+      ],
       "@account/settings/feature-settings": [
         "libs/account/settings/feature-settings/src/index.ts"
       ],
