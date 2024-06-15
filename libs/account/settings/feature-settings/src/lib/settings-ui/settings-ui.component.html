@@ -2,11 +2,19 @@
   <h1>Настройки</h1>
   <div class="settings-content">
     <div class="settings-content__item">
-      <div class="settings-block requisites">
+      <div
+        class="settings-block requisites"
+        utilsAccordion
+        [buttonToggle]="requisitesChangeButton"
+      >
         <div class="settings-block__header">
           <h3>Реквизиты агенства</h3>
           <a>Изменить</a>
-          <img src="assets/images/icons/arrow-toggle.svg" alt="" />
+          <img
+            src="assets/images/icons/arrow-toggle.svg"
+            alt=""
+            #requisitesChangeButton
+          />
         </div>
         <div class="settings-block__content requisites-content">
           <div class="image-container">
@@ -33,11 +41,19 @@
         </div>
         <a class="link-edit-button">Изменить</a>
       </div>
-      <div class="settings-block contacts">
+      <div
+        class="settings-block contacts"
+        utilsAccordion
+        [buttonToggle]="contactsChangeButton"
+      >
         <div class="settings-block__header">
           <h3>Контакты, Сайт, Соцсети, Мессенжеры</h3>
           <a>Изменить</a>
-          <img src="assets/images/icons/arrow-toggle.svg" alt="" />
+          <img
+            src="assets/images/icons/arrow-toggle.svg"
+            alt=""
+            #contactsChangeButton
+          />
         </div>
         <div class="settings-block__content contacts-content">
           <ul class="settings-list">
@@ -75,11 +91,19 @@
       </div>
     </div>
     <div class="settings-content__item">
-      <div class="settings-block login-details">
+      <div
+        class="settings-block login-details"
+        utilsAccordion
+        [buttonToggle]="loginChangeButton"
+      >
         <div class="settings-block__header">
           <h3>Данные для входа</h3>
           <a>Изменить</a>
-          <img src="assets/images/icons/arrow-toggle.svg" alt="" />
+          <img
+            src="assets/images/icons/arrow-toggle.svg"
+            alt=""
+            #loginChangeButton
+          />
         </div>
         <div class="settings-block__content login-details-content">
           <ul class="settings-list">

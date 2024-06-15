@@ -1,1 +1,1 @@
-export * from './lib/util-directives/util-directives.component';
+export * from './lib/directives/accordion/accordion.directive';
