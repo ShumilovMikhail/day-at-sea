@@ -2,7 +2,7 @@
   "name": "util-validators",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/utils/validators/util-validators/src",
-  "prefix": "validators",
+  "prefix": "utils",
   "projectType": "library",
   "tags": [],
   "targets": {
