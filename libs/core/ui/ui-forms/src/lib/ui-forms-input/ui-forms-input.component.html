@@ -7,15 +7,25 @@
     >{{ label }}</label
   >
   }
-  <input
-    type="text"
+  <div
+    class="input-wrapper"
     [ngClass]="{
-      error: control.errors && control.touched
+      'cross-enable': crossEnable
     }"
-    [formControl]="control"
-    [placeholder]="placeholder ?? ''"
-    (focus)="onFocus()"
-  />
+  >
+    <input
+      type="text"
+      [ngClass]="{
+        error: control.errors && control.touched
+      }"
+      [formControl]="control"
+      [placeholder]="placeholder ?? ''"
+      (focus)="onFocus()"
+    />
+    @if (crossEnable) {
+    <button class="cross" (click)="onReset()"></button>
+    }
+  </div>
   <ul>
     @if (errors && control.touched) { @for (error of errors; track error) { @if
     (error !== '') {

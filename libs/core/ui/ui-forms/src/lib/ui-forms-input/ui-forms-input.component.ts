@@ -16,8 +16,13 @@ export class UiFormsInputComponent {
   @Input() required: boolean | undefined;
   @Input() placeholder: string | undefined;
   @Input() errors: string[] | undefined;
+  @Input() crossEnable = false;
 
   public onFocus(): void {
     this.control.markAsUntouched();
+  }
+
+  onReset() {
+    this.control.patchValue('');
   }
 }
