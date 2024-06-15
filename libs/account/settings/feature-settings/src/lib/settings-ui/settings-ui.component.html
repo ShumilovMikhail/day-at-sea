@@ -6,6 +6,7 @@
         <div class="settings-block__header">
           <h3>Реквизиты агенства</h3>
           <a>Изменить</a>
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" />
         </div>
         <div class="settings-block__content requisites-content">
           <div class="image-container">
@@ -30,11 +31,13 @@
             </li>
           </ul>
         </div>
+        <a class="link-edit-button">Изменить</a>
       </div>
       <div class="settings-block contacts">
         <div class="settings-block__header">
           <h3>Контакты, Сайт, Соцсети, Мессенжеры</h3>
           <a>Изменить</a>
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" />
         </div>
         <div class="settings-block__content contacts-content">
           <ul class="settings-list">
@@ -68,6 +71,7 @@
             </li>
           </ul>
         </div>
+        <a class="link-edit-button">Изменить</a>
       </div>
     </div>
     <div class="settings-content__item">
@@ -75,6 +79,7 @@
         <div class="settings-block__header">
           <h3>Данные для входа</h3>
           <a>Изменить</a>
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" />
         </div>
         <div class="settings-block__content login-details-content">
           <ul class="settings-list">
@@ -84,7 +89,13 @@
               </div>
               <div class="content">
                 <span>Логин</span>
-                <p>{{ userVM.login }}</p>
+                <p>
+                  {{
+                    userVM.login.length > 17
+                      ? (userVM.login | slice : 0 : 17) + '...'
+                      : userVM.login
+                  }}
+                </p>
               </div>
             </li>
             <li>
@@ -93,11 +104,18 @@
               </div>
               <div class="content">
                 <span>E-mail</span>
-                <p>{{ userVM.email }}</p>
+                <p>
+                  {{
+                    userVM.email.length > 17
+                      ? (userVM.email | slice : 0 : 17) + '...'
+                      : userVM.email
+                  }}
+                </p>
               </div>
             </li>
           </ul>
         </div>
+        <a class="link-edit-button">Изменить</a>
       </div>
     </div>
   </div>
