@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormGroup } from '@angular/forms';
 
-import { ContactsVM } from '../types/contacts.models';
+import { ContactsForm } from '../types/contacts.models';
 
 @Component({
   selector: 'account-contacts-edit-ui',
@@ -12,5 +13,5 @@ import { ContactsVM } from '../types/contacts.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactsEditUiComponent {
-  @Input({ required: true }) contactsVM!: ContactsVM;
+  @Input({ required: true }) form!: FormGroup<ContactsForm>;
 }

@@ -1,5 +1,5 @@
-@if (contactsVM$ | async; as contactsVM) {
-<account-contacts-edit-ui [contactsVM]="contactsVM"></account-contacts-edit-ui>
+@if (form) {
+<account-contacts-edit-ui [form]="form"></account-contacts-edit-ui>
 } @else {
 <div class="loader-container">
   <ui-indicators-loader></ui-indicators-loader>
