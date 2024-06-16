@@ -1,0 +1,191 @@
+@import 'variables';
+@import 'mixins';
+
+.contacts-edit {
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+h1 {
+  font-size: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.form-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  h2 {
+    font-size: 20px;
+  }
+}
+
+.phones {
+  &__content {
+    .input-wrapper {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      ui-forms-input {
+        width: 560px;
+      }
+
+      button {
+        background-color: transparent;
+        border: none;
+        svg {
+          transition: 0.2s color;
+          &:hover {
+            fill: $primaryHover;
+          }
+        }
+        cursor: pointer;
+      }
+    }
+    .button-add {
+      margin-top: 10px;
+      background-color: transparent;
+      border: none;
+      color: $primary;
+      transition: 0.2s color;
+      &:hover {
+        color: $primaryHover;
+      }
+      cursor: pointer;
+    }
+  }
+}
+
+.site {
+  ui-forms-input {
+    width: 560px;
+  }
+}
+
+.social-networks {
+  &__content {
+    display: flex;
+    gap: 5px;
+    ui-forms-input {
+      width: 250px;
+    }
+  }
+}
+
+.messengers {
+  &__content {
+    display: flex;
+    gap: 5px;
+    ui-forms-input {
+      width: 250px;
+    }
+  }
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .button-submit {
+    @include button-primary();
+    padding: 10px;
+    width: 129px;
+  }
+  .button-cancel {
+    @include button-secondary();
+    padding: 10px;
+    width: 129px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contacts-edit {
+    padding: 20px 15px;
+    gap: 20px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+
+  form {
+    gap: 28px;
+  }
+
+  .form-inner {
+    gap: 32px;
+  }
+
+  .form-block {
+    gap: 9px;
+    h2 {
+      font-size: 16px;
+    }
+  }
+
+  .phones {
+    &__content {
+      .input-wrapper {
+        gap: 10px;
+        width: 100%;
+        ui-forms-input {
+        }
+      }
+      .button-add {
+        width: 100%;
+        padding: 8px 29px;
+        @include button-secondary();
+      }
+    }
+  }
+
+  .site {
+    ui-forms-input {
+      width: 100%;
+    }
+  }
+
+  .social-networks {
+    &__content {
+      flex-direction: column;
+      gap: 10px;
+      ui-forms-input {
+        width: 100%;
+      }
+    }
+  }
+
+  .messengers {
+    &__content {
+      flex-direction: column;
+      gap: 10px;
+      ui-forms-input {
+        width: 100%;
+      }
+    }
+  }
+
+  .buttons-container {
+    flex-direction: column;
+    gap: 10px;
+    .button-submit {
+      @include button-primary();
+      width: 100%;
+    }
+    .button-cancel {
+      @include button-secondary();
+      width: 100%;
+    }
+  }
+}

@@ -5,7 +5,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Observable, filter, map, take } from 'rxjs';
 
@@ -50,7 +50,9 @@ export class ContactsEditContainerComponent implements OnInit {
 
   private initializeForm(contactsVM: ContactsVM): void {
     this.form = this.fb.group({
-      phones: [this.fb.array(contactsVM.phones)],
+      phones: new FormArray(
+        contactsVM.phones.map((phone: string | null) => new FormControl(phone))
+      ),
       site: [contactsVM.site],
       vk: [contactsVM.vk],
       ok: [contactsVM.ok],

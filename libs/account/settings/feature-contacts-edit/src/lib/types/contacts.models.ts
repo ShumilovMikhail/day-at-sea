@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormArray, FormControl } from '@angular/forms';
 
 export interface ContactsVM {
   phones: string[];
@@ -11,7 +11,7 @@ export interface ContactsVM {
 }
 
 export interface ContactsForm {
-  phones: FormControl<(string | null)[] | null>;
+  phones: FormArray<FormControl<string | null>>;
   site: FormControl<string | null>;
   vk: FormControl<string | null>;
   ok: FormControl<string | null>;

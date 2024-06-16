@@ -1,4 +1,89 @@
 <div class="contacts-edit">
   <h1>Контакты, Сайт, Соцсети, Мессенжеры</h1>
-  <form></form>
+  <form [formGroup]="form">
+    <div class="form-inner">
+      <div class="phones form-block">
+        <h2>Дополнительные телефоны</h2>
+        <div class="phones__content" formArrayName="phones">
+          @for (phone of phones.controls; track phone) {
+          <div class="input-wrapper">
+            <ui-forms-input
+              [control]="phone | formControl"
+              [crossEnable]="true"
+              [placeholder]="'+7'"
+            ></ui-forms-input>
+            <button class="button-delete" type="button">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="#3CBADE"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M8.42608 1.66797C7.81244 1.66797 7.31498 2.16543 7.31498 2.77908C7.31498 3.0859 7.06625 3.33464 6.75942 3.33464H6.66683H4.16683C3.7066 3.33464 3.3335 3.70774 3.3335 4.16797C3.3335 4.6282 3.7066 5.0013 4.16683 5.0013H6.66683H6.75942H13.2396H13.2409H13.3335H15.8335C16.2937 5.0013 16.6668 4.6282 16.6668 4.16797C16.6668 3.70774 16.2937 3.33464 15.8335 3.33464H13.2402C12.9337 3.33427 12.6853 3.08569 12.6853 2.77908C12.6853 2.16543 12.1879 1.66797 11.5742 1.66797H8.42608Z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5.00032 6.66797C4.76728 6.66797 4.54489 6.76555 4.38709 6.93704C4.2293 7.10854 4.15052 7.33827 4.16987 7.57051L4.81217 15.2781C4.95614 17.0058 6.40037 18.3346 8.13399 18.3346H11.8667C13.6003 18.3346 15.0445 17.0058 15.1885 15.2781L15.8307 7.57051C15.8502 7.33827 15.7713 7.10854 15.6136 6.93704C15.4557 6.76555 15.2334 6.66797 15.0003 6.66797H5.00032Z"
+                />
+              </svg>
+            </button>
+          </div>
+          }
+          <button class="button-add" type="button">+ добавить телефон</button>
+        </div>
+      </div>
+      <div class="site form-block">
+        <h2>Сайт</h2>
+        <ui-forms-input
+          [control]="form.get('site')! | formControl"
+          [crossEnable]="true"
+          [placeholder]="'site.ru'"
+        ></ui-forms-input>
+      </div>
+      <div class="social-networks form-block">
+        <h2>Соцсети</h2>
+        <div class="social-networks__content">
+          <ui-forms-input
+            [control]="form.get('vk')! | formControl"
+            [crossEnable]="true"
+            [label]="'Вконтакте'"
+          ></ui-forms-input>
+          <ui-forms-input
+            [control]="form.get('ok')! | formControl"
+            [crossEnable]="true"
+            [label]="'Одноклассники'"
+          ></ui-forms-input>
+        </div>
+      </div>
+      <div class="messengers form-block">
+        <h2>Мессенжеры</h2>
+        <div class="messengers__content">
+          <ui-forms-input
+            [control]="form.get('whatsapp')! | formControl"
+            [crossEnable]="true"
+            [label]="'Whatsapp'"
+          ></ui-forms-input>
+          <ui-forms-input
+            [control]="form.get('telegram')! | formControl"
+            [crossEnable]="true"
+            [label]="'Telegram'"
+          ></ui-forms-input>
+          <ui-forms-input
+            [control]="form.get('viber')! | formControl"
+            [crossEnable]="true"
+            [label]="'Viber'"
+          ></ui-forms-input>
+        </div>
+      </div>
+    </div>
+    <div class="buttons-container">
+      <button class="button-submit" type="submit">Сохранить</button>
+      <button class="button-cancel" type="button">Отменить</button>
+    </div>
+  </form>
 </div>
