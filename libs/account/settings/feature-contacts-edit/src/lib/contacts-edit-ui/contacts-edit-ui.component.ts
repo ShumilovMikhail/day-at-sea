@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 
 import { ContactsForm } from '../types/contacts.models';
-import { UiFormsInputComponent } from '@ui/forms';
+import { UiFormsInputComponent, UiFormsPhoneComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
 
 @Component({
@@ -19,6 +19,7 @@ import { FormControlPipe } from '@utils/pipes';
     ReactiveFormsModule,
     UiFormsInputComponent,
     FormControlPipe,
+    UiFormsPhoneComponent,
   ],
   templateUrl: './contacts-edit-ui.component.html',
   styleUrl: './contacts-edit-ui.component.scss',

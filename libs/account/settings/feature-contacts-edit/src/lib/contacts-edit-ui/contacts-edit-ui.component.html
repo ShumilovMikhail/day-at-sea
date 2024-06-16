@@ -7,11 +7,11 @@
         <div class="phones__content" formArrayName="phones">
           @for (phone of phones.controls; track $index) {
           <div class="input-wrapper">
-            <ui-forms-input
+            <ui-forms-phone
               [control]="phone | formControl"
               [crossEnable]="true"
               [placeholder]="'+7'"
-            ></ui-forms-input>
+            ></ui-forms-phone>
             <button
               class="button-delete"
               type="button"

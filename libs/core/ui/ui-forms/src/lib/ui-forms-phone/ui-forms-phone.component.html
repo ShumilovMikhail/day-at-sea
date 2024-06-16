@@ -1,0 +1,39 @@
+<div class="input-container">
+  @if (label) {
+  <label
+    [ngClass]="{
+      required: required
+    }"
+    >{{ label }}</label
+  >
+  }
+  <div
+    class="input-wrapper"
+    [ngClass]="{
+      'cross-enable': crossEnable
+    }"
+  >
+    <input
+      type="tel"
+      uiFormsPhone
+      [ngClass]="{
+        error: control.errors && control.touched
+      }"
+      [formControl]="control"
+      [placeholder]="placeholder ?? ''"
+      [value]="control.value | phone"
+      [inputValue]="control.value | phone"
+      (focus)="onFocus()"
+      maxlength="18"
+    />
+    @if (crossEnable) {
+    <button class="cross" (click)="onReset()"></button>
+    }
+  </div>
+  <ul>
+    @if (errors && control.touched) { @for (error of errors; track error) { @if
+    (error !== '') {
+    <li>{{ error }}</li>
+    } } }
+  </ul>
+</div>
