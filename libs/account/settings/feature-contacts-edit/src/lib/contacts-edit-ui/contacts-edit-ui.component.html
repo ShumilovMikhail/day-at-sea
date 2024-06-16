@@ -5,14 +5,18 @@
       <div class="phones form-block">
         <h2>Дополнительные телефоны</h2>
         <div class="phones__content" formArrayName="phones">
-          @for (phone of phones.controls; track phone) {
+          @for (phone of phones.controls; track $index) {
           <div class="input-wrapper">
             <ui-forms-input
               [control]="phone | formControl"
               [crossEnable]="true"
               [placeholder]="'+7'"
             ></ui-forms-input>
-            <button class="button-delete" type="button">
+            <button
+              class="button-delete"
+              type="button"
+              (click)="onDeletePhoneButtonClick($index)"
+            >
               <svg
                 width="20"
                 height="20"
@@ -34,7 +38,13 @@
             </button>
           </div>
           }
-          <button class="button-add" type="button">+ добавить телефон</button>
+          <button
+            class="button-add"
+            type="button"
+            (click)="onAddPhoneButtonClick()"
+          >
+            + добавить телефон
+          </button>
         </div>
       </div>
       <div class="site form-block">

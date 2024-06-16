@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 import { ContactsForm } from '../types/contacts.models';
 import { UiFormsInputComponent } from '@ui/forms';
@@ -24,5 +29,13 @@ export class ContactsEditUiComponent {
 
   get phones(): FormArray {
     return this.form.get('phones') as FormArray;
+  }
+
+  onAddPhoneButtonClick() {
+    this.form.controls.phones.push(new FormControl(''));
+  }
+
+  onDeletePhoneButtonClick(index: number) {
+    this.form.controls.phones.removeAt(index);
   }
 }
