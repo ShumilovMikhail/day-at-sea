@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { select, Store, Action } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, take } from 'rxjs';
 
 import { AgencyStatus } from '../types/agency-state.models';
 import {
@@ -32,5 +32,16 @@ export class AgencyFacade {
 
   public init(userId: number): void {
     this.store.dispatch(agencyActions.init({ userId }));
+  }
+
+  public updateContacts(contacts: Contacts): void {
+    this.agency$.pipe(take(1)).subscribe((agency: AgencyEntity | null) => {
+      if (!agency) {
+        throw Error('updateContacts: agency is null');
+      }
+      this.store.dispatch(
+        agencyActions.updateAgencyContacts({ id: agency.id, contacts })
+      );
+    });
   }
 }

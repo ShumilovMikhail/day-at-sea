@@ -4,7 +4,7 @@ import { switchMap, catchError, of, map } from 'rxjs';
 
 import { agencyActions } from './agency.actions';
 import { ApiService } from '@http';
-import { AgencyDTO, AgencyEntity } from '../types/agency.models';
+import { AgencyDTO, AgencyEntity, Contacts } from '../types/agency.models';
 import { agencyDTOAdapter } from './agency-dto.adapter';
 
 export const agencyInitEffect$ = createEffect(
@@ -33,6 +33,26 @@ export const getAgencyEffect$ = createEffect(
             return of(agencyActions.getAgencyFailure({ error }));
           })
         );
+      })
+    ),
+  { functional: true }
+);
+
+export const updateAgencyContactsEffect$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(agencyActions.updateAgencyContacts),
+      switchMap(({ id, contacts }: { id: number; contacts: Contacts }) => {
+        return apiService
+          .put<Contacts>(`agencies/${id}/contacts`, contacts)
+          .pipe(
+            map((contacts: Contacts) => {
+              return agencyActions.updateAgencyContactsSuccess({ contacts });
+            }),
+            catchError(({ error }) => {
+              return of(agencyActions.updateAgencyContactsFailure({ error }));
+            })
+          );
       })
     ),
   { functional: true }
