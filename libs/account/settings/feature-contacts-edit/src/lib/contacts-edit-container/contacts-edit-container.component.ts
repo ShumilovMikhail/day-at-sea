@@ -31,6 +31,7 @@ export class ContactsEditContainerComponent implements OnInit {
   private readonly contactsVM$: Observable<Contacts | null> =
     this.agencyFacade.contacts$;
   public form!: FormGroup<ContactsForm>;
+  public readonly loading$ = this.agencyFacade.loading$;
 
   ngOnInit(): void {
     this.contactsVM$
@@ -46,6 +47,10 @@ export class ContactsEditContainerComponent implements OnInit {
       .subscribe((contactsVM: ContactsVM) => {
         this.initializeForm(contactsVM);
       });
+  }
+
+  public onSubmit() {
+    this.agencyFacade.updateContacts(this.form.value as Contacts);
   }
 
   private initializeForm(contactsVM: ContactsVM): void {

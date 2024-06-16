@@ -44,10 +44,10 @@ export const updateAgencyContactsEffect$ = createEffect(
       ofType(agencyActions.updateAgencyContacts),
       switchMap(({ id, contacts }: { id: number; contacts: Contacts }) => {
         return apiService
-          .put<Contacts>(`agencies/${id}/contacts`, contacts)
+          .put<{ contacts: Contacts }>(`agencies/${id}/contacts`, contacts)
           .pipe(
-            map((contacts: Contacts) => {
-              return agencyActions.updateAgencyContactsSuccess({ contacts });
+            map((contacts: { contacts: Contacts }) => {
+              return agencyActions.updateAgencyContactsSuccess(contacts);
             }),
             catchError(({ error }) => {
               return of(agencyActions.updateAgencyContactsFailure({ error }));

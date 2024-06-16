@@ -1,6 +1,6 @@
 <div class="contacts-edit">
   <h1>Контакты, Сайт, Соцсети, Мессенжеры</h1>
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-inner">
       <div class="phones form-block">
         <h2>Дополнительные телефоны</h2>
@@ -92,7 +92,10 @@
       </div>
     </div>
     <div class="buttons-container">
-      <button class="button-submit" type="submit">Сохранить</button>
+      <button class="button-submit" type="submit" [disabled]="isLoading">
+        Сохранить
+        <div class="spinner-loader" *ngIf="isLoading"></div>
+      </button>
       <button class="button-cancel" type="button">Отменить</button>
     </div>
   </form>

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormArray,
@@ -27,16 +33,22 @@ import { FormControlPipe } from '@utils/pipes';
 })
 export class ContactsEditUiComponent {
   @Input({ required: true }) form!: FormGroup<ContactsForm>;
+  @Input() isLoading = false;
+  @Output() submitEvent = new EventEmitter<void>();
 
   get phones(): FormArray {
     return this.form.get('phones') as FormArray;
   }
 
-  onAddPhoneButtonClick() {
+  public onAddPhoneButtonClick(): void {
     this.form.controls.phones.push(new FormControl(''));
   }
 
-  onDeletePhoneButtonClick(index: number) {
+  public onDeletePhoneButtonClick(index: number): void {
     this.form.controls.phones.removeAt(index);
+  }
+
+  public onSubmit(): void {
+    this.submitEvent.emit();
   }
 }

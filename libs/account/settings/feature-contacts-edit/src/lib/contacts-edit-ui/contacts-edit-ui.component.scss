@@ -101,6 +101,10 @@ form {
   .button-submit {
     @include button-primary();
     padding: 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
     width: 129px;
   }
   .button-cancel {

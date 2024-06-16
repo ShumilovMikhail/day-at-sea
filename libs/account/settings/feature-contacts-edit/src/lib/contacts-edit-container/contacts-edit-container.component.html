@@ -1,5 +1,9 @@
 @if (form) {
-<account-contacts-edit-ui [form]="form"></account-contacts-edit-ui>
+<account-contacts-edit-ui
+  [form]="form"
+  [isLoading]="(loading$ | async) ?? false"
+  (submitEvent)="onSubmit()"
+></account-contacts-edit-ui>
 } @else {
 <div class="loader-container">
   <ui-indicators-loader></ui-indicators-loader>
