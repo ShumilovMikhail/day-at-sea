@@ -12,7 +12,11 @@ import { API_URL } from '@http';
 
 const shouldIntercept = (req: HttpRequest<any>): boolean => {
   const apiUrl = inject(API_URL);
-  const urls: string[] = [`${apiUrl}/user`, `${apiUrl}/auth/me`];
+  const urls: string[] = [
+    `${apiUrl}/user`,
+    `${apiUrl}/auth/me`,
+    `${apiUrl}/agencies`,
+  ];
 
   for (const url of urls) {
     if (req.url.includes(url)) {
