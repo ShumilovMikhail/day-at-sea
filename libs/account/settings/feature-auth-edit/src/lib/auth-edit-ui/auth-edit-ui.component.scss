@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.auth-edit {
+  padding: 40px 50px;
+  h1 {
+    font-size: 30px;
+  }
+  .content {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-edit {
+    padding: 20px 15px;
+    h1 {
+      font-size: 24px;
+    }
+    .content {
+      margin-top: 28px;
+      gap: 29px;
+    }
+  }
+}

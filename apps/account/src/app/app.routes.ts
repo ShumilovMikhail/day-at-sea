@@ -19,6 +19,13 @@ export const appRoutes: Route[] = [
             (c) => c.ContactsEditContainerComponent
           ),
       },
+      {
+        path: 'settings/auth/edit',
+        loadComponent: () =>
+          import('@account/settings/auth-edit').then(
+            (c) => c.AuthEditContainerComponent
+          ),
+      },
     ],
   },
 ];
