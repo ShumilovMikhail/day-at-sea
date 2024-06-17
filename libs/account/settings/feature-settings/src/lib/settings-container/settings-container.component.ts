@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
+import { Title } from '@angular/platform-browser';
 import { Observable, map } from 'rxjs';
 
 import { SettingsUiComponent } from '../settings-ui/settings-ui.component';
@@ -44,4 +45,8 @@ export class SettingsContainerComponent {
         agencyEntityVMAdapter.entityToVM(agency)
       )
     );
+
+  constructor(private readonly title: Title) {
+    title.setTitle('Настройки');
+  }
 }

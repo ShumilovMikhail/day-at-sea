@@ -48,7 +48,7 @@
       >
         <div class="settings-block__header">
           <h3>Контакты, Сайт, Соцсети, Мессенжеры</h3>
-          <a>Изменить</a>
+          <a [routerLink]="['contacts/edit']">Изменить</a>
           <img
             src="assets/images/icons/arrow-toggle.svg"
             alt=""
@@ -87,7 +87,9 @@
             </li>
           </ul>
         </div>
-        <a class="link-edit-button">Изменить</a>
+        <a class="link-edit-button" [routerLink]="['contacts/edit']"
+          >Изменить</a
+        >
       </div>
     </div>
     <div class="settings-content__item">

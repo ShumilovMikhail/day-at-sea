@@ -73,30 +73,36 @@
       <div class="messengers form-block">
         <h2>Мессенжеры</h2>
         <div class="messengers__content">
-          <ui-forms-input
+          <ui-forms-phone
             [control]="form.get('whatsapp')! | formControl"
             [crossEnable]="true"
             [label]="'Whatsapp'"
-          ></ui-forms-input>
-          <ui-forms-input
+          ></ui-forms-phone>
+          <ui-forms-phone
             [control]="form.get('telegram')! | formControl"
             [crossEnable]="true"
             [label]="'Telegram'"
-          ></ui-forms-input>
-          <ui-forms-input
+          ></ui-forms-phone>
+          <ui-forms-phone
             [control]="form.get('viber')! | formControl"
             [crossEnable]="true"
             [label]="'Viber'"
-          ></ui-forms-input>
+          ></ui-forms-phone>
         </div>
       </div>
     </div>
     <div class="buttons-container">
-      <button class="button-submit" type="submit" [disabled]="isLoading">
+      <button
+        class="button-submit"
+        type="submit"
+        [disabled]="isLoading || form.invalid"
+      >
         Сохранить
         <div class="spinner-loader" *ngIf="isLoading"></div>
       </button>
-      <button class="button-cancel" type="button">Отменить</button>
+      <button class="button-cancel" type="button" (click)="onCancel()">
+        Отменить
+      </button>
     </div>
   </form>
 </div>

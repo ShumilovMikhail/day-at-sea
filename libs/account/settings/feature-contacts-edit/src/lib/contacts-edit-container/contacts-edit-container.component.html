@@ -3,6 +3,7 @@
   [form]="form"
   [isLoading]="(loading$ | async) ?? false"
   (submitEvent)="onSubmit()"
+  (cancelEvent)="onCancel()"
 ></account-contacts-edit-ui>
 } @else {
 <div class="loader-container">

@@ -35,6 +35,7 @@ export class ContactsEditUiComponent {
   @Input({ required: true }) form!: FormGroup<ContactsForm>;
   @Input() isLoading = false;
   @Output() submitEvent = new EventEmitter<void>();
+  @Output() cancelEvent = new EventEmitter<void>();
 
   get phones(): FormArray {
     return this.form.get('phones') as FormArray;
@@ -50,5 +51,9 @@ export class ContactsEditUiComponent {
 
   public onSubmit(): void {
     this.submitEvent.emit();
+  }
+
+  public onCancel(): void {
+    this.cancelEvent.emit();
   }
 }

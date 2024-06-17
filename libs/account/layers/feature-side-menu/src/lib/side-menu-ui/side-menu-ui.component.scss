@@ -127,19 +127,29 @@ nav {
     gap: 36px;
     li {
       padding-left: 27px;
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      font-weight: 600;
-      transition: 0.2s color;
-      svg {
-        transition: 0.2s fill;
-      }
-      cursor: pointer;
-      &:hover {
-        color: black;
+      a {
+        align-items: center;
+        gap: 13px;
+        display: flex;
+        transition: 0.2s color;
+        font-weight: 600;
         svg {
-          fill: black;
+          transition: 0.2s fill;
+        }
+        cursor: pointer;
+        &:hover {
+          color: black;
+          svg {
+            fill: black;
+          }
+        }
+      }
+      &.active {
+        a {
+          color: black;
+          svg {
+            fill: black;
+          }
         }
       }
     }

@@ -1,5 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {
+  NavigationEnd,
+  Router,
+  RouterEvent,
+  RouterModule,
+} from '@angular/router';
 import { filter, take } from 'rxjs';
 
 import { AuthFacade, UserEntity } from '@auth/data-access';
@@ -17,6 +22,7 @@ import { AgencyFacade } from '@account/data-access-agency';
 export class AppComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
   public readonly agencyFacade = inject(AgencyFacade);
+  public readonly router = inject(Router);
   public isSideMenuMobileOpen = false;
 
   ngOnInit(): void {
@@ -29,6 +35,11 @@ export class AppComponent implements OnInit {
       .subscribe((user) => {
         this.agencyFacade.init(user!.id);
       });
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isSideMenuMobileOpen = false;
+      }
+    });
   }
 
   public onSideMenuMobileToggle(isMobileOpen: boolean) {
