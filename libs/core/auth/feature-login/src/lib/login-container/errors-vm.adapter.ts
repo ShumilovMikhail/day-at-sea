@@ -10,7 +10,6 @@ interface ErrorsVMAdapter {
   errorsDTOToVM: (error: { message: string }) => string;
 }
 
-export const errorsVMAdapter = {
-  errorsDTOToVM: (error: { message: string }): string =>
-    errorsTypes[error.message] ?? error.message,
+export const errorsVMAdapter: ErrorsVMAdapter = {
+  errorsDTOToVM: (error: { message: string }): string => errorsTypes[error.message] ?? error.message,
 };

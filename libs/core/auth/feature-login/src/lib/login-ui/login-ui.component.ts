@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -15,13 +8,7 @@ import { FormControlPipe } from '@utils/pipes';
 @Component({
   selector: 'auth-login-ui',
   standalone: true,
-  imports: [
-    CommonModule,
-    UiFormsInputComponent,
-    UiFormsPasswordComponent,
-    FormControlPipe,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, UiFormsInputComponent, UiFormsPasswordComponent, FormControlPipe, ReactiveFormsModule],
   templateUrl: './login-ui.component.html',
   styleUrl: './login-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

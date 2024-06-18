@@ -14,7 +14,7 @@ import { UiFormsInputComponent, UiFormsPasswordComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
 
 interface RegisterForm {
-  login: FormControl<string>;
+  username: FormControl<string>;
   email: FormControl<string>;
   fullName: FormControl<string>;
   password: FormControl<string>;
@@ -24,13 +24,7 @@ const STEP_COUNT = 3;
 @Component({
   selector: 'auth-register-form-ui',
   standalone: true,
-  imports: [
-    CommonModule,
-    UiFormsInputComponent,
-    FormControlPipe,
-    UiFormsPasswordComponent,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, UiFormsInputComponent, FormControlPipe, UiFormsPasswordComponent, ReactiveFormsModule],
   templateUrl: './register-form-ui.component.html',
   styleUrl: './register-form-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

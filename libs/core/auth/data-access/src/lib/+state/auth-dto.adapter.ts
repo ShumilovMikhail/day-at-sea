@@ -1,13 +1,9 @@
-import {
-  EmailLoginDataDTO,
-  LoginData,
-  LoginDataDTO,
-} from '../types/login.models';
+import { EmailLoginDataDTO, LoginData, UsernameLoginDataDTO } from '../types/login.models';
 import { RegisterData, RegisterDataDTO } from '../types/register.models';
 
 export interface AuthDTOAdapter {
   registerDataToDTO: (registerData: RegisterData) => RegisterDataDTO;
-  loginDataToDTO: (loginData: LoginData) => LoginDataDTO | EmailLoginDataDTO;
+  loginDataToDTO: (loginData: LoginData) => UsernameLoginDataDTO | EmailLoginDataDTO;
 }
 
 const isEmail = (email: string) => {
@@ -17,15 +13,15 @@ const isEmail = (email: string) => {
 
 export const authDTOAdapter: AuthDTOAdapter = {
   registerDataToDTO: (registerData: RegisterData): RegisterDataDTO => ({
-    login: registerData.login,
+    username: registerData.username,
     password: registerData.password,
     email: registerData.email,
     full_name: registerData.fullName,
   }),
-  loginDataToDTO: (loginData: LoginData): LoginDataDTO | EmailLoginDataDTO => ({
+  loginDataToDTO: (loginData: LoginData): UsernameLoginDataDTO | EmailLoginDataDTO => ({
     password: loginData.password,
-    ...(isEmail(loginData.loginOrEmail)
-      ? { email: loginData.loginOrEmail }
-      : { login: loginData.loginOrEmail }),
+    ...(isEmail(loginData.usernameOrEmail)
+      ? { email: loginData.usernameOrEmail }
+      : { username: loginData.usernameOrEmail }),
   }),
 };

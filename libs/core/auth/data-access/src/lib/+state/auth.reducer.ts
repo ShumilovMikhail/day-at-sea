@@ -4,7 +4,7 @@ import { authActions } from './auth.actions';
 import { AuthState } from '../types/auth-state.models';
 import { RegisterDataDTO } from '../types/register.models';
 import { AuthResponse, Token } from '../types/auth.models';
-import { EmailLoginDataDTO, LoginDataDTO } from '../types/login.models';
+import { EmailLoginDataDTO, UsernameLoginDataDTO } from '../types/login.models';
 import { ResponseError } from '@http';
 import { UserEntity } from '../types/user.models';
 
@@ -79,7 +79,7 @@ export const authFeature = createFeature({
     ),
     on(
       authActions.login,
-      (state, payload: { data: LoginDataDTO | EmailLoginDataDTO }): AuthState => ({
+      (state, payload: { data: UsernameLoginDataDTO | EmailLoginDataDTO }): AuthState => ({
         ...state,
         authStatus: 'loading',
         error: null,
@@ -128,15 +128,15 @@ export const authFeature = createFeature({
       })
     ),
     on(
-      authActions.changeUserLogin,
-      (state, payload: { id: number; login: string }): AuthState => ({
+      authActions.changeUsername,
+      (state, payload: { id: number; username: string }): AuthState => ({
         ...state,
         authStatus: 'loading',
         error: null,
       })
     ),
     on(
-      authActions.changeUserLoginSuccess,
+      authActions.changeUsernameSuccess,
       (state, payload: { user: UserEntity }): AuthState => ({
         ...state,
         authStatus: 'loaded',
@@ -144,7 +144,7 @@ export const authFeature = createFeature({
       })
     ),
     on(
-      authActions.changeUserLoginFailure,
+      authActions.changeUsernameFailure,
       (state, payload: { error: ResponseError }): AuthState => ({
         ...state,
         authStatus: 'error',

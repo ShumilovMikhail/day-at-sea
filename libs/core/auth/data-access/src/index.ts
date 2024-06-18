@@ -1,4 +1,4 @@
-export * from './lib/validators/login-available';
+export * from './lib/validators/username-available';
 export * from './lib/validators/email-available';
 export * from './lib/services/auth.facade';
 export * as authEffects from './lib/+state/auth.effects';

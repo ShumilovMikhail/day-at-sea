@@ -1,4 +1,4 @@
-<div class="login-edit">
+<div class="username-edit">
   <div class="header">
     <h2>Имя пользователя</h2>
     @if (mode === 'default') {
@@ -8,20 +8,20 @@
   <div class="content">
     <p class="text">Нужен, чтобы быстро войти в личный кабинет</p>
     @switch (mode) { @case ('default') {
-    <div class="login">
-      <p>{{ loginDefault }}</p>
+    <div class="username">
+      <p>{{ usernameDefault }}</p>
     </div>
     } @case ('edit') {
     <form [formGroup]="form">
       <ui-forms-input
-        [control]="form.get('login')! | formControl"
+        [control]="form.get('username')! | formControl"
         [crossEnable]="true"
         [errors]="
-          form.get('login')?.errors
+          form.get('username')?.errors
             ? [
-                (form.get('login')?.errors)!['isExist'] ? 'Данное имя уже занято' : '',
-                (form.get('login')?.errors)!['minlength'] ? 'Минимальная длина имени 5 символов' : '',
-                (form.get('login')?.errors)!['isIncorrectly']
+                (form.get('username')?.errors)!['isExist'] ? 'Данное имя уже занято' : '',
+                (form.get('username')?.errors)!['minlength'] ? 'Минимальная длина имени 5 символов' : '',
+                (form.get('username')?.errors)!['isIncorrectly']
                   ? 'Имя пользователя может содержать только латинские буквы, цифры и знаки - и _'
                   : ''
               ]
@@ -32,7 +32,7 @@
         <button
           class="button-submit"
           type="submit"
-          [disabled]="form.get('login')?.value === loginDefault || loading || form.get('login')?.errors"
+          [disabled]="form.get('username')?.value === usernameDefault || loading || form.get('username')?.errors"
           (click)="onSubmit()"
         >
           Сохранить

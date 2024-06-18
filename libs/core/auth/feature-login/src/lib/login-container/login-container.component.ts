@@ -10,7 +10,7 @@ import { AuthFacade } from '@auth/data-access';
 import { errorsVMAdapter } from './errors-vm.adapter';
 
 interface LoginForm {
-  loginOrEmail: string;
+  usernameOrEmail: string;
   password: string;
 }
 
@@ -31,15 +31,14 @@ export class LoginContainerComponent {
   private readonly fb = inject(FormBuilder);
   public readonly isLoading: Observable<boolean> = this.authFacade.loading$;
   public readonly form = this.fb.group({
-    loginOrEmail: ['', [Validators.required]],
+    usernameOrEmail: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
-  public readonly errors$: Observable<string | null> =
-    this.authFacade.error$.pipe(
-      map((error: FormError | null) => {
-        return error ? errorsVMAdapter.errorsDTOToVM(error) : null;
-      })
-    );
+  public readonly errors$: Observable<string | null> = this.authFacade.error$.pipe(
+    map((error: FormError | null) => {
+      return error ? errorsVMAdapter.errorsDTOToVM(error) : null;
+    })
+  );
 
   public onSubmit(): void {
     if (this.form.valid) {

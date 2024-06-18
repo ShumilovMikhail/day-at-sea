@@ -1,5 +1,5 @@
 export interface UserVM {
-  login: string;
+  username: string;
   email: string;
 }
 

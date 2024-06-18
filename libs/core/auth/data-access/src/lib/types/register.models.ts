@@ -1,12 +1,12 @@
 export interface RegisterData {
-  login: string;
+  username: string;
   email: string;
   fullName: string;
   password: string;
 }
 
 export interface RegisterDataDTO {
-  login: string;
+  username: string;
   email: string;
   full_name: string;
   password: string;

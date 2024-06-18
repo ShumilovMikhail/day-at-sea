@@ -105,14 +105,14 @@ export const getUserEffect$ = createEffect(
 export const changeUserLoginEffect$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) =>
     actions$.pipe(
-      ofType(authActions.changeUserLogin),
-      switchMap(({ id, login }: { id: number; login: string }) => {
-        return apiService.put<UserEntity>(`users/${id}/login`, { login }).pipe(
+      ofType(authActions.changeUsername),
+      switchMap(({ id, username }: { id: number; username: string }) => {
+        return apiService.put<UserEntity>(`users/${id}/username`, { username }).pipe(
           map((user: UserEntity) => {
-            return authActions.changeUserLoginSuccess({ user });
+            return authActions.changeUsernameSuccess({ user });
           }),
           catchError(({ error }) => {
-            return of(authActions.changeUserLoginFailure({ error }));
+            return of(authActions.changeUsernameFailure({ error }));
           })
         );
       })

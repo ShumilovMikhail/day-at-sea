@@ -27,8 +27,7 @@
     }
   </div>
   <ul>
-    @if (errors && control.touched) { @for (error of errors; track error) { @if
-    (error !== '') {
+    @if (errors && control.touched) { @for (error of errors; track error) { @if (error !== '') {
     <li>{{ error }}</li>
     } } }
   </ul>

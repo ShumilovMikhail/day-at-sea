@@ -1,10 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'feature-login-edit',
+  displayName: 'feature-username-edit',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory:
-    '../../../../coverage/libs/account/settings/feature-login-edit',
+  coverageDirectory: '../../../../coverage/libs/account/settings/feature-username-edit',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

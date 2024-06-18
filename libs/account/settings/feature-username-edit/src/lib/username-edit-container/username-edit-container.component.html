@@ -1,0 +1,8 @@
+@if (username$ | async; as username) {
+<account-username-edit-ui
+  [username]="username"
+  [form]="form"
+  (submitEvent)="onSubmit()"
+  [loading]="(loading$ | async) ?? false"
+></account-username-edit-ui>
+}

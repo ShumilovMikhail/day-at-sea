@@ -13,7 +13,7 @@ import {
 } from '../+state/auth.selectors';
 import { authDTOAdapter } from '../+state/auth-dto.adapter';
 import { RegisterData, RegisterDataDTO } from '../types/register.models';
-import { EmailLoginDataDTO, LoginData, LoginDataDTO } from '../types/login.models';
+import { EmailLoginDataDTO, LoginData, UsernameLoginDataDTO } from '../types/login.models';
 import { Token } from '../types/auth.models';
 import { AuthStatus } from '../types/auth-state.models';
 import { ResponseError } from '@http';
@@ -40,16 +40,16 @@ export class AuthFacade {
   }
 
   public login(loginData: LoginData): void {
-    const data: LoginDataDTO | EmailLoginDataDTO = authDTOAdapter.loginDataToDTO(loginData);
+    const data: UsernameLoginDataDTO | EmailLoginDataDTO = authDTOAdapter.loginDataToDTO(loginData);
     this.store.dispatch(authActions.login({ data }));
   }
 
-  public changeLogin(login: string): void {
+  public changeLogin(username: string): void {
     this.user$.pipe(take(1)).subscribe((user: UserEntity | null) => {
       if (!user) {
-        throw Error('changeLogin: user is null');
+        throw Error('changeUsername: user is null');
       }
-      this.store.dispatch(authActions.changeUserLogin({ id: user.id, login }));
+      this.store.dispatch(authActions.changeUsername({ id: user.id, username }));
     });
   }
 }

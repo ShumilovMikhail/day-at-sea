@@ -3,20 +3,16 @@
   <div class="step">
     <div class="inputs-container">
       <ui-forms-input
-        [control]="form.get('login')! | formControl"
+        [control]="form.get('username')! | formControl"
         [label]="'Имя пользователя'"
         [required]="true"
         [placeholder]="'Имя пользователя'"
         [errors]="
-          form.get('login')?.errors
+          form.get('username')?.errors
             ? [
-                (form.get('login')?.errors)!['isExist']
-                  ? 'Данное имя уже занято'
-                  : '',
-                (form.get('login')?.errors)!['minlength']
-                  ? 'Минимальная длина имени 5 символов'
-                  : '',
-                (form.get('login')?.errors)!['isIncorrectly']
+                (form.get('username')?.errors)!['isExist'] ? 'Данное имя уже занято' : '',
+                (form.get('username')?.errors)!['minlength'] ? 'Минимальная длина имени 5 символов' : '',
+                (form.get('username')?.errors)!['isIncorrectly']
                   ? 'Имя пользователя может содержать только латинские буквы, цифры и знаки - и _'
                   : ''
               ]
@@ -31,12 +27,8 @@
         [errors]="
           form.get('email')?.errors
             ? [
-                (form.get('email')?.errors)!['isExist']
-                  ? 'Данный email уже занят'
-                  : '',
-                (form.get('email')?.errors)!['email']
-                  ? 'Введите корректный email'
-                  : ''
+                (form.get('email')?.errors)!['isExist'] ? 'Данный email уже занят' : '',
+                (form.get('email')?.errors)!['email'] ? 'Введите корректный email' : ''
               ]
             : undefined
         "
@@ -45,19 +37,14 @@
     <button
       class="submit-button"
       type="submit"
-      [disabled]="
-        !(this.form.get('login')?.valid && this.form.get('email')?.valid)
-      "
+      [disabled]="!(this.form.get('username')?.valid && this.form.get('email')?.valid)"
     >
       Продолжить
     </button>
   </div>
   } @if (step === 2) {
   <div class="step">
-    <p>
-      Похоже, что вы здесь впервые. Укажите ваши ФИО, чтобы мы могли вас
-      запомнить.
-    </p>
+    <p>Похоже, что вы здесь впервые. Укажите ваши ФИО, чтобы мы могли вас запомнить.</p>
     <ui-forms-input
       [control]="form.get('fullName')! | formControl"
       [label]="'ФИО'"
@@ -65,29 +52,16 @@
       [placeholder]="'Введите ваше ФИО'"
       [errors]="
         form.get('fullName')?.errors
-          ? [
-              (form.get('fullName')?.errors)!['isIncorrectly']
-                ? 'Введите корректное ФИО'
-                : ''
-            ]
+          ? [(form.get('fullName')?.errors)!['isIncorrectly'] ? 'Введите корректное ФИО' : '']
           : undefined
       "
     ></ui-forms-input>
-    <button
-      class="submit-button"
-      type="submit"
-      [disabled]="!form.get('fullName')?.valid"
-    >
-      Продолжить
-    </button>
+    <button class="submit-button" type="submit" [disabled]="!form.get('fullName')?.valid">Продолжить</button>
     <ng-container *ngTemplateOutlet="linkButton"></ng-container>
   </div>
   } @if (step === 3) {
   <div class="step">
-    <p>
-      Безопасность ваших данных — наш приоритет. Пожалуйста, введите надёжный
-      пароль для входа
-    </p>
+    <p>Безопасность ваших данных — наш приоритет. Пожалуйста, введите надёжный пароль для входа</p>
     <ui-forms-password
       [control]="form.get('password')! | formControl"
       [label]="'Пароль'"
@@ -96,12 +70,8 @@
       [errors]="
         form.get('password')?.errors
           ? [
-              (form.get('password')?.errors)!['minlength']
-                ? 'Пароль должен содержать минимум 8 символов'
-                : '',
-              (form.get('password')?.errors)!['containsSpaces']
-                ? 'Пароль не должен содержать пробелов'
-                : '',
+              (form.get('password')?.errors)!['minlength'] ? 'Пароль должен содержать минимум 8 символов' : '',
+              (form.get('password')?.errors)!['containsSpaces'] ? 'Пароль не должен содержать пробелов' : '',
               (form.get('password')?.errors)!['latinLetters']
                 ? 'Пароль может содержать буквы только из латинского алфавита'
                 : ''
@@ -109,11 +79,7 @@
           : undefined
       "
     ></ui-forms-password>
-    <button
-      class="submit-button"
-      type="submit"
-      [disabled]="!form.valid || !form.get('password')?.valid || isLoading"
-    >
+    <button class="submit-button" type="submit" [disabled]="!form.valid || !form.get('password')?.valid || isLoading">
       Сохранить
       <div class="spinner-loader" *ngIf="isLoading"></div>
     </button>
@@ -125,13 +91,7 @@
 <ng-template #linkButton>
   <div class="link-button__container">
     <button class="link-button" type="button" (click)="onPreviousStep()">
-      <svg
-        width="12"
-        height="12"
-        viewBox="0 0 24 24"
-        fill="#3CBADE"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="#3CBADE" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M7.83868 3.81629C8.16564 3.4779 8.70981 3.4779 9.04821 3.81629C9.37517 4.14326 9.37517 4.68743 9.04821 5.01363L2.91521 11.1466H23.1533C23.625 11.1474 24 11.5224 24 11.9941C24 12.4659 23.625 12.8531 23.1533 12.8531H2.91521L9.04821 18.9746C9.37517 19.313 9.37517 19.858 9.04821 20.1842C8.70981 20.5226 8.16488 20.5226 7.83868 20.1842L0.253796 12.5993C-0.0845985 12.2723 -0.0845985 11.7281 0.253796 11.4019L7.83868 3.81629Z"
         />

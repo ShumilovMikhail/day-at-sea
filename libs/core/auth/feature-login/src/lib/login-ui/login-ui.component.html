@@ -3,7 +3,7 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="inputs-container">
       <ui-forms-input
-        [control]="form.get('loginOrEmail')! | formControl"
+        [control]="form.get('usernameOrEmail')! | formControl"
         [label]="'Имя пользователя или email'"
         [required]="true"
         [placeholder]="'Введите имя пользователя или email'"
@@ -21,12 +21,7 @@
     }
     <button
       type="submit"
-      [disabled]="
-        !(
-          this.form.get('loginOrEmail')?.valid &&
-          this.form.get('password')?.valid
-        ) || isLoading
-      "
+      [disabled]="!(this.form.get('usernameOrEmail')?.valid && this.form.get('password')?.valid) || isLoading"
     >
       Авторизация
       <div class="spinner-loader" *ngIf="isLoading"></div>
@@ -34,7 +29,8 @@
   </form>
   <span>У вас нет аккаунта? <a>Регистрация</a></span>
   <p>
-    Нажимая кнопку Продолжить, вы соглашаетесь с <a>правилами сайта</a>
-    <span> Sutkinamore.ru</span> и <a>политикой конфиденциальности</a>
+    Нажимая кнопку Продолжить, вы соглашаетесь с <a>правилами сайта</a> <span> Sutkinamore.ru</span> и <a
+      >политикой конфиденциальности</a
+    >
   </p>
 </div>

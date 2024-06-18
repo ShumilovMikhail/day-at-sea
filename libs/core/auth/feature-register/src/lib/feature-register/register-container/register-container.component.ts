@@ -7,19 +7,15 @@ import { PushPipe } from '@ngrx/component';
 import { ModalComponent } from '@layers';
 import { RegisterUiComponent } from '../register-ui/register-ui.component';
 import {
-  loginCorrectlyValidator,
+  usernameCorrectlyValidator,
   containsSpacesValidator,
   fullNameValidator,
   latinLettersValidator,
 } from '@utils/validators';
-import {
-  AuthFacade,
-  emailAvailableValidator,
-  loginAvailableValidator,
-} from '@auth/data-access';
+import { AuthFacade, emailAvailableValidator, usernameAvailableValidator } from '@auth/data-access';
 
 interface RegisterForm {
-  login: string;
+  username: string;
   password: string;
   email: string;
   fullName: string;
@@ -38,26 +34,14 @@ export class RegisterContainerComponent {
   private readonly authFacade = inject(AuthFacade);
   public readonly isLoading$: Observable<boolean> = this.authFacade.loading$;
   public readonly form = this.fb.group({
-    login: [
+    username: [
       '',
-      [Validators.required, Validators.minLength(5), loginCorrectlyValidator()],
-      [loginAvailableValidator()],
+      [Validators.required, Validators.minLength(5), usernameCorrectlyValidator()],
+      [usernameAvailableValidator()],
     ],
-    email: [
-      '',
-      [Validators.required, Validators.email],
-      [emailAvailableValidator()],
-    ],
+    email: ['', [Validators.required, Validators.email], [emailAvailableValidator()]],
     fullName: ['', [Validators.required, fullNameValidator()]],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(8),
-        containsSpacesValidator(),
-        latinLettersValidator(),
-      ],
-    ],
+    password: ['', [Validators.required, Validators.minLength(8), containsSpacesValidator(), latinLettersValidator()]],
   });
 
   onSubmit(): void {

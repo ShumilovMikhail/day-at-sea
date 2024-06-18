@@ -2,19 +2,11 @@
   <h1>Настройки</h1>
   <div class="settings-content">
     <div class="settings-content__item">
-      <div
-        class="settings-block requisites"
-        utilsAccordion
-        [buttonToggle]="requisitesChangeButton"
-      >
+      <div class="settings-block requisites" utilsAccordion [buttonToggle]="requisitesChangeButton">
         <div class="settings-block__header">
           <h3>Реквизиты агенства</h3>
           <a>Изменить</a>
-          <img
-            src="assets/images/icons/arrow-toggle.svg"
-            alt=""
-            #requisitesChangeButton
-          />
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" #requisitesChangeButton />
         </div>
         <div class="settings-block__content requisites-content">
           <div class="image-container">
@@ -41,19 +33,11 @@
         </div>
         <a class="link-edit-button">Изменить</a>
       </div>
-      <div
-        class="settings-block contacts"
-        utilsAccordion
-        [buttonToggle]="contactsChangeButton"
-      >
+      <div class="settings-block contacts" utilsAccordion [buttonToggle]="contactsChangeButton">
         <div class="settings-block__header">
           <h3>Контакты, Сайт, Соцсети, Мессенжеры</h3>
           <a [routerLink]="['contacts/edit']">Изменить</a>
-          <img
-            src="assets/images/icons/arrow-toggle.svg"
-            alt=""
-            #contactsChangeButton
-          />
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" #contactsChangeButton />
         </div>
         <div class="settings-block__content contacts-content">
           <ul class="settings-list">
@@ -87,25 +71,15 @@
             </li>
           </ul>
         </div>
-        <a class="link-edit-button" [routerLink]="['contacts/edit']"
-          >Изменить</a
-        >
+        <a class="link-edit-button" [routerLink]="['contacts/edit']">Изменить</a>
       </div>
     </div>
     <div class="settings-content__item">
-      <div
-        class="settings-block login-details"
-        utilsAccordion
-        [buttonToggle]="loginChangeButton"
-      >
+      <div class="settings-block login-details" utilsAccordion [buttonToggle]="loginChangeButton">
         <div class="settings-block__header">
           <h3>Данные для входа</h3>
           <a [routerLink]="['auth/edit']">Изменить</a>
-          <img
-            src="assets/images/icons/arrow-toggle.svg"
-            alt=""
-            #loginChangeButton
-          />
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" #loginChangeButton />
         </div>
         <div class="settings-block__content login-details-content">
           <ul class="settings-list">
@@ -114,13 +88,9 @@
                 <img src="/assets/images/icons/user.svg" alt="user" />
               </div>
               <div class="content">
-                <span>Логин</span>
+                <span>Имя пользователя</span>
                 <p>
-                  {{
-                    userVM.login.length > 17
-                      ? (userVM.login | slice : 0 : 17) + '...'
-                      : userVM.login
-                  }}
+                  {{ userVM.username.length > 17 ? (userVM.username | slice : 0 : 17) + '...' : userVM.username }}
                 </p>
               </div>
             </li>
@@ -131,17 +101,13 @@
               <div class="content">
                 <span>E-mail</span>
                 <p>
-                  {{
-                    userVM.email.length > 17
-                      ? (userVM.email | slice : 0 : 17) + '...'
-                      : userVM.email
-                  }}
+                  {{ userVM.email.length > 17 ? (userVM.email | slice : 0 : 17) + '...' : userVM.email }}
                 </p>
               </div>
             </li>
           </ul>
         </div>
-        <a class="link-edit-button">Изменить</a>
+        <a class="link-edit-button" [routerLink]="['auth/edit']">Изменить</a>
       </div>
     </div>
   </div>

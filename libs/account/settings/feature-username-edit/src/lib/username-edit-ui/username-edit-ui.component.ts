@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,30 +11,30 @@ enum Mode {
 }
 
 @Component({
-  selector: 'account-login-edit-ui',
+  selector: 'account-username-edit-ui',
   standalone: true,
   imports: [CommonModule, UiFormsInputComponent, ReactiveFormsModule, FormControlPipe],
-  templateUrl: './login-edit-ui.component.html',
-  styleUrl: './login-edit-ui.component.scss',
+  templateUrl: './username-edit-ui.component.html',
+  styleUrl: './username-edit-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginEditUiComponent {
-  @Input({ required: true }) set login(login: string) {
+export class UsernameEditUiComponent {
+  @Input({ required: true }) set username(username: string) {
     this.mode = Mode.DEFAULT;
-    this.loginDefault = login;
+    this.usernameDefault = username;
   }
   @Input({ required: true }) form!: FormGroup;
   @Input() loading = false;
   @Output() submitEvent = new EventEmitter<void>();
   public mode: Mode = Mode.DEFAULT;
-  public loginDefault = '';
+  public usernameDefault = '';
 
   public onChangeModeToEdit(): void {
     this.mode = Mode.EDIT;
   }
 
   public onChangeModeToDefault(): void {
-    this.form.get('login')?.reset(this.login);
+    this.form.get('username')?.reset(this.usernameDefault);
     this.mode = Mode.DEFAULT;
   }
 
