@@ -1,0 +1,8 @@
+@if (login$ | async; as login) {
+<account-login-edit-ui
+  [login]="login"
+  [form]="form"
+  (submitEvent)="onSubmit()"
+  [loading]="(loading$ | async) ?? false"
+></account-login-edit-ui>
+}

@@ -1,1 +1,9 @@
-<account-auth-edit-ui> </account-auth-edit-ui>
+@if (isAuthenticate$ | async;) {
+<account-auth-edit-ui>
+  <account-login-edit-container></account-login-edit-container>
+</account-auth-edit-ui>
+}@else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}

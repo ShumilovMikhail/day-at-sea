@@ -33,6 +33,9 @@
       "@account/settings/feature-settings": [
         "libs/account/settings/feature-settings/src/index.ts"
       ],
+      "@account/settings/login-edit": [
+        "libs/account/settings/feature-login-edit/src/index.ts"
+      ],
       "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
       "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
       "@auth/feature-register": [

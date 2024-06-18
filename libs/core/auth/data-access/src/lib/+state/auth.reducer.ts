@@ -79,10 +79,7 @@ export const authFeature = createFeature({
     ),
     on(
       authActions.login,
-      (
-        state,
-        payload: { data: LoginDataDTO | EmailLoginDataDTO }
-      ): AuthState => ({
+      (state, payload: { data: LoginDataDTO | EmailLoginDataDTO }): AuthState => ({
         ...state,
         authStatus: 'loading',
         error: null,
@@ -124,6 +121,30 @@ export const authFeature = createFeature({
     ),
     on(
       authActions.getUserFailure,
+      (state, payload: { error: ResponseError }): AuthState => ({
+        ...state,
+        authStatus: 'error',
+        error: payload.error,
+      })
+    ),
+    on(
+      authActions.changeUserLogin,
+      (state, payload: { id: number; login: string }): AuthState => ({
+        ...state,
+        authStatus: 'loading',
+        error: null,
+      })
+    ),
+    on(
+      authActions.changeUserLoginSuccess,
+      (state, payload: { user: UserEntity }): AuthState => ({
+        ...state,
+        authStatus: 'loaded',
+        loggedUser: payload.user,
+      })
+    ),
+    on(
+      authActions.changeUserLoginFailure,
       (state, payload: { error: ResponseError }): AuthState => ({
         ...state,
         authStatus: 'error',

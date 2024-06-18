@@ -13,15 +13,18 @@ export const authActions = createActionGroup({
     login: props<{ data: LoginDataDTO | EmailLoginDataDTO }>(),
     loadTokenFromStorage: emptyProps(),
     getUser: emptyProps(),
+    changeUserLogin: props<{ id: number; login: string }>(),
 
     getUserSuccess: props<{ user: UserEntity }>(),
     registerSuccess: props<AuthResponse>(),
     loginSuccess: props<AuthResponse>(),
     loadTokenFromStorageSuccess: props<{ authToken: Token }>(),
+    changeUserLoginSuccess: props<{ user: UserEntity }>(),
 
     getUserFailure: props<{ error: ResponseError }>(),
     registerFailure: props<{ error: ResponseError }>(),
     loginFailure: props<{ error: ResponseError }>(),
     loadTokenFromStorageFailure: emptyProps(),
+    changeUserLoginFailure: props<{ error: ResponseError }>(),
   },
 });

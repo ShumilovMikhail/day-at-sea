@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, tap } from 'rxjs';
+import { switchMap, catchError, of, map } from 'rxjs';
 
 import { authActions } from './auth.actions';
 import { ApiService } from '@http';
@@ -14,9 +14,7 @@ export const registerEffect$ = createEffect(
       ofType(authActions.register),
       switchMap(({ data }) =>
         api.post<AuthResponse>('auth/signup', data).pipe(
-          map((response: AuthResponse) =>
-            authActions.registerSuccess(response)
-          ),
+          map((response: AuthResponse) => authActions.registerSuccess(response)),
           catchError(({ error }) => of(authActions.registerFailure({ error })))
         )
       )
@@ -39,10 +37,7 @@ export const loginEffect$ = createEffect(
 );
 
 export const authAfterEffect$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    localStorageJwtService = inject(LocalStorageJwtService)
-  ) =>
+  (actions$ = inject(Actions), localStorageJwtService = inject(LocalStorageJwtService)) =>
     actions$.pipe(
       ofType(authActions.registerSuccess, authActions.loginSuccess),
       map(({ authToken }) => {
@@ -65,10 +60,7 @@ export const authInitEffect$ = createEffect(
 );
 
 export const loadTokenFromStorageEffect$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    localStorageJwtService = inject(LocalStorageJwtService)
-  ) =>
+  (actions$ = inject(Actions), localStorageJwtService = inject(LocalStorageJwtService)) =>
     actions$.pipe(
       ofType(authActions.loadTokenFromStorage),
       map(() => {
@@ -103,6 +95,24 @@ export const getUserEffect$ = createEffect(
           }),
           catchError(({ error }) => {
             return of(authActions.getUserFailure({ error }));
+          })
+        );
+      })
+    ),
+  { functional: true }
+);
+
+export const changeUserLoginEffect$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(authActions.changeUserLogin),
+      switchMap(({ id, login }: { id: number; login: string }) => {
+        return apiService.put<UserEntity>(`users/${id}/login`, { login }).pipe(
+          map((user: UserEntity) => {
+            return authActions.changeUserLoginSuccess({ user });
+          }),
+          catchError(({ error }) => {
+            return of(authActions.changeUserLoginFailure({ error }));
           })
         );
       })
