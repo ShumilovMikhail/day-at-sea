@@ -15,6 +15,7 @@ export const authActions = createActionGroup({
     getUser: emptyProps(),
     changeUsername: props<{ id: number; username: string }>(),
     changeUserEmail: props<{ id: number; email: string }>(),
+    changeUserPassword: props<{ id: number; password: string }>(),
 
     getUserSuccess: props<{ user: UserEntity }>(),
     registerSuccess: props<AuthResponse>(),
@@ -22,6 +23,7 @@ export const authActions = createActionGroup({
     loadTokenFromStorageSuccess: props<{ authToken: Token }>(),
     changeUsernameSuccess: props<{ user: UserEntity }>(),
     changeUserEmailSuccess: props<{ user: UserEntity }>(),
+    changeUserPasswordSuccess: props<{ user: UserEntity }>(),
 
     getUserFailure: props<{ error: ResponseError }>(),
     registerFailure: props<{ error: ResponseError }>(),
@@ -29,5 +31,6 @@ export const authActions = createActionGroup({
     loadTokenFromStorageFailure: emptyProps(),
     changeUsernameFailure: props<{ error: ResponseError }>(),
     changeUserEmailFailure: props<{ error: ResponseError }>(),
+    changeUserPasswordFailure: props<{ error: ResponseError }>(),
   },
 });

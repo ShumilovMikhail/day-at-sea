@@ -174,6 +174,30 @@ export const authFeature = createFeature({
         authStatus: 'error',
         error: payload.error,
       })
+    ),
+    on(
+      authActions.changeUserPassword,
+      (state, payload: { id: number; password: string }): AuthState => ({
+        ...state,
+        authStatus: 'loading',
+        error: null,
+      })
+    ),
+    on(
+      authActions.changeUserPasswordSuccess,
+      (state, payload: { user: UserEntity }): AuthState => ({
+        ...state,
+        authStatus: 'loaded',
+        loggedUser: payload.user,
+      })
+    ),
+    on(
+      authActions.changeUserPasswordFailure,
+      (state, payload: { error: ResponseError }): AuthState => ({
+        ...state,
+        authStatus: 'error',
+        error: payload.error,
+      })
     )
   ),
 });

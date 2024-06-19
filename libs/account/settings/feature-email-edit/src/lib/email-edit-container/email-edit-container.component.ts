@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Observable, filter, map, tap } from 'rxjs';
-
-import { AuthFacade, UserEntity, emailAvailableValidator } from '@auth/data-access';
-import { EmailEditUiComponent } from '../email-edit-ui/email-edit-ui.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Observable, filter } from 'rxjs';
+
+import { AuthFacade, emailAvailableValidator } from '@auth/data-access';
+import { EmailEditUiComponent } from '../email-edit-ui/email-edit-ui.component';
 
 @Component({
   selector: 'account-email-edit-container',

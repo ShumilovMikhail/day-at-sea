@@ -8,6 +8,7 @@ import { UsernameEditContainerComponent } from '@account/settings/feature-userna
 import { AuthFacade } from '@auth/data-access';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 import { EmailEditContainerComponent } from '@account/settings/feature-email-edit';
+import { PasswordEditContainerComponent } from '@account/settings/feature-password-edit';
 
 @Component({
   selector: 'account-auth-edit-container',
@@ -18,6 +19,7 @@ import { EmailEditContainerComponent } from '@account/settings/feature-email-edi
     UsernameEditContainerComponent,
     UiIndicatorsLoaderComponent,
     EmailEditContainerComponent,
+    PasswordEditContainerComponent,
   ],
   templateUrl: './auth-edit-container.component.html',
   styleUrl: './auth-edit-container.component.scss',

@@ -11,6 +11,7 @@ import {
   selectIsAuthenticate,
   selectUser,
   selectUserEmail,
+  selectUserPassword,
   selectUsername,
 } from '../+state/auth.selectors';
 import { authDTOAdapter } from '../+state/auth-dto.adapter';
@@ -33,6 +34,7 @@ export class AuthFacade {
   public readonly user$: Observable<UserEntity | null> = this.store.select(selectUser);
   public readonly username$: Observable<string | null> = this.store.select(selectUsername);
   public readonly userEmail$: Observable<string | null> = this.store.select(selectUserEmail);
+  public readonly userPassword$: Observable<string | null> = this.store.select(selectUserPassword);
 
   public init(): void {
     this.store.dispatch(authActions.init());
@@ -63,6 +65,15 @@ export class AuthFacade {
         throw Error('changeUsername: user is null');
       }
       this.store.dispatch(authActions.changeUserEmail({ id: user.id, email }));
+    });
+  }
+
+  public changeUserPassword(password: string): void {
+    this.user$.pipe(take(1)).subscribe((user: UserEntity | null) => {
+      if (!user) {
+        throw Error('changeUsername: user is null');
+      }
+      this.store.dispatch(authActions.changeUserPassword({ id: user.id, password }));
     });
   }
 }

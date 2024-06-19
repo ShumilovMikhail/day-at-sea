@@ -137,3 +137,21 @@ export const changeUserEmailEffect$ = createEffect(
     ),
   { functional: true }
 );
+
+export const changeUserPasswordEffect$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(authActions.changeUserPassword),
+      switchMap(({ id, password }: { id: number; password: string }) => {
+        return apiService.put<UserEntity>(`users/${id}/password`, { password }).pipe(
+          map((user: UserEntity) => {
+            return authActions.changeUserPasswordSuccess({ user });
+          }),
+          catchError(({ error }) => {
+            return of(authActions.changeUserPasswordFailure({ error }));
+          })
+        );
+      })
+    ),
+  { functional: true }
+);

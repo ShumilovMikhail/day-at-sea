@@ -21,6 +21,7 @@
       "@account/settings/auth-edit": ["libs/account/settings/feature-auth-edit/src/index.ts"],
       "@account/settings/feature-contacts-edit": ["libs/account/settings/feature-contacts-edit/src/index.ts"],
       "@account/settings/feature-email-edit": ["libs/account/settings/feature-email-edit/src/index.ts"],
+      "@account/settings/feature-password-edit": ["libs/account/settings/feature-password-edit/src/index.ts"],
       "@account/settings/feature-settings": ["libs/account/settings/feature-settings/src/index.ts"],
       "@account/settings/feature-username-edit": ["libs/account/settings/feature-username-edit/src/index.ts"],
       "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],

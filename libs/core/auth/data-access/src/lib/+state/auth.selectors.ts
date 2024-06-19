@@ -25,3 +25,5 @@ export const selectUser = createSelector(selectAuthState, (state: AuthState) => 
 export const selectUsername = createSelector(selectUser, (user: UserEntity | null) => user?.username ?? null);
 
 export const selectUserEmail = createSelector(selectUser, (user: UserEntity | null) => user?.email ?? null);
+
+export const selectUserPassword = createSelector(selectUser, (user: UserEntity | null) => user?.password ?? null);
