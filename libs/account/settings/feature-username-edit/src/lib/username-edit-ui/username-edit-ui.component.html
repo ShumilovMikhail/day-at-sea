@@ -10,6 +10,7 @@
     @switch (mode) { @case ('default') {
     <div class="username">
       <p>{{ usernameDefault }}</p>
+      <button class="mobile-change-button" (click)="onChangeModeToEdit()">Изменить</button>
     </div>
     } @case ('edit') {
     <form [formGroup]="form">

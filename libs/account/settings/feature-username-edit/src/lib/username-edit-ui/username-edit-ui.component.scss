@@ -67,3 +67,42 @@ form {
   padding: 10px;
   width: 130px;
 }
+
+.mobile-change-button {
+  display: none;
+  @include button-secondary();
+  width: 100%;
+  padding: 10px;
+}
+
+@media (max-width: 480px) {
+  .username-edit {
+    gap: 15px;
+    width: 100%;
+  }
+
+  .header {
+    h2 {
+      font-size: 16px;
+    }
+    button {
+      display: none;
+    }
+  }
+
+  .content {
+    gap: 10px;
+  }
+
+  .username {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    p {
+      font-size: 16px;
+    }
+    button {
+      display: block;
+    }
+  }
+}
