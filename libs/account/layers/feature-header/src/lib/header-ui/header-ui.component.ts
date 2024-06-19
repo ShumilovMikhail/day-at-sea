@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface AgencyVM {
@@ -24,10 +18,9 @@ interface AgencyVM {
 export class HeaderUiComponent {
   @Output() menuButtonEvent = new EventEmitter<boolean>();
   @Input({ required: true }) agencyVM!: AgencyVM | null;
-  public mobileButtonActive = false;
+  @Input({ required: true }) isMobileButtonActive!: boolean;
 
   public onMenuButtonClick(): void {
-    this.mobileButtonActive = !this.mobileButtonActive;
-    this.menuButtonEvent.emit(this.mobileButtonActive);
+    this.menuButtonEvent.emit(!this.isMobileButtonActive);
   }
 }

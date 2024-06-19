@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Output,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { Observable } from 'rxjs';
@@ -22,10 +16,10 @@ import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderContainerComponent {
+  @Input({ required: true }) isMobileButtonActive!: boolean;
   @Output() menuOpenEvent = new EventEmitter<boolean>();
   private readonly agencyFacade = inject(AgencyFacade);
-  public readonly agency$: Observable<AgencyEntity | null> =
-    this.agencyFacade.agency$;
+  public readonly agency$: Observable<AgencyEntity | null> = this.agencyFacade.agency$;
 
   public onMenuToggle(isMobileOpen: boolean): void {
     this.menuOpenEvent.emit(isMobileOpen);
