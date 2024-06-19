@@ -119,3 +119,21 @@ export const changeUserLoginEffect$ = createEffect(
     ),
   { functional: true }
 );
+
+export const changeUserEmailEffect$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(authActions.changeUserEmail),
+      switchMap(({ id, email }: { id: number; email: string }) => {
+        return apiService.put<UserEntity>(`users/${id}/email`, { email }).pipe(
+          map((user: UserEntity) => {
+            return authActions.changeUserEmailSuccess({ user });
+          }),
+          catchError(({ error }) => {
+            return of(authActions.changeUserEmailFailure({ error }));
+          })
+        );
+      })
+    ),
+  { functional: true }
+);

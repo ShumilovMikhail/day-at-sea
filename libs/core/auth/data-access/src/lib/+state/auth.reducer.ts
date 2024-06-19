@@ -150,6 +150,30 @@ export const authFeature = createFeature({
         authStatus: 'error',
         error: payload.error,
       })
+    ),
+    on(
+      authActions.changeUserEmail,
+      (state, payload: { id: number; email: string }): AuthState => ({
+        ...state,
+        authStatus: 'loading',
+        error: null,
+      })
+    ),
+    on(
+      authActions.changeUserEmailSuccess,
+      (state, payload: { user: UserEntity }): AuthState => ({
+        ...state,
+        authStatus: 'loaded',
+        loggedUser: payload.user,
+      })
+    ),
+    on(
+      authActions.changeUserEmailFailure,
+      (state, payload: { error: ResponseError }): AuthState => ({
+        ...state,
+        authStatus: 'error',
+        error: payload.error,
+      })
     )
   ),
 });

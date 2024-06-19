@@ -1,0 +1,47 @@
+<div class="email-edit">
+  <div class="header">
+    <h2>E-mail</h2>
+    @if (mode === 'default') {
+    <button type="button" (click)="onChangeModeToEdit()">изменить</button>
+    }
+  </div>
+  <div class="content">
+    <p class="text">
+      На адрес электронной почты приходят уведомления о новых бронированиях, системная информация. Также его можно
+      использовать для входа в личный кабинет
+    </p>
+    @switch (mode) { @case ('default') {
+    <div class="email">
+      <p>{{ emailDefault }}</p>
+      <button class="mobile-change-button" (click)="onChangeModeToEdit()">Изменить</button>
+    </div>
+    } @case ('edit') {
+    <form [formGroup]="form">
+      <ui-forms-input
+        [control]="form.get('email')! | formControl"
+        [crossEnable]="true"
+        [errors]="
+          form.get('email')?.errors
+            ? [
+                (form.get('email')?.errors)!['isExist'] ? 'Данный email уже занят' : '',
+                (form.get('email')?.errors)!['email'] ? 'Введите корректный email' : ''
+              ]
+            : undefined
+        "
+      ></ui-forms-input>
+      <div class="buttons-wrapper">
+        <button
+          class="button-submit"
+          type="submit"
+          [disabled]="form.get('email')?.value === emailDefault || loading || form.get('email')?.errors"
+          (click)="onSubmit()"
+        >
+          Сохранить
+          <div class="spinner-loader" *ngIf="loading"></div>
+        </button>
+        <button class="button-cancel" type="button" (click)="onChangeModeToDefault()">Отмена</button>
+      </div>
+    </form>
+    } }
+  </div>
+</div>

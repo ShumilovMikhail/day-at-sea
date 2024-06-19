@@ -1,0 +1,108 @@
+@import 'variables';
+@import 'mixins';
+
+.email-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 510px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2 {
+    font-size: 20px;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    color: $primary;
+    transition: 0.2s color;
+    cursor: pointer;
+    &:hover {
+      color: $primaryHover;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.email {
+  p {
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.buttons-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-submit {
+  @include button-primary();
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+}
+.button-cancel {
+  @include button-secondary();
+  padding: 10px;
+  width: 130px;
+}
+
+.mobile-change-button {
+  display: none;
+  @include button-secondary();
+  width: 100%;
+  padding: 10px;
+}
+
+@media (max-width: 480px) {
+  .email-edit {
+    gap: 15px;
+    width: 100%;
+  }
+
+  .header {
+    h2 {
+      font-size: 16px;
+    }
+    button {
+      display: none;
+    }
+  }
+
+  .content {
+    gap: 10px;
+  }
+
+  .email {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    p {
+      font-size: 16px;
+    }
+    button {
+      display: block;
+    }
+  }
+}

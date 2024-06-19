@@ -10,6 +10,8 @@ import {
   selectAuthToken,
   selectIsAuthenticate,
   selectUser,
+  selectUserEmail,
+  selectUsername,
 } from '../+state/auth.selectors';
 import { authDTOAdapter } from '../+state/auth-dto.adapter';
 import { RegisterData, RegisterDataDTO } from '../types/register.models';
@@ -29,6 +31,8 @@ export class AuthFacade {
   public readonly loading$: Observable<boolean> = this.store.select(selectAuthLoading);
   public readonly isAuthenticate$: Observable<boolean> = this.store.select(selectIsAuthenticate);
   public readonly user$: Observable<UserEntity | null> = this.store.select(selectUser);
+  public readonly username$: Observable<string | null> = this.store.select(selectUsername);
+  public readonly userEmail$: Observable<string | null> = this.store.select(selectUserEmail);
 
   public init(): void {
     this.store.dispatch(authActions.init());
@@ -44,12 +48,21 @@ export class AuthFacade {
     this.store.dispatch(authActions.login({ data }));
   }
 
-  public changeLogin(username: string): void {
+  public changeUsername(username: string): void {
     this.user$.pipe(take(1)).subscribe((user: UserEntity | null) => {
       if (!user) {
         throw Error('changeUsername: user is null');
       }
       this.store.dispatch(authActions.changeUsername({ id: user.id, username }));
+    });
+  }
+
+  public changeUserEmail(email: string): void {
+    this.user$.pipe(take(1)).subscribe((user: UserEntity | null) => {
+      if (!user) {
+        throw Error('changeUsername: user is null');
+      }
+      this.store.dispatch(authActions.changeUserEmail({ id: user.id, email }));
     });
   }
 }
