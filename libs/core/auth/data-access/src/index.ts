@@ -9,3 +9,4 @@ export * from './lib/types/login.models';
 export * from './lib/types/register.models';
 export * from './lib/services/token.interceptor';
 export * from './lib/types/user.models';
+export * from './lib/services/auth.guard';
