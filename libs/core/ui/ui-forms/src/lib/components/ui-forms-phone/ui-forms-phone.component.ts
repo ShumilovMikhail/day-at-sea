@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
-import { PhonePipe } from '../pipes/phone.pipe';
-import { PhoneDirective } from '../directives/phone.directive';
+import { PhonePipe } from '../../pipes/phone.pipe';
+import { PhoneDirective } from '../../directives/phone.directive';
 
 @Component({
   selector: 'ui-forms-phone',

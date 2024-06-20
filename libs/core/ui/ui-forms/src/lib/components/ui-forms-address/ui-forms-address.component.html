@@ -1,0 +1,50 @@
+<div class="input-container">
+  @if (label) {
+  <label
+    [ngClass]="{
+      required: required
+    }"
+    >{{ label }}</label
+  >
+  }
+  <div
+    class="inner"
+    [ngClass]="{
+      'city-searched': cities
+    }"
+  >
+    <div
+      class="input-wrapper"
+      [ngClass]="{
+        'cross-enable': crossEnable
+      }"
+    >
+      <input
+        type="text"
+        uiFormsAddress
+        [ngClass]="{
+          error: control.errors && control.touched
+        }"
+        [formControl]="control"
+        [placeholder]="placeholder ?? ''"
+        (focus)="onFocus()"
+        (findCitiesEvent)="onFindCities($event)"
+      />
+      @if (crossEnable) {
+      <button class="cross" type="button" (click)="onReset()"></button>
+      }
+    </div>
+    <div class="cities-wrapper">
+      <ul class="city-list">
+        @for (city of cities; track $index) {
+        <li class="city-item" (click)="onCitySelect(city)">{{ city }}</li>
+        }
+      </ul>
+    </div>
+  </div>
+  <ul class="errors">
+    @if (errors && control.touched) { @for (error of errors; track error) { @if (error !== '') {
+    <li>{{ error }}</li>
+    } } }
+  </ul>
+</div>

@@ -26,7 +26,7 @@
     <button class="cross" type="button" (click)="onReset()"></button>
     }
   </div>
-  <ul>
+  <ul class="errors">
     @if (errors && control.touched) { @for (error of errors; track error) { @if (error !== '') {
     <li>{{ error }}</li>
     } } }
