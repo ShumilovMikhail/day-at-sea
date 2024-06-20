@@ -8,6 +8,7 @@ import {
   selectAgencyContacts,
   selectAgencyError,
   selectAgencyLoading,
+  selectAgencyRequisites,
   selectAgencyStatus,
 } from '../+state/agency.selectors';
 import { AgencyEntity, Contacts } from '../types/agency.models';
@@ -18,17 +19,17 @@ import { agencyActions } from '../+state/agency.actions';
 export class AgencyFacade {
   private readonly store = inject(Store);
 
-  public readonly status$: Observable<AgencyStatus | null> =
-    this.store.select(selectAgencyStatus);
-  public readonly loading$: Observable<boolean> =
-    this.store.select(selectAgencyLoading);
-  public readonly agency$: Observable<AgencyEntity | null> =
-    this.store.select(selectAgency);
-  public readonly error$: Observable<ResponseError | null> =
-    this.store.select(selectAgencyError);
+  public readonly status$: Observable<AgencyStatus | null> = this.store.select(selectAgencyStatus);
+  public readonly loading$: Observable<boolean> = this.store.select(selectAgencyLoading);
+  public readonly agency$: Observable<AgencyEntity | null> = this.store.select(selectAgency);
+  public readonly error$: Observable<ResponseError | null> = this.store.select(selectAgencyError);
 
-  public readonly contacts$: Observable<Contacts | null> =
-    this.store.select(selectAgencyContacts);
+  public readonly contacts$: Observable<Contacts | null> = this.store.select(selectAgencyContacts);
+
+  public readonly requisites$: Observable<Pick<
+    AgencyEntity,
+    'name' | 'logo' | 'city' | 'contactPerson' | 'phone'
+  > | null> = this.store.select(selectAgencyRequisites);
 
   public init(userId: number): void {
     this.store.dispatch(agencyActions.init({ userId }));
@@ -39,9 +40,7 @@ export class AgencyFacade {
       if (!agency) {
         throw Error('updateContacts: agency is null');
       }
-      this.store.dispatch(
-        agencyActions.updateAgencyContacts({ id: agency.id, contacts })
-      );
+      this.store.dispatch(agencyActions.updateAgencyContacts({ id: agency.id, contacts }));
     });
   }
 }

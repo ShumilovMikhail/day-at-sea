@@ -1,1 +1,7 @@
-<p>requisites-edit-container works!</p>
+@if (requisites) {
+<account-requisites-edit-ui [formRequisites]="form"></account-requisites-edit-ui>
+} @else {
+<div class="loader-wrapper">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}

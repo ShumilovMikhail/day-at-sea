@@ -1,0 +1,39 @@
+<div class="requisites-edit">
+  <h2>Реквизиты агенства</h2>
+  <div class="inner">
+    <div class="logo">
+      <div class="logo-container">
+        <img [src]="formRequisites.get('logo')!.value ?? 'assets/images/user-default-photo.png'" alt="agency-logo" />
+      </div>
+      <button>Обновить логотип</button>
+    </div>
+    <div class="content">
+      <form>
+        <ui-forms-input
+          [control]="formRequisites.get('name')! | formControl"
+          label="Название агенства"
+          [crossEnable]="true"
+        ></ui-forms-input>
+        <ui-forms-input
+          [control]="formRequisites.get('city')! | formControl"
+          label="Город"
+          [crossEnable]="true"
+        ></ui-forms-input>
+        <ui-forms-input
+          [control]="formRequisites.get('contactPerson')! | formControl"
+          label="Контактное лицо"
+          [crossEnable]="true"
+        ></ui-forms-input>
+        <ui-forms-phone
+          [control]="formRequisites.get('phone')! | formControl"
+          label="Телефон контактного лица"
+          [crossEnable]="true"
+        ></ui-forms-phone>
+      </form>
+    </div>
+  </div>
+  <div class="buttons-container">
+    <button class="button-submit">Сохранить</button>
+    <button class="button-cancel">Отменить</button>
+  </div>
+</div>
