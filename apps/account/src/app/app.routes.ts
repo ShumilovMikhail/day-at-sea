@@ -18,7 +18,12 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'settings/auth/edit',
-        loadComponent: () => import('@account/settings/auth-edit').then((c) => c.AuthEditContainerComponent),
+        loadComponent: () => import('@account/settings/feature-auth-edit').then((c) => c.AuthEditContainerComponent),
+      },
+      {
+        path: 'settings/requisites/edit',
+        loadComponent: () =>
+          import('@account/settings/feature-requisites-edit').then((c) => c.RequisitesEditContainerComponent),
       },
     ],
   },

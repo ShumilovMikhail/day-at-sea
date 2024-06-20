@@ -5,7 +5,7 @@
       <div class="settings-block requisites" utilsAccordion [buttonToggle]="requisitesChangeButton">
         <div class="settings-block__header">
           <h3>Реквизиты агенства</h3>
-          <a>Изменить</a>
+          <a [routerLink]="['requisites/edit']">Изменить</a>
           <img src="assets/images/icons/arrow-toggle.svg" alt="" #requisitesChangeButton />
         </div>
         <div class="settings-block__content requisites-content">
@@ -31,7 +31,7 @@
             </li>
           </ul>
         </div>
-        <a class="link-edit-button">Изменить</a>
+        <a class="link-edit-button" [routerLink]="['requisites/edit']">Изменить</a>
       </div>
       <div class="settings-block contacts" utilsAccordion [buttonToggle]="contactsChangeButton">
         <div class="settings-block__header">
