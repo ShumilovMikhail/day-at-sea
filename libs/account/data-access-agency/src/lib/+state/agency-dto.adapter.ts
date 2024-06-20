@@ -13,6 +13,7 @@ export const agencyDTOAdapter: AgencyDTOAdapter = {
       phone: agencyDTO.phone,
       contacts: agencyDTO.contacts,
       city: agencyDTO.city,
+      logo: agencyDTO.logo,
     };
   },
 };

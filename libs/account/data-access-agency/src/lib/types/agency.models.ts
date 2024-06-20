@@ -15,6 +15,7 @@ export interface AgencyDTO {
   city: string | null;
   phone: string | null;
   contacts: Contacts;
+  logo: string;
 }
 
 export interface AgencyEntity {
@@ -24,4 +25,5 @@ export interface AgencyEntity {
   city: string | null;
   phone: string | null;
   contacts: Contacts;
+  logo: string;
 }
