@@ -1,10 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import {
-  NavigationEnd,
-  Router,
-  RouterEvent,
-  RouterModule,
-} from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, take } from 'rxjs';
 
 import { AuthFacade, UserEntity } from '@auth/data-access';

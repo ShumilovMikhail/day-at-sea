@@ -28,6 +28,7 @@
       "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
       "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
       "@auth/feature-register": ["libs/core/auth/feature-register/src/index.ts"],
+      "@dadata/data-access-address": ["libs/core/dadata/data-access-address/src/index.ts"],
       "@http": ["libs/core/http/src/index.ts"],
       "@layers": ["libs/core/layers/src/index.ts"],
       "@ui/forms": ["libs/core/ui/ui-forms/src/index.ts"],

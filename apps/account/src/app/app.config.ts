@@ -1,8 +1,4 @@
-import {
-  ApplicationConfig,
-  isDevMode,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngrx/store';
@@ -14,6 +10,7 @@ import { environment } from '../environments/environment.development';
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import { API_URL } from '@http';
 import { agencyEffects, agencyFeature } from '@account/data-access-agency';
+import { DADATA_TOKEN } from '@dadata/data-access-address';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,6 +32,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: API_URL,
       useValue: environment.API_URL,
+    },
+    {
+      provide: DADATA_TOKEN,
+      useValue: environment.DADATA_TOKEN,
     },
   ],
 };
