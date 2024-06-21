@@ -10,13 +10,16 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs';
 
-import { AddressDirective } from '../../directives/address.directive';
+import { SearchDirective } from '../../directives/search.directive';
+import { DadataAddressService } from '@dadata/data-access-address';
+import { ClickOutsideDirective } from '@utils/directives';
 
 @Component({
   selector: 'ui-forms-address',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AddressDirective],
+  imports: [CommonModule, ReactiveFormsModule, SearchDirective, ClickOutsideDirective],
   templateUrl: './ui-forms-address.component.html',
   styleUrl: './ui-forms-address.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +33,9 @@ export class UiFormsAddressComponent implements OnInit {
   @Input() crossEnable = false;
   private readonly changeDetectionRef = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly addressService = inject(DadataAddressService);
   public cities: string[] | null = null;
+  public isSearching = false;
 
   ngOnInit(): void {
     this.control.statusChanges
@@ -46,12 +51,22 @@ export class UiFormsAddressComponent implements OnInit {
     this.control.patchValue('');
   }
 
-  public onFindCities(cities: string[]): void {
-    this.cities = cities;
+  public onSearch(): void {
+    this.addressService
+      .getCities(this.control.value)
+      .pipe(take(1))
+      .subscribe((cities: string[]) => {
+        this.cities = cities;
+        this.isSearching = true;
+      });
+  }
+
+  public onSearchTermination(): void {
+    this.isSearching = false;
   }
 
   public onCitySelect(city: string): void {
     this.control.patchValue(city);
-    this.cities = null;
+    this.isSearching = false;
   }
 }

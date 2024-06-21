@@ -8,10 +8,12 @@
   >
   }
   <div
+    utilsClickOutside
     class="inner"
     [ngClass]="{
-      'city-searched': cities
+      'city-searching': isSearching
     }"
+    (clickOutsideEvent)="onSearchTermination()"
   >
     <div
       class="input-wrapper"
@@ -21,14 +23,14 @@
     >
       <input
         type="text"
-        uiFormsAddress
+        uiFormsSearch
         [ngClass]="{
           error: control.errors && control.touched
         }"
         [formControl]="control"
         [placeholder]="placeholder ?? ''"
         (focus)="onFocus()"
-        (findCitiesEvent)="onFindCities($event)"
+        (searchEvent)="onSearch()"
       />
       @if (crossEnable) {
       <button class="cross" type="button" (click)="onReset()"></button>
