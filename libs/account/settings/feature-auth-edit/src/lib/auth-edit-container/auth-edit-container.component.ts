@@ -9,6 +9,7 @@ import { AuthFacade } from '@auth/data-access';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 import { EmailEditContainerComponent } from '@account/settings/feature-email-edit';
 import { PasswordEditContainerComponent } from '@account/settings/feature-password-edit';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'account-auth-edit-container',
@@ -27,8 +28,13 @@ import { PasswordEditContainerComponent } from '@account/settings/feature-passwo
 })
 export class AuthEditContainerComponent {
   private readonly authFacade = inject(AuthFacade);
+  private readonly router = inject(Router);
   public readonly isAuthenticate$: Observable<boolean> = this.authFacade.isAuthenticate$;
   constructor(title: Title) {
-    title.setTitle('Настройки');
+    title.setTitle('Настройки - Данные для входа');
+  }
+
+  public onBack(): void {
+    this.router.navigateByUrl('account/settings');
   }
 }

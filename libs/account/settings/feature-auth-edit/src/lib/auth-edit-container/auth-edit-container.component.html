@@ -1,5 +1,5 @@
 @if (isAuthenticate$ | async;) {
-<account-auth-edit-ui>
+<account-auth-edit-ui (backEvent)="onBack()">
   <account-username-edit-container></account-username-edit-container>
   <account-email-edit-container></account-email-edit-container>
   <account-password-edit-container></account-password-edit-container>

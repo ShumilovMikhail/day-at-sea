@@ -51,7 +51,7 @@
   align-items: center;
 }
 
-.user-info {
+.agency-info {
   display: flex;
   gap: 12px;
   align-items: center;
@@ -64,6 +64,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
   &__inner {
     p {
@@ -138,7 +139,7 @@
     align-items: center;
   }
 
-  .user-info {
+  .agency-info {
     display: none;
   }
   .menu-button {

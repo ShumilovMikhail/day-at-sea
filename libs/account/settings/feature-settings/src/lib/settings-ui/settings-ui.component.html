@@ -10,7 +10,11 @@
         </div>
         <div class="settings-block__content requisites-content">
           <div class="image-container">
-            <img src="/assets/images/settings-default-photo.png" alt="photo" />
+            @if (agencyVM.logo) {
+            <img [ngSrc]="agencyVM.logo" alt="" priority fill />
+            } @else {
+            <img src="assets/images/settings-default-photo.png" alt="" />
+            }
           </div>
           <ul class="settings-list requisites-list">
             <li>

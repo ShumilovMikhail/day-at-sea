@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -31,22 +25,19 @@ export class ContactsEditContainerComponent implements OnInit {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   private readonly agencyFacade = inject(AgencyFacade);
   private readonly fb = inject(FormBuilder);
-  private readonly contactsVM$: Observable<Contacts | null> =
-    this.agencyFacade.contacts$;
+  private readonly contactsVM$: Observable<Contacts | null> = this.agencyFacade.contacts$;
   private readonly router = inject(Router);
   public form!: FormGroup<ContactsForm>;
   public readonly loading$ = this.agencyFacade.loading$;
 
   constructor(private readonly title: Title) {
-    title.setTitle('Настройки');
+    title.setTitle('Настройки - Контакты, Сайт, Соцсети, Мессенжеры');
   }
 
   ngOnInit(): void {
     this.contactsVM$
       .pipe(
-        filter((contactsVM: Contacts | null): contactsVM is Contacts =>
-          Boolean(contactsVM)
-        ),
+        filter((contactsVM: Contacts | null): contactsVM is Contacts => Boolean(contactsVM)),
         take(1),
         map((contactsEntity: Contacts): ContactsVM => {
           return contactsEntityToVM.entityToVM(contactsEntity);
@@ -67,9 +58,7 @@ export class ContactsEditContainerComponent implements OnInit {
 
   private initializeForm(contactsVM: ContactsVM): void {
     this.form = this.fb.group({
-      phones: new FormArray(
-        contactsVM.phones.map((phone: string | null) => new FormControl(phone))
-      ),
+      phones: new FormArray(contactsVM.phones.map((phone: string | null) => new FormControl(phone))),
       site: [contactsVM.site],
       vk: [contactsVM.vk, [siteValidator('vk.com', { required: true })]],
       ok: [contactsVM.ok, [siteValidator('ok.ru', { required: false })]],

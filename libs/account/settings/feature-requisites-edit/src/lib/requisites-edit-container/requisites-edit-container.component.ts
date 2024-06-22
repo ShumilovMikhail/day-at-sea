@@ -10,6 +10,7 @@ import { RequisitesForm, RequisitesVM, UpdateRequisitesRequestVM } from '../type
 import { RequisitesEditUiComponent } from '../requisites-edit-ui/requisites-edit-ui.component';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 import { fullNameValidator } from '@utils/validators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'account-requisites-edit-container',
@@ -28,6 +29,10 @@ export class RequisitesEditContainerComponent implements OnInit {
   public form!: FormGroup<RequisitesForm>;
   public requisites!: RequisitesVM | null;
   public readonly loading$: Observable<boolean> = this.agencyFacade.loading$;
+
+  constructor(title: Title) {
+    title.setTitle('Настройки - Реквизиты');
+  }
 
   ngOnInit(): void {
     this.agencyFacade.requisites$

@@ -1,8 +1,9 @@
 <ng-container *ngrxLet="agency$ as agency">
   <ng-container
     *ngrxLet="{
-    name: agency ? (agency.contactPerson| firstName) : '',
-  } as vm"
+      name: agency ? (agency.contactPerson | firstName) : '',
+      logo: agency ? agency.logo : null
+    } as vm"
   >
     <account-side-menu-ui
       [agencyVM]="agency ? vm : null"

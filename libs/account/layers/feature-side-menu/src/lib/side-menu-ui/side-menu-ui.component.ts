@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 interface AgencyVM {
   name: string;
-  photo?: string;
+  logo?: string | null;
 }
 @Component({
   selector: 'account-side-menu-ui',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgOptimizedImage],
   templateUrl: './side-menu-ui.component.html',
   styleUrl: './side-menu-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

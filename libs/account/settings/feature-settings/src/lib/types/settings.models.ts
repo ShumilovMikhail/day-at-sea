@@ -19,4 +19,5 @@ export interface AgencyVM {
   contactPerson: string | null;
   phone: string | null;
   contacts: ContactsVM;
+  logo: string | null;
 }

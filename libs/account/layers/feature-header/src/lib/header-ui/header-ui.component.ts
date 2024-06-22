@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 interface AgencyVM {
   id: number | string;
   name: string;
-  photo?: string;
+  logo?: string | null;
 }
 
 @Component({
   selector: 'account-header-ui',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './header-ui.component.html',
   styleUrl: './header-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

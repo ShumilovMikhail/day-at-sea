@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,4 +9,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './auth-edit-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthEditUiComponent {}
+export class AuthEditUiComponent {
+  @Output() backEvent = new EventEmitter<void>();
+
+  public onBack(): void {
+    this.backEvent.emit();
+  }
+}

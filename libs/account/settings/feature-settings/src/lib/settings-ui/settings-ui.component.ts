@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { AgencyVM, ContactsVM, UserVM } from '../types/settings.models';
@@ -8,7 +8,7 @@ import { AccordionDirective } from '@utils/directives';
 @Component({
   selector: 'account-settings-ui',
   standalone: true,
-  imports: [CommonModule, AccordionDirective, RouterModule],
+  imports: [CommonModule, AccordionDirective, RouterModule, NgOptimizedImage],
   templateUrl: './settings-ui.component.html',
   styleUrl: './settings-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

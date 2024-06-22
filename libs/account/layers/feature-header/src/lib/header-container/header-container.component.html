@@ -1,9 +1,10 @@
 <ng-container *ngrxLet="agency$ as agency">
   <ng-container
     *ngrxLet="{
-    name: agency ? (agency.contactPerson| firstName) : '',
-    id:  agency ? agency.id : '',
-  } as vm"
+      name: agency ? (agency.contactPerson | firstName) : '',
+      id: agency ? agency.id : '',
+      logo: agency ? agency.logo : null
+    } as vm"
   >
     <account-header-ui
       [agencyVM]="agency ? vm : null"
