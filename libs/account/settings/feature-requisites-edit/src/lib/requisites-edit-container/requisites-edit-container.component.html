@@ -1,5 +1,11 @@
 @if (requisites) {
-<account-requisites-edit-ui [formRequisites]="form"></account-requisites-edit-ui>
+<account-requisites-edit-ui
+  [formRequisites]="form"
+  [isLoading]="(loading$ | async) ?? false"
+  (loadLogoEvent)="onLoadLogo($event)"
+  (submitEvent)="onSubmit()"
+  (cancelEvent)="onCancel()"
+></account-requisites-edit-ui>
 } @else {
 <div class="loader-wrapper">
   <ui-indicators-loader></ui-indicators-loader>

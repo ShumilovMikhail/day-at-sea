@@ -2,7 +2,7 @@ import { createReducer, on, createFeature } from '@ngrx/store';
 
 import { AgencyState } from '../types/agency-state.models';
 import { agencyActions } from './agency.actions';
-import { AgencyEntity, Contacts } from '../types/agency.models';
+import { AgencyEntity, AgencyRequisitesEntity, Contacts, UpdateRequisitesRequestDTO } from '../types/agency.models';
 import { ResponseError } from '@http';
 
 export const initialAgencyState: AgencyState = {
@@ -48,10 +48,7 @@ export const agencyFeature = createFeature({
     ),
     on(
       agencyActions.updateAgencyContacts,
-      (
-        state: AgencyState,
-        payload: { id: number; contacts: Contacts }
-      ): AgencyState => ({
+      (state: AgencyState, payload: { id: number; contacts: Contacts }): AgencyState => ({
         ...state,
         status: 'loading',
         error: null,
@@ -70,6 +67,33 @@ export const agencyFeature = createFeature({
     ),
     on(
       agencyActions.updateAgencyContactsFailure,
+      (state: AgencyState, payload: { error: ResponseError }): AgencyState => ({
+        ...state,
+        status: 'error',
+        error: payload.error,
+      })
+    ),
+    on(
+      agencyActions.updateAgencyRequisites,
+      (state: AgencyState, payload: { id: number; requisites: UpdateRequisitesRequestDTO }): AgencyState => ({
+        ...state,
+        status: 'loading',
+        error: null,
+      })
+    ),
+    on(
+      agencyActions.updateAgencyRequisitesSuccess,
+      (state: AgencyState, payload: { requisites: AgencyRequisitesEntity }): AgencyState => ({
+        ...state,
+        status: 'loaded',
+        agency: {
+          ...state.agency,
+          ...payload.requisites,
+        } as AgencyEntity,
+      })
+    ),
+    on(
+      agencyActions.updateAgencyRequisitesFailure,
       (state: AgencyState, payload: { error: ResponseError }): AgencyState => ({
         ...state,
         status: 'error',

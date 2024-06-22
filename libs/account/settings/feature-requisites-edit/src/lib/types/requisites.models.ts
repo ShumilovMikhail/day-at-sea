@@ -15,3 +15,11 @@ export interface RequisitesForm {
   contactPerson: FormControl<string | null>;
   logo: FormControl<string | null>;
 }
+
+export interface UpdateRequisitesRequestVM {
+  name: string | null;
+  contactPerson: string | null;
+  city: string | null;
+  phone: string | null;
+  logo: string | ArrayBuffer | null;
+}

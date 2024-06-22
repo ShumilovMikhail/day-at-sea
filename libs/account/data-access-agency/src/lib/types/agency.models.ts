@@ -8,22 +8,44 @@ export interface Contacts {
   viber: string | null;
 }
 
-export interface AgencyDTO {
-  id: number;
+export interface AgencyRequisitesDTO {
   name: string | null;
   contact_person: string;
   city: string | null;
   phone: string | null;
-  contacts: Contacts;
   logo: string;
 }
 
-export interface AgencyEntity {
-  id: number;
+export interface AgencyRequisitesEntity {
   name: string | null;
   contactPerson: string;
   city: string | null;
   phone: string | null;
-  contacts: Contacts;
   logo: string;
+}
+
+export interface AgencyDTO extends AgencyRequisitesDTO {
+  id: number;
+  contacts: Contacts;
+}
+
+export interface AgencyEntity extends AgencyRequisitesEntity {
+  id: number;
+  contacts: Contacts;
+}
+
+export interface UpdateRequisitesRequestEntity {
+  name: string | null;
+  contactPerson: string | null;
+  city: string | null;
+  phone: string | null;
+  logo: string | ArrayBuffer | null;
+}
+
+export interface UpdateRequisitesRequestDTO {
+  name: string | null;
+  contact_person: string | null;
+  city: string | null;
+  phone: string | null;
+  logo: string | ArrayBuffer | null;
 }

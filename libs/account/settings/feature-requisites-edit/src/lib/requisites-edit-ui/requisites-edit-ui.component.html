@@ -3,9 +3,17 @@
   <div class="inner">
     <div class="logo">
       <div class="logo-container">
-        <img [src]="formRequisites.get('logo')!.value ?? 'assets/images/user-default-photo.png'" alt="agency-logo" />
+        <img
+          [ngSrc]="formRequisites.get('logo')!.value ?? 'assets/images/user-default-photo.png'"
+          alt="agency-logo"
+          priority
+          fill
+        />
       </div>
-      <button>Обновить логотип</button>
+      <label>
+        <input type="file" #logoInput (change)="onLogoChange($event)" />
+        <button (click)="logoInput.click()">Обновить логотип</button>
+      </label>
     </div>
     <div class="content">
       <form>
@@ -33,7 +41,14 @@
     </div>
   </div>
   <div class="buttons-container">
-    <button class="button-submit">Сохранить</button>
-    <button class="button-cancel">Отменить</button>
+    <button
+      class="button-submit"
+      (click)="onSubmit()"
+      [disabled]="formRequisites.get('contactPerson')!.errors || isLoading"
+    >
+      Сохранить
+      <div class="spinner-loader" *ngIf="isLoading"></div>
+    </button>
+    <button class="button-cancel" (click)="onCancel()">Отменить</button>
   </div>
 </div>

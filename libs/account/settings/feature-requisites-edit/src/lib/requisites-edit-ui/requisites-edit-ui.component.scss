@@ -29,17 +29,23 @@ h2 {
     align-items: center;
     background-color: rgba(60, 186, 222, 0.1);
     overflow: hidden;
+    position: relative;
   }
 
-  button {
-    margin-top: 14px;
-    background-color: transparent;
-    border: none;
-    color: $primary;
-    transition: 0.2s all;
-    cursor: pointer;
-    &:hover {
-      color: $primaryHover;
+  label {
+    input {
+      display: none;
+    }
+    button {
+      margin-top: 14px;
+      background-color: transparent;
+      border: none;
+      color: $primary;
+      transition: 0.2s all;
+      cursor: pointer;
+      &:hover {
+        color: $primaryHover;
+      }
     }
   }
 }
@@ -64,10 +70,58 @@ form {
   @include button-primary();
   padding: 10px;
   width: 130px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
 }
 
 .button-cancel {
   @include button-secondary();
   padding: 10px;
   width: 130px;
+}
+
+@media (max-width: 480px) {
+  .requisites-edit {
+    gap: 20px;
+    padding: 20px 15px;
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .inner {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .logo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .button-submit {
+    @include button-primary();
+    padding: 10px;
+    width: 100%;
+  }
+
+  .button-cancel {
+    @include button-secondary();
+    padding: 10px;
+    width: 100%;
+  }
 }

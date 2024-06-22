@@ -11,9 +11,10 @@ import {
   selectAgencyRequisites,
   selectAgencyStatus,
 } from '../+state/agency.selectors';
-import { AgencyEntity, Contacts } from '../types/agency.models';
+import { AgencyEntity, AgencyRequisitesEntity, Contacts, UpdateRequisitesRequestEntity } from '../types/agency.models';
 import { ResponseError } from '@http';
 import { agencyActions } from '../+state/agency.actions';
+import { agencyDTOAdapter } from '../+state/agency-dto.adapter';
 
 @Injectable({ providedIn: 'root' })
 export class AgencyFacade {
@@ -26,10 +27,7 @@ export class AgencyFacade {
 
   public readonly contacts$: Observable<Contacts | null> = this.store.select(selectAgencyContacts);
 
-  public readonly requisites$: Observable<Pick<
-    AgencyEntity,
-    'name' | 'logo' | 'city' | 'contactPerson' | 'phone'
-  > | null> = this.store.select(selectAgencyRequisites);
+  public readonly requisites$: Observable<AgencyRequisitesEntity | null> = this.store.select(selectAgencyRequisites);
 
   public init(userId: number): void {
     this.store.dispatch(agencyActions.init({ userId }));
@@ -41,6 +39,16 @@ export class AgencyFacade {
         throw Error('updateContacts: agency is null');
       }
       this.store.dispatch(agencyActions.updateAgencyContacts({ id: agency.id, contacts }));
+    });
+  }
+
+  public updateRequisites(requisitesRequest: UpdateRequisitesRequestEntity): void {
+    this.agency$.pipe(take(1)).subscribe((agency: AgencyEntity | null) => {
+      if (!agency) {
+        throw Error('updateRequisites: agency is null');
+      }
+      const requisites = agencyDTOAdapter.requisitesRequestEntityToDTO(requisitesRequest);
+      this.store.dispatch(agencyActions.updateAgencyRequisites({ id: agency.id, requisites }));
     });
   }
 }
