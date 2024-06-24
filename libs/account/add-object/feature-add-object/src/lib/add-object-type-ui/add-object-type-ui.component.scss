@@ -1,0 +1,56 @@
+@import 'variables';
+
+:host {
+  width: 100%;
+}
+
+.add-object-type {
+  h3 {
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+.type-list {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.type-item {
+  padding: 20px;
+  width: 280px;
+  display: flex;
+  gap: 15px;
+  align-items: start;
+  border: 1px solid $blueLight;
+  border-radius: 10px;
+  transition: 0.2s all;
+  cursor: pointer;
+  .content {
+    p {
+      font-weight: 500;
+    }
+    span {
+      color: rgba(48, 48, 48, 0.5);
+      font-size: 14px;
+    }
+  }
+  &:hover {
+    background-color: rgba(60, 186, 222, 0.3);
+  }
+  &.active {
+    background-color: rgba(60, 186, 222, 0.3);
+  }
+}
+
+@media (max-width: 480px) {
+  .type-list {
+    flex-direction: column;
+  }
+
+  .type-item {
+    width: 100%;
+  }
+}

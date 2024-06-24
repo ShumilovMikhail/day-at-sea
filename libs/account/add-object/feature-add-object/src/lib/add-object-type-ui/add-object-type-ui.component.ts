@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { ObjectTypes } from '../types/object.models';
 
 @Component({
   selector: 'account-add-object-type-ui',
@@ -9,4 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './add-object-type-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddObjectTypeUiComponent {}
+export class AddObjectTypeUiComponent {
+  @Output() selectTypeEvent = new EventEmitter<ObjectTypes>();
+  @Input() selectedType: ObjectTypes | null = null;
+
+  public onSelectType(type: string): void {
+    this.selectTypeEvent.emit(type as ObjectTypes);
+  }
+}

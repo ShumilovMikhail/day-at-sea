@@ -1,1 +1,44 @@
-<p>add-object-type-ui works!</p>
+<div class="add-object-type">
+  <h3>Что будете сдавать</h3>
+  <ul class="type-list">
+    <li
+      class="type-item"
+      [ngClass]="{
+        active: selectedType === 'floor'
+      }"
+      (click)="onSelectType('floor')"
+    >
+      <img src="assets/images/icons/flat-icon.svg" alt="type-icon" height="24" width="24" />
+      <div class="content">
+        <p>Квартира, апартаменты</p>
+        <span>целиком</span>
+      </div>
+    </li>
+    <li
+      class="type-item"
+      [ngClass]="{
+        active: selectedType === 'house'
+      }"
+      (click)="onSelectType('house')"
+    >
+      <img src="assets/images/icons/house-icon.svg" alt="type-icon" height="24" width="24" />
+      <div class="content">
+        <p>Дом, коттедж</p>
+        <span>целиком</span>
+      </div>
+    </li>
+    <li
+      class="type-item"
+      [ngClass]="{
+        active: selectedType === 'room'
+      }"
+      (click)="onSelectType('room')"
+    >
+      <img src="assets/images/icons/room-icon.svg" alt="type-icon" height="24" width="24" />
+      <div class="content">
+        <p>Отдельная комната</p>
+        <span>целиком</span>
+      </div>
+    </li>
+  </ul>
+</div>

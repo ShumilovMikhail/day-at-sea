@@ -1,1 +1,7 @@
-<p>add-object-container works!</p>
+<div class="add-object">
+  <h1>Добавить объект</h1>
+  <account-add-object-type-ui
+    [selectedType]="selectedType"
+    (selectTypeEvent)="onSelectType($event)"
+  ></account-add-object-type-ui>
+</div>
