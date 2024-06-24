@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
-import { PhonePipe } from '../../pipes/phone.pipe';
 import { PhoneDirective } from '../../directives/phone.directive';
 
 @Component({
@@ -11,7 +10,7 @@ import { PhoneDirective } from '../../directives/phone.directive';
   templateUrl: './ui-forms-phone.component.html',
   styleUrl: './ui-forms-phone.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, ReactiveFormsModule, PhonePipe, PhoneDirective],
+  imports: [CommonModule, ReactiveFormsModule, PhoneDirective],
 })
 export class UiFormsPhoneComponent {
   @Input({ required: true }) control!: FormControl;

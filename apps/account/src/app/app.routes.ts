@@ -25,6 +25,10 @@ export const appRoutes: Route[] = [
         loadComponent: () =>
           import('@account/settings/feature-requisites-edit').then((c) => c.RequisitesEditContainerComponent),
       },
+      {
+        path: 'add-object',
+        loadComponent: () => import('@account/feature-add-object').then((c) => c.AddObjectContainerComponent),
+      },
     ],
   },
 ];
