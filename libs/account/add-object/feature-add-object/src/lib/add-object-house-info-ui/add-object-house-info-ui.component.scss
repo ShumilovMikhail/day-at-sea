@@ -13,6 +13,7 @@ form {
     margin-top: 20px;
     @include button-primary();
     padding: 13px 20px;
+    justify-content: center;
   }
 }
 

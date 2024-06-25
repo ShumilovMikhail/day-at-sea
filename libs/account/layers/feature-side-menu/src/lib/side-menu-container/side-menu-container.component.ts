@@ -1,10 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  inject,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { Observable } from 'rxjs';
 
@@ -12,6 +7,7 @@ import { SideMenuUiComponent } from '../side-menu-ui/side-menu-ui.component';
 import { SideMenuMobileDirective } from '../directives/side-menu-mobile.directive';
 import { FirstNamePipe } from '@utils/pipes';
 import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
+import { UiAddObjectSideMenuComponent } from '@add-object/ui-side-menu';
 
 @Component({
   selector: 'account-side-menu-container',
@@ -22,6 +18,7 @@ import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
     LetDirective,
     SideMenuMobileDirective,
     FirstNamePipe,
+    UiAddObjectSideMenuComponent,
   ],
   templateUrl: './side-menu-container.component.html',
   styleUrl: './side-menu-container.component.scss',
@@ -30,6 +27,7 @@ import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
 export class SideMenuContainerComponent {
   @Input({ required: true }) isMobileOpen!: boolean;
   private readonly agencyFacade = inject(AgencyFacade);
-  public readonly agency$: Observable<AgencyEntity | null> =
-    this.agencyFacade.agency$;
+  private readonly location = inject(Location);
+  public readonly agency$: Observable<AgencyEntity | null> = this.agencyFacade.agency$;
+  public url: string = this.location.path();
 }

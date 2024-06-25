@@ -1,5 +1,6 @@
 @media (max-width: 480px) {
-  account-side-menu-ui {
+  account-side-menu-ui,
+  account-ui-add-object-side-menu {
     display: block;
     width: 100%;
     position: fixed;
@@ -7,7 +8,8 @@
     left: 0;
     transition: 0.2s left;
   }
-  account-side-menu-ui[mobile-hidden] {
+  account-side-menu-ui[mobile-hidden],
+  account-ui-add-object-side-menu[mobile-hidden] {
     left: -100%;
   }
 }

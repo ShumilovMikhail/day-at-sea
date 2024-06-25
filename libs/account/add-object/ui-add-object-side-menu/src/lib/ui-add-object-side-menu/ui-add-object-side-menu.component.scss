@@ -1,0 +1,128 @@
+@import 'variables';
+@import 'mixins';
+
+.side-menu {
+  display: block;
+  width: 350px;
+  height: 100%;
+}
+
+.container {
+  overflow-y: auto;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  width: 350px;
+  height: 100vh;
+  left: 0;
+  padding: 36px 30px 86px 30px;
+  scrollbar-width: none;
+  background-color: $white;
+  border-right: 1px solid $greyBorder;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.container::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+nav {
+  flex: 1 1 auto;
+  ul {
+    display: flex;
+    flex-direction: column;
+    li {
+      &.user-action {
+        display: none;
+      }
+      a {
+        padding: 15px 0px;
+        padding-left: 27px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        font-weight: 600;
+        transition: 0.35s background-color;
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 30px;
+          height: 30px;
+        }
+        cursor: pointer;
+        &:hover {
+          background-color: #ecf9fcb9;
+        }
+      }
+      &.active {
+        background-color: #ecf9fc;
+      }
+    }
+  }
+}
+
+.account-menu {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    li {
+      padding-left: 27px;
+      a {
+        align-items: center;
+        gap: 13px;
+        display: flex;
+        color: $primary;
+        transition: 0.2s color;
+        font-weight: 600;
+        svg {
+          transition: 0.2s fill;
+        }
+        cursor: pointer;
+        &:hover {
+          color: $primaryHover;
+          svg {
+            fill: $primaryHover;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .side-menu {
+    border-right: none;
+    width: 100%;
+  }
+
+  .container {
+    position: static;
+    width: 100%;
+    padding: 0px 0 56px 0;
+  }
+
+  nav {
+    width: 100%;
+    ul {
+      width: 100%;
+      li {
+        a {
+          border-bottom: 1px solid rgba(60, 186, 222, 0.3);
+          padding-left: 27px;
+          border-radius: 0;
+        }
+        &.user-action {
+          display: block;
+        }
+      }
+    }
+  }
+}
