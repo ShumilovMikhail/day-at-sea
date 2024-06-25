@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form-block">
     <p>Выберите тип жилья</p>
     <div class="radio-list">

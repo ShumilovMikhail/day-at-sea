@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="content">
     <ui-forms-address [control]="form.get('city')! | formControl" [label]="'Город'"></ui-forms-address>
     <ui-forms-input [control]="form.get('street')! | formControl" [label]="'Улица'"></ui-forms-input>

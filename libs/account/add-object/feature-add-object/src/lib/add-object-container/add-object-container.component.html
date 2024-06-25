@@ -5,11 +5,11 @@
     (selectTypeEvent)="onSelectType($event)"
   ></account-add-object-type-ui>
   @switch (selectedType) { @case ('floor') {
-  <account-add-object-floor-info-ui></account-add-object-floor-info-ui>
+  <account-add-object-floor-info-ui (submitEvent)="onSubmit($event)"></account-add-object-floor-info-ui>
   } @case ('house') {
-  <account-add-object-house-info-ui></account-add-object-house-info-ui>
+  <account-add-object-house-info-ui (submitEvent)="onSubmit($event)"></account-add-object-house-info-ui>
   } @case ('room') {
-  <account-add-object-room-info-ui></account-add-object-room-info-ui>
+  <account-add-object-room-info-ui (submitEvent)="onSubmit($event)"></account-add-object-room-info-ui>
   } @default {
   <div class="info">
     <p>
