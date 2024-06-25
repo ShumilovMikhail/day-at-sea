@@ -1,0 +1,57 @@
+<form [formGroup]="form">
+  <div class="form-block">
+    <p>Выберите тип жилья</p>
+    <div class="radio-list">
+      <label class="radio">
+        <input type="radio" name="type" value="Комната в квартире" formControlName="type" />
+        <div></div>
+        Комната в квартире
+      </label>
+      <label class="radio">
+        <input type="radio" name="type" value="Комната в частном доме" formControlName="type" />
+        <div></div>
+        Комната в частном доме
+      </label>
+      <label class="radio">
+        <input type="radio" name="type" value="Комната в коттедже" formControlName="type" />
+        <div></div>
+        Комната в коттедже
+      </label>
+    </div>
+  </div>
+  <div class="form-block">
+    <p>Количество комнат</p>
+    <div class="radio-list">
+      <label class="radio">
+        <input type="radio" name="countRoom" value="1" formControlName="countRoom" />
+        <div></div>
+        В 1-комнатной
+      </label>
+      <label class="radio">
+        <input type="radio" name="countRoom" value="2" formControlName="countRoom" />
+        <div></div>
+        В 2х-комнатной
+      </label>
+      <label class="radio">
+        <input type="radio" name="countRoom" value="3" formControlName="countRoom" />
+        <div></div>
+        В 3х-комнатной
+      </label>
+      <label class="radio">
+        <input type="radio" name="countRoom" value="Другое" formControlName="countRoom" />
+        <div></div>
+        Другое
+      </label>
+    </div>
+  </div>
+  <ui-forms-address
+    [control]="form.get('address')! | formControl"
+    [label]="'Укажите место'"
+    [placeholder]="'Город'"
+    [crossEnable]="true"
+  ></ui-forms-address>
+  <button type="submit" [disabled]="!form.valid || isLoading">
+    Продолжить оформление
+    <div class="spinner-loader" *ngIf="isLoading"></div>
+  </button>
+</form>

@@ -1,0 +1,16 @@
+<form>
+  <div class="content">
+    <ui-forms-address [control]="form.get('city')! | formControl" [label]="'Город'"></ui-forms-address>
+    <ui-forms-input [control]="form.get('street')! | formControl" [label]="'Улица'"></ui-forms-input>
+    <ui-forms-input [control]="form.get('house')! | formControl" [label]="'Номер дома'"></ui-forms-input>
+    <div class="block">
+      <ui-forms-input [control]="form.get('corpus')! | formControl" [label]="'Корпус'"></ui-forms-input>
+      <ui-forms-input [control]="form.get('floor')! | formControl" [label]="'Квартира'"></ui-forms-input>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!form.valid || isLoading">
+    Продолжить оформление
+    <div class="spinner-loader" *ngIf="isLoading"></div>
+  </button>
+</form>

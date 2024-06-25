@@ -4,4 +4,22 @@
     [selectedType]="selectedType"
     (selectTypeEvent)="onSelectType($event)"
   ></account-add-object-type-ui>
+  @switch (selectedType) { @case ('floor') {
+  <account-add-object-floor-info-ui></account-add-object-floor-info-ui>
+  } @case ('house') {
+  <account-add-object-house-info-ui></account-add-object-house-info-ui>
+  } @case ('room') {
+  <account-add-object-room-info-ui></account-add-object-room-info-ui>
+  } @default {
+  <div class="info">
+    <p>
+      Уважаемый собственник! <br />
+      <br />
+      Добавляя новый объект, указывая адрес и прочие параметры объекта, будьте, пожалуйста, внимательны! <br />
+      <br />
+      По правилам СуткиНаМоре, после публикации объекта, изменить эти данные вы сможете только через обращение в
+      поддержку. Спасибо!
+    </p>
+  </div>
+  } }
 </div>

@@ -1,0 +1,20 @@
+<form>
+  <div class="content">
+    <ui-forms-select
+      [control]="form.get('type')! | formControl"
+      [options]="typeOptions"
+      [selectedOption]="typeOptions[0]"
+      [label]="'Выберите тип жилья'"
+    ></ui-forms-select>
+    <ui-forms-address
+      [control]="form.get('address')! | formControl"
+      [label]="'Укажите место'"
+      [placeholder]="'Город'"
+      [crossEnable]="true"
+    ></ui-forms-address>
+  </div>
+  <button type="submit" [disabled]="!form.valid || isLoading">
+    Продолжить оформление
+    <div class="spinner-loader" *ngIf="isLoading"></div>
+  </button>
+</form>

@@ -4,3 +4,4 @@ export * from './lib/util-validators/username-correctly.validator';
 export * from './lib/util-validators/latin-letters.validator';
 export * from './lib/util-validators/site.validator';
 export * from './lib/util-validators/conform-password.validator';
+export * from './lib/util-validators/house-number.validator';

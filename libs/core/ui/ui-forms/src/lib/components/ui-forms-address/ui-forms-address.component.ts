@@ -58,6 +58,7 @@ export class UiFormsAddressComponent implements OnInit {
       .subscribe((cities: string[]) => {
         this.cities = cities;
         this.isSearching = true;
+        this.changeDetectionRef.detectChanges();
       });
   }
 

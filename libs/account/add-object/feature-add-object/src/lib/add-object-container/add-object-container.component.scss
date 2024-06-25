@@ -1,3 +1,5 @@
+@import 'variables';
+
 :host {
   width: 100%;
 }
@@ -13,6 +15,13 @@
   }
 }
 
+.info {
+  padding: 44px 42px;
+  background-color: $beige;
+  width: 860px;
+  border-radius: 10px;
+}
+
 @media (max-width: 480px) {
   .add-object {
     padding: 20px 15px;
@@ -21,5 +30,10 @@
 
   h1 {
     font-size: 24px;
+  }
+
+  .info {
+    padding: 21px 20px;
+    width: 100%;
   }
 }

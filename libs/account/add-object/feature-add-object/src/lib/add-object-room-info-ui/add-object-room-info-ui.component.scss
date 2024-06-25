@@ -1,0 +1,48 @@
+@import 'mixins';
+
+.form-block {
+  margin-top: 25px;
+  p {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .radio-list {
+    margin-top: 7px;
+    display: flex;
+    gap: 30px;
+  }
+}
+
+ui-forms-address {
+  margin-top: 35px;
+  width: 400px;
+}
+
+button {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-top: 20px;
+  @include button-primary();
+  padding: 13px 20px;
+}
+
+@media (max-width: 480px) {
+  .form-block {
+    margin-top: 30px;
+    .radio-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  ui-forms-address {
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}

@@ -14,7 +14,7 @@ body {
 
 html,
 body {
-  height: 100%;
+  height: 100vh;
   width: 100vw;
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -191,6 +191,46 @@ a {
 @keyframes l13 {
   100% {
     transform: rotate(1turn);
+  }
+}
+
+.radio {
+  display: flex;
+  width: fit-content;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+
+  input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+  }
+  div {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid $blueLight;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      transform: translate(-50%, -50%) scale(0);
+      border-radius: 50%;
+      background-color: $primary;
+      transition: 0.1s all ease-in;
+    }
+  }
+
+  input:checked + div::before {
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 

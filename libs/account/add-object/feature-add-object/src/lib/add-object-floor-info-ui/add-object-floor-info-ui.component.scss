@@ -1,0 +1,34 @@
+@import 'mixins';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px;
+}
+
+.block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-top: 20px;
+  @include button-primary();
+  padding: 13px 20px;
+}
+
+@media (max-width: 480px) {
+  .content {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}

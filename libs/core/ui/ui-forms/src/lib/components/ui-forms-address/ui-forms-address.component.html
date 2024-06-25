@@ -36,6 +36,7 @@
       <button class="cross" type="button" (click)="onReset()"></button>
       }
     </div>
+    @if (cities) {
     <div class="cities-wrapper">
       <ul class="city-list">
         @for (city of cities; track $index) {
@@ -43,6 +44,7 @@
         }
       </ul>
     </div>
+    }
   </div>
   <ul class="errors">
     @if (errors && control.touched) { @for (error of errors; track error) { @if (error !== '') {
