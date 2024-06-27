@@ -234,6 +234,50 @@ a {
   }
 }
 
+.checkbox {
+  display: flex;
+  width: fit-content;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+  input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+  }
+  div {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $blueLight;
+    border-radius: 3px;
+    transition: 0.2s all;
+    &:hover {
+      border: 1px solid rgba(60, 186, 222, 0.15);
+    }
+    &::before {
+      content: '';
+      background-image: url('../assets/images/check.png');
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      transform: translate(-50%, -50%) scale(0);
+      transition: 0.1s all ease-in;
+    }
+  }
+  input:checked + div {
+    border: 1px solid $primary;
+    &::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
 @media (max-width: 320px) {
   h1 {
     font-size: 24px;

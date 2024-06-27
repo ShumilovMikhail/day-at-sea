@@ -1,0 +1,89 @@
+<div class="infrastructure">
+  <h1>Инфраструктура</h1>
+  <form>
+    <div class="places checkboxes-block" utilsAccordion [buttonToggle]="placesChangeButton">
+      <div class="checkboxes-block__header">
+        <h3>Расстояние до мест</h3>
+        <img src="assets/images/icons/arrow-toggle.svg" alt="" #placesChangeButton />
+      </div>
+      <ul class="place-list">
+        @for (place of data.placesDistanceList; track $index) {
+        <li class="place-item">
+          <label class="checkbox">
+            <input type="checkbox" />
+            <div></div>
+            {{ place }}
+          </label>
+        </li>
+        }
+      </ul>
+    </div>
+    <div class="leisures">
+      <div class="leisure checkboxes-block" utilsAccordion [buttonToggle]="leisureChangeButton">
+        <div class="checkboxes-block__header">
+          <h3>Расстояние до мест</h3>
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" #leisureChangeButton />
+        </div>
+        <ul class="leisure-list">
+          @for (leisure of data.leisureList; track $index) {
+          <li class="leisure-item">
+            <label class="checkbox">
+              <input type="checkbox" />
+              <div></div>
+              {{ leisure }}
+            </label>
+          </li>
+          }
+        </ul>
+      </div>
+      <div class="leisure-water checkboxes-block" utilsAccordion [buttonToggle]="leisureWaterChangeButton">
+        <div class="checkboxes-block__header">
+          <h3>Отдых на воде рядом</h3>
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" #leisureWaterChangeButton />
+        </div>
+        <ul class="leisure-water-list">
+          @for (leisureWater of data.leisureWaterList; track $index) {
+          <li class="leisure-water-item">
+            <label class="checkbox">
+              <input type="checkbox" />
+              <div></div>
+              {{ leisureWater }}
+            </label>
+          </li>
+          }
+        </ul>
+      </div>
+      <div class="leisure-active checkboxes-block" utilsAccordion [buttonToggle]="leisureActiveChangeButton">
+        <div class="checkboxes-block__header">
+          <h3>Активный отдых рядом</h3>
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" #leisureActiveChangeButton />
+        </div>
+        <ul class="leisure-active-list">
+          @for (leisureActive of data.leisureActiveList; track $index) {
+          <li class="leisure-active-item">
+            <label class="checkbox">
+              <input type="checkbox" />
+              <div></div>
+              {{ leisureActive }}
+            </label>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="reaches">
+      <div class="reaches__block">
+        <h3>Как проехать на личном транспорте?</h3>
+        <textarea placeholder="Подробно опишите маршрут для проезда до места"></textarea>
+      </div>
+      <div class="reaches__block">
+        <h3>Как проехать на общественном транспорте?</h3>
+        <textarea placeholder="Подробно опишите маршрут для проезда до места"></textarea>
+      </div>
+    </div>
+    <div class="buttons-container">
+      <button class="save-button" type="button">Сохранить</button>
+      <button class="next-button" type="submit">Продолжить</button>
+    </div>
+  </form>
+</div>

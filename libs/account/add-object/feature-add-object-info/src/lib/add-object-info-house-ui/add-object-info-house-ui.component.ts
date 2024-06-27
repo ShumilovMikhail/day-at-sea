@@ -31,7 +31,7 @@ const typeOptions = [
   imports: [CommonModule, UiFormsSelectComponent, UiFormsAddressComponent, ReactiveFormsModule],
 })
 export class AddObjectInfoHouseUiComponent implements OnInit {
-  @Input({ required: true }) typeControl!: FormControl<string>;
+  @Input({ required: true }) placementTypeControl!: FormControl<string>;
   @Input({ required: true }) addressControl!: FormControl<string>;
   @Input({ required: true }) placementControl!: FormControl<string>;
   @Input() isLoading = false;

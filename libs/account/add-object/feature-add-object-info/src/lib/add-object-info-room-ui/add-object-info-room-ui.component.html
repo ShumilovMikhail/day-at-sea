@@ -3,17 +3,17 @@
     <p>Выберите тип жилья</p>
     <div class="radio-list">
       <label class="radio">
-        <input type="radio" name="type" value="Комната в квартире" [formControl]="typeControl" />
+        <input type="radio" name="type" value="Комната в квартире" [formControl]="placementTypeControl" />
         <div></div>
         Комната в квартире
       </label>
       <label class="radio">
-        <input type="radio" name="type" value="Комната в частном доме" [formControl]="typeControl" />
+        <input type="radio" name="type" value="Комната в частном доме" [formControl]="placementTypeControl" />
         <div></div>
         Комната в частном доме
       </label>
       <label class="radio">
-        <input type="radio" name="type" value="Комната в коттедже" [formControl]="typeControl" />
+        <input type="radio" name="type" value="Комната в коттедже" [formControl]="placementTypeControl" />
         <div></div>
         Комната в коттедже
       </label>
@@ -25,7 +25,11 @@
     [placeholder]="'Город'"
     [crossEnable]="true"
   ></ui-forms-address>
-  <button type="button" [disabled]="(!addressControl.valid && !typeControl.valid) || isLoading" (click)="onSubmit()">
+  <button
+    type="button"
+    [disabled]="(!addressControl.valid && !placementTypeControl.valid) || isLoading"
+    (click)="onSubmit()"
+  >
     Продолжить оформление
     <div class="spinner-loader" *ngIf="isLoading"></div>
   </button>

@@ -5,7 +5,7 @@
       logo: agency ? agency.logo : null
     } as vm"
   >
-    @if (url.includes('add-object')) {
+    @if (url.includes('add-object/')) {
     <account-ui-add-object-side-menu accountSideMenuMobile [modalOpen]="isMobileOpen"></account-ui-add-object-side-menu>
     } @else {
     <account-side-menu-ui

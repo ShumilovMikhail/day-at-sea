@@ -14,7 +14,7 @@ import { FormControlPipe } from '@utils/pipes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectInfoRoomUiComponent implements OnInit {
-  @Input({ required: true }) typeControl!: FormControl<string>;
+  @Input({ required: true }) placementTypeControl!: FormControl<string>;
   @Input({ required: true }) addressControl!: FormControl<string>;
   @Input({ required: true }) placementControl!: FormControl<string>;
   @Input() isLoading = false;

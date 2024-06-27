@@ -1,7 +1,9 @@
 @switch (step) { @case(undefined) {
 <account-add-object-info-container
   [addressControl]="this.form.get('address')! | formControl"
-  [typeControl]="this.form.get('characteristics')!.get('type')! | formControl"
+  [placementTypeControl]="this.form.get('characteristics')!.get('placementType')! | formControl"
   [placementControl]="this.form.get('placement')! | formControl"
 ></account-add-object-info-container>
+} @case ('infrastructure') {
+<account-add-object-infrastructure-container [form]="infrastructureForm"> </account-add-object-infrastructure-container>
 } }
