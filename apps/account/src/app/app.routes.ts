@@ -27,7 +27,13 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'add-object',
-        loadComponent: () => import('@account/feature-add-object').then((c) => c.AddObjectContainerComponent),
+        loadComponent: () =>
+          import('@account/add-object/feature-add-object').then((c) => c.AddObjectContainerComponent),
+      },
+      {
+        path: 'add-object/:step',
+        loadComponent: () =>
+          import('@account/add-object/feature-add-object').then((c) => c.AddObjectContainerComponent),
       },
     ],
   },

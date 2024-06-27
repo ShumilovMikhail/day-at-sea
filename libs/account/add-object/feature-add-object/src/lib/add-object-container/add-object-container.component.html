@@ -1,25 +1,7 @@
-<div class="add-object">
-  <h1>Добавить объект</h1>
-  <account-add-object-type-ui
-    [selectedType]="selectedType"
-    (selectTypeEvent)="onSelectType($event)"
-  ></account-add-object-type-ui>
-  @switch (selectedType) { @case ('floor') {
-  <account-add-object-floor-info-ui (submitEvent)="onSubmit($event)"></account-add-object-floor-info-ui>
-  } @case ('house') {
-  <account-add-object-house-info-ui (submitEvent)="onSubmit($event)"></account-add-object-house-info-ui>
-  } @case ('room') {
-  <account-add-object-room-info-ui (submitEvent)="onSubmit($event)"></account-add-object-room-info-ui>
-  } @default {
-  <div class="info">
-    <p>
-      Уважаемый собственник! <br />
-      <br />
-      Добавляя новый объект, указывая адрес и прочие параметры объекта, будьте, пожалуйста, внимательны! <br />
-      <br />
-      По правилам СуткиНаМоре, после публикации объекта, изменить эти данные вы сможете только через обращение в
-      поддержку. Спасибо!
-    </p>
-  </div>
-  } }
-</div>
+@switch (step) { @case(undefined) {
+<account-add-object-info-container
+  [addressControl]="this.form.get('address')! | formControl"
+  [typeControl]="this.form.get('characteristics')!.get('type')! | formControl"
+  [placementControl]="this.form.get('placement')! | formControl"
+></account-add-object-info-container>
+} }

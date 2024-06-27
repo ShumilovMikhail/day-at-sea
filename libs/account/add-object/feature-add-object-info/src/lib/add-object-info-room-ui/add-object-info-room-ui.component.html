@@ -1,0 +1,32 @@
+<form>
+  <div class="form-block">
+    <p>Выберите тип жилья</p>
+    <div class="radio-list">
+      <label class="radio">
+        <input type="radio" name="type" value="Комната в квартире" [formControl]="typeControl" />
+        <div></div>
+        Комната в квартире
+      </label>
+      <label class="radio">
+        <input type="radio" name="type" value="Комната в частном доме" [formControl]="typeControl" />
+        <div></div>
+        Комната в частном доме
+      </label>
+      <label class="radio">
+        <input type="radio" name="type" value="Комната в коттедже" [formControl]="typeControl" />
+        <div></div>
+        Комната в коттедже
+      </label>
+    </div>
+  </div>
+  <ui-forms-address
+    [control]="addressControl! | formControl"
+    [label]="'Укажите место'"
+    [placeholder]="'Город'"
+    [crossEnable]="true"
+  ></ui-forms-address>
+  <button type="button" [disabled]="(!addressControl.valid && !typeControl.valid) || isLoading" (click)="onSubmit()">
+    Продолжить оформление
+    <div class="spinner-loader" *ngIf="isLoading"></div>
+  </button>
+</form>

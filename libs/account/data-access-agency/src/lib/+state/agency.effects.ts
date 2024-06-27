@@ -78,7 +78,6 @@ export const updateAgencyRequisitesEffect$ = createEffect(
     actions$.pipe(
       ofType(agencyActions.updateAgencyRequisites),
       switchMap(({ id, requisites }: { id: number; requisites: UpdateRequisitesRequestDTO }) => {
-        console.log(requisites);
         return apiService.put<AgencyRequisitesDTO>(`agencies/${id}/requisites`, requisites).pipe(
           map((requisites: AgencyRequisitesDTO) => {
             const requisitesEntity: AgencyRequisitesEntity = agencyDTOAdapter.requisitesDTOToEntity(requisites);

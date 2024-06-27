@@ -1,11 +1,11 @@
 export enum ObjectTypes {
-  FLOOR = 'floor',
+  FLAT = 'flat',
   HOUSE = 'house',
   ROOM = 'room',
 }
 
 export interface ObjectInfoVM {
   address: string;
-  type?: string;
-  countRoom?: number | string;
+  placement: string;
+  type: string;
 }

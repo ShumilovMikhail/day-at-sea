@@ -1,7 +1,13 @@
 @import 'variables';
+:host {
+  position: relative;
+  z-index: 3;
+}
+
 .select-container {
   position: relative;
   width: 100%;
+  z-index: 999;
 }
 .select {
   position: relative;
@@ -32,7 +38,7 @@
   width: 100%;
   position: absolute;
   top: 100%;
-  z-index: 2;
+  z-index: 3;
   background-color: $white;
   border: 1px solid $blueLight;
   border-bottom-left-radius: 5px;

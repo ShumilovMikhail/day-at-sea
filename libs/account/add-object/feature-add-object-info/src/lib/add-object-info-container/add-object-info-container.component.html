@@ -1,0 +1,39 @@
+<div class="add-object">
+  <h1>Добавить объект</h1>
+  <account-add-object-info-type-ui
+    [selectedType]="selectedType"
+    (selectTypeEvent)="onSelectType($event)"
+  ></account-add-object-info-type-ui>
+  @switch (selectedType) { @case ('flat') {
+  <account-add-object-info-flat-ui
+    [addressControl]="addressControl"
+    [placementControl]="placementControl"
+    (submitEvent)="onSubmit()"
+  ></account-add-object-info-flat-ui>
+  } @case ('house') {
+  <account-add-object-info-house-ui
+    [addressControl]="addressControl"
+    [typeControl]="typeControl"
+    [placementControl]="placementControl"
+    (submitEvent)="onSubmit()"
+  ></account-add-object-info-house-ui>
+  } @case ('room') {
+  <account-add-object-info-room-ui
+    [addressControl]="addressControl"
+    [typeControl]="typeControl"
+    [placementControl]="placementControl"
+    (submitEvent)="onSubmit()"
+  ></account-add-object-info-room-ui>
+  } @default {
+  <div class="info">
+    <p>
+      Уважаемый собственник! <br />
+      <br />
+      Добавляя новый объект, указывая адрес и прочие параметры объекта, будьте, пожалуйста, внимательны! <br />
+      <br />
+      По правилам СуткиНаМоре, после публикации объекта, изменить эти данные вы сможете только через обращение в
+      поддержку. Спасибо!
+    </p>
+  </div>
+  } }
+</div>

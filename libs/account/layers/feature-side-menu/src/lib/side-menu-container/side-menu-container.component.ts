@@ -7,7 +7,7 @@ import { SideMenuUiComponent } from '../side-menu-ui/side-menu-ui.component';
 import { SideMenuMobileDirective } from '../directives/side-menu-mobile.directive';
 import { FirstNamePipe } from '@utils/pipes';
 import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
-import { UiAddObjectSideMenuComponent } from '@add-object/ui-side-menu';
+import { UiAddObjectSideMenuComponent } from '@account/add-object/ui-side-menu';
 
 @Component({
   selector: 'account-side-menu-container',

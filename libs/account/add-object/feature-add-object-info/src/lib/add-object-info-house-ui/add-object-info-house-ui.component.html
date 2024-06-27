@@ -1,19 +1,19 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form>
   <div class="content">
     <ui-forms-select
-      [control]="form.get('type')! | formControl"
+      [control]="typeControl"
       [options]="typeOptions"
       [selectedOption]="typeOptions[0]"
       [label]="'Выберите тип жилья'"
     ></ui-forms-select>
     <ui-forms-address
-      [control]="form.get('address')! | formControl"
+      [control]="addressControl"
       [label]="'Укажите место'"
       [placeholder]="'Город'"
       [crossEnable]="true"
     ></ui-forms-address>
   </div>
-  <button type="submit" [disabled]="!form.valid || isLoading">
+  <button type="button" [disabled]="(!addressControl.valid && !typeControl.valid) || isLoading" (click)="onSubmit()">
     Продолжить оформление
     <div class="spinner-loader" *ngIf="isLoading"></div>
   </button>
