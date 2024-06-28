@@ -41,7 +41,7 @@ export class AddObjectInfrastructureUiComponent {
   public onDistanceChange(type: string, name: string, event: Event): void {
     const distance = (event.target as HTMLInputElement).value;
     const index = (this.form.get(type) as FormArray).controls.findIndex((item) => item.value.name === name);
-    if (!index) {
+    if (index === -1) {
       throw Error('Infrastructure item is undefined');
     }
     (this.form.get(type) as FormArray).at(index).patchValue({
@@ -61,7 +61,7 @@ export class AddObjectInfrastructureUiComponent {
 
   private removeInfrastructureItem(type: string, name: string): void {
     const index = (this.form.get(type) as FormArray).controls.findIndex((item) => item.value.name === name);
-    if (!index) {
+    if (index === -1) {
       throw Error('Infrastructure item is undefined');
     }
     (this.form.get(type) as FormArray).removeAt(index);
