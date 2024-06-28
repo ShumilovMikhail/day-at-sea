@@ -13,7 +13,7 @@
             <input
               type="checkbox"
               #infrastructureCheckbox
-              (change)="onCheckboxChange($event, 'placesDistance', place)"
+              (change)="onCheckboxChange(infrastructureCheckbox.checked, 'placesDistance', place, distance.value)"
             />
             <div></div>
             {{ place }}
@@ -23,7 +23,8 @@
               <input
                 type="text"
                 placeholder="Расстояние"
-                (change)="onDistanceChange('placesDistance', place, $event)"
+                (change)="onDistanceChange('placesDistance', place, distance.value)"
+                #distance
               />
             </div>
           </div>
@@ -41,13 +42,22 @@
           @for (leisure of data.leisureList; track $index) {
           <li class="leisure-item" accountInfrastructureCheckbox [checkbox]="infrastructureCheckbox">
             <label class="checkbox">
-              <input type="checkbox" #infrastructureCheckbox (change)="onCheckboxChange($event, 'leisure', leisure)" />
+              <input
+                type="checkbox"
+                #infrastructureCheckbox
+                (change)="onCheckboxChange(infrastructureCheckbox.checked, 'leisure', leisure, distance.value)"
+              />
               <div></div>
               {{ leisure }}
             </label>
             <div class="distance input-container">
               <div class="input-wrapper">
-                <input type="text" placeholder="Расстояние" (change)="onDistanceChange('leisure', leisure, $event)" />
+                <input
+                  type="text"
+                  placeholder="Расстояние"
+                  #distance
+                  (change)="onDistanceChange('leisure', leisure, distance.value)"
+                />
               </div>
             </div>
           </li>
@@ -66,7 +76,10 @@
               <input
                 type="checkbox"
                 #infrastructureCheckbox
-                (change)="onCheckboxChange($event, 'leisureWater', leisureWater)"
+                #distance
+                (change)="
+                  onCheckboxChange(infrastructureCheckbox.checked, 'leisureWater', leisureWater, distance.value)
+                "
               />
               <div></div>
               {{ leisureWater }}
@@ -76,7 +89,7 @@
                 <input
                   type="text"
                   placeholder="Расстояние"
-                  (change)="onDistanceChange('leisureWater', leisureWater, $event)"
+                  (change)="onDistanceChange('leisureWater', leisureWater, distance.value)"
                 />
               </div>
             </div>
@@ -96,7 +109,10 @@
               <input
                 type="checkbox"
                 #infrastructureCheckbox
-                (change)="onCheckboxChange($event, 'leisureActive', leisureActive)"
+                #distance
+                (change)="
+                  onCheckboxChange(infrastructureCheckbox.checked, 'leisureActive', leisureActive, distance.value)
+                "
               />
               <div></div>
               {{ leisureActive }}
@@ -106,7 +122,7 @@
                 <input
                   type="text"
                   placeholder="Расстояние"
-                  (change)="onDistanceChange('leisureActive', leisureActive, $event)"
+                  (change)="onDistanceChange('leisureActive', leisureActive, distance.value)"
                 />
               </div>
             </div>

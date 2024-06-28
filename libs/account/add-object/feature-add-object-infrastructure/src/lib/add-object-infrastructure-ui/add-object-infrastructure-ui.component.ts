@@ -29,17 +29,15 @@ export class AddObjectInfrastructureUiComponent {
   public readonly data = inject(InfrastructureDataService);
   @Input({ required: true }) form!: FormGroup<InfrastructureVM>;
 
-  public onCheckboxChange(event: Event, type: string, name: string): void {
-    const isChecked = (event.target as HTMLInputElement).checked;
+  public onCheckboxChange(isChecked: boolean, type: string, name: string, distance: string): void {
     if (isChecked) {
-      this.addInfrastructureItem(type, name);
+      this.addInfrastructureItem(type, name, distance);
     } else {
       this.removeInfrastructureItem(type, name);
     }
   }
 
-  public onDistanceChange(type: string, name: string, event: Event): void {
-    const distance = (event.target as HTMLInputElement).value;
+  public onDistanceChange(type: string, name: string, distance: string): void {
     const index = (this.form.get(type) as FormArray).controls.findIndex((item) => item.value.name === name);
     if (index === -1) {
       throw Error('Infrastructure item is undefined');
@@ -50,11 +48,11 @@ export class AddObjectInfrastructureUiComponent {
     });
   }
 
-  private addInfrastructureItem(type: string, name: string): void {
+  private addInfrastructureItem(type: string, name: string, distance: string): void {
     (this.form.get(type) as FormArray).push(
       new FormControl({
         name,
-        distance: 0,
+        distance,
       })
     );
   }

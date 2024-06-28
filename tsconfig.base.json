@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@account/add-object/feature-add-object": ["libs/account/add-object/feature-add-object/src/index.ts"],
+      "@account/add-object/feature-add-object-characteristics": [
+        "libs/account/add-object/feature-add-object-characteristics/src/index.ts"
+      ],
       "@account/add-object/feature-add-object-info": ["libs/account/add-object/feature-add-object-info/src/index.ts"],
       "@account/add-object/feature-add-object-infrastructure": [
         "libs/account/add-object/feature-add-object-infrastructure/src/index.ts"
