@@ -8,12 +8,25 @@
       </div>
       <ul class="place-list">
         @for (place of data.placesDistanceList; track $index) {
-        <li class="place-item">
+        <li class="place-item" accountInfrastructureCheckbox [checkbox]="infrastructureCheckbox">
           <label class="checkbox">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              #infrastructureCheckbox
+              (change)="onCheckboxChange($event, 'placesDistance', place)"
+            />
             <div></div>
             {{ place }}
           </label>
+          <div class="distance input-container">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                placeholder="Расстояние"
+                (change)="onDistanceChange('placesDistance', place, $event)"
+              />
+            </div>
+          </div>
         </li>
         }
       </ul>
@@ -26,12 +39,17 @@
         </div>
         <ul class="leisure-list">
           @for (leisure of data.leisureList; track $index) {
-          <li class="leisure-item">
+          <li class="leisure-item" accountInfrastructureCheckbox [checkbox]="infrastructureCheckbox">
             <label class="checkbox">
-              <input type="checkbox" />
+              <input type="checkbox" #infrastructureCheckbox />
               <div></div>
               {{ leisure }}
             </label>
+            <div class="distance input-container">
+              <div class="input-wrapper">
+                <input type="text" placeholder="Расстояние" />
+              </div>
+            </div>
           </li>
           }
         </ul>
@@ -43,12 +61,17 @@
         </div>
         <ul class="leisure-water-list">
           @for (leisureWater of data.leisureWaterList; track $index) {
-          <li class="leisure-water-item">
+          <li class="leisure-water-item" accountInfrastructureCheckbox [checkbox]="infrastructureCheckbox">
             <label class="checkbox">
-              <input type="checkbox" />
+              <input type="checkbox" #infrastructureCheckbox />
               <div></div>
               {{ leisureWater }}
             </label>
+            <div class="distance input-container">
+              <div class="input-wrapper">
+                <input type="text" placeholder="Расстояние" />
+              </div>
+            </div>
           </li>
           }
         </ul>
@@ -60,12 +83,17 @@
         </div>
         <ul class="leisure-active-list">
           @for (leisureActive of data.leisureActiveList; track $index) {
-          <li class="leisure-active-item">
+          <li class="leisure-active-item" accountInfrastructureCheckbox [checkbox]="infrastructureCheckbox">
             <label class="checkbox">
-              <input type="checkbox" />
+              <input type="checkbox" #infrastructureCheckbox />
               <div></div>
               {{ leisureActive }}
             </label>
+            <div class="distance input-container">
+              <div class="input-wrapper">
+                <input type="text" placeholder="Расстояние" />
+              </div>
+            </div>
           </li>
           }
         </ul>
@@ -74,11 +102,17 @@
     <div class="reaches">
       <div class="reaches__block">
         <h3>Как проехать на личном транспорте?</h3>
-        <textarea placeholder="Подробно опишите маршрут для проезда до места"></textarea>
+        <textarea
+          placeholder="Подробно опишите маршрут для проезда до места"
+          [formControl]="form.get('reachByPrivateTransport')! | formControl"
+        ></textarea>
       </div>
       <div class="reaches__block">
         <h3>Как проехать на общественном транспорте?</h3>
-        <textarea placeholder="Подробно опишите маршрут для проезда до места"></textarea>
+        <textarea
+          placeholder="Подробно опишите маршрут для проезда до места"
+          [formControl]="form.get('reachByPublicTransport')! | formControl"
+        ></textarea>
       </div>
     </div>
     <div class="buttons-container">
