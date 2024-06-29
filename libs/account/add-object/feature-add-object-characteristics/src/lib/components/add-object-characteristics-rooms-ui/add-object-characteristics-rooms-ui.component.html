@@ -1,0 +1,95 @@
+<div class="rooms">
+  <h3>Количество и тип помещений</h3>
+  <form>
+    <fieldset class="info">
+      <ui-forms-counter
+        class="rooms-count"
+        [control]="form.roomCount | formControl"
+        [count]="0"
+        [maxCount]="10"
+        [label]="'Количество комнат'"
+      ></ui-forms-counter>
+      <ui-forms-select
+        class="bedrooms-count"
+        [control]="form.bedroomCount"
+        [options]="['Студия', '1 спальня', '2 спальни', '3 спальни', '4 спальни', '5 спален']"
+        [label]="'Количество изолированных спален'"
+        [selectedOption]="'1 спальня'"
+      ></ui-forms-select>
+      <div class="guests">
+        <ui-forms-counter
+          #guestCounter
+          [control]="form.guestCount | formControl"
+          [count]="0"
+          [maxCount]="4"
+          [disabled]="guestCounterDisabled"
+          [label]="'Количество гостей'"
+        ></ui-forms-counter>
+        <label class="checkbox">
+          <input type="checkbox" #guestCheckbox (change)="onCheckboxClick(guestCheckbox.checked)" />
+          <div></div>
+          5 и более
+        </label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <div class="bedrooms">
+        <div class="bedrooms-list">
+          @for (bedroom of bedrooms.controls; track bedroom; let i = $index) {
+          <div class="room-item">
+            <ui-forms-select
+              [control]="bedroom.get('name')! | formControl"
+              [options]="[
+                'Односпальная кровать',
+                'Двуспальная кровать',
+                'Двуспальная диван-кровать',
+                'Двуспальная широкая (king-size)',
+                'Особо широкая двуспальная (super-king-size)',
+                'Двухъярусная кровать',
+                'Диван-кровать'
+              ]"
+              [label]="'Тип кровати'"
+              [selectedOption]="'1 спальня'"
+            ></ui-forms-select>
+            <ui-forms-counter
+              [control]="bedroom.get('count')! | formControl"
+              [count]="0"
+              [maxCount]="10"
+              [label]="'Количество кроватей'"
+            ></ui-forms-counter>
+            <div class="cross" (click)="onRemoveBedroom(i)"></div>
+          </div>
+          }
+        </div>
+        <button type="button" (click)="onAddBedroom()">+ Добавить кровать</button>
+      </div>
+      <div class="bathrooms">
+        @for (bathroom of bathrooms.controls; track bathroom; let i = $index) {
+        <div class="room-item">
+          <ui-forms-select
+            [control]="bathroom.get('name')! | formControl"
+            [options]="['Ванная комната совмещенная с туалетом', 'Ванная комната без туалета', 'Отдельный туалет']"
+            [label]="'Тип ванной комнаты/туалета'"
+            [selectedOption]="'Ванная комната совмещенная с туалетом'"
+          ></ui-forms-select>
+          <ui-forms-counter
+            [control]="bathroom.get('count')! | formControl"
+            [count]="0"
+            [maxCount]="10"
+            [label]="'Количество комнат с ванной'"
+          ></ui-forms-counter>
+          <div class="cross" (click)="onRemoveBathroom(i)"></div>
+        </div>
+        }
+        <button type="button" (click)="onAddBathroom()">+ Добавить санузел</button>
+      </div>
+      <ui-forms-select
+        class="water-supply"
+        [control]="form.waterSupplyType"
+        [options]="['Центральное водоснабжение', 'Автономное водоснабжение']"
+        [label]="'Горячее водоснабжение'"
+        [selectedOption]="'Центральное водоснабжение'"
+      ></ui-forms-select>
+    </fieldset>
+  </form>
+</div>

@@ -18,6 +18,7 @@ export class UiFormsSelectComponent implements OnInit {
   @Input({ required: true }) options: string[] | null = null;
   @Input() selectedOption: string | null = null;
   @Input() label: string | undefined;
+  @Input() disabled = false;
   public isSelecting = false;
 
   ngOnInit(): void {
@@ -25,7 +26,9 @@ export class UiFormsSelectComponent implements OnInit {
   }
 
   public onSelectClick(): void {
-    this.isSelecting = !this.isSelecting;
+    if (!this.disabled) {
+      this.isSelecting = !this.isSelecting;
+    }
   }
 
   public onSelectOption(option: string): void {

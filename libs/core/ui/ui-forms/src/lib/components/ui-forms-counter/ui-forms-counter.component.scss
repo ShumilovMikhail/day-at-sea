@@ -1,0 +1,56 @@
+@import 'variables';
+
+.label {
+  font-size: 14px;
+}
+
+.counter {
+  display: flex;
+  width: 150px;
+  align-items: center;
+  border: 1px solid $blueLight;
+  border-radius: 5px;
+  justify-content: space-between;
+  background-color: $white;
+  transition: 0.2s all;
+  button {
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s all;
+    &:first-child {
+      position: relative;
+      border-right: 1px solid $blueLight;
+    }
+    &:last-child {
+      border-left: 1px solid $blueLight;
+    }
+  }
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    font-size: 18px;
+    transition: 0.2s all;
+  }
+  &.disabled {
+    border: 1px solid $greyBorder;
+    button {
+      &:first-child {
+        color: $grey;
+        border-right: 1px solid $greyBorder;
+      }
+      &:last-child {
+        color: $grey;
+        border-left: 1px solid $greyBorder;
+      }
+    }
+    div {
+      color: $grey;
+    }
+  }
+}

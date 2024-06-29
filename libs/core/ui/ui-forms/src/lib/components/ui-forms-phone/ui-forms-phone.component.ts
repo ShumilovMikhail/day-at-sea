@@ -19,12 +19,15 @@ export class UiFormsPhoneComponent {
   @Input() placeholder: string | undefined;
   @Input() errors: string[] | undefined;
   @Input() crossEnable = false;
+  @Input() disabled = false;
 
   public onFocus(): void {
     this.control.markAsUntouched();
   }
 
   onReset() {
-    this.control.patchValue('');
+    if (!this.disabled) {
+      this.control.patchValue('');
+    }
   }
 }

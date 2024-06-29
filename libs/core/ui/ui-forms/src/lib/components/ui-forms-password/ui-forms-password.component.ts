@@ -16,10 +16,13 @@ export class UiFormsPasswordComponent {
   @Input() required: boolean | undefined;
   @Input() placeholder: string | undefined;
   @Input() errors: string[] | undefined;
+  @Input() disabled = false;
   public passwordHide = true;
 
   public onPasswordToggle(): void {
-    this.passwordHide = !this.passwordHide;
+    if (!this.disabled) {
+      this.passwordHide = !this.passwordHide;
+    }
   }
   public onFocus(): void {
     this.control.markAsUntouched();

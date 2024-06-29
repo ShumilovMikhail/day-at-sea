@@ -31,6 +31,7 @@ export class UiFormsAddressComponent implements OnInit {
   @Input() placeholder: string | undefined;
   @Input() errors: string[] | undefined;
   @Input() crossEnable = false;
+  @Input() disabled = false;
   private readonly changeDetectionRef = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
   private readonly addressService = inject(DadataAddressService);
@@ -48,7 +49,9 @@ export class UiFormsAddressComponent implements OnInit {
   }
 
   public onReset(): void {
-    this.control.patchValue('');
+    if (!this.disabled) {
+      this.control.patchValue('');
+    }
   }
 
   public onSearch(): void {

@@ -49,10 +49,8 @@ export class AddObjectContainerComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params: Params) => {
       this.step = params['step'];
-      console.log(params['step']);
       this.changeDetectorRef.detectChanges();
     });
-    console.log(1);
 
     this.form.valueChanges.subscribe((value) => {
       console.log(value);

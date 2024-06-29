@@ -19,6 +19,17 @@
           [placementControl]="placementControl"
         ></account-add-object-characteristics-general-parameters-ui>
       </ng-content>
+      <ng-content
+        *ngrxLet="{
+          roomCount: form.get('roomCount')! | formControl,
+          bedroomCount: form.get('bedroomCount')! | formControl,
+          guestCount: form.get('guestCount')! | formControl,
+          rooms: form.get('rooms')! | formGroup,
+          waterSupplyType: form.get('waterSupplyType')! | formControl,
+        } as roomsForm"
+      >
+        <account-add-object-characteristics-rooms-ui [form]="roomsForm"></account-add-object-characteristics-rooms-ui>
+      </ng-content>
     </div>
     <div class="description"></div>
   </div>

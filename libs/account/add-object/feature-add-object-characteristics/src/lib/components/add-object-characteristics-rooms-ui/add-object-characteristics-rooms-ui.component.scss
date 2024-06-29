@@ -1,0 +1,127 @@
+@import 'variables';
+@import 'mixins';
+
+.rooms {
+  form {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+.info {
+  display: flex;
+  gap: 10px;
+  .bedrooms-count {
+    width: 300px;
+  }
+  .guests {
+    display: flex;
+    align-items: end;
+    gap: 22px;
+    .checkbox {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.bedrooms,
+.bathrooms {
+  button {
+    background-color: transparent;
+    border: none;
+    color: $primary;
+    cursor: pointer;
+    transition: 0.2s all ease-in;
+    &:hover {
+      color: $primaryHover;
+    }
+  }
+}
+
+.room-item {
+  display: flex;
+  width: fit-content;
+  gap: 10px;
+  position: relative;
+  align-items: center;
+  ui-forms-select {
+    width: 460px;
+    display: block;
+  }
+
+  .cross {
+    bottom: 5px;
+    position: absolute;
+    right: -30px;
+  }
+}
+
+.water-supply {
+  margin-top: 10px;
+  display: block;
+  width: 620px;
+}
+
+@media (max-width: 480px) {
+  .rooms {
+    form {
+      margin-top: 12px;
+      gap: 40px;
+    }
+  }
+
+  .info {
+    flex-direction: column;
+    gap: 20px;
+    .bedrooms-count {
+      width: 100%;
+    }
+    .guests {
+      justify-content: space-between;
+    }
+  }
+
+  .bedrooms,
+  .bathrooms {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    button {
+      background-color: transparent;
+      border: 1px solid $primary;
+      color: $primary;
+      cursor: pointer;
+      transition: 0.2s all ease-in;
+      &:hover {
+        color: $white;
+      }
+      @include button-secondary();
+      padding: 8px 28px;
+      width: 100%;
+    }
+  }
+
+  .room-item {
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: end;
+    ui-forms-select {
+      width: 100%;
+    }
+
+    .cross {
+      position: static;
+      right: 0;
+      bottom: 0;
+      margin-bottom: 5px;
+    }
+  }
+
+  .water-supply {
+    display: block;
+    width: 100%;
+  }
+}

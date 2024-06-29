@@ -31,8 +31,8 @@ export class AddObjectFormService {
       bedroomCount: [''],
       guestCount: [''],
       rooms: this.fb.nonNullable.group({
-        bedrooms: this.fb.array([] as FormControl<RoomItem>[]),
-        bathrooms: this.fb.array([] as FormControl<RoomItem>[]),
+        bedrooms: this.fb.array([] as FormGroup<RoomItem>[]),
+        bathrooms: this.fb.array([] as FormGroup<RoomItem>[]),
       }),
       waterSupplyType: [''],
       amenities: this.fb.array([] as FormControl<string>[]),

@@ -8,6 +8,16 @@
   position: relative;
   width: 100%;
   z-index: 3;
+  &.disabled {
+    .select {
+      border: 1px solid $greyBorder;
+      .arrow {
+        svg {
+          fill: $greyBorder;
+        }
+      }
+    }
+  }
 }
 .select {
   position: relative;

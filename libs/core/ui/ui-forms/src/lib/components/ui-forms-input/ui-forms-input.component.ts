@@ -26,6 +26,7 @@ export class UiFormsInputComponent implements OnInit {
   @Input() placeholder: string | undefined;
   @Input() errors: string[] | undefined;
   @Input() crossEnable = false;
+  @Input() disabled = false;
   private readonly changeDetectionRef = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -40,6 +41,8 @@ export class UiFormsInputComponent implements OnInit {
   }
 
   onReset() {
-    this.control.patchValue('');
+    if (!this.disabled) {
+      this.control.patchValue('');
+    }
   }
 }

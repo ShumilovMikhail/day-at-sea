@@ -10,7 +10,8 @@
   <div
     class="input-wrapper"
     [ngClass]="{
-      'cross-enable': crossEnable
+      'cross-enable': crossEnable,
+      disabled: disabled
     }"
   >
     <input
@@ -19,6 +20,7 @@
         error: control.errors && control.touched
       }"
       [formControl]="control"
+      [readonly]="disabled"
       [placeholder]="placeholder ?? ''"
       (focus)="onFocus()"
     />

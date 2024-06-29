@@ -37,8 +37,8 @@ export interface ObjectFormCharacteristics {
   bedroomCount: FormControl<string>;
   guestCount: FormControl<string>;
   rooms: FormGroup<{
-    bedrooms: FormArray<FormControl<RoomItem>>;
-    bathrooms: FormArray<FormControl<RoomItem>>;
+    bedrooms: FormArray<FormGroup<RoomItem>>;
+    bathrooms: FormArray<FormGroup<RoomItem>>;
   }>;
   waterSupplyType: FormControl<string>;
   amenities: FormArray<FormControl<string>>;
@@ -46,8 +46,8 @@ export interface ObjectFormCharacteristics {
 }
 
 export interface RoomItem {
-  name: string;
-  count: string;
+  name: FormControl<string>;
+  count: FormControl<string>;
 }
 
 export interface ObjectFormRules {

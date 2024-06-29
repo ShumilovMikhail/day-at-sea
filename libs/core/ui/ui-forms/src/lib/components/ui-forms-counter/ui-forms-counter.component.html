@@ -1,0 +1,17 @@
+<div class="input-container">
+  @if (label) {
+  <label class="label">{{ label }}</label>
+  }
+  <div class="input-wrapper">
+    <div class="counter" [ngClass]="{ disabled: disabled }">
+      <button type="button" (click)="onReduce()">-</button>
+      <div>{{ count }}</div>
+      <button type="button" (click)="onAdd()">+</button>
+    </div>
+  </div>
+  <ul class="errors">
+    @if (errors && control.touched) { @for (error of errors; track error) { @if (error !== '') {
+    <li>{{ error }}</li>
+    } } }
+  </ul>
+</div>

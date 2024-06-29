@@ -72,6 +72,53 @@ fieldset {
   padding: 0;
 }
 
+.cross {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  transform: translate(0, -50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: 2px;
+    height: 10px;
+    background-color: $black;
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 40%;
+    transition: 0.2s opacity ease-in;
+  }
+  &::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: 2px;
+    height: 10px;
+    background-color: $black;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    opacity: 40%;
+    transition: 0.2s opacity ease-in;
+  }
+  &:hover {
+    &::after {
+      opacity: 1;
+    }
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
 .input-container {
   display: flex;
   flex-direction: column;
@@ -107,71 +154,34 @@ fieldset {
       display: none;
       top: 50%;
       right: 15px;
-      width: 20px;
-      height: 20px;
-      transform: translate(0, -50%);
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      &::after {
-        content: '';
-        display: inline-block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-
-        width: 2px;
-        height: 10px;
-        background-color: $black;
-        transform: translate(-50%, -50%) rotate(45deg);
-        opacity: 40%;
-        transition: 0.2s opacity ease-in;
-      }
-      &::before {
-        content: '';
-        display: inline-block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-
-        width: 2px;
-        height: 10px;
-        background-color: $black;
-        transform: translate(-50%, -50%) rotate(-45deg);
-        opacity: 40%;
-        transition: 0.2s opacity ease-in;
-      }
-      &:hover {
-        &::after {
-          opacity: 1;
-        }
-        &::before {
-          opacity: 1;
-        }
-      }
     }
   }
-  .cross-enable {
+  &.disabled {
     input {
-      padding: 11px 15px;
-      padding-right: 35px;
-    }
-    .cross {
-      display: block;
+      border: 1px solid $greyBorder;
     }
   }
+}
+.cross-enable {
+  input {
+    padding: 11px 15px;
+    padding-right: 35px;
+  }
+  .cross {
+    display: block;
+  }
+}
 
-  .errors {
-    margin-top: 2px;
-    margin-left: 5px;
-    list-style: inside;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    li {
-      color: $red;
-      font-size: 12px;
-    }
+.errors {
+  margin-top: 2px;
+  margin-left: 5px;
+  list-style: inside;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  li {
+    color: $red;
+    font-size: 12px;
   }
 }
 
