@@ -7,7 +7,7 @@
 .select-container {
   position: relative;
   width: 100%;
-  z-index: 999;
+  z-index: 3;
 }
 .select {
   position: relative;
@@ -38,7 +38,7 @@
   width: 100%;
   position: absolute;
   top: 100%;
-  z-index: 3;
+  z-index: 4;
   background-color: $white;
   border: 1px solid $blueLight;
   border-bottom-left-radius: 5px;
@@ -82,4 +82,8 @@
   .options {
     display: block;
   }
+}
+
+.selecting {
+  z-index: 5;
 }

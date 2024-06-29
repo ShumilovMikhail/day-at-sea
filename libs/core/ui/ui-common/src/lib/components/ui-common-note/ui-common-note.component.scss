@@ -1,0 +1,51 @@
+:host {
+  display: inline-block;
+}
+
+.note-container {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+.note-image__wrapper {
+  width: 16px;
+  height: 16px;
+  padding: 3px 5px;
+  background-color: #ecf9fc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+  &:hover {
+    background-color: #ecf9fcd3;
+    & + .note {
+      opacity: 1;
+    }
+  }
+}
+
+.note {
+  opacity: 0;
+  z-index: 4;
+  top: calc(-100% + -26px);
+  left: -12px;
+  position: absolute;
+  width: 155px;
+  padding: 2px 7px;
+  font-size: 12px;
+  background-color: #ecf9fc;
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    bottom: -5px;
+    left: 14px;
+    background-color: #ecf9fcd3;
+  }
+}

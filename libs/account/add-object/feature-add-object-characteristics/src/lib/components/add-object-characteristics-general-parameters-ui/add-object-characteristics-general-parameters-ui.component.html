@@ -1,0 +1,46 @@
+<div class="general-parameters">
+  <h3>Общие параметры</h3>
+  <form>
+    <fieldset>
+      <ui-forms-select
+        class="placement-type"
+        [control]="form.placementType"
+        [options]="placementList"
+        [selectedOption]="form.placementType.value"
+        [label]="'Тип жилья'"
+      ></ui-forms-select>
+      <ui-forms-input class="square" [control]="form.square" [label]="'Площадь, м2'"></ui-forms-input>
+    </fieldset>
+    <fieldset class="driveway">
+      <ui-forms-input class="floor" [control]="form.floor" [label]="'Этаж'"></ui-forms-input>
+      <ui-forms-input class="floor-count" [control]="form.floorCount" [label]="'Этажей в доме'"></ui-forms-input>
+      <label class="checkbox lift">
+        <input type="checkbox" [formControl]="form.lift" />
+        <div></div>
+        Лифт
+      </label>
+      <div class="attic-container">
+        <label class="checkbox attic">
+          <input type="checkbox" [formControl]="form.attic" />
+          <div></div>
+          Мансарда
+        </label>
+        <ui-common-note></ui-common-note>
+      </div>
+    </fieldset>
+    <fieldset>
+      <ui-forms-select
+        class="kitchen"
+        [control]="form.kitchen"
+        [options]="['без кухни', 'отдельная кухня', 'кухня-гостинная', 'кухонная зона']"
+        [label]="'Параметры кухни'"
+      ></ui-forms-select>
+      <ui-forms-select
+        class="repair"
+        [control]="form.repair"
+        [options]="['кометический ремонт', 'евроремнот', 'дизайнерский ремонт']"
+        [label]="'Параметры кухни'"
+      ></ui-forms-select>
+    </fieldset>
+  </form>
+</div>

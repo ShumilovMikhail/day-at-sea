@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LetDirective } from '@ngrx/component';
 
 import { InfrastructureDataService } from './services/infrastructure-data.service';
 import { AccordionDirective } from '@utils/directives';
 import { UiFormsInputComponent } from '@ui/forms';
 import { InfrastructureCheckboxDirective } from './directives/infrastructure-checkbox.directive';
-import { InfrastructureVM } from '../types/infrastructure.models';
+import { InfrastructureItemVM, InfrastructureVM } from '../types/infrastructure.models';
 import { FormControlPipe } from '@utils/pipes';
 
 @Component({
@@ -19,6 +20,7 @@ import { FormControlPipe } from '@utils/pipes';
     InfrastructureCheckboxDirective,
     ReactiveFormsModule,
     FormControlPipe,
+    LetDirective,
   ],
   providers: [InfrastructureDataService],
   templateUrl: './add-object-infrastructure-ui.component.html',
@@ -28,6 +30,11 @@ import { FormControlPipe } from '@utils/pipes';
 export class AddObjectInfrastructureUiComponent {
   public readonly data = inject(InfrastructureDataService);
   @Input({ required: true }) form!: FormGroup<InfrastructureVM>;
+
+  public findCheckboxControl(type: string, name: string): InfrastructureItemVM | null {
+    const control = (this.form.get(type) as FormArray).controls.find((item) => item.value.name === name);
+    return control ? control.value : null;
+  }
 
   public onCheckboxChange(isChecked: boolean, type: string, name: string, distance: string): void {
     if (isChecked) {

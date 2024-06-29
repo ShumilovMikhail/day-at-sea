@@ -1,0 +1,26 @@
+<div class="characteristics">
+  <h1>Характеристики</h1>
+  <div>
+    <div class="parametrs">
+      <ng-content
+        *ngrxLet="{
+          placementType: form.get('placementType')! | formControl,
+          square: form.get('square')! | formControl,
+          floor: form.get('floor')! | formControl,
+          floorCount: form.get('floorCount')! | formControl,
+          lift: form.get('lift')! | formControl,
+          attic: form.get('attic')! | formControl,
+          kitchen: form.get('kitchen')! | formControl,
+          repair: form.get('repair')! | formControl,
+        } as generalParametersForm"
+      >
+        <account-add-object-characteristics-general-parameters-ui
+          [form]="generalParametersForm"
+          [placementControl]="placementControl"
+        ></account-add-object-characteristics-general-parameters-ui>
+      </ng-content>
+    </div>
+    <div class="description"></div>
+  </div>
+  <div class="amenities"></div>
+</div>

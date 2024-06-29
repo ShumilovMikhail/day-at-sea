@@ -1,0 +1,90 @@
+.general-parameters {
+  form {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    fieldset {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .driveway {
+      align-items: end;
+    }
+  }
+}
+
+ui-forms-input,
+ui-forms-select {
+  height: 64px;
+}
+
+.placement-type {
+  width: 400px;
+}
+
+.square {
+  width: 210px;
+}
+
+.floor,
+.floor-count {
+  width: 195px;
+}
+
+.lift,
+.attic-container {
+  margin-bottom: 15px;
+}
+
+.attic-container {
+  display: flex;
+  gap: 6px;
+}
+
+.kitchen,
+.repair {
+  width: 305px;
+}
+
+@media (max-width: 480px) {
+  .general-parameters {
+    form {
+      gap: 10px;
+      fieldset {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .driveway {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: start;
+      }
+    }
+  }
+
+  .placement-type,
+  .square,
+  .kitchen,
+  .repair {
+    width: 100%;
+  }
+
+  .floor,
+  .floor-count {
+    width: calc(50% - 5px);
+    max-width: 50%;
+  }
+
+  .lift,
+  .attic-container {
+    margin-bottom: 0px;
+  }
+
+  .attic-container {
+    ui-common-note {
+      display: none;
+    }
+  }
+}

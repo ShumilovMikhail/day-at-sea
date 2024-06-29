@@ -8,27 +8,38 @@
       </div>
       <ul class="place-list">
         @for (place of data.placesDistanceList; track $index) {
-        <li class="place-item" accountInfrastructureCheckbox [checkbox]="infrastructureCheckbox">
-          <label class="checkbox">
-            <input
-              type="checkbox"
-              #infrastructureCheckbox
-              (change)="onCheckboxChange(infrastructureCheckbox.checked, 'placesDistance', place, distance.value)"
-            />
-            <div></div>
-            {{ place }}
-          </label>
-          <div class="distance input-container">
-            <div class="input-wrapper">
+        <ng-container *ngrxLet="findCheckboxControl('placesDistance', place) as controlData">
+          <li
+            class="place-item"
+            accountInfrastructureCheckbox
+            [checkbox]="infrastructureCheckbox"
+            [ngClass]="{
+              active: controlData
+            }"
+          >
+            <label class="checkbox">
               <input
-                type="text"
-                placeholder="Расстояние"
-                (change)="onDistanceChange('placesDistance', place, distance.value)"
-                #distance
+                type="checkbox"
+                [checked]="!!controlData"
+                #infrastructureCheckbox
+                (change)="onCheckboxChange(infrastructureCheckbox.checked, 'placesDistance', place, distance.value)"
               />
+              <div></div>
+              {{ place }}
+            </label>
+            <div class="distance input-container">
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  [value]="controlData ? controlData.distance : null"
+                  placeholder="Расстояние"
+                  (change)="onDistanceChange('placesDistance', place, distance.value)"
+                  #distance
+                />
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+        </ng-container>
         }
       </ul>
     </div>
@@ -40,27 +51,38 @@
         </div>
         <ul class="leisure-list">
           @for (leisure of data.leisureList; track $index) {
-          <li class="leisure-item" accountInfrastructureCheckbox [checkbox]="infrastructureCheckbox">
-            <label class="checkbox">
-              <input
-                type="checkbox"
-                #infrastructureCheckbox
-                (change)="onCheckboxChange(infrastructureCheckbox.checked, 'leisure', leisure, distance.value)"
-              />
-              <div></div>
-              {{ leisure }}
-            </label>
-            <div class="distance input-container">
-              <div class="input-wrapper">
+          <ng-container *ngrxLet="findCheckboxControl('leisure', leisure) as controlData">
+            <li
+              class="leisure-item"
+              accountInfrastructureCheckbox
+              [checkbox]="infrastructureCheckbox"
+              [ngClass]="{
+                active: controlData
+              }"
+            >
+              <label class="checkbox">
                 <input
-                  type="text"
-                  placeholder="Расстояние"
-                  #distance
-                  (change)="onDistanceChange('leisure', leisure, distance.value)"
+                  type="checkbox"
+                  [checked]="!!controlData"
+                  #infrastructureCheckbox
+                  (change)="onCheckboxChange(infrastructureCheckbox.checked, 'leisure', leisure, distance.value)"
                 />
+                <div></div>
+                {{ leisure }}
+              </label>
+              <div class="distance input-container">
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    [value]="controlData ? controlData.distance : null"
+                    placeholder="Расстояние"
+                    #distance
+                    (change)="onDistanceChange('leisure', leisure, distance.value)"
+                  />
+                </div>
               </div>
-            </div>
-          </li>
+            </li>
+          </ng-container>
           }
         </ul>
       </div>
@@ -71,29 +93,40 @@
         </div>
         <ul class="leisure-water-list">
           @for (leisureWater of data.leisureWaterList; track $index) {
-          <li class="leisure-water-item" accountInfrastructureCheckbox [checkbox]="infrastructureCheckbox">
-            <label class="checkbox">
-              <input
-                type="checkbox"
-                #infrastructureCheckbox
-                #distance
-                (change)="
-                  onCheckboxChange(infrastructureCheckbox.checked, 'leisureWater', leisureWater, distance.value)
-                "
-              />
-              <div></div>
-              {{ leisureWater }}
-            </label>
-            <div class="distance input-container">
-              <div class="input-wrapper">
+          <ng-container *ngrxLet="findCheckboxControl('leisureWater', leisureWater) as controlData">
+            <li
+              class="leisure-water-item"
+              accountInfrastructureCheckbox
+              [checkbox]="infrastructureCheckbox"
+              [ngClass]="{
+                active: controlData
+              }"
+            >
+              <label class="checkbox">
                 <input
-                  type="text"
-                  placeholder="Расстояние"
-                  (change)="onDistanceChange('leisureWater', leisureWater, distance.value)"
+                  type="checkbox"
+                  [checked]="!!controlData"
+                  #infrastructureCheckbox
+                  (change)="
+                    onCheckboxChange(infrastructureCheckbox.checked, 'leisureWater', leisureWater, distance.value)
+                  "
                 />
+                <div></div>
+                {{ leisureWater }}
+              </label>
+              <div class="distance input-container">
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    [value]="controlData ? controlData.distance : null"
+                    #distance
+                    placeholder="Расстояние"
+                    (change)="onDistanceChange('leisureWater', leisureWater, distance.value)"
+                  />
+                </div>
               </div>
-            </div>
-          </li>
+            </li>
+          </ng-container>
           }
         </ul>
       </div>
@@ -104,29 +137,40 @@
         </div>
         <ul class="leisure-active-list">
           @for (leisureActive of data.leisureActiveList; track $index) {
-          <li class="leisure-active-item" accountInfrastructureCheckbox [checkbox]="infrastructureCheckbox">
-            <label class="checkbox">
-              <input
-                type="checkbox"
-                #infrastructureCheckbox
-                #distance
-                (change)="
-                  onCheckboxChange(infrastructureCheckbox.checked, 'leisureActive', leisureActive, distance.value)
-                "
-              />
-              <div></div>
-              {{ leisureActive }}
-            </label>
-            <div class="distance input-container">
-              <div class="input-wrapper">
+          <ng-container *ngrxLet="findCheckboxControl('leisureActive', leisureActive) as controlData">
+            <li
+              class="leisure-active-item"
+              accountInfrastructureCheckbox
+              [checkbox]="infrastructureCheckbox"
+              [ngClass]="{
+                active: controlData
+              }"
+            >
+              <label class="checkbox">
                 <input
-                  type="text"
-                  placeholder="Расстояние"
-                  (change)="onDistanceChange('leisureActive', leisureActive, distance.value)"
+                  type="checkbox"
+                  [checked]="!!controlData"
+                  #infrastructureCheckbox
+                  (change)="
+                    onCheckboxChange(infrastructureCheckbox.checked, 'leisureActive', leisureActive, distance.value)
+                  "
                 />
+                <div></div>
+                {{ leisureActive }}
+              </label>
+              <div class="distance input-container">
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    [value]="controlData ? controlData.distance : null"
+                    #distance
+                    placeholder="Расстояние"
+                    (change)="onDistanceChange('leisureActive', leisureActive, distance.value)"
+                  />
+                </div>
               </div>
-            </div>
-          </li>
+            </li>
+          </ng-container>
           }
         </ul>
       </div>

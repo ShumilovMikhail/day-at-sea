@@ -2,10 +2,13 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { FormControl } from '@angular/forms';
 
+import { SelectDirective } from '../../directives/select.directive';
+import { ClickOutsideDirective } from '@utils/directives';
+
 @Component({
   selector: 'ui-forms-select',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SelectDirective, ClickOutsideDirective],
   templateUrl: './ui-forms-select.component.html',
   styleUrl: './ui-forms-select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,5 +35,9 @@ export class UiFormsSelectComponent implements OnInit {
     this.selectedOption = option;
     this.isSelecting = false;
     this.control.patchValue(option);
+  }
+
+  public onBlur(): void {
+    this.isSelecting = false;
   }
 }

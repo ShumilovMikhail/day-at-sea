@@ -1,4 +1,4 @@
-<div class="input-container">
+<div class="input-container" uiFormsSelect [isSelecting]="isSelecting" [options]="options">
   @if (label) {
   <label>{{ label }}</label>
   }
@@ -9,6 +9,8 @@
         [ngClass]="{
           active: isSelecting && options
         }"
+        utilsClickOutside
+        (clickOutsideEvent)="onBlur()"
       >
         <div class="select">
           {{ selectedOption }}

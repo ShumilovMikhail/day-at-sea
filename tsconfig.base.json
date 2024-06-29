@@ -24,6 +24,7 @@
         "libs/account/add-object/feature-add-object-infrastructure/src/index.ts"
       ],
       "@account/add-object/ui-side-menu": ["libs/account/add-object/ui-add-object-side-menu/src/index.ts"],
+      "@account/add-object/util": ["libs/account/add-object/util-add-object/src/index.ts"],
       "@account/data-access-agency": ["libs/account/data-access-agency/src/index.ts"],
       "@account/layers/header": ["libs/account/layers/feature-header/src/index.ts"],
       "@account/layers/side-menu": ["libs/account/layers/feature-side-menu/src/index.ts"],
@@ -40,6 +41,7 @@
       "@dadata/data-access-address": ["libs/core/dadata/data-access-address/src/index.ts"],
       "@http": ["libs/core/http/src/index.ts"],
       "@layers": ["libs/core/layers/src/index.ts"],
+      "@ui/common": ["libs/core/ui/ui-common/src/index.ts"],
       "@ui/forms": ["libs/core/ui/ui-forms/src/index.ts"],
       "@ui/indicators": ["libs/core/ui/ui-indicators/src/index.ts"],
       "@user/data-access": ["libs/account/data-access-user/src/index.ts"],
