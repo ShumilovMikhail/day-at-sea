@@ -1,6 +1,6 @@
 <div class="infrastructure">
   <h1>Инфраструктура</h1>
-  <form>
+  <form [formGroup]="form" (ngSubmit)="onNextClick()">
     <div class="places checkboxes-block" utilsAccordion [buttonToggle]="placesChangeButton">
       <div class="checkboxes-block__header">
         <h3>Расстояние до мест</h3>

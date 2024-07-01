@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
@@ -30,6 +30,11 @@ import { FormControlPipe } from '@utils/pipes';
 export class AddObjectInfrastructureUiComponent {
   public readonly data = inject(InfrastructureDataService);
   @Input({ required: true }) form!: FormGroup<InfrastructureVM>;
+  @Output() nextEvent = new EventEmitter<void>();
+
+  public onNextClick(): void {
+    this.nextEvent.emit();
+  }
 
   public findCheckboxControl(type: string, name: string): InfrastructureItemVM | null {
     const control = (this.form.get(type) as FormArray).controls.find((item) => item.value.name === name);

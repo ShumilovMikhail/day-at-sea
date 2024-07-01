@@ -1,7 +1,7 @@
 <div class="characteristics">
   <h1>Характеристики</h1>
-  <div>
-    <div class="parametrs">
+  <div class="content">
+    <div class="parameters">
       <ng-content
         *ngrxLet="{
           placementType: form.get('placementType')! | formControl,
@@ -30,11 +30,20 @@
       >
         <account-add-object-characteristics-rooms-ui [form]="roomsForm"></account-add-object-characteristics-rooms-ui>
       </ng-content>
-      <account-add-object-characteristics-amenities-ui
-        [form]="form.get('amenities')! | formGroup"
-      ></account-add-object-characteristics-amenities-ui>
     </div>
-    <div class="description"></div>
+    <div class="description">
+      <account-add-object-characteristics-description-ui
+        [descriptionControl]="form.get('description')! | formControl"
+      ></account-add-object-characteristics-description-ui>
+    </div>
   </div>
-  <div class="amenities"></div>
+  <div class="amenities">
+    <account-add-object-characteristics-amenities-ui
+      [form]="form.get('amenities')! | formGroup"
+    ></account-add-object-characteristics-amenities-ui>
+  </div>
+  <div class="buttons-container">
+    <button class="save-button" type="button">Сохранить</button>
+    <button class="next-button" type="button" (click)="onNextButtonClick()">Продолжить</button>
+  </div>
 </div>
