@@ -17,8 +17,15 @@ export interface CharacteristicsVM {
     bathrooms: FormArray<FormGroup<RoomItemVM>>;
   }>;
   waterSupplyType: FormControl<string>;
-  amenities: FormArray<FormControl<string>>;
+  amenities: FormGroup<AmenitiesVM>;
   description: FormControl<string>;
+}
+
+export interface AmenitiesVM {
+  flat: FormArray<FormControl<string>>;
+  bathroom: FormArray<FormControl<string>>;
+  kitchen: FormArray<FormControl<string>>;
+  children: FormArray<FormControl<string>>;
 }
 
 export interface RoomItemVM {

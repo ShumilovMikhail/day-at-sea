@@ -7,6 +7,7 @@ import { AddObjectCharacteristicsGeneralParametersUiComponent } from '../add-obj
 import { CharacteristicsVM } from '../../types/characteristics.models';
 import { FormControlPipe, FormGroupPipe } from '@utils/pipes';
 import { AddObjectCharacteristicsRoomsUiComponent } from '../add-object-characteristics-rooms-ui/add-object-characteristics-rooms-ui.component';
+import { AddObjectCharacteristicsAmenitiesUiComponent } from '../add-object-characteristics-amenities-ui/add-object-characteristics-amenities-ui.component';
 
 @Component({
   selector: 'account-add-object-characteristics-ui',
@@ -18,6 +19,7 @@ import { AddObjectCharacteristicsRoomsUiComponent } from '../add-object-characte
     FormControlPipe,
     AddObjectCharacteristicsRoomsUiComponent,
     FormGroupPipe,
+    AddObjectCharacteristicsAmenitiesUiComponent,
   ],
   templateUrl: './add-object-characteristics-ui.component.html',
   styleUrl: './add-object-characteristics-ui.component.scss',

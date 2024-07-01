@@ -7,23 +7,9 @@
         <div class="phones__content" formArrayName="phones">
           @for (phone of phones.controls; track $index) {
           <div class="input-wrapper">
-            <ui-forms-phone
-              [control]="phone | formControl"
-              [crossEnable]="true"
-              [placeholder]="'+7'"
-            ></ui-forms-phone>
-            <button
-              class="button-delete"
-              type="button"
-              (click)="onDeletePhoneButtonClick($index)"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="#3CBADE"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+            <ui-forms-phone [control]="phone | formControl" [crossEnable]="true" [placeholder]="'+7'"></ui-forms-phone>
+            <button class="button-delete" type="button" (click)="onDeletePhoneButtonClick($index)">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="#3CBADE" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
@@ -38,13 +24,7 @@
             </button>
           </div>
           }
-          <button
-            class="button-add"
-            type="button"
-            (click)="onAddPhoneButtonClick()"
-          >
-            + добавить телефон
-          </button>
+          <button class="button-add" type="button" (click)="onAddPhoneButtonClick()">+ добавить телефон</button>
         </div>
       </div>
       <div class="site form-block">
@@ -92,17 +72,11 @@
       </div>
     </div>
     <div class="buttons-container">
-      <button
-        class="button-submit"
-        type="submit"
-        [disabled]="isLoading || form.invalid"
-      >
+      <button class="button-submit" type="submit" [disabled]="isLoading || form.invalid">
         Сохранить
         <div class="spinner-loader" *ngIf="isLoading"></div>
       </button>
-      <button class="button-cancel" type="button" (click)="onCancel()">
-        Отменить
-      </button>
+      <button class="button-cancel" type="button" (click)="onCancel()">Отменить</button>
     </div>
   </form>
 </div>

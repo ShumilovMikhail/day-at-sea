@@ -30,6 +30,9 @@
       >
         <account-add-object-characteristics-rooms-ui [form]="roomsForm"></account-add-object-characteristics-rooms-ui>
       </ng-content>
+      <account-add-object-characteristics-amenities-ui
+        [form]="form.get('amenities')! | formGroup"
+      ></account-add-object-characteristics-amenities-ui>
     </div>
     <div class="description"></div>
   </div>

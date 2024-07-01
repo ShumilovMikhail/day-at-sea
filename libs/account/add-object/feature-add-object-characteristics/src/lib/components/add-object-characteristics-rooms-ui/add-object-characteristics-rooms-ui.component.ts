@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { RoomsVM } from '../../types/rooms.models';
 import { UiFormsCounterComponent, UiFormsSelectComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RoomItemVM } from '../../types/characteristics.models';
 
 @Component({
