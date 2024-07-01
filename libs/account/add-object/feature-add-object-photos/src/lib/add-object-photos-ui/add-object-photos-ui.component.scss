@@ -1,0 +1,50 @@
+@import 'variables';
+
+.photos {
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1 {
+    font-size: 30px;
+  }
+}
+
+.upload-image {
+  cursor: pointer;
+  input {
+    opacity: 0;
+    position: absolute;
+  }
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 22px;
+    background-color: #ecf9fc;
+    border-radius: 10px;
+    gap: 10px;
+    border: 1px solid $blueLight;
+    .image {
+      width: fit-content;
+    }
+    p {
+      width: fit-content;
+      max-width: 320px;
+      text-align: center;
+      button {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        font-size: 16px;
+        font-family: 'Gilroy', sans-serif;
+        color: $primary;
+        transition: 0.2s color ease;
+        &:hover {
+          color: $primaryHover;
+        }
+      }
+    }
+  }
+}

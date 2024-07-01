@@ -5,7 +5,7 @@ export interface ObjectForm {
   address: FormControl<string>;
   infrastructure: FormGroup<ObjectFormInfrastructure>;
   characteristics: FormGroup<ObjectFormCharacteristics>;
-  photos: FormArray<FormControl<string>>;
+  photos: FormGroup<ObjectFormPhotos>;
   rules: FormGroup<ObjectFormRules>;
   services: FormArray<FormControl<string>>;
 }
@@ -67,4 +67,9 @@ export interface ObjectFormRules {
   pledge: FormControl<string>;
   freeCancellation: FormControl<string>;
   description: FormControl<string>;
+}
+
+export interface ObjectFormPhotos {
+  generalPhotoIndex: FormControl<number | null>;
+  photos: FormArray<FormControl<string>>;
 }

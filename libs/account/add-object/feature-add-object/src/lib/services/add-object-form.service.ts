@@ -43,7 +43,10 @@ export class AddObjectFormService {
       }),
       description: [''],
     }),
-    photos: this.fb.array([] as FormControl<string>[]),
+    photos: this.fb.nonNullable.group({
+      generalPhotoIndex: new FormControl(null) as FormControl<number | null>,
+      photos: this.fb.array([] as FormControl<string>[]),
+    }),
     rules: this.fb.nonNullable.group({
       arrivalTime: [''],
       departureTime: [''],

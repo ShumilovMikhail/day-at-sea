@@ -8,9 +8,10 @@ import { FormGroup } from '@angular/forms';
 import { AddObjectInfoContainerComponent } from '@account/add-object/feature-add-object-info';
 import { FormControlPipe } from '@utils/pipes';
 import { AddObjectInfrastructureContainerComponent } from '@account/add-object/feature-add-object-infrastructure';
-import { ObjectFormCharacteristics, ObjectFormInfrastructure } from '../types/object-form.models';
+import { ObjectFormCharacteristics, ObjectFormInfrastructure, ObjectFormPhotos } from '../types/object-form.models';
 import { AddObjectCharacteristicsContainerComponent } from '@account/add-object/feature-add-object-characteristics';
 import { AddObjectFormService } from '../services/add-object-form.service';
+import { AddObjectPhotosContainerComponent } from '@account/add-object/feature-add-object-photos';
 
 @Component({
   selector: 'account-add-object-container',
@@ -21,6 +22,7 @@ import { AddObjectFormService } from '../services/add-object-form.service';
     FormControlPipe,
     AddObjectInfrastructureContainerComponent,
     AddObjectCharacteristicsContainerComponent,
+    AddObjectPhotosContainerComponent,
   ],
   templateUrl: './add-object-container.component.html',
   styleUrl: './add-object-container.component.scss',
@@ -40,6 +42,10 @@ export class AddObjectContainerComponent implements OnInit {
 
   public get characteristicsForm(): FormGroup<ObjectFormCharacteristics> {
     return this.form.get('characteristics') as FormGroup<ObjectFormCharacteristics>;
+  }
+
+  public get photosForm(): FormGroup<ObjectFormPhotos> {
+    return this.form.get('photos') as FormGroup<ObjectFormPhotos>;
   }
 
   constructor(title: Title) {
