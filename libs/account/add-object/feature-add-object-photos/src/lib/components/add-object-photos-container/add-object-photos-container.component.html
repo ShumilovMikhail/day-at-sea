@@ -1,0 +1,14 @@
+<div class="photos">
+  <h1>Фотографии</h1>
+  <form>
+    <account-add-object-photos-file-uploader-ui
+      (loadPhotosEvent)="onLoadPhotos($event)"
+    ></account-add-object-photos-file-uploader-ui>
+    <account-add-object-photos-list-ui
+      [photosList]="photosView"
+      [selectedPhotoIndex]="form.get('generalPhotoIndex')!.value"
+      (crossClickEvent)="onDeletePhoto($event)"
+      (selectButtonClickEvent)="onSelectPhoto($event)"
+    ></account-add-object-photos-list-ui>
+  </form>
+</div>

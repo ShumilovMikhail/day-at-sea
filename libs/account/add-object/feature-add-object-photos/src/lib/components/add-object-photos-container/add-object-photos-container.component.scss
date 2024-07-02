@@ -1,0 +1,15 @@
+.photos {
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1 {
+    font-size: 30px;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

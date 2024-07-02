@@ -1,0 +1,21 @@
+<ul class="photos-list">
+  @for (photo of photosList; track photo) {
+  <li
+    [ngClass]="{
+      selected: selectedPhotoIndex === $index
+    }"
+  >
+    <div class="photo-container">
+      <img [src]="photo" alt="" />
+      <div class="cross" (click)="onCrossClick($index)"></div>
+    </div>
+    <div class="content">
+      @if (selectedPhotoIndex === $index) {
+      <p>Главное фото</p>
+      }@else {
+      <button type="button" (click)="onSelectButtonClick($index)">Сделать главным</button>
+      }
+    </div>
+  </li>
+  }
+</ul>

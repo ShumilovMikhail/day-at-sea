@@ -1,0 +1,12 @@
+<label class="uploader" accountFilesDrop (filesDropEvent)="onPhotosDrop($event)">
+  <input type="file" (change)="onPhotosSelect($event)" />
+  <div class="uploader__content">
+    <div class="image">
+      <img src="/assets/images/icons/upload-icon.svg" alt="upload-icon" />
+    </div>
+    <p class="text">
+      Перетащите сюда фотографии объектов и детали интерьера или
+      <button type="button">выберите</button>
+    </p>
+  </div>
+</label>
