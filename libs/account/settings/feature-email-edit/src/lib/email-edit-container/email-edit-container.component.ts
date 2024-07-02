@@ -44,4 +44,8 @@ export class EmailEditContainerComponent implements OnInit {
       this.authFacade.changeUserEmail(this.form.value.email as string);
     }
   }
+
+  public onCancelChangeEmail(): void {
+    this.form.get('email')?.patchValue(this.email as string);
+  }
 }

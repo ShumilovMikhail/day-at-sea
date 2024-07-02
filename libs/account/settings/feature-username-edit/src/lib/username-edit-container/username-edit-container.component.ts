@@ -49,4 +49,8 @@ export class UsernameEditContainerComponent implements OnInit {
       this.loading = true;
     }
   }
+
+  public cancelChangeUsername(): void {
+    this.form.get('username')?.reset(this.username as string);
+  }
 }

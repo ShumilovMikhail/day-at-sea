@@ -2,7 +2,8 @@
 <account-username-edit-ui
   [username]="username"
   [form]="form"
-  (submitEvent)="onSubmit()"
   [loading]="loading"
+  (cancelChangeUsernameEvent)="cancelChangeUsername()"
+  (submitEvent)="onSubmit()"
 ></account-username-edit-ui>
 }

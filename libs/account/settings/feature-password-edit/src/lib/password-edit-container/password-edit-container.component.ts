@@ -39,6 +39,11 @@ export class PasswordEditContainerComponent implements OnInit {
     });
   }
 
+  public onCancelChangePassword(): void {
+    this.form.get('password')?.reset('');
+    this.form.get('conformPassword')?.reset('');
+  }
+
   public onSubmit(): void {
     if (this.form.valid) {
       this.authFacade.changeUserPassword(this.form.value.password as string);

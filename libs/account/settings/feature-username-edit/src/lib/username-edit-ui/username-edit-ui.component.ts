@@ -26,6 +26,7 @@ export class UsernameEditUiComponent {
   @Input({ required: true }) form!: FormGroup;
   @Input() loading = false;
   @Output() submitEvent = new EventEmitter<void>();
+  @Output() cancelChangeUsernameEvent = new EventEmitter<void>();
   public mode: Mode = Mode.DEFAULT;
   public usernameDefault = '';
 
@@ -34,7 +35,7 @@ export class UsernameEditUiComponent {
   }
 
   public onChangeModeToDefault(): void {
-    this.form.get('username')?.reset(this.usernameDefault);
+    this.cancelChangeUsernameEvent.emit();
     this.mode = Mode.DEFAULT;
   }
 

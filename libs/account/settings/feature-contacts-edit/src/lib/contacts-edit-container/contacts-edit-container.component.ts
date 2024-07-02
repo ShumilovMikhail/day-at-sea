@@ -48,6 +48,14 @@ export class ContactsEditContainerComponent implements OnInit {
       });
   }
 
+  public onAddPhone(): void {
+    this.form.controls.phones.push(new FormControl(''));
+  }
+
+  public onDeletePhone(index: number): void {
+    this.form.controls.phones.removeAt(index);
+  }
+
   public onSubmit(): void {
     this.agencyFacade.updateContacts(this.form.value as Contacts);
   }

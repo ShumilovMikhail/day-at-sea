@@ -25,6 +25,7 @@ export class PasswordEditUiComponent {
   @Input({ required: true }) form!: FormGroup;
   @Input() loading = false;
   @Output() submitEvent = new EventEmitter<void>();
+  @Output() cancelChangePasswordEvent = new EventEmitter<void>();
   public mode: Mode = Mode.DEFAULT;
 
   public onChangeModeToEdit(): void {
@@ -32,8 +33,7 @@ export class PasswordEditUiComponent {
   }
 
   public onChangeModeToDefault(): void {
-    this.form.get('password')?.reset('');
-    this.form.get('conformPassword')?.reset('');
+    this.cancelChangePasswordEvent.emit();
     this.mode = Mode.DEFAULT;
   }
 

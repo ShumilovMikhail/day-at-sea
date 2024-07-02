@@ -26,6 +26,7 @@ export class EmailEditUiComponent {
   @Input({ required: true }) form!: FormGroup;
   @Input() loading = false;
   @Output() submitEvent = new EventEmitter<void>();
+  @Output() cancelChangeEmailEvent = new EventEmitter<void>();
   public mode: Mode = Mode.DEFAULT;
   public emailDefault = '';
 
@@ -34,7 +35,7 @@ export class EmailEditUiComponent {
   }
 
   public onChangeModeToDefault(): void {
-    this.form.get('email')?.reset(this.emailDefault);
+    this.cancelChangeEmailEvent.emit();
     this.mode = Mode.DEFAULT;
   }
 

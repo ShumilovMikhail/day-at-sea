@@ -1,93 +1,58 @@
 <div class="amenities">
   <h3>Удобства</h3>
   <form>
-    <div class="amenities-block" utilsAccordion [buttonToggle]="flatChangeButton">
-      <div class="amenities-header">
-        <h4>В квартире</h4>
-        <img src="assets/images/icons/arrow-toggle.svg" alt="" #flatChangeButton />
-      </div>
-      <ul class="amenities-list">
-        @for (amenities of amenitiesDataService.flat; track $index) {
-        <li class="amenities-item">
-          <label class="checkbox">
-            <input
-              type="checkbox"
-              #checkbox
-              [checked]="hasAmenities('flat', amenities)"
-              (change)="changeAmenitiesCheckbox(checkbox.checked, 'flat', amenities)"
-            />
-            <div></div>
-            {{ amenities }}
-          </label>
-        </li>
-        }
-      </ul>
-    </div>
-    <div class="amenities-block" utilsAccordion [buttonToggle]="bathroomChangeButton">
-      <div class="amenities-header">
-        <h4>Ванная комната</h4>
-        <img src="assets/images/icons/arrow-toggle.svg" alt="" #bathroomChangeButton />
-      </div>
-      <ul class="amenities-list">
-        @for (amenities of amenitiesDataService.bathroom; track $index) {
-        <li class="amenities-item">
-          <label class="checkbox">
-            <input
-              type="checkbox"
-              #checkbox
-              [checked]="hasAmenities('flat', amenities)"
-              (change)="changeAmenitiesCheckbox(checkbox.checked, 'flat', amenities)"
-            />
-            <div></div>
-            {{ amenities }}
-          </label>
-        </li>
-        }
-      </ul>
-    </div>
-    <div class="amenities-block" utilsAccordion [buttonToggle]="kitchenChangeButton">
-      <div class="amenities-header">
-        <h4>Кухня</h4>
-        <img src="assets/images/icons/arrow-toggle.svg" alt="" #kitchenChangeButton />
-      </div>
-      <ul class="amenities-list">
-        @for (amenities of amenitiesDataService.kitchen; track $index) {
-        <li class="amenities-item">
-          <label class="checkbox">
-            <input
-              type="checkbox"
-              #checkbox
-              [checked]="hasAmenities('flat', amenities)"
-              (change)="changeAmenitiesCheckbox(checkbox.checked, 'flat', amenities)"
-            />
-            <div></div>
-            {{ amenities }}
-          </label>
-        </li>
-        }
-      </ul>
-    </div>
-    <div class="amenities-block" utilsAccordion [buttonToggle]="childrenChangeButton">
-      <div class="amenities-header">
-        <h4>Для детей</h4>
-        <img src="assets/images/icons/arrow-toggle.svg" alt="" #childrenChangeButton />
-      </div>
-      <ul class="amenities-list">
-        @for (amenities of amenitiesDataService.children; track $index) {
-        <li class="amenities-item">
-          <label class="checkbox">
-            <input
-              type="checkbox"
-              #checkbox
-              [checked]="hasAmenities('flat', amenities)"
-              (change)="changeAmenitiesCheckbox(checkbox.checked, 'flat', amenities)"
-            />
-            <div></div>
-            {{ amenities }}
-          </label>
-        </li>
-        }
-      </ul>
-    </div>
+    <ng-container
+      *ngTemplateOutlet="
+        amenitiesBlock;
+        context: { title: 'В квартире', type: 'flat', array: amenitiesDataService.flat }
+      "
+    >
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="
+        amenitiesBlock;
+        context: { title: 'Ванная комната', type: 'bathroom', array: amenitiesDataService.bathroom }
+      "
+    >
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="
+        amenitiesBlock;
+        context: { title: 'Кухня', type: 'kitchen', array: amenitiesDataService.kitchen }
+      "
+    >
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="
+        amenitiesBlock;
+        context: { title: 'Для детей', type: 'children', array: amenitiesDataService.children }
+      "
+    >
+    </ng-container>
   </form>
 </div>
+
+<ng-template #amenitiesBlock let-title="title" let-type="type" let-array="array">
+  <div class="amenities-block" utilsAccordion [buttonToggle]="changeButton">
+    <div class="amenities-header">
+      <h4>{{ title }}</h4>
+      <img src="assets/images/icons/arrow-toggle.svg" alt="" #changeButton />
+    </div>
+    <ul class="amenities-list">
+      @for (item of array; track $index) {
+      <li class="amenities-item">
+        <label class="checkbox">
+          <input
+            type="checkbox"
+            #checkbox
+            [checked]="hasAmenities(type, item)"
+            (change)="changeAmenitiesCheckbox(checkbox.checked, type, item)"
+          />
+          <div></div>
+          {{ item }}
+        </label>
+      </li>
+      }
+    </ul>
+  </div>
+</ng-template>

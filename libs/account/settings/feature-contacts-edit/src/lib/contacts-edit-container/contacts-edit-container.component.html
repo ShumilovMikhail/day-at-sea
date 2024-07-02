@@ -4,6 +4,8 @@
   [isLoading]="(loading$ | async) ?? false"
   (submitEvent)="onSubmit()"
   (cancelEvent)="onCancel()"
+  (addPhoneEvent)="onAddPhone()"
+  (deletePhone)="onDeletePhone($event)"
 ></account-contacts-edit-ui>
 } @else {
 <div class="loader-container">
