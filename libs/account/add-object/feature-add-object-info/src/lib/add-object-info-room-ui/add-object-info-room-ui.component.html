@@ -19,16 +19,16 @@
       </label>
     </div>
   </div>
-  <ui-forms-address
+  <ui-forms-address-container
     [control]="addressControl! | formControl"
     [label]="'Укажите место'"
     [placeholder]="'Город'"
     [crossEnable]="true"
-  ></ui-forms-address>
+  ></ui-forms-address-container>
   <button
     type="button"
     [disabled]="(!addressControl.valid && !placementTypeControl.valid) || isLoading"
-    (click)="onSubmit()"
+    (click)="onNextButtonClickEvent()"
   >
     Продолжить оформление
     <div class="spinner-loader" *ngIf="isLoading"></div>

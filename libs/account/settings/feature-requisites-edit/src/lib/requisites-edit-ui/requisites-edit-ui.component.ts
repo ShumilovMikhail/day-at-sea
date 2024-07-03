@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { RequisitesForm } from '../types/requisites.models';
-import { UiFormsAddressComponent, UiFormsInputComponent, UiFormsPhoneComponent } from '@ui/forms';
+import { UiFormsAddressContainerComponent, UiFormsInputComponent, UiFormsPhoneComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
 
 @Component({
@@ -14,7 +14,7 @@ import { FormControlPipe } from '@utils/pipes';
     UiFormsInputComponent,
     FormControlPipe,
     UiFormsPhoneComponent,
-    UiFormsAddressComponent,
+    UiFormsAddressContainerComponent,
     NgOptimizedImage,
   ],
   templateUrl: './requisites-edit-ui.component.html',

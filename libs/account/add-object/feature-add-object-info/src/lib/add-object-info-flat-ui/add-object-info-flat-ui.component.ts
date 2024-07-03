@@ -2,14 +2,20 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { UiFormsAddressComponent, UiFormsInputComponent } from '@ui/forms';
+import { UiFormsAddressContainerComponent, UiFormsInputComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
 import { houseNumberValidator } from '@utils/validators';
 
 @Component({
   selector: 'account-add-object-info-flat-ui',
   standalone: true,
-  imports: [CommonModule, UiFormsAddressComponent, FormControlPipe, UiFormsInputComponent, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    UiFormsAddressContainerComponent,
+    FormControlPipe,
+    UiFormsInputComponent,
+    ReactiveFormsModule,
+  ],
   templateUrl: './add-object-info-flat-ui.component.html',
   styleUrl: './add-object-info-flat-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +24,7 @@ export class AddObjectInfoFlatUiComponent implements OnInit {
   @Input() isLoading = false;
   @Input({ required: true }) addressControl!: FormControl<string>;
   @Input({ required: true }) placementControl!: FormControl<string>;
-  @Output() submitEvent = new EventEmitter<void>();
+  @Output() nextButtonClickEvent = new EventEmitter<void>();
   private readonly fb = inject(FormBuilder);
   public form = this.fb.group({
     city: ['', [Validators.required]],
@@ -32,13 +38,13 @@ export class AddObjectInfoFlatUiComponent implements OnInit {
     this.placementControl.patchValue('Квартира/апартаменты');
   }
 
-  public onSubmit(): void {
+  public onNextButtonClick(): void {
     const formValue = this.form.value;
     const address = `${formValue.city}, ${formValue.street}, дом ${formValue.house}, ${
       formValue.corpus ? `корпус ${formValue.corpus}, ` : ''
     }квартира ${formValue.floor}`;
 
     this.addressControl.patchValue(address);
-    this.submitEvent.emit();
+    this.nextButtonClickEvent.emit();
   }
 }

@@ -22,11 +22,11 @@
           label="Название агенства"
           [crossEnable]="true"
         ></ui-forms-input>
-        <ui-forms-address
+        <ui-forms-address-container
           [control]="formRequisites.get('city')! | formControl"
           label="Город"
           [crossEnable]="true"
-        ></ui-forms-address>
+        ></ui-forms-address-container>
         <ui-forms-input
           [control]="formRequisites.get('contactPerson')! | formControl"
           label="Контактное лицо"

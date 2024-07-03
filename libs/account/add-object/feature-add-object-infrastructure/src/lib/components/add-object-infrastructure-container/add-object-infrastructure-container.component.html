@@ -1,0 +1,15 @@
+<div class="infrastructure">
+  <h1>Инфраструктура</h1>
+  <form [formGroup]="form">
+    <account-add-object-infrastructure-list-ui
+      [infrastructureList]="infrastructureList"
+      (addInfrastructureItemEvent)="onAddInfrastructureItem($event.type, $event.name)"
+      (removeInfrastructureItemEvent)="onRemoveInfrastructureItem($event.type, $event.name)"
+      (distanceChangeEvent)="onDistanceChange($event.type, $event.name, $event.distance)"
+    ></account-add-object-infrastructure-list-ui>
+    <account-add-object-infrastructure-reaches-ui
+      [reaches]="infrastructureReaches"
+    ></account-add-object-infrastructure-reaches-ui>
+    <account-add-object-buttons-ui (nextButtonClickEvent)="onNext()"></account-add-object-buttons-ui>
+  </form>
+</div>

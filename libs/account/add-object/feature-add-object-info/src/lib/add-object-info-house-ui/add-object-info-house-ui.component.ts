@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
-import { UiFormsAddressComponent, UiFormsSelectComponent } from '@ui/forms';
+import { UiFormsAddressContainerComponent, UiFormsSelectComponent } from '@ui/forms';
 
 const typeOptions = [
   'Коттедж',
@@ -28,21 +28,21 @@ const typeOptions = [
   templateUrl: './add-object-info-house-ui.component.html',
   styleUrl: './add-object-info-house-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, UiFormsSelectComponent, UiFormsAddressComponent, ReactiveFormsModule],
+  imports: [CommonModule, UiFormsSelectComponent, UiFormsAddressContainerComponent, ReactiveFormsModule],
 })
 export class AddObjectInfoHouseUiComponent implements OnInit {
   @Input({ required: true }) placementTypeControl!: FormControl<string>;
   @Input({ required: true }) addressControl!: FormControl<string>;
   @Input({ required: true }) placementControl!: FormControl<string>;
   @Input() isLoading = false;
-  @Output() submitEvent = new EventEmitter<void>();
+  @Output() nextButtonClickEvent = new EventEmitter<void>();
   public readonly typeOptions = typeOptions;
 
   ngOnInit(): void {
     this.placementControl.patchValue('Дом, коттедж');
   }
 
-  public onSubmit(): void {
-    this.submitEvent.emit();
+  public onNextButtonClickEvent(): void {
+    this.nextButtonClickEvent.emit();
   }
 }

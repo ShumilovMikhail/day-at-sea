@@ -1,1 +1,1 @@
-export * from './lib/add-object-infrastructure-container/add-object-infrastructure-container.component';
+export * from './lib/components/add-object-infrastructure-container/add-object-infrastructure-container.component';

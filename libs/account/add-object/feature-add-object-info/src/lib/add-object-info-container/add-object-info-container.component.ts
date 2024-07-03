@@ -34,7 +34,7 @@ export class AddObjectInfoContainerComponent {
     this.selectedType = type;
   }
 
-  public onSubmit(): void {
+  public onNext(): void {
     this.router.navigate(['/account/add-object/infrastructure']);
   }
 }

@@ -1,0 +1,15 @@
+<ui-forms-address-ui
+  [required]="required"
+  [control]="control"
+  [crossEnable]="crossEnable"
+  [disabled]="disabled"
+  [errors]="errors"
+  [label]="label"
+  [placeholder]="placeholder"
+  [isSearching]="isSearching"
+  [cities]="cities"
+  (blurEvent)="onSearchTermination()"
+  (changeInputEvent)="onSearch()"
+  (citySelectEvent)="onCitySelect($event)"
+  (crossClickEvent)="onReset()"
+></ui-forms-address-ui>

@@ -1,1 +1,1 @@
-export * from './lib/login-container/login-container.component';
+export * from './lib/components/login-container/login-container.component';

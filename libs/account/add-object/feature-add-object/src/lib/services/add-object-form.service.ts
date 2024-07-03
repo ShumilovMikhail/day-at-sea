@@ -11,7 +11,7 @@ export class AddObjectFormService {
     placement: ['Отдельная комната'],
     address: [''],
     infrastructure: this.fb.nonNullable.group({
-      placesDistance: this.fb.array([] as FormControl<InfrastructureItem>[]),
+      places: this.fb.array([] as FormControl<InfrastructureItem>[]),
       leisure: this.fb.array([] as FormControl<InfrastructureItem>[]),
       leisureWater: this.fb.array([] as FormControl<InfrastructureItem>[]),
       leisureActive: this.fb.array([] as FormControl<InfrastructureItem>[]),

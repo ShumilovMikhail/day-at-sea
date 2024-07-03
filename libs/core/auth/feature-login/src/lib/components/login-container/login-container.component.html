@@ -1,0 +1,10 @@
+<layers-modal>
+  <auth-login-ui>
+    <auth-login-form-ui
+      [form]="form"
+      [error]="errors$ | async"
+      [isLoading]="isLoading | ngrxPush"
+      (submitEvent)="onSubmit()"
+    ></auth-login-form-ui>
+  </auth-login-ui>
+</layers-modal>

@@ -6,17 +6,17 @@
       [selectedOption]="typeOptions[0]"
       [label]="'Выберите тип жилья'"
     ></ui-forms-select>
-    <ui-forms-address
+    <ui-forms-address-container
       [control]="addressControl"
       [label]="'Укажите место'"
       [placeholder]="'Город'"
       [crossEnable]="true"
-    ></ui-forms-address>
+    ></ui-forms-address-container>
   </div>
   <button
     type="button"
     [disabled]="(!addressControl.valid && !placementTypeControl.valid) || isLoading"
-    (click)="onSubmit()"
+    (click)="onNextButtonClickEvent()"
   >
     Продолжить оформление
     <div class="spinner-loader" *ngIf="isLoading"></div>

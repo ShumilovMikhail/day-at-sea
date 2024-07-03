@@ -11,7 +11,7 @@ export interface ObjectForm {
 }
 
 export interface ObjectFormInfrastructure {
-  placesDistance: FormArray<FormControl<InfrastructureItem>>;
+  places: FormArray<FormControl<InfrastructureItem>>;
   leisure: FormArray<FormControl<InfrastructureItem>>;
   leisureWater: FormArray<FormControl<InfrastructureItem>>;
   leisureActive: FormArray<FormControl<InfrastructureItem>>;

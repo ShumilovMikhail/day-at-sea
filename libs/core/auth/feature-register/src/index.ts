@@ -1,1 +1,1 @@
-export * from './lib/feature-register/register-container/register-container.component';
+export * from './lib/components/register-container/register-container.component';

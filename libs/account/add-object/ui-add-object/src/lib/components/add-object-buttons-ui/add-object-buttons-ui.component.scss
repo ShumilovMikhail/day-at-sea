@@ -1,0 +1,37 @@
+@import 'mixins';
+
+:host {
+  display: block;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    box-sizing: content-box;
+    display: flex;
+    justify-content: center;
+    padding: 13px 28px;
+    width: 130px;
+  }
+}
+
+.save-button {
+  @include button-primary();
+}
+.next-button {
+  @include button-secondary();
+}
+
+@media (max-width: 480px) {
+  .buttons-container {
+    flex-direction: column;
+    gap: 10px;
+    button {
+      box-sizing: border-box;
+      padding: 8px 28px;
+      width: 100%;
+    }
+  }
+}

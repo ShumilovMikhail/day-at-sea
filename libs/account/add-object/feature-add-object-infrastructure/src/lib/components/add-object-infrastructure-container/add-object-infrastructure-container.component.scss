@@ -1,0 +1,39 @@
+:host {
+  width: 100%;
+}
+
+.infrastructure {
+  padding: 40px 50px;
+  h1 {
+    font-size: 30px;
+  }
+}
+
+form {
+  margin-top: 40px;
+}
+
+account-add-object-infrastructure-reaches-ui {
+  margin-top: 43px;
+}
+
+account-add-object-buttons-ui {
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .infrastructure {
+    padding: 20px 15px;
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  account-add-object-infrastructure-reaches-ui {
+    margin-top: 37px;
+  }
+}
