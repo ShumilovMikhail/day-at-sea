@@ -11,6 +11,7 @@ import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import { API_URL } from '@http';
 import { agencyEffects, agencyFeature } from '@account/data-access-agency';
 import { DADATA_TOKEN } from '@dadata/data-access-address';
+import { WINDOW } from '@utils/types';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,6 +37,14 @@ export const appConfig: ApplicationConfig = {
     {
       provide: DADATA_TOKEN,
       useValue: environment.DADATA_TOKEN,
+    },
+    {
+      provide: DADATA_TOKEN,
+      useValue: environment.DADATA_TOKEN,
+    },
+    {
+      provide: WINDOW,
+      useFactory: () => window,
     },
   ],
 };

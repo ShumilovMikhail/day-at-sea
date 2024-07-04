@@ -1,12 +1,37 @@
-<label class="uploader" accountFilesDrop (filesDropEvent)="onPhotosDrop($event)">
-  <input type="file" (change)="onPhotosSelect($event)" />
+<label
+  class="uploader"
+  #uploader
+  utilsIsMobile
+  accountFilesDrop
+  [ngClass]="{
+    dragover: isDragover
+  }"
+  (filesDropEvent)="onPhotosDrop($event)"
+  (dragoverEvent)="onPhotosDrag($event)"
+  (isMobileEvent)="onIsMobileChange($event)"
+>
+  <input type="file" (change)="onPhotosSelect($event)" multiple accept=".jpg,.webp,.png,.jpeg" />
   <div class="uploader__content">
     <div class="image">
-      <img src="/assets/images/icons/upload-icon.svg" alt="upload-icon" />
+      <img
+        [src]="isDragover ? '/assets/images/icons/arrow-up.svg' : '/assets/images/icons/upload-icon.svg'"
+        alt="upload-icon"
+        height="24px"
+        weight="24px"
+      />
     </div>
+    @if (isDragover) {
+    <p class="text">Перетащите сюда фотографии объектов и детали интерьера</p>
+    }@else { @if (isMobile) {
+    <p>Прикрепите фотографии объектов и детали интерьера</p>
+    } @else {
     <p class="text">
       Перетащите сюда фотографии объектов и детали интерьера или
       <button type="button">выберите</button>
     </p>
+    } }
   </div>
+  @if (error) {
+  <div class="error">{{ error }}</div>
+  }
 </label>

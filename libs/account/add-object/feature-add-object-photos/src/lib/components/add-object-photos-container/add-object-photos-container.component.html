@@ -2,6 +2,7 @@
   <h1>Фотографии</h1>
   <form>
     <account-add-object-photos-file-uploader-ui
+      [error]="error"
       (loadPhotosEvent)="onLoadPhotos($event)"
     ></account-add-object-photos-file-uploader-ui>
     <account-add-object-photos-list-ui
@@ -10,5 +11,6 @@
       (crossClickEvent)="onDeletePhoto($event)"
       (selectButtonClickEvent)="onSelectPhoto($event)"
     ></account-add-object-photos-list-ui>
+    <account-add-object-buttons-ui (nextButtonClickEvent)="onNext()"></account-add-object-buttons-ui>
   </form>
 </div>

@@ -50,7 +50,9 @@
       "@ui/indicators": ["libs/core/ui/ui-indicators/src/index.ts"],
       "@user/data-access": ["libs/account/data-access-user/src/index.ts"],
       "@utils/directives": ["libs/core/utils/util-directives/src/index.ts"],
+      "@utils/functions": ["libs/core/utils/util-functions/src/index.ts"],
       "@utils/pipes": ["libs/core/utils/util-pipes/src/index.ts"],
+      "@utils/types": ["libs/core/utils/util-types/src/index.ts"],
       "@utils/validators": ["libs/core/utils/util-validators/src/index.ts"]
     }
   },

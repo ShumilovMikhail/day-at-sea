@@ -184,6 +184,11 @@ fieldset {
   }
 }
 
+.error {
+  color: $red;
+  font-size: 12px;
+}
+
 .spinner-loader {
   width: 20px;
   padding: 4px;

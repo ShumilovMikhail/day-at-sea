@@ -12,10 +12,11 @@
     flex-direction: column;
     align-items: center;
     padding: 22px;
-    background-color: #ecf9fc;
+    background-color: #ffffff;
     border-radius: 10px;
     gap: 10px;
     border: 1px solid $blueLight;
+    transition: 0.2s all ease-in-out;
     .image {
       width: fit-content;
     }
@@ -35,6 +36,27 @@
           color: $primaryHover;
         }
       }
+    }
+  }
+
+  &:hover &__content {
+    background-color: #ecf9fc;
+  }
+
+  &.dragover &__content {
+    background-color: #ecf9fc;
+    border: 1px dashed $blueLight;
+  }
+
+  .error {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .uploader {
+    &__content {
+      padding: 22px 9px;
     }
   }
 }

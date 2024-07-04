@@ -1,21 +1,54 @@
-<ul class="photos-list">
-  @for (photo of photosList; track photo) {
-  <li
+<ng-container utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
+  @if (!isMobile) {
+  <ul class="photos-list">
+    @for (photo of photosList; track photo; let index = $index) {
+    <li>
+      <ng-container *ngTemplateOutlet="photoItem; context: { index, photo }"></ng-container>
+    </li>
+    }
+  </ul>
+  } @else {
+  <swiper-container
+    class="swiper-container"
+    space-between="10"
+    scrollbar="true"
+    scrollbar-draggable="true"
+    slides-per-view="auto"
+    free-mode="true"
+    observe-parents="true"
+    [ngStyle]="{
+      '--swiper-scrollbar-drag-bg-color': '#3CBADE',
+      '--swiper-scrollbar-bg-color': '#ECF9FC',
+      '--swiper-scrollbar-border-radius': '4px',
+      '--swiper-scrollbar-size': '8px'
+    }"
+  >
+    @for (photo of photosList; track photo; let index = $index) {
+    <swiper-slide class="slide">
+      <ng-container *ngTemplateOutlet="photoItem; context: { index, photo }"></ng-container>
+    </swiper-slide>
+    }
+  </swiper-container>
+  }
+</ng-container>
+
+<ng-template #photoItem let-index="index" let-photo="photo">
+  <div
+    class="photo-item__container"
     [ngClass]="{
-      selected: selectedPhotoIndex === $index
+      selected: selectedPhotoIndex === index
     }"
   >
     <div class="photo-container">
       <img [src]="photo" alt="" />
-      <div class="cross" (click)="onCrossClick($index)"></div>
+      <div class="cross" (click)="onCrossClick(index)"></div>
     </div>
     <div class="content">
-      @if (selectedPhotoIndex === $index) {
+      @if (selectedPhotoIndex === index) {
       <p>Главное фото</p>
       }@else {
-      <button type="button" (click)="onSelectButtonClick($index)">Сделать главным</button>
+      <button type="button" (click)="onSelectButtonClick(index)">Сделать главным</button>
       }
     </div>
-  </li>
-  }
-</ul>
+  </div>
+</ng-template>
