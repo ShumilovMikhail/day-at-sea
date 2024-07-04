@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
   styleUrl: './add-object-photos-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddObjectPhotosContainerComponent {
+export class AddObjectPhotosContainerComponent implements OnInit {
   @Input({ required: true }) form!: FormGroup<PhotosVM>;
   private readonly router = inject(Router);
   private get formArrayPhotos(): FormArray<FormControl<string>> {
@@ -32,6 +32,10 @@ export class AddObjectPhotosContainerComponent {
     return [...this.loadedPhotosView];
   }
   public error: string | null = null;
+
+  ngOnInit(): void {
+    this.loadedPhotosView = Array.from(this.formArrayPhotos.controls).map((item) => item.value);
+  }
 
   public onLoadPhotos(loadedPhotos: File[]): void {
     this.error = null;
