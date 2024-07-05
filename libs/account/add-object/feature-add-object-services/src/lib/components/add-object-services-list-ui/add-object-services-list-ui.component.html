@@ -1,0 +1,16 @@
+<ul class="rules-list">
+  @for (service of servicesList; track $index) {
+  <li class="rules-item">
+    <label class="checkbox">
+      <input
+        #checkbox
+        type="checkbox"
+        [checked]="hasService(service)"
+        (change)="onCheckboxChange(checkbox.checked, service)"
+      />
+      <div></div>
+      {{ service }}
+    </label>
+  </li>
+  }
+</ul>

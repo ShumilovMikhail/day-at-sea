@@ -1,0 +1,11 @@
+<div class="services">
+  <h1>Услуги</h1>
+  <form>
+    <account-add-object-services-list-ui
+      [servicesArray]="servicesArray"
+      (addServiceEvent)="onAddService($event)"
+      (removeServiceEvent)="onRemoveService($event)"
+    ></account-add-object-services-list-ui>
+  </form>
+  <account-add-object-buttons-ui (nextButtonClickEvent)="onNext()"></account-add-object-buttons-ui>
+</div>

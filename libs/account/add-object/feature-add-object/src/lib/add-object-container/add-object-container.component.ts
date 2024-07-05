@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
 
 import { AddObjectInfoContainerComponent } from '@account/add-object/feature-add-object-info';
-import { FormControlPipe } from '@utils/pipes';
+import { FormArrayPipe, FormControlPipe } from '@utils/pipes';
 import { AddObjectInfrastructureContainerComponent } from '@account/add-object/feature-add-object-infrastructure';
 import {
   ObjectFormCharacteristics,
@@ -18,6 +18,7 @@ import { AddObjectCharacteristicsContainerComponent } from '@account/add-object/
 import { AddObjectFormService } from '../services/add-object-form.service';
 import { AddObjectPhotosContainerComponent } from '@account/add-object/feature-add-object-photos';
 import { AddObjectRulesContainerComponent } from '@account/add-object/feature-add-object-rules';
+import { AddObjectServicesContainerComponent } from '@account/add-object/feature-add-object-services';
 
 @Component({
   selector: 'account-add-object-container',
@@ -26,10 +27,12 @@ import { AddObjectRulesContainerComponent } from '@account/add-object/feature-ad
     CommonModule,
     AddObjectInfoContainerComponent,
     FormControlPipe,
+    FormArrayPipe,
     AddObjectInfrastructureContainerComponent,
     AddObjectCharacteristicsContainerComponent,
     AddObjectPhotosContainerComponent,
     AddObjectRulesContainerComponent,
+    AddObjectServicesContainerComponent,
   ],
   templateUrl: './add-object-container.component.html',
   styleUrl: './add-object-container.component.scss',

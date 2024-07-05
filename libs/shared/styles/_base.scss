@@ -272,6 +272,7 @@ fieldset {
     display: inline-block;
     width: 20px;
     height: 20px;
+    min-width: 20px;
     border: 1px solid $blueLight;
     border-radius: 3px;
     transition: 0.2s all;

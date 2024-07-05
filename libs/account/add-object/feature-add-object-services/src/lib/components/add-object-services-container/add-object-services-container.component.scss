@@ -1,0 +1,24 @@
+.services {
+  padding: 40px 50px;
+  h1 {
+    font-size: 30px;
+  }
+  form {
+    margin-top: 22px;
+  }
+  account-add-object-buttons-ui {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services {
+    padding: 20px 15px;
+    h1 {
+      font-size: 24px;
+    }
+    form {
+      margin-top: 26px;
+    }
+  }
+}

@@ -15,4 +15,8 @@
 <account-add-object-photos-container [form]="photosForm"></account-add-object-photos-container>
 } @case ('rules') {
 <account-add-object-rules-container [form]="rulesForm"></account-add-object-rules-container>
+} @case ('services') {
+<account-add-object-services-container
+  [servicesArray]="form.get('services')! | formArray"
+></account-add-object-services-container>
 }}
