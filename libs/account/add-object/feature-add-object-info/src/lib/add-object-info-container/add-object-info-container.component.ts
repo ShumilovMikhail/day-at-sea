@@ -32,6 +32,7 @@ export class AddObjectInfoContainerComponent {
 
   public onSelectType(type: ObjectTypes): void {
     this.selectedType = type;
+    this.addressControl.patchValue('');
   }
 
   public onNext(): void {

@@ -15,7 +15,7 @@
     }"
   >
     <input
-      type="text"
+      [type]="type ?? 'text'"
       [ngClass]="{
         error: control.errors && control.touched
       }"

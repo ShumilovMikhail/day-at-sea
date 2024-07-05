@@ -8,10 +8,16 @@ import { FormGroup } from '@angular/forms';
 import { AddObjectInfoContainerComponent } from '@account/add-object/feature-add-object-info';
 import { FormControlPipe } from '@utils/pipes';
 import { AddObjectInfrastructureContainerComponent } from '@account/add-object/feature-add-object-infrastructure';
-import { ObjectFormCharacteristics, ObjectFormInfrastructure, ObjectFormPhotos } from '../types/object-form.models';
+import {
+  ObjectFormCharacteristics,
+  ObjectFormInfrastructure,
+  ObjectFormPhotos,
+  ObjectFormRules,
+} from '../types/object-form.models';
 import { AddObjectCharacteristicsContainerComponent } from '@account/add-object/feature-add-object-characteristics';
 import { AddObjectFormService } from '../services/add-object-form.service';
 import { AddObjectPhotosContainerComponent } from '@account/add-object/feature-add-object-photos';
+import { AddObjectRulesContainerComponent } from '@account/add-object/feature-add-object-rules';
 
 @Component({
   selector: 'account-add-object-container',
@@ -23,6 +29,7 @@ import { AddObjectPhotosContainerComponent } from '@account/add-object/feature-a
     AddObjectInfrastructureContainerComponent,
     AddObjectCharacteristicsContainerComponent,
     AddObjectPhotosContainerComponent,
+    AddObjectRulesContainerComponent,
   ],
   templateUrl: './add-object-container.component.html',
   styleUrl: './add-object-container.component.scss',
@@ -48,6 +55,10 @@ export class AddObjectContainerComponent implements OnInit {
     return this.form.get('photos') as FormGroup<ObjectFormPhotos>;
   }
 
+  public get rulesForm(): FormGroup<ObjectFormRules> {
+    return this.form.get('rules') as FormGroup<ObjectFormRules>;
+  }
+
   constructor(title: Title) {
     title.setTitle('Добавить объект');
   }
@@ -58,7 +69,7 @@ export class AddObjectContainerComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
     });
 
-    this.form.valueChanges.subscribe((value) => {
+    this.form.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
       console.log(value);
     });
   }

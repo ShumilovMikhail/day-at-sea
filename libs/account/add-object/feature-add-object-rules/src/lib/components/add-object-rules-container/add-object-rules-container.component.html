@@ -1,0 +1,29 @@
+<div class="rules">
+  <h1>Правила проживания</h1>
+  <form>
+    <ng-container
+      *ngrxLet="{
+      arrivalTime: form.get('arrivalTime')! | formControl,
+      departureTime: form.get('departureTime')! | formControl,
+      earlyArrival: form.get('earlyArrival')! | formControl,
+      lateDeparture: form.get('lateDeparture')! | formControl,
+    } as arrivalForm"
+    >
+      <account-add-object-rules-arrival-ui [arrival]="arrivalForm"></account-add-object-rules-arrival-ui>
+    </ng-container>
+    <account-add-object-rules-list-ui [rulesArray]="form.get('rules')! | formArray"></account-add-object-rules-list-ui>
+    <ng-container
+      *ngrxLet="{
+      paymentCheckIn: form.get('paymentCheckIn')! | formControl,
+      pledge: form.get('pledge')! | formControl,
+      freeCancellation: form.get('freeCancellation')! | formControl,
+    } as bookingForm"
+    >
+      <account-add-object-rules-booking-ui [booking]="bookingForm"></account-add-object-rules-booking-ui>
+    </ng-container>
+    <account-add-object-rules-description-ui
+      [descriptionControl]="form.get('description')! | formControl"
+    ></account-add-object-rules-description-ui>
+  </form>
+  <account-add-object-buttons-ui (nextButtonClickEvent)="onNext()"></account-add-object-buttons-ui>
+</div>

@@ -1,0 +1,28 @@
+<div class="arrival">
+  <div class="inputs">
+    <ui-forms-input
+      [control]="arrival.arrivalTime"
+      [label]="'Рассчетное время заезда'"
+      [type]="'time'"
+      [required]="true"
+    ></ui-forms-input>
+    <ui-forms-input
+      [control]="arrival.departureTime"
+      [label]="'Рассчетное время отъезда'"
+      [type]="'time'"
+      [required]="true"
+    ></ui-forms-input>
+  </div>
+  <div class="checkboxes">
+    <label class="checkbox">
+      <input type="checkbox" [formControl]="arrival.earlyArrival" />
+      <div></div>
+      Ранний заезд
+    </label>
+    <label class="checkbox">
+      <input type="checkbox" [formControl]="arrival.lateDeparture" />
+      <div></div>
+      Ранний выезд
+    </label>
+  </div>
+</div>

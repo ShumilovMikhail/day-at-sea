@@ -1,0 +1,11 @@
+<ul class="rules-list">
+  @for (rule of rulesList; track $index) {
+  <li class="rules-item">
+    <label class="checkbox">
+      <input #checkbox type="checkbox" [checked]="hasRule(rule)" (change)="onCheckboxChange(checkbox.checked, rule)" />
+      <div></div>
+      {{ rule }}
+    </label>
+  </li>
+  }
+</ul>

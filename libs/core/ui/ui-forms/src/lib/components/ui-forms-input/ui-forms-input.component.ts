@@ -27,6 +27,7 @@ export class UiFormsInputComponent implements OnInit {
   @Input() errors: string[] | undefined;
   @Input() crossEnable = false;
   @Input() disabled = false;
+  @Input() type: string | null = null;
   private readonly changeDetectionRef = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
 

@@ -26,6 +26,7 @@
       "@account/add-object/feature-add-object-photos": [
         "libs/account/add-object/feature-add-object-photos/src/index.ts"
       ],
+      "@account/add-object/feature-add-object-rules": ["libs/account/add-object/feature-add-object-rules/src/index.ts"],
       "@account/add-object/ui": ["libs/account/add-object/ui-add-object/src/index.ts"],
       "@account/add-object/ui-side-menu": ["libs/account/add-object/ui-add-object-side-menu/src/index.ts"],
       "@account/add-object/util": ["libs/account/add-object/util-add-object/src/index.ts"],

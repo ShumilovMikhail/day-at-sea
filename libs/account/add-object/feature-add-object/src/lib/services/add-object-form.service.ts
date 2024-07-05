@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { InfrastructureItem, ObjectForm, RoomItem } from '../types/object-form.models';
 
 @Injectable({
@@ -48,14 +49,14 @@ export class AddObjectFormService {
       photos: this.fb.array([] as FormControl<string>[]),
     }),
     rules: this.fb.nonNullable.group({
-      arrivalTime: [''],
+      arrivalTime: ['', [Validators.required]],
       departureTime: [''],
       earlyArrival: [false],
       lateDeparture: [false],
       rules: this.fb.array([] as FormControl<string>[]),
       paymentCheckIn: [''],
       pledge: [''],
-      freeCancellation: [''],
+      freeCancellation: ['1 день'],
       description: [''],
     }),
     services: this.fb.array([] as FormControl<string>[]),

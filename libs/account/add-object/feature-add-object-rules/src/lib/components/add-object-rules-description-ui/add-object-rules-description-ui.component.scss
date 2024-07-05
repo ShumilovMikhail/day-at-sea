@@ -1,0 +1,37 @@
+@import 'variables';
+
+.description {
+  p {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  textarea {
+    margin-top: 7px;
+    width: 620px;
+    height: 160px;
+    border: 1px solid $blueLight;
+    border-radius: 5px;
+    font-family: 'Gilroy';
+    padding: 10px;
+    scrollbar-width: none;
+    resize: none;
+  }
+
+  textarea::-webkit-scrollbar {
+    display: none;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .description {
+    textarea {
+      margin-top: 10px;
+      width: 100%;
+      padding: 6px;
+    }
+  }
+}

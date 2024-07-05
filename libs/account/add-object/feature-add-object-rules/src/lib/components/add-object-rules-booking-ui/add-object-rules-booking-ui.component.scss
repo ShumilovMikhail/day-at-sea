@@ -1,0 +1,38 @@
+.booking {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+ui-forms-select,
+ui-forms-input {
+  width: 620px;
+}
+
+.free-cancellation {
+  p {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  ul {
+    margin-top: 12px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking {
+    gap: 20px;
+  }
+  ui-forms-select,
+  ui-forms-input {
+    width: 100%;
+  }
+
+  .free-cancellation {
+    ul {
+      flex-wrap: wrap;
+    }
+  }
+}

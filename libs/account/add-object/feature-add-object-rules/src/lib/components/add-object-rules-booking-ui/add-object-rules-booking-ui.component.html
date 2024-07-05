@@ -1,0 +1,54 @@
+<div class="booking">
+  <ui-forms-select
+    [control]="booking.paymentCheckIn"
+    [options]="['Только наличными', 'Наличными или пластиковой картой', 'Электронные деньги', 'Безналичный расчет']"
+    [label]="'Оплата при заселении'"
+    [selectedOption]="'Только наличными'"
+  ></ui-forms-select>
+  <ui-forms-input
+    [control]="booking.pledge"
+    [label]="'Залог,рублей'"
+    [required]="true"
+    [placeholder]="'Введите сумму'"
+  ></ui-forms-input>
+  <div class="free-cancellation">
+    <p>Бесплатная отмена бронирования за:</p>
+    <ul>
+      <li>
+        <label class="radio">
+          <input type="radio" name="freeCancellation" [formControl]="booking.freeCancellation" value="1 день" />
+          <div></div>
+          1 день
+        </label>
+      </li>
+      <li>
+        <label class="radio">
+          <input type="radio" name="freeCancellation" [formControl]="booking.freeCancellation" value="7 дней" />
+          <div></div>
+          7 дней
+        </label>
+      </li>
+      <li>
+        <label class="radio">
+          <input type="radio" name="freeCancellation" [formControl]="booking.freeCancellation" value="14 дней" />
+          <div></div>
+          14 дней
+        </label>
+      </li>
+      <li>
+        <label class="radio">
+          <input type="radio" name="freeCancellation" [formControl]="booking.freeCancellation" value="30 дней" />
+          <div></div>
+          30 дней
+        </label>
+      </li>
+      <li>
+        <label class="radio">
+          <input type="radio" name="freeCancellation" [formControl]="booking.freeCancellation" value="Без возврата" />
+          <div></div>
+          Без возврата
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>

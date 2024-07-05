@@ -1,0 +1,43 @@
+@import 'variables';
+
+.arrival {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+ui-forms-input {
+  width: 305px;
+}
+.inputs,
+.checkboxes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkboxes {
+  padding-top: 10px;
+}
+
+@media (max-width: 480px) {
+  .arrival {
+    flex-direction: column;
+    align-items: start;
+    gap: 22px;
+  }
+  ui-forms-input {
+    width: 100%;
+  }
+
+  .inputs {
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .checkboxes {
+    padding-top: 0;
+    gap: 18px;
+  }
+}

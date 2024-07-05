@@ -1,0 +1,12 @@
+.rules-list {
+  display: grid;
+  grid-template-columns: repeat(3, 315px);
+  gap: 10px 0;
+}
+
+@media (max-width: 480px) {
+  .rules-list {
+    grid-template-columns: 1fr;
+    gap: 10px 0;
+  }
+}
