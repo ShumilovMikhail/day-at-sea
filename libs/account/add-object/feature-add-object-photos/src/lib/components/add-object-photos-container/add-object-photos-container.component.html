@@ -11,6 +11,9 @@
       (crossClickEvent)="onDeletePhoto($event)"
       (selectButtonClickEvent)="onSelectPhoto($event)"
     ></account-add-object-photos-list-ui>
-    <account-add-object-buttons-ui (nextButtonClickEvent)="onNext()"></account-add-object-buttons-ui>
+    <account-add-object-buttons-ui
+      (nextButtonClickEvent)="onNext()"
+      (saveButtonClickEvent)="onSave()"
+    ></account-add-object-buttons-ui>
   </form>
 </div>

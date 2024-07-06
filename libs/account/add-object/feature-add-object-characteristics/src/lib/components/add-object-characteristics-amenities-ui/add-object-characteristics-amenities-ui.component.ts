@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AmenitiesVM } from '../../types/amenities.models';
+import { AmenitiesFormVM } from '../../types/characteristics-form.models';
 import { AmenitiesDataService } from './services/amenities-data.service';
 import { AccordionDirective } from '@utils/directives';
 
@@ -16,7 +16,7 @@ import { AccordionDirective } from '@utils/directives';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectCharacteristicsAmenitiesUiComponent {
-  @Input({ required: true }) form!: FormGroup<AmenitiesVM>;
+  @Input({ required: true }) form!: FormGroup<AmenitiesFormVM>;
   public readonly amenitiesDataService = inject(AmenitiesDataService);
 
   public changeAmenitiesCheckbox(isChecked: boolean, type: string, name: string): void {

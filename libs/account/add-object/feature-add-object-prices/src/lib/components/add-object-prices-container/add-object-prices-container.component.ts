@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ObjectPricesItemVM, PricesType } from '../../types/prices.models';
+import { ObjectFormPricesItemVM, PricesType } from '../../types/prices-form.models';
 import { AddObjectPricesDefaultContainerComponent } from '../add-object-prices-default-container/add-object-prices-default-container.component';
 import { FormGroup } from '@angular/forms';
+import { LocalStorageObjectFormService } from '@account/add-object/data-access';
+import { ObjectPricesItemVM } from '../../types/prices.models';
 
 @Component({
   selector: 'account-add-object-prices-container',
@@ -15,12 +17,17 @@ import { FormGroup } from '@angular/forms';
 })
 export class AddObjectPricesContainerComponent {
   @Input({ required: true }) pricesArray!: PricesType;
+  private readonly objectFormStorageService = inject(LocalStorageObjectFormService);
 
-  get defaultPrices(): FormGroup<ObjectPricesItemVM> {
+  get defaultPrices(): FormGroup<ObjectFormPricesItemVM> {
     const defaultPrices = this.pricesArray.controls.find((form) => form.get('name')!.value === 'Цены по умолчанию');
     if (!defaultPrices) {
       throw Error('default prices: not found form');
     }
     return defaultPrices;
+  }
+
+  public onSave(): void {
+    this.objectFormStorageService.updateObjectForm({ prices: this.pricesArray.value as ObjectPricesItemVM[] });
   }
 }

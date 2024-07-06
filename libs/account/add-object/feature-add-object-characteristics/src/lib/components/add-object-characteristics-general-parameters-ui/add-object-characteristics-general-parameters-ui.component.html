@@ -33,13 +33,15 @@
         class="kitchen"
         [control]="form.kitchen"
         [options]="['без кухни', 'отдельная кухня', 'кухня-гостинная', 'кухонная зона']"
+        [selectedOption]="form.kitchen.value"
         [label]="'Параметры кухни'"
       ></ui-forms-select>
       <ui-forms-select
         class="repair"
         [control]="form.repair"
         [options]="['кометический ремонт', 'евроремнот', 'дизайнерский ремонт']"
-        [label]="'Параметры кухни'"
+        [selectedOption]="form.repair.value"
+        [label]="'Ремонт'"
       ></ui-forms-select>
     </fieldset>
   </form>

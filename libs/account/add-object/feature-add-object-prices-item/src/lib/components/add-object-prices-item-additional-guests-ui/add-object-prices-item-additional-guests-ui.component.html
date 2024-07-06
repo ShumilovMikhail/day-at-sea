@@ -10,7 +10,7 @@
     <ui-forms-select
       [control]="additionalGuests.get('unit')! | formControl"
       [options]="['руб', '%']"
-      [selectedOption]="'руб'"
+      [selectedOption]="additionalGuests.get('unit')!.value"
     ></ui-forms-select>
   </div>
 </div>

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { ArrivalVM } from '../../types/rules.models';
+import { ArrivalFormVM } from '../../types/rules-form.models';
 import { UiFormsInputComponent } from '@ui/forms';
 
 @Component({
@@ -14,5 +14,5 @@ import { UiFormsInputComponent } from '@ui/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectRulesArrivalUiComponent {
-  @Input({ required: true }) arrival!: ArrivalVM;
+  @Input({ required: true }) arrival!: ArrivalFormVM;
 }

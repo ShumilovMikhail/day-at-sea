@@ -42,5 +42,8 @@
       [form]="form.get('amenities')! | formGroup"
     ></account-add-object-characteristics-amenities-ui>
   </div>
-  <account-add-object-buttons-ui (nextButtonClickEvent)="onNext()"></account-add-object-buttons-ui>
+  <account-add-object-buttons-ui
+    (nextButtonClickEvent)="onNext()"
+    (saveButtonClickEvent)="onSave()"
+  ></account-add-object-buttons-ui>
 </div>

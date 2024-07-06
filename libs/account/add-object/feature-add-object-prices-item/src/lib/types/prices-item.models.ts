@@ -1,54 +1,54 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
-export interface ObjectPricesItemVM {
+export interface ObjectFormPricesItemVM {
   name: FormControl<string>;
   price: FormControl<string>;
   minStay: FormControl<number>;
-  discounts: FormGroup<DiscountsVM>;
-  weekendDiscount: FormGroup<WeekendDiscountVM>;
-  additionalGuests: FormGroup<AdditionalGuestsVM>;
+  discounts: FormGroup<DiscountsFormVM>;
+  weekendDiscount: FormGroup<WeekendDiscountFormVM>;
+  additionalGuests: FormGroup<AdditionalGuestsFormVM>;
   onRequest: FormControl<boolean>;
   instant: FormControl<boolean>;
 }
 
-export interface DiscountsVM {
-  durationStay: FormArray<FormGroup<DurationStayDiscountItemVM>>;
-  lastMinuteBooking: FormArray<FormGroup<LastMinuteBookingDiscountItemVM>>;
-  earlyBooking: FormArray<FormGroup<EarlyBookingDiscountItemVM>>;
+export interface DiscountsFormVM {
+  durationStay: FormArray<FormGroup<DurationStayDiscountItemFormVM>>;
+  lastMinuteBooking: FormArray<FormGroup<LastMinuteBookingDiscountItemFormVM>>;
+  earlyBooking: FormArray<FormGroup<EarlyBookingDiscountItemFormVM>>;
 }
 
-export interface DurationStayDiscountItemVM {
+export interface DurationStayDiscountItemFormVM {
   durationOver: FormControl<number>;
   discount: FormControl<string>;
   unit: FormControl<string>;
 }
 
-export interface EarlyBookingDiscountItemVM {
+export interface EarlyBookingDiscountItemFormVM {
   beforeMonths: FormControl<number>;
   discount: FormControl<string>;
   unit: FormControl<string>;
 }
 
-export interface LastMinuteBookingDiscountItemVM {
+export interface LastMinuteBookingDiscountItemFormVM {
   beforeDays: FormControl<number>;
   discount: FormControl<string>;
   unit: FormControl<string>;
 }
 
-export interface WeekendDiscountVM {
+export interface WeekendDiscountFormVM {
   price: FormControl<string>;
   friday: FormControl<boolean>;
   saturday: FormControl<boolean>;
   sunday: FormControl<boolean>;
 }
 
-export interface AdditionalGuestsVM {
+export interface AdditionalGuestsFormVM {
   overGuests: FormControl<number>;
   surcharge: FormControl<string>;
   unit: FormControl<string>;
 }
 
-export interface PriceVM {
+export interface PriceFormVM {
   price: FormControl<string>;
   minStay: FormControl<number>;
 }

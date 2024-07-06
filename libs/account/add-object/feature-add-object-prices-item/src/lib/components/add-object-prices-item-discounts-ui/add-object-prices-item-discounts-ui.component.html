@@ -93,6 +93,6 @@
     [maxCount]="100"
   ></ui-forms-counter>
   <ui-forms-input [control]="discount" [label]="'Скидка'"></ui-forms-input>
-  <ui-forms-select [control]="unit" [options]="['руб', '%']" [selectedOption]="'руб'"></ui-forms-select>
+  <ui-forms-select [control]="unit" [options]="['руб', '%']" [selectedOption]="unit.value"></ui-forms-select>
   <button type="button" class="cross" (click)="onRemoveDiscount(type, index)"></button>
 </ng-template>

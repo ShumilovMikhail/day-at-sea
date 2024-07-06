@@ -2,11 +2,14 @@ import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angu
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { PhotosVM } from '../../types/photos.models';
+import { PhotosFormVM } from '../../types/photos-form.models';
 import { AddObjectPhotosListUiComponent } from '../add-object-photos-list-ui/add-object-photos-list-ui.component';
 import { AddObjectPhotosFileUploaderUiComponent } from '../add-object-photos-file-uploader-ui/add-object-photos-file-uploader-ui.component';
 import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
 import { Router } from '@angular/router';
+import { LocalStorageObjectFormService } from '@account/add-object/data-access';
+import { ObjectPhotosVM } from '../../types/photos.models';
+import { base64ToBlob } from '@utils/functions';
 
 @Component({
   selector: 'account-add-object-photos-container',
@@ -22,8 +25,9 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectPhotosContainerComponent implements OnInit {
-  @Input({ required: true }) form!: FormGroup<PhotosVM>;
+  @Input({ required: true }) form!: FormGroup<PhotosFormVM>;
   private readonly router = inject(Router);
+  private readonly localStorageObjectFormService = inject(LocalStorageObjectFormService);
   private get formArrayPhotos(): FormArray<FormControl<string>> {
     return this.form.get('photos') as FormArray;
   }
@@ -67,5 +71,9 @@ export class AddObjectPhotosContainerComponent implements OnInit {
 
   public onNext(): void {
     this.router.navigateByUrl('account/add-object/rules');
+  }
+
+  public onSave(): void {
+    this.localStorageObjectFormService.updateObjectForm({ photos: this.form.value as ObjectPhotosVM });
   }
 }

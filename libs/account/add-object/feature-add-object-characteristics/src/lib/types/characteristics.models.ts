@@ -1,34 +1,34 @@
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-
-export interface CharacteristicsVM {
-  placementType: FormControl<string>;
-  square: FormControl<string>;
-  floor: FormControl<string>;
-  floorCount: FormControl<string>;
-  lift: FormControl<boolean>;
-  attic: FormControl<boolean>;
-  kitchen: FormControl<string>;
-  repair: FormControl<string>;
-  roomCount: FormControl<string>;
-  bedroomCount: FormControl<string>;
-  guestCount: FormControl<string>;
-  rooms: FormGroup<{
-    bedrooms: FormArray<FormGroup<RoomItemVM>>;
-    bathrooms: FormArray<FormGroup<RoomItemVM>>;
-  }>;
-  waterSupplyType: FormControl<string>;
-  amenities: FormGroup<AmenitiesVM>;
-  description: FormControl<string>;
+export interface ObjectCharacteristicsVM {
+  placementType: string;
+  square: string;
+  floor: string;
+  floorCount: string;
+  lift: boolean;
+  attic: boolean;
+  kitchen: string;
+  repair: string;
+  roomCount: number;
+  bedroomCount: string;
+  guestCount: number | string;
+  rooms: ObjectRoomsVM;
+  waterSupplyType: string;
+  amenities: AmenitiesVM;
+  description: string;
 }
 
-export interface AmenitiesVM {
-  flat: FormArray<FormControl<string>>;
-  bathroom: FormArray<FormControl<string>>;
-  kitchen: FormArray<FormControl<string>>;
-  children: FormArray<FormControl<string>>;
+export interface ObjectRoomsVM {
+  bedrooms: RoomItemVM[];
+  bathrooms: RoomItemVM[];
 }
 
 export interface RoomItemVM {
-  name: FormControl<string>;
-  count: FormControl<string>;
+  name: string;
+  count: number;
+}
+
+export interface AmenitiesVM {
+  flat: string[];
+  bathroom: string[];
+  kitchen: string[];
+  children: string[];
 }

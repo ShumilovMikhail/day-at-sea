@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { InfrastructureReachesVM } from '../../types/infrastructure.models';
+import { InfrastructureReachesFormVM } from '../../types/infrastructure-form.models';
 
 @Component({
   selector: 'account-add-object-infrastructure-reaches-ui',
@@ -13,5 +13,5 @@ import { InfrastructureReachesVM } from '../../types/infrastructure.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectInfrastructureReachesUiComponent {
-  @Input({ required: true }) reaches!: InfrastructureReachesVM;
+  @Input({ required: true }) reaches!: InfrastructureReachesFormVM;
 }

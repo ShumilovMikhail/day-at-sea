@@ -5,7 +5,7 @@
       <ui-forms-counter
         class="rooms-count"
         [control]="form.roomCount | formControl"
-        [count]="0"
+        [count]="form.roomCount.value"
         [maxCount]="10"
         [label]="'Количество комнат'"
       ></ui-forms-counter>
@@ -14,19 +14,24 @@
         [control]="form.bedroomCount"
         [options]="['Студия', '1 спальня', '2 спальни', '3 спальни', '4 спальни', '5 спален']"
         [label]="'Количество изолированных спален'"
-        [selectedOption]="'1 спальня'"
+        [selectedOption]="form.bedroomCount.value"
       ></ui-forms-select>
       <div class="guests">
         <ui-forms-counter
           #guestCounter
           [control]="form.guestCount | formControl"
-          [count]="0"
+          [count]="form.guestCount.value"
           [maxCount]="4"
           [disabled]="guestCounterDisabled"
           [label]="'Количество гостей'"
         ></ui-forms-counter>
         <label class="checkbox">
-          <input type="checkbox" #guestCheckbox (change)="onCheckboxClick(guestCheckbox.checked)" />
+          <input
+            type="checkbox"
+            [checked]="guestCounterDisabled"
+            #guestCheckbox
+            (change)="onCheckboxClick(guestCheckbox.checked)"
+          />
           <div></div>
           5 и более
         </label>
@@ -49,11 +54,11 @@
                 'Диван-кровать'
               ]"
               [label]="'Тип кровати'"
-              [selectedOption]="'1 спальня'"
+              [selectedOption]="bedroom.get('name')!.value"
             ></ui-forms-select>
             <ui-forms-counter
               [control]="bedroom.get('count')! | formControl"
-              [count]="0"
+              [count]="bedroom.get('count')!.value"
               [maxCount]="10"
               [label]="'Количество кроватей'"
             ></ui-forms-counter>
@@ -70,11 +75,11 @@
             [control]="bathroom.get('name')! | formControl"
             [options]="['Ванная комната совмещенная с туалетом', 'Ванная комната без туалета', 'Отдельный туалет']"
             [label]="'Тип ванной комнаты/туалета'"
-            [selectedOption]="'Ванная комната совмещенная с туалетом'"
+            [selectedOption]="bathroom.get('name')!.value"
           ></ui-forms-select>
           <ui-forms-counter
             [control]="bathroom.get('count')! | formControl"
-            [count]="0"
+            [count]="bathroom.get('count')!.value"
             [maxCount]="10"
             [label]="'Количество комнат с ванной'"
           ></ui-forms-counter>
@@ -88,7 +93,7 @@
         [control]="form.waterSupplyType"
         [options]="['Центральное водоснабжение', 'Автономное водоснабжение']"
         [label]="'Горячее водоснабжение'"
-        [selectedOption]="'Центральное водоснабжение'"
+        [selectedOption]="form.waterSupplyType.value"
       ></ui-forms-select>
     </fieldset>
   </form>

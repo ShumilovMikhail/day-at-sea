@@ -3,10 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { InfrastructureListVM, InfrastructureReachesVM, InfrastructureVM } from '../../types/infrastructure.models';
+import {
+  InfrastructureListFormVM,
+  InfrastructureReachesFormVM,
+  InfrastructureFormVM,
+} from '../../types/infrastructure-form.models';
 import { AddObjectInfrastructureListUiComponent } from '../add-object-infrastructure-list-ui/add-object-infrastructure-list-ui.component';
 import { AddObjectInfrastructureReachesUiComponent } from '../add-object-infrastructure-reaches-ui/add-object-infrastructure-reaches-ui.component';
 import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
+import { LocalStorageObjectFormService } from '@account/add-object/data-access';
+import { ObjectInfrastructureVM } from '../../types/infrastructure.models';
 
 @Component({
   selector: 'account-add-object-infrastructure-container',
@@ -23,10 +29,11 @@ import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectInfrastructureContainerComponent {
-  @Input({ required: true }) form!: FormGroup<InfrastructureVM>;
+  @Input({ required: true }) form!: FormGroup<InfrastructureFormVM>;
   private readonly router = inject(Router);
+  private readonly localStorageObjectFormService = inject(LocalStorageObjectFormService);
 
-  get infrastructureList(): InfrastructureListVM {
+  get infrastructureList(): InfrastructureListFormVM {
     return {
       places: this.form.get('places') as FormArray,
       leisure: this.form.get('leisure') as FormArray,
@@ -35,7 +42,7 @@ export class AddObjectInfrastructureContainerComponent {
     };
   }
 
-  get infrastructureReaches(): InfrastructureReachesVM {
+  get infrastructureReaches(): InfrastructureReachesFormVM {
     return {
       reachByPrivateTransport: this.form.get('reachByPrivateTransport') as FormControl,
       reachByPublicTransport: this.form.get('reachByPublicTransport') as FormControl,
@@ -44,6 +51,11 @@ export class AddObjectInfrastructureContainerComponent {
 
   public onNext(): void {
     this.router.navigateByUrl('account/add-object/characteristics');
+  }
+
+  public onSave(): void {
+    console.log(1);
+    this.localStorageObjectFormService.updateObjectForm({ infrastructure: this.form.value as ObjectInfrastructureVM });
   }
 
   public onDistanceChange(type: string, name: string, distance: string): void {

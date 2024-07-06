@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 
-import { AdditionalGuestsVM } from '../../types/prices-item.models';
+import { AdditionalGuestsFormVM } from '../../types/prices-item.models';
 import { UiFormsCounterComponent, UiFormsInputComponent, UiFormsSelectComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
 
@@ -15,5 +15,5 @@ import { FormControlPipe } from '@utils/pipes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectPricesItemAdditionalGuestsUiComponent {
-  @Input({ required: true }) additionalGuests!: FormGroup<AdditionalGuestsVM>;
+  @Input({ required: true }) additionalGuests!: FormGroup<AdditionalGuestsFormVM>;
 }

@@ -13,7 +13,7 @@ import {
   ObjectFormInfrastructure,
   ObjectFormPhotos,
   ObjectFormRules,
-} from '../types/object-form.models';
+} from '@account/add-object/util';
 import { AddObjectCharacteristicsContainerComponent } from '@account/add-object/feature-add-object-characteristics';
 import { AddObjectFormService } from '../services/add-object-form.service';
 import { AddObjectPhotosContainerComponent } from '@account/add-object/feature-add-object-photos';

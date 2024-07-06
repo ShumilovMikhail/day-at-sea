@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { UiFormsInputComponent, UiFormsSelectComponent } from '@ui/forms';
-import { GeneralParametersVM } from '../../types/general-parameters.models';
+import { GeneralParameterFormVM } from '../../types/characteristics-form.models';
 import { PlacementTypeDataService } from '@account/add-object/util';
 import { UiCommonNoteComponent } from '@ui/common';
 
@@ -18,7 +18,7 @@ import { UiCommonNoteComponent } from '@ui/common';
 })
 export class AddObjectCharacteristicsGeneralParametersUiComponent {
   @Input({ required: true }) placementControl!: FormControl<string>;
-  @Input({ required: true }) form!: GeneralParametersVM;
+  @Input({ required: true }) form!: GeneralParameterFormVM;
   private readonly placementTypeData = inject(PlacementTypeDataService);
   get placementList(): string[] {
     const placement = this.placementControl.value;

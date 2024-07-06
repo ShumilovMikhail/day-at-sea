@@ -3,9 +3,3 @@ export enum ObjectTypes {
   HOUSE = 'house',
   ROOM = 'room',
 }
-
-export interface ObjectInfoVM {
-  address: string;
-  placement: string;
-  type: string;
-}

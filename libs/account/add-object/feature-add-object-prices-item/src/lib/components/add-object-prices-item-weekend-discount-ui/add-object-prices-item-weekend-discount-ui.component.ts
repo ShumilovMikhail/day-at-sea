@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { WeekendDiscountVM } from '../../types/prices-item.models';
+import { WeekendDiscountFormVM } from '../../types/prices-item.models';
 import { UiFormsInputComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
 
@@ -15,5 +15,5 @@ import { FormControlPipe } from '@utils/pipes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectPricesItemWeekendDiscountUiComponent {
-  @Input({ required: true }) weekendDiscount!: FormGroup<WeekendDiscountVM>;
+  @Input({ required: true }) weekendDiscount!: FormGroup<WeekendDiscountFormVM>;
 }

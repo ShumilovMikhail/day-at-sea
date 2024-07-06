@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormArray, FormGroup } from '@angular/forms';
 
 import {
-  DiscountsVM,
-  DurationStayDiscountItemVM,
-  EarlyBookingDiscountItemVM,
-  LastMinuteBookingDiscountItemVM,
+  DiscountsFormVM,
+  DurationStayDiscountItemFormVM,
+  EarlyBookingDiscountItemFormVM,
+  LastMinuteBookingDiscountItemFormVM,
 } from '../../types/prices-item.models';
 import { UiFormsCounterComponent, UiFormsInputComponent, UiFormsSelectComponent } from '@ui/forms';
 
@@ -19,21 +19,21 @@ import { UiFormsCounterComponent, UiFormsInputComponent, UiFormsSelectComponent 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectPricesItemDiscountsUiComponent {
-  @Input({ required: true }) discounts!: FormGroup<DiscountsVM>;
+  @Input({ required: true }) discounts!: FormGroup<DiscountsFormVM>;
   @Output() addDiscountEvent = new EventEmitter<string>();
   @Output() removeDiscountEvent = new EventEmitter<{ type: string; index: number }>();
 
-  get durationStayArray(): FormGroup<DurationStayDiscountItemVM>[] {
-    return (this.discounts.get('durationStay') as FormArray).controls as FormGroup<DurationStayDiscountItemVM>[];
+  get durationStayArray(): FormGroup<DurationStayDiscountItemFormVM>[] {
+    return (this.discounts.get('durationStay') as FormArray).controls as FormGroup<DurationStayDiscountItemFormVM>[];
   }
 
-  get earlyBookingArray(): FormGroup<EarlyBookingDiscountItemVM>[] {
-    return (this.discounts.get('earlyBooking') as FormArray).controls as FormGroup<EarlyBookingDiscountItemVM>[];
+  get earlyBookingArray(): FormGroup<EarlyBookingDiscountItemFormVM>[] {
+    return (this.discounts.get('earlyBooking') as FormArray).controls as FormGroup<EarlyBookingDiscountItemFormVM>[];
   }
 
-  get lastMinuteBookingArray(): FormGroup<LastMinuteBookingDiscountItemVM>[] {
+  get lastMinuteBookingArray(): FormGroup<LastMinuteBookingDiscountItemFormVM>[] {
     return (this.discounts.get('lastMinuteBooking') as FormArray)
-      .controls as FormGroup<LastMinuteBookingDiscountItemVM>[];
+      .controls as FormGroup<LastMinuteBookingDiscountItemFormVM>[];
   }
 
   public onAddDiscount(type: string): void {

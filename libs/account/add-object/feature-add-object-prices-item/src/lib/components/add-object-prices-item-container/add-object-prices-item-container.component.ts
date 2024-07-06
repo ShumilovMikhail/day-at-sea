@@ -3,7 +3,7 @@ import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 
-import { DiscountsVM, ObjectPricesItemVM } from '../../types/prices-item.models';
+import { DiscountsFormVM, ObjectFormPricesItemVM } from '../../types/prices-item.models';
 import { FormControlPipe, FormGroupPipe } from '@utils/pipes';
 import { AddObjectPricesItemPriceUiComponent } from '../add-object-prices-item-price-ui/add-object-prices-item-price-ui.component';
 import { AddObjectPricesItemDiscountsUiComponent } from '../add-object-prices-item-discounts-ui/add-object-prices-item-discounts-ui.component';
@@ -31,11 +31,11 @@ import { AddObjectPricesItemAdditionalGuestsUiComponent } from '../add-object-pr
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectPricesItemContainerComponent {
-  @Input({ required: true }) pricesItem!: FormGroup<ObjectPricesItemVM>;
+  @Input({ required: true }) pricesItem!: FormGroup<ObjectFormPricesItemVM>;
   private readonly pricesItemService = inject(PricesItemService);
 
   public onAddDiscount(type: string): void {
-    const form = this.pricesItemService.createFormByType(type as keyof DiscountsVM);
+    const form = this.pricesItemService.createFormByType(type as keyof DiscountsFormVM);
     (this.pricesItem.get('discounts')?.get(type) as FormArray).push(form);
   }
 

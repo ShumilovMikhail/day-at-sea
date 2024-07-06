@@ -8,19 +8,19 @@ export interface ObjectForm {
   photos: FormGroup<ObjectFormPhotos>;
   rules: FormGroup<ObjectFormRules>;
   services: FormArray<FormControl<string>>;
-  prices: FormArray<FormGroup<ObjectPricesItem>>;
+  prices: FormArray<FormGroup<ObjectFormPricesItem>>;
 }
 
 export interface ObjectFormInfrastructure {
-  places: FormArray<FormControl<InfrastructureItem>>;
-  leisure: FormArray<FormControl<InfrastructureItem>>;
-  leisureWater: FormArray<FormControl<InfrastructureItem>>;
-  leisureActive: FormArray<FormControl<InfrastructureItem>>;
+  places: FormArray<FormGroup<InfrastructureItemForm>>;
+  leisure: FormArray<FormGroup<InfrastructureItemForm>>;
+  leisureWater: FormArray<FormGroup<InfrastructureItemForm>>;
+  leisureActive: FormArray<FormGroup<InfrastructureItemForm>>;
   reachByPublicTransport: FormControl<string>;
   reachByPrivateTransport: FormControl<string>;
 }
 
-export interface InfrastructureItem {
+export interface InfrastructureItemForm {
   name: FormControl<string>;
   distance: FormControl<string>;
 }
@@ -34,24 +34,26 @@ export interface ObjectFormCharacteristics {
   attic: FormControl<boolean>;
   kitchen: FormControl<string>;
   repair: FormControl<string>;
-  roomCount: FormControl<string>;
+  roomCount: FormControl<number>;
   bedroomCount: FormControl<string>;
-  guestCount: FormControl<string>;
-  rooms: FormGroup<{
-    bedrooms: FormArray<FormGroup<RoomItem>>;
-    bathrooms: FormArray<FormGroup<RoomItem>>;
-  }>;
+  guestCount: FormControl<number | string>;
+  rooms: FormGroup<ObjectFormRooms>;
   waterSupplyType: FormControl<string>;
-  amenities: FormGroup<Amenities>;
+  amenities: FormGroup<AmenitiesForm>;
   description: FormControl<string>;
 }
 
-export interface RoomItem {
-  name: FormControl<string>;
-  count: FormControl<string>;
+export interface ObjectFormRooms {
+  bedrooms: FormArray<FormGroup<RoomItemForm>>;
+  bathrooms: FormArray<FormGroup<RoomItemForm>>;
 }
 
-export interface Amenities {
+export interface RoomItemForm {
+  name: FormControl<string>;
+  count: FormControl<number>;
+}
+
+export interface AmenitiesForm {
   flat: FormArray<FormControl<string>>;
   bathroom: FormArray<FormControl<string>>;
   kitchen: FormArray<FormControl<string>>;
@@ -75,49 +77,49 @@ export interface ObjectFormPhotos {
   photos: FormArray<FormControl<string>>;
 }
 
-export interface ObjectPricesItem {
+export interface ObjectFormPricesItem {
   name: FormControl<string>;
   price: FormControl<string>;
   minStay: FormControl<number>;
-  discounts: FormGroup<Discounts>;
-  weekendDiscount: FormGroup<WeekendDiscount>;
-  additionalGuests: FormGroup<AdditionalGuests>;
+  discounts: FormGroup<DiscountsForm>;
+  weekendDiscount: FormGroup<WeekendDiscountForm>;
+  additionalGuests: FormGroup<AdditionalGuestsForm>;
   onRequest: FormControl<boolean>;
   instant: FormControl<boolean>;
 }
 
-export interface Discounts {
-  durationStay: FormArray<FormGroup<DurationStayDiscountItem>>;
-  lastMinuteBooking: FormArray<FormGroup<LastMinuteBookingDiscountItem>>;
-  earlyBooking: FormArray<FormGroup<EarlyBookingDiscountItem>>;
+export interface DiscountsForm {
+  durationStay: FormArray<FormGroup<DurationStayDiscountItemForm>>;
+  lastMinuteBooking: FormArray<FormGroup<LastMinuteBookingDiscountItemForm>>;
+  earlyBooking: FormArray<FormGroup<EarlyBookingDiscountItemForm>>;
 }
 
-export interface DurationStayDiscountItem {
+export interface DurationStayDiscountItemForm {
   durationOver: FormControl<number>;
   discount: FormControl<string>;
   unit: FormControl<string>;
 }
 
-export interface EarlyBookingDiscountItem {
+export interface EarlyBookingDiscountItemForm {
   beforeMonths: FormControl<number>;
   discount: FormControl<string>;
   unit: FormControl<string>;
 }
 
-export interface LastMinuteBookingDiscountItem {
+export interface LastMinuteBookingDiscountItemForm {
   beforeDays: FormControl<number>;
   discount: FormControl<string>;
   unit: FormControl<string>;
 }
 
-export interface WeekendDiscount {
+export interface WeekendDiscountForm {
   price: FormControl<string>;
   friday: FormControl<boolean>;
   saturday: FormControl<boolean>;
   sunday: FormControl<boolean>;
 }
 
-export interface AdditionalGuests {
+export interface AdditionalGuestsForm {
   overGuests: FormControl<number>;
   surcharge: FormControl<string>;
   unit: FormControl<string>;

@@ -3,7 +3,7 @@
     [control]="booking.paymentCheckIn"
     [options]="['Только наличными', 'Наличными или пластиковой картой', 'Электронные деньги', 'Безналичный расчет']"
     [label]="'Оплата при заселении'"
-    [selectedOption]="'Только наличными'"
+    [selectedOption]="booking.paymentCheckIn.value"
   ></ui-forms-select>
   <ui-forms-input
     [control]="booking.pledge"

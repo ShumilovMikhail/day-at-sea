@@ -8,6 +8,7 @@ import { AddObjectInfoRoomUiComponent } from '../add-object-info-room-ui/add-obj
 import { AddObjectInfoFlatUiComponent } from '../add-object-info-flat-ui/add-object-info-flat-ui.component';
 import { AddObjectInfoHouseUiComponent } from '../add-object-info-house-ui/add-object-info-house-ui.component';
 import { Router } from '@angular/router';
+import { LocalStorageObjectFormService } from '@account/add-object/data-access';
 
 @Component({
   selector: 'account-add-object-info-container',
@@ -28,6 +29,7 @@ export class AddObjectInfoContainerComponent {
   @Input({ required: true }) addressControl!: FormControl<string>;
   @Input({ required: true }) placementTypeControl!: FormControl<string>;
   private readonly router = inject(Router);
+  private readonly objectFormStorageService = inject(LocalStorageObjectFormService);
   public selectedType: ObjectTypes | null = null;
 
   public onSelectType(type: ObjectTypes): void {
@@ -36,6 +38,11 @@ export class AddObjectInfoContainerComponent {
   }
 
   public onNext(): void {
+    this.objectFormStorageService.updateObjectForm({
+      placement: this.placementControl.value,
+      address: this.addressControl.value,
+      characteristics: this.placementTypeControl.parent?.value,
+    });
     this.router.navigate(['/account/add-object/infrastructure']);
   }
 }

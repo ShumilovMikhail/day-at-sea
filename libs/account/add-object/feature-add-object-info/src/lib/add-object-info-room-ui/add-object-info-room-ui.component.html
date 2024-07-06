@@ -2,21 +2,13 @@
   <div class="form-block">
     <p>Выберите тип жилья</p>
     <div class="radio-list">
+      @for (placementType of placementTypes; track $index) {
       <label class="radio">
-        <input type="radio" name="type" value="Комната в квартире" [formControl]="placementTypeControl" />
+        <input type="radio" name="type" [formControl]="placementTypeControl" [value]="placementType" />
         <div></div>
-        Комната в квартире
+        {{ placementType }}
       </label>
-      <label class="radio">
-        <input type="radio" name="type" value="Комната в частном доме" [formControl]="placementTypeControl" />
-        <div></div>
-        Комната в частном доме
-      </label>
-      <label class="radio">
-        <input type="radio" name="type" value="Комната в коттедже" [formControl]="placementTypeControl" />
-        <div></div>
-        Комната в коттедже
-      </label>
+      }
     </div>
   </div>
   <ui-forms-address-container

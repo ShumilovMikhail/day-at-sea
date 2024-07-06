@@ -5,6 +5,7 @@ import { FormArray, FormControl } from '@angular/forms';
 
 import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
 import { AddObjectServicesListUiComponent } from '../add-object-services-list-ui/add-object-services-list-ui.component';
+import { LocalStorageObjectFormService } from '@account/add-object/data-access';
 
 @Component({
   selector: 'account-add-object-services-container',
@@ -17,9 +18,14 @@ import { AddObjectServicesListUiComponent } from '../add-object-services-list-ui
 export class AddObjectServicesContainerComponent {
   @Input({ required: true }) servicesArray!: FormArray<FormControl<string>>;
   private readonly router = inject(Router);
+  private readonly objectFormStorageService = inject(LocalStorageObjectFormService);
 
   public onNext(): void {
     this.router.navigateByUrl('account/add-object/prices');
+  }
+
+  public onSave(): void {
+    this.objectFormStorageService.updateObjectForm({ services: this.servicesArray.value });
   }
 
   public onAddService(service: string): void {

@@ -7,5 +7,8 @@
       (removeServiceEvent)="onRemoveService($event)"
     ></account-add-object-services-list-ui>
   </form>
-  <account-add-object-buttons-ui (nextButtonClickEvent)="onNext()"></account-add-object-buttons-ui>
+  <account-add-object-buttons-ui
+    (nextButtonClickEvent)="onNext()"
+    (saveButtonClickEvent)="onSave()"
+  ></account-add-object-buttons-ui>
 </div>

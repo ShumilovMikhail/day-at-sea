@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@account/add-object/data-access": ["libs/account/add-object/data-access/src/index.ts"],
       "@account/add-object/feature-add-object": ["libs/account/add-object/feature-add-object/src/index.ts"],
       "@account/add-object/feature-add-object-characteristics": [
         "libs/account/add-object/feature-add-object-characteristics/src/index.ts"

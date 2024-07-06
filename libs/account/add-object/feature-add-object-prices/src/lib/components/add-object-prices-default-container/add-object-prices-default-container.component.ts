@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 
-import { ObjectPricesItemVM } from '../../types/prices.models';
+import { ObjectFormPricesItemVM } from '../../types/prices-form.models';
 import { AddObjectPricesItemContainerComponent } from '@account/add-object/feature-add-object-prices-item';
 
 @Component({
@@ -14,5 +14,10 @@ import { AddObjectPricesItemContainerComponent } from '@account/add-object/featu
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectPricesDefaultContainerComponent {
-  @Input({ required: true }) defaultPrices!: FormGroup<ObjectPricesItemVM>;
+  @Input({ required: true }) defaultPrices!: FormGroup<ObjectFormPricesItemVM>;
+  @Output() saveEvent = new EventEmitter<void>();
+
+  public onSave(): void {
+    this.saveEvent.emit();
+  }
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PriceVM } from '../../types/prices-item.models';
+import { PriceFormVM } from '../../types/prices-item.models';
 import { UiFormsCounterComponent, UiFormsInputComponent } from '@ui/forms';
 
 @Component({
@@ -13,5 +13,5 @@ import { UiFormsCounterComponent, UiFormsInputComponent } from '@ui/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectPricesItemPriceUiComponent {
-  @Input({ required: true }) price!: PriceVM;
+  @Input({ required: true }) price!: PriceFormVM;
 }

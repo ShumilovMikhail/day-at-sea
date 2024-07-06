@@ -25,5 +25,8 @@
       [descriptionControl]="form.get('description')! | formControl"
     ></account-add-object-rules-description-ui>
   </form>
-  <account-add-object-buttons-ui (nextButtonClickEvent)="onNext()"></account-add-object-buttons-ui>
+  <account-add-object-buttons-ui
+    (nextButtonClickEvent)="onNext()"
+    (saveButtonClickEvent)="onSave()"
+  ></account-add-object-buttons-ui>
 </div>
