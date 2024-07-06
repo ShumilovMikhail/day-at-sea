@@ -1,0 +1,10 @@
+<div class="price">
+  <ui-forms-input [control]="price.price" [label]="'Цена, руб/сутки'"></ui-forms-input>
+  <ui-forms-counter
+    [control]="price.minStay"
+    [count]="price.minStay.value"
+    [label]="'Минимальный срок проживания'"
+    [minCount]="0"
+    [maxCount]="100"
+  ></ui-forms-counter>
+</div>

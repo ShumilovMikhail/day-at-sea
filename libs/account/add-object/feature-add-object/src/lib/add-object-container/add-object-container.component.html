@@ -19,4 +19,8 @@
 <account-add-object-services-container
   [servicesArray]="form.get('services')! | formArray"
 ></account-add-object-services-container>
+} @case ('prices') {
+<account-add-object-prices-container
+  [pricesArray]="form.get('prices')! | formArray"
+></account-add-object-prices-container>
 }}

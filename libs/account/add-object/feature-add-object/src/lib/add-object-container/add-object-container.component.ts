@@ -19,6 +19,7 @@ import { AddObjectFormService } from '../services/add-object-form.service';
 import { AddObjectPhotosContainerComponent } from '@account/add-object/feature-add-object-photos';
 import { AddObjectRulesContainerComponent } from '@account/add-object/feature-add-object-rules';
 import { AddObjectServicesContainerComponent } from '@account/add-object/feature-add-object-services';
+import { AddObjectPricesContainerComponent } from '@account/add-object/feature-add-object-prices';
 
 @Component({
   selector: 'account-add-object-container',
@@ -33,6 +34,7 @@ import { AddObjectServicesContainerComponent } from '@account/add-object/feature
     AddObjectPhotosContainerComponent,
     AddObjectRulesContainerComponent,
     AddObjectServicesContainerComponent,
+    AddObjectPricesContainerComponent,
   ],
   templateUrl: './add-object-container.component.html',
   styleUrl: './add-object-container.component.scss',

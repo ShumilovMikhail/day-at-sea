@@ -1,0 +1,29 @@
+.discount-block {
+  h2 {
+    font-size: 16px;
+  }
+
+  .content {
+    display: flex;
+    gap: 10px;
+    align-items: end;
+  }
+}
+
+ui-forms-input {
+  width: 245px;
+}
+
+ui-forms-select {
+  margin-bottom: 4px;
+  width: 80px;
+}
+
+@media (max-width: 480px) {
+  .discount-block {
+    .content {
+      align-items: start;
+      flex-direction: column;
+    }
+  }
+}

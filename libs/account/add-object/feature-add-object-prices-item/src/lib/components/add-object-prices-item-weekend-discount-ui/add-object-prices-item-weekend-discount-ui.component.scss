@@ -1,0 +1,32 @@
+h2 {
+  font-size: 16px;
+}
+
+ui-forms-input {
+  margin-top: 15px;
+  width: 425px;
+}
+
+.checkbox-list {
+  display: flex;
+  gap: 40px;
+  margin-top: 17px;
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 14px;
+  }
+
+  ui-forms-input {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .checkbox-list {
+    display: flex;
+    gap: 10px 40px;
+    margin-top: 17px;
+    flex-wrap: wrap;
+  }
+}

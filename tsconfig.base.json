@@ -26,6 +26,12 @@
       "@account/add-object/feature-add-object-photos": [
         "libs/account/add-object/feature-add-object-photos/src/index.ts"
       ],
+      "@account/add-object/feature-add-object-prices": [
+        "libs/account/add-object/feature-add-object-prices/src/index.ts"
+      ],
+      "@account/add-object/feature-add-object-prices-item": [
+        "libs/account/add-object/feature-add-object-prices-item/src/index.ts"
+      ],
       "@account/add-object/feature-add-object-rules": ["libs/account/add-object/feature-add-object-rules/src/index.ts"],
       "@account/add-object/feature-add-object-services": [
         "libs/account/add-object/feature-add-object-services/src/index.ts"

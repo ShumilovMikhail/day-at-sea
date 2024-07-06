@@ -1,0 +1,16 @@
+<div class="discount-block">
+  <h2>Дополнительные гости</h2>
+  <div class="content">
+    <ui-forms-counter
+      [control]="additionalGuests.get('overGuests')! | formControl"
+      [count]="additionalGuests.get('overGuests')!.value"
+      [label]="'За каждого дополнительного гостя свыше'"
+    ></ui-forms-counter>
+    <ui-forms-input [control]="additionalGuests.get('surcharge')! | formControl" [label]="'Доплата'"></ui-forms-input>
+    <ui-forms-select
+      [control]="additionalGuests.get('unit')! | formControl"
+      [options]="['руб', '%']"
+      [selectedOption]="'руб'"
+    ></ui-forms-select>
+  </div>
+</div>

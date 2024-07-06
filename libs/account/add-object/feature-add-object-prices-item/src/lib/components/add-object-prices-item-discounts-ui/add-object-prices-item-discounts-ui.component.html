@@ -1,0 +1,98 @@
+<div class="discounts">
+  <div class="discount-block">
+    <h2>Скидка на срок проживания</h2>
+    <ul class="discount-block__list">
+      @for (discount of durationStayArray; track discount) {
+      <li class="discount-block__item">
+        <ng-container
+          *ngTemplateOutlet="
+            discountItem;
+            context: {
+              title: 'Свыше скольки суток',
+              discount: discount.get('discount'),
+              count: discount.get('durationOver'),
+              unit: discount.get('unit'),
+              type: 'durationStay',
+              index: $index
+            }
+          "
+        ></ng-container>
+      </li>
+      }
+    </ul>
+    <button class="discount-block__add-button" type="button" (click)="onAddDiscount('durationStay')">
+      + Добавить скидку на срок проживания
+    </button>
+  </div>
+  <div class="discount-block">
+    <h2>Скидка за раннее бронирование</h2>
+    <ul class="discount-block__list">
+      @for (discount of earlyBookingArray; track discount) {
+      <li class="discount-block__item">
+        <ng-container
+          *ngTemplateOutlet="
+            discountItem;
+            context: {
+              title: 'За сколько месяцев бронь?',
+              discount: discount.get('discount'),
+              count: discount.get('beforeMonths'),
+              unit: discount.get('unit'),
+              type: 'earlyBooking',
+              index: $index
+            }
+          "
+        ></ng-container>
+      </li>
+      }
+    </ul>
+    <button class="discount-block__add-button" type="button" (click)="onAddDiscount('earlyBooking')">
+      + Добавить скидку за ранее бронирование
+    </button>
+  </div>
+  <div class="discount-block">
+    <h2>Скидка за бронирование в последний момент</h2>
+    <ul class="discount-block__list">
+      @for (discount of lastMinuteBookingArray; track discount) {
+      <li class="discount-block__item">
+        <ng-container
+          *ngTemplateOutlet="
+            discountItem;
+            context: {
+              title: 'За сколько дней бронь?',
+              discount: discount.get('discount'),
+              count: discount.get('beforeDays'),
+              unit: discount.get('unit'),
+              type: 'lastMinuteBooking',
+              index: $index
+            }
+          "
+        ></ng-container>
+      </li>
+      }
+    </ul>
+    <button class="discount-block__add-button" type="button" (click)="onAddDiscount('lastMinuteBooking')">
+      + Добавить скидку для бронирования в последний момент
+    </button>
+  </div>
+</div>
+
+<ng-template
+  #discountItem
+  let-title="title"
+  let-discount="discount"
+  let-count="count"
+  let-unit="unit"
+  let-type="type"
+  let-index="index"
+>
+  <ui-forms-counter
+    [control]="count"
+    [count]="count.value"
+    [label]="title"
+    [minCount]="0"
+    [maxCount]="100"
+  ></ui-forms-counter>
+  <ui-forms-input [control]="discount" [label]="'Скидка'"></ui-forms-input>
+  <ui-forms-select [control]="unit" [options]="['руб', '%']" [selectedOption]="'руб'"></ui-forms-select>
+  <button type="button" class="cross" (click)="onRemoveDiscount(type, index)"></button>
+</ng-template>

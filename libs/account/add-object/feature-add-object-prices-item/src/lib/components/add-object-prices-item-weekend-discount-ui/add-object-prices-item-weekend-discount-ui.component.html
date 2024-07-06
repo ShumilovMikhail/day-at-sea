@@ -1,0 +1,30 @@
+<div class="weekend-discount">
+  <h2>Специальная цена выходного дня</h2>
+  <ui-forms-input
+    [control]="weekendDiscount.get('price')! | formControl"
+    [label]="'Цена выходного дня, руб/сутки'"
+  ></ui-forms-input>
+  <ul class="checkbox-list">
+    <li class="checkbox-item">
+      <label class="checkbox">
+        <input type="checkbox" [formControl]="weekendDiscount.get('friday')! | formControl" />
+        <div></div>
+        Пятница
+      </label>
+    </li>
+    <li class="checkbox-item">
+      <label class="checkbox">
+        <input type="checkbox" [formControl]="weekendDiscount.get('saturday')! | formControl" />
+        <div></div>
+        Суббота
+      </label>
+    </li>
+    <li class="checkbox-item">
+      <label class="checkbox">
+        <input type="checkbox" [formControl]="weekendDiscount.get('sunday')! | formControl" />
+        <div></div>
+        Воскресенье
+      </label>
+    </li>
+  </ul>
+</div>

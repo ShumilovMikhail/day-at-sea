@@ -1,0 +1,19 @@
+.price {
+  display: flex;
+  gap: 10px;
+}
+
+ui-forms-input {
+  width: 425px;
+}
+
+@media (max-width: 480px) {
+  .price {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  ui-forms-input {
+    width: 100%;
+  }
+}

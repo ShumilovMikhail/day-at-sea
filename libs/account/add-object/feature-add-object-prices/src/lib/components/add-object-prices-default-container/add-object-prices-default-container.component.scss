@@ -1,0 +1,29 @@
+@import 'variables';
+@import 'mixins';
+
+.default-prices {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 34px 35px;
+  border: 1px solid $blueLight;
+  border-radius: 5px;
+  background-color: $white;
+  width: 800px;
+}
+
+button {
+  padding: 13px 25px;
+  width: 192px;
+  @include button-secondary();
+}
+
+@media (max-width: 480px) {
+  .default-prices {
+    padding: 20px;
+    width: 100%;
+  }
+  button {
+    width: 100%;
+  }
+}

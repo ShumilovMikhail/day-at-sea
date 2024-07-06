@@ -8,6 +8,7 @@ export interface ObjectForm {
   photos: FormGroup<ObjectFormPhotos>;
   rules: FormGroup<ObjectFormRules>;
   services: FormArray<FormControl<string>>;
+  prices: FormArray<FormGroup<ObjectPricesItem>>;
 }
 
 export interface ObjectFormInfrastructure {
@@ -72,4 +73,52 @@ export interface ObjectFormRules {
 export interface ObjectFormPhotos {
   generalPhotoIndex: FormControl<number | null>;
   photos: FormArray<FormControl<string>>;
+}
+
+export interface ObjectPricesItem {
+  name: FormControl<string>;
+  price: FormControl<string>;
+  minStay: FormControl<number>;
+  discounts: FormGroup<Discounts>;
+  weekendDiscount: FormGroup<WeekendDiscount>;
+  additionalGuests: FormGroup<AdditionalGuests>;
+  onRequest: FormControl<boolean>;
+  instant: FormControl<boolean>;
+}
+
+export interface Discounts {
+  durationStay: FormArray<FormGroup<DurationStayDiscountItem>>;
+  lastMinuteBooking: FormArray<FormGroup<LastMinuteBookingDiscountItem>>;
+  earlyBooking: FormArray<FormGroup<EarlyBookingDiscountItem>>;
+}
+
+export interface DurationStayDiscountItem {
+  durationOver: FormControl<number>;
+  discount: FormControl<string>;
+  unit: FormControl<string>;
+}
+
+export interface EarlyBookingDiscountItem {
+  beforeMonths: FormControl<number>;
+  discount: FormControl<string>;
+  unit: FormControl<string>;
+}
+
+export interface LastMinuteBookingDiscountItem {
+  beforeDays: FormControl<number>;
+  discount: FormControl<string>;
+  unit: FormControl<string>;
+}
+
+export interface WeekendDiscount {
+  price: FormControl<string>;
+  friday: FormControl<boolean>;
+  saturday: FormControl<boolean>;
+  sunday: FormControl<boolean>;
+}
+
+export interface AdditionalGuests {
+  overGuests: FormControl<number>;
+  surcharge: FormControl<string>;
+  unit: FormControl<string>;
 }

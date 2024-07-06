@@ -1,7 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { InfrastructureItem, ObjectForm, RoomItem } from '../types/object-form.models';
+import {
+  DurationStayDiscountItem,
+  EarlyBookingDiscountItem,
+  InfrastructureItem,
+  LastMinuteBookingDiscountItem,
+  ObjectForm,
+  ObjectPricesItem,
+  RoomItem,
+} from '../types/object-form.models';
 
 @Injectable({
   providedIn: 'root',
@@ -60,26 +68,30 @@ export class AddObjectFormService {
       description: [''],
     }),
     services: this.fb.array([] as FormControl<string>[]),
-    // prices: {
-    //   default: {
-    //     price: [''],
-    //     minStay: [''],
-    //     discounts: [[]],
-    //     weekendDiscount: {
-    //       price: [''],
-    //       friday: [false],
-    //       saturday: [false],
-    //       sunday: [false],
-    //     },
-    //     additionalGuests: {
-    //       moreGuests: [''],
-    //       surcharge: [''],
-    //       unit: [''],
-    //     },
-    //     onRequest: [false],
-    //     instant: [false],
-    //   },
-    //   seasons: [[]],
-    // },
+    prices: this.fb.array([
+      this.fb.nonNullable.group({
+        name: ['Цены по умолчанию'],
+        price: [''],
+        minStay: [0],
+        discounts: this.fb.nonNullable.group({
+          durationStay: this.fb.array([] as FormGroup<DurationStayDiscountItem>[]),
+          lastMinuteBooking: this.fb.array([] as FormGroup<LastMinuteBookingDiscountItem>[]),
+          earlyBooking: this.fb.array([] as FormGroup<EarlyBookingDiscountItem>[]),
+        }),
+        weekendDiscount: this.fb.nonNullable.group({
+          price: [''],
+          friday: [false],
+          saturday: [false],
+          sunday: [false],
+        }),
+        additionalGuests: this.fb.nonNullable.group({
+          overGuests: [0],
+          surcharge: [''],
+          unit: [''],
+        }),
+        onRequest: [false],
+        instant: [false],
+      }),
+    ] as FormGroup<ObjectPricesItem>[]),
   });
 }
