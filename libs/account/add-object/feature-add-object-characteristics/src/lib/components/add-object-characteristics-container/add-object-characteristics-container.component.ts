@@ -11,8 +11,8 @@ import { AddObjectCharacteristicsRoomsUiComponent } from '../add-object-characte
 import { AddObjectCharacteristicsAmenitiesUiComponent } from '../add-object-characteristics-amenities-ui/add-object-characteristics-amenities-ui.component';
 import { AddObjectCharacteristicsDescriptionUiComponent } from '../add-object-characteristics-description-ui/add-object-characteristics-description-ui.component';
 import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
-import { LocalStorageObjectFormService } from '@account/add-object/data-access';
 import { ObjectCharacteristicsVM } from '../../types/characteristics.models';
+import { ObjectFormStore } from '@account/add-object/data-access';
 
 @Component({
   selector: 'account-add-object-characteristics-container',
@@ -36,14 +36,14 @@ export class AddObjectCharacteristicsContainerComponent {
   @Input({ required: true }) placementControl!: FormControl<string>;
   @Input({ required: true }) form!: FormGroup<CharacteristicsFormVM>;
   private readonly router = inject(Router);
-  private readonly localStorageObjectFormService = inject(LocalStorageObjectFormService);
+  private readonly objectFormStore = inject(ObjectFormStore);
 
   public onNext(): void {
     this.router.navigateByUrl('account/add-object/photos');
   }
 
   public onSave(): void {
-    this.localStorageObjectFormService.updateObjectForm({
+    this.objectFormStore.saveForm({
       characteristics: this.form.value as ObjectCharacteristicsVM,
     });
   }

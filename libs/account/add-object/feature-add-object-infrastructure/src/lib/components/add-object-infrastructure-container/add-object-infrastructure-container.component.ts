@@ -11,7 +11,7 @@ import {
 import { AddObjectInfrastructureListUiComponent } from '../add-object-infrastructure-list-ui/add-object-infrastructure-list-ui.component';
 import { AddObjectInfrastructureReachesUiComponent } from '../add-object-infrastructure-reaches-ui/add-object-infrastructure-reaches-ui.component';
 import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
-import { LocalStorageObjectFormService } from '@account/add-object/data-access';
+import { ObjectFormStore } from '@account/add-object/data-access';
 import { ObjectInfrastructureVM } from '../../types/infrastructure.models';
 
 @Component({
@@ -31,7 +31,7 @@ import { ObjectInfrastructureVM } from '../../types/infrastructure.models';
 export class AddObjectInfrastructureContainerComponent {
   @Input({ required: true }) form!: FormGroup<InfrastructureFormVM>;
   private readonly router = inject(Router);
-  private readonly localStorageObjectFormService = inject(LocalStorageObjectFormService);
+  private readonly objectFormStore = inject(ObjectFormStore);
 
   get infrastructureList(): InfrastructureListFormVM {
     return {
@@ -54,8 +54,7 @@ export class AddObjectInfrastructureContainerComponent {
   }
 
   public onSave(): void {
-    console.log(1);
-    this.localStorageObjectFormService.updateObjectForm({ infrastructure: this.form.value as ObjectInfrastructureVM });
+    this.objectFormStore.saveForm({ infrastructure: this.form.value as ObjectInfrastructureVM });
   }
 
   public onDistanceChange(type: string, name: string, distance: string): void {

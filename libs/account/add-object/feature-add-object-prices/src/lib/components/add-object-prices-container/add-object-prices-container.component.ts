@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ObjectFormPricesItemVM, PricesType } from '../../types/prices-form.models';
 import { AddObjectPricesDefaultContainerComponent } from '../add-object-prices-default-container/add-object-prices-default-container.component';
 import { FormGroup } from '@angular/forms';
-import { LocalStorageObjectFormService } from '@account/add-object/data-access';
+import { ObjectFormStore } from '@account/add-object/data-access';
 import { ObjectPricesItemVM } from '../../types/prices.models';
 
 @Component({
@@ -17,7 +17,7 @@ import { ObjectPricesItemVM } from '../../types/prices.models';
 })
 export class AddObjectPricesContainerComponent {
   @Input({ required: true }) pricesArray!: PricesType;
-  private readonly objectFormStorageService = inject(LocalStorageObjectFormService);
+  private readonly objectFormStore = inject(ObjectFormStore);
 
   get defaultPrices(): FormGroup<ObjectFormPricesItemVM> {
     const defaultPrices = this.pricesArray.controls.find((form) => form.get('name')!.value === 'Цены по умолчанию');
@@ -28,6 +28,6 @@ export class AddObjectPricesContainerComponent {
   }
 
   public onSave(): void {
-    this.objectFormStorageService.updateObjectForm({ prices: this.pricesArray.value as ObjectPricesItemVM[] });
+    this.objectFormStore.saveForm({ prices: this.pricesArray.value as ObjectPricesItemVM[] });
   }
 }

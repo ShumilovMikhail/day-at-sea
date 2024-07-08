@@ -1,5 +1,4 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { inject } from '@angular/core';
 
 import {
   DurationStayDiscountItemForm,
@@ -49,10 +48,10 @@ const createDiscountFormTypes: CreateFormTypes = {
 };
 
 export const createDiscountFormByType = (
+  fb: FormBuilder,
   type: keyof CreateFormTypes,
   form: DurationStayDiscountItem | EarlyBookingDiscountItem | LastMinuteBookingDiscountItem | null = null
 ): FormGroup => {
-  const fb = inject(FormBuilder);
   return createDiscountFormTypes[type](
     fb,
     form as DurationStayDiscountItem & EarlyBookingDiscountItem & LastMinuteBookingDiscountItem & null

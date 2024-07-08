@@ -33,3 +33,7 @@ export const selectAgencyRequisites = createSelector(selectAgency, (agency: Agen
       }
     : null
 );
+
+export const selectAgencyId = createSelector(selectAgency, (agency: AgencyEntity | null) =>
+  agency ? agency.id : null
+);

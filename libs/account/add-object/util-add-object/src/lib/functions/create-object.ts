@@ -1,4 +1,3 @@
-import { inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
@@ -26,21 +25,20 @@ import {
 } from '../types/object-form.models';
 import { createDiscountFormByType } from './create-discount';
 
-export const createObjectForm = (form: AgencyObject | null): FormGroup<ObjectForm> => {
-  const fb = inject(FormBuilder);
+export const createObjectForm = (fb: FormBuilder, form: AgencyObject | null): FormGroup<ObjectForm> => {
   return fb.nonNullable.group({
     placement: [form?.placement ?? ''],
     address: [form?.address ?? ''],
-    infrastructure: createInfrastructureForm(form?.infrastructure),
-    characteristics: createCharacteristicsForm(form?.characteristics),
-    photos: createPhotosForm(form?.photos),
-    rules: createRulesForm(form?.rules),
+    infrastructure: createInfrastructureForm(fb, form?.infrastructure),
+    characteristics: createCharacteristicsForm(fb, form?.characteristics),
+    photos: createPhotosForm(fb, form?.photos),
+    rules: createRulesForm(fb, form?.rules),
     services: fb.array(
       (form?.services.map((service) => new FormControl(service ?? '')) ?? []) as FormControl<string>[]
     ),
     prices: fb.array(
-      (form?.prices.map((price) => createPricesItemForm(price)) ?? [
-        createPricesItemForm({
+      (form?.prices.map((price) => createPricesItemForm(fb, price)) ?? [
+        createPricesItemForm(fb, {
           name: 'Цены по умолчанию',
           price: '',
           minStay: 0,
@@ -67,8 +65,10 @@ export const createObjectForm = (form: AgencyObject | null): FormGroup<ObjectFor
     ),
   });
 };
-const createInfrastructureForm = (form: ObjectInfrastructure | undefined): FormGroup<ObjectFormInfrastructure> => {
-  const fb = inject(FormBuilder);
+const createInfrastructureForm = (
+  fb: FormBuilder,
+  form: ObjectInfrastructure | undefined
+): FormGroup<ObjectFormInfrastructure> => {
   const createInfrastructureItemsArray = (
     infrastructureItems: InfrastructureItem[] | undefined
   ): FormGroup<InfrastructureItemForm>[] | null =>
@@ -89,8 +89,10 @@ const createInfrastructureForm = (form: ObjectInfrastructure | undefined): FormG
   });
 };
 
-const createCharacteristicsForm = (form: ObjectCharacteristics | undefined): FormGroup<ObjectFormCharacteristics> => {
-  const fb = inject(FormBuilder);
+const createCharacteristicsForm = (
+  fb: FormBuilder,
+  form: ObjectCharacteristics | undefined
+): FormGroup<ObjectFormCharacteristics> => {
   const createRoomItemsArray = (roomItems: RoomItem[] | undefined): FormGroup<RoomItemForm>[] | null =>
     roomItems?.map((item) =>
       fb.nonNullable.group({
@@ -131,16 +133,15 @@ const createCharacteristicsForm = (form: ObjectCharacteristics | undefined): For
     description: [form?.description ?? ''],
   });
 };
-const createPhotosForm = (form: ObjectPhotos | undefined): FormGroup<ObjectFormPhotos> => {
-  const fb = inject(FormBuilder);
+
+const createPhotosForm = (fb: FormBuilder, form: ObjectPhotos | undefined): FormGroup<ObjectFormPhotos> => {
   return fb.nonNullable.group({
     generalPhotoIndex: new FormControl(form?.generalPhotoIndex) as FormControl<number | null>,
     photos: fb.array((form?.photos.map((photo) => new FormControl(photo ?? '')) ?? []) as FormControl<string>[]),
   });
 };
 
-const createRulesForm = (form: ObjectRules | undefined): FormGroup<ObjectFormRules> => {
-  const fb = inject(FormBuilder);
+const createRulesForm = (fb: FormBuilder, form: ObjectRules | undefined): FormGroup<ObjectFormRules> => {
   return fb.nonNullable.group({
     arrivalTime: [form?.arrivalTime ?? '', [Validators.required]],
     departureTime: [form?.departureTime ?? ''],
@@ -154,8 +155,7 @@ const createRulesForm = (form: ObjectRules | undefined): FormGroup<ObjectFormRul
   });
 };
 
-const createPricesItemForm = (form: ObjectPricesItem | undefined): FormGroup<ObjectFormPricesItem> => {
-  const fb = inject(FormBuilder);
+const createPricesItemForm = (fb: FormBuilder, form: ObjectPricesItem | undefined): FormGroup<ObjectFormPricesItem> => {
   console.log(form);
   return fb.nonNullable.group({
     name: [form?.name ?? ''],
@@ -163,15 +163,15 @@ const createPricesItemForm = (form: ObjectPricesItem | undefined): FormGroup<Obj
     minStay: [form?.minStay ?? 0],
     discounts: fb.nonNullable.group({
       durationStay: fb.array(
-        (form?.discounts.durationStay.map((item) => createDiscountFormByType('durationStay', item)) ??
+        (form?.discounts.durationStay.map((item) => createDiscountFormByType(fb, 'durationStay', item)) ??
           []) as FormGroup<DurationStayDiscountItemForm>[]
       ),
       lastMinuteBooking: fb.array(
-        (form?.discounts.lastMinuteBooking.map((item) => createDiscountFormByType('lastMinuteBooking', item)) ??
+        (form?.discounts.lastMinuteBooking.map((item) => createDiscountFormByType(fb, 'lastMinuteBooking', item)) ??
           []) as FormGroup<LastMinuteBookingDiscountItemForm>[]
       ),
       earlyBooking: fb.array(
-        (form?.discounts.earlyBooking.map((item) => createDiscountFormByType('earlyBooking', item)) ??
+        (form?.discounts.earlyBooking.map((item) => createDiscountFormByType(fb, 'earlyBooking', item)) ??
           []) as FormGroup<EarlyBookingDiscountItemForm>[]
       ),
     }),

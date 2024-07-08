@@ -7,6 +7,7 @@ import {
   selectAgency,
   selectAgencyContacts,
   selectAgencyError,
+  selectAgencyId,
   selectAgencyLoading,
   selectAgencyRequisites,
   selectAgencyStatus,
@@ -24,6 +25,7 @@ export class AgencyFacade {
   public readonly loading$: Observable<boolean> = this.store.select(selectAgencyLoading);
   public readonly agency$: Observable<AgencyEntity | null> = this.store.select(selectAgency);
   public readonly error$: Observable<ResponseError | null> = this.store.select(selectAgencyError);
+  public readonly id$: Observable<number | null> = this.store.select(selectAgencyId);
 
   public readonly contacts$: Observable<Contacts | null> = this.store.select(selectAgencyContacts);
 

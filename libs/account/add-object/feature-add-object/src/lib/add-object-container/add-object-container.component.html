@@ -1,4 +1,4 @@
-@switch (step) { @case(undefined) {
+@if (form) { @switch (step) { @case(undefined) {
 <account-add-object-info-container
   [addressControl]="form.get('address')! | formControl"
   [placementTypeControl]="form.get('characteristics')!.get('placementType')! | formControl"
@@ -23,4 +23,8 @@
 <account-add-object-prices-container
   [pricesArray]="form.get('prices')! | formArray"
 ></account-add-object-prices-container>
-}}
+}} } @else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}

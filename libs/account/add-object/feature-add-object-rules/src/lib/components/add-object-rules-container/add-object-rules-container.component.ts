@@ -11,7 +11,7 @@ import { AddObjectRulesListUiComponent } from '../add-object-rules-list-ui/add-o
 import { AddObjectRulesBookingUiComponent } from '../add-object-rules-booking-ui/add-object-rules-booking-ui.component';
 import { AddObjectRulesDescriptionUiComponent } from '../add-object-rules-description-ui/add-object-rules-description-ui.component';
 import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
-import { LocalStorageObjectFormService } from '@account/add-object/data-access';
+import { LocalStorageObjectFormService, ObjectFormStore } from '@account/add-object/data-access';
 import { ObjectRulesVM } from '../../types/rules.models';
 
 @Component({
@@ -35,13 +35,13 @@ import { ObjectRulesVM } from '../../types/rules.models';
 export class AddObjectRulesContainerComponent {
   @Input({ required: true }) form!: FormGroup<ObjectFormRulesVM>;
   private readonly router = inject(Router);
-  private readonly objectFormStorageService = inject(LocalStorageObjectFormService);
+  private readonly objectFormStore = inject(ObjectFormStore);
 
   public onNext(): void {
     this.router.navigateByUrl('account/add-object/services');
   }
 
   public onSave(): void {
-    this.objectFormStorageService.updateObjectForm({ rules: this.form.value as ObjectRulesVM });
+    this.objectFormStore.saveForm({ rules: this.form.value as ObjectRulesVM });
   }
 }

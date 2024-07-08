@@ -1,59 +1,41 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { AgencyObject } from '@account/add-object/util';
-import { AuthFacade } from '@auth/data-access';
-import { filter } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
 @Injectable({ providedIn: 'root' })
 export class LocalStorageObjectFormService {
-  private readonly authFacade = inject(AuthFacade);
-  private formKey: string | null = null;
+  private readonly formKey = 'add-object-form';
 
-  constructor() {
-    this.authFacade.token$
-      .pipe(
-        takeUntilDestroyed(),
-        filter((token: string | null): token is string => Boolean(token))
-      )
-      .subscribe((token: string) => {
-        this.formKey = `add-object-form-${token}`;
-      });
-  }
-
-  public setObjectForm(form: AgencyObject): void {
-    if (this.formKey) {
-      console.log(form.photos);
-      localStorage.setItem(this.formKey, JSON.stringify(form));
-      return;
+  public setObjectForm(id: number, form: AgencyObject): void {
+    try {
+      if (this.formKey) {
+        localStorage.setItem(`${this.formKey}-${id}`, JSON.stringify(form));
+      }
+    } catch {
+      throw Error('object form locale storage set: storage is full');
     }
-    throw Error('object form locale storage set: token in null');
   }
 
-  public getObjectForm(): AgencyObject | null {
+  public getObjectForm(id: number): AgencyObject | null {
     if (this.formKey) {
-      const JSONForm: string | null = localStorage.getItem(this.formKey);
+      const JSONForm: string | null = localStorage.getItem(`${this.formKey}-${id}`);
       return JSONForm ? JSON.parse(JSONForm) : null;
     }
     return null;
   }
 
-  public updateObjectForm(partForm: Partial<AgencyObject>): void {
-    if (!this.formKey) {
-      throw Error('object form locale storage update: token in null');
-    }
-    const JSONForm: string | null = localStorage.getItem(this.formKey);
+  public updateObjectForm(id: number, partForm: Partial<AgencyObject>): void {
+    const JSONForm: string | null = localStorage.getItem(`${this.formKey}-${id}`);
     if (JSONForm) {
       const form = JSON.parse(JSONForm);
-      console.log({ ...form, ...partForm });
-      localStorage.setItem(this.formKey, JSON.stringify({ ...form, ...partForm }));
+      try {
+        localStorage.setItem(`${this.formKey}-${id}`, JSON.stringify({ ...form, ...partForm }));
+      } catch {
+        throw Error('object form locale storage set: storage is full');
+      }
     }
   }
 
-  public removeObjectForm(): void {
-    if (this.formKey) {
-      return localStorage.removeItem(this.formKey);
-    }
-    throw Error('object form locale storage remove: token in null');
+  public removeObjectForm(id: number): void {
+    return localStorage.removeItem(`${this.formKey}-${id}`);
   }
 }

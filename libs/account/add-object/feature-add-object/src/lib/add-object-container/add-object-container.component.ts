@@ -9,17 +9,20 @@ import { AddObjectInfoContainerComponent } from '@account/add-object/feature-add
 import { FormArrayPipe, FormControlPipe } from '@utils/pipes';
 import { AddObjectInfrastructureContainerComponent } from '@account/add-object/feature-add-object-infrastructure';
 import {
+  ObjectForm,
   ObjectFormCharacteristics,
   ObjectFormInfrastructure,
   ObjectFormPhotos,
   ObjectFormRules,
 } from '@account/add-object/util';
 import { AddObjectCharacteristicsContainerComponent } from '@account/add-object/feature-add-object-characteristics';
-import { AddObjectFormService } from '../services/add-object-form.service';
 import { AddObjectPhotosContainerComponent } from '@account/add-object/feature-add-object-photos';
 import { AddObjectRulesContainerComponent } from '@account/add-object/feature-add-object-rules';
 import { AddObjectServicesContainerComponent } from '@account/add-object/feature-add-object-services';
 import { AddObjectPricesContainerComponent } from '@account/add-object/feature-add-object-prices';
+import { ObjectFormStore } from '@account/add-object/data-access';
+import { filter } from 'rxjs';
+import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 
 @Component({
   selector: 'account-add-object-container',
@@ -35,7 +38,9 @@ import { AddObjectPricesContainerComponent } from '@account/add-object/feature-a
     AddObjectRulesContainerComponent,
     AddObjectServicesContainerComponent,
     AddObjectPricesContainerComponent,
+    UiIndicatorsLoaderComponent,
   ],
+  providers: [ObjectFormStore],
   templateUrl: './add-object-container.component.html',
   styleUrl: './add-object-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,24 +49,24 @@ export class AddObjectContainerComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly formService = inject(AddObjectFormService);
-  public readonly form = this.formService.form;
+  private readonly formStore = inject(ObjectFormStore);
+  public form!: FormGroup<ObjectForm> | null;
   public step: string | null = null;
 
   public get infrastructureForm(): FormGroup<ObjectFormInfrastructure> {
-    return this.form.get('infrastructure') as FormGroup<ObjectFormInfrastructure>;
+    return this.form?.get('infrastructure') as FormGroup<ObjectFormInfrastructure>;
   }
 
   public get characteristicsForm(): FormGroup<ObjectFormCharacteristics> {
-    return this.form.get('characteristics') as FormGroup<ObjectFormCharacteristics>;
+    return this.form?.get('characteristics') as FormGroup<ObjectFormCharacteristics>;
   }
 
   public get photosForm(): FormGroup<ObjectFormPhotos> {
-    return this.form.get('photos') as FormGroup<ObjectFormPhotos>;
+    return this.form?.get('photos') as FormGroup<ObjectFormPhotos>;
   }
 
   public get rulesForm(): FormGroup<ObjectFormRules> {
-    return this.form.get('rules') as FormGroup<ObjectFormRules>;
+    return this.form?.get('rules') as FormGroup<ObjectFormRules>;
   }
 
   constructor(title: Title) {
@@ -73,8 +78,18 @@ export class AddObjectContainerComponent implements OnInit {
       this.step = params['step'];
       this.changeDetectorRef.detectChanges();
     });
+    this.formStore.init();
+    this.formStore.form$
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter((form: FormGroup<ObjectForm> | null): form is FormGroup<ObjectForm> => Boolean(form))
+      )
+      .subscribe((form: FormGroup<ObjectForm>) => {
+        this.form = form;
+        this.changeDetectorRef.detectChanges();
+      });
 
-    this.form.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
+    this.form?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
       console.log(value);
     });
   }
