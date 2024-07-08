@@ -1,4 +1,6 @@
 <div class="buttons-container">
   <button class="save-button" type="button" (click)="onSaveButtonClick()">Сохранить</button>
-  <button class="next-button" type="button" (click)="onNextButtonClick()">Продолжить</button>
+  <button class="next-button" type="button" [disabled]="nextButtonDisable" (click)="onNextButtonClick()">
+    Продолжить
+  </button>
 </div>

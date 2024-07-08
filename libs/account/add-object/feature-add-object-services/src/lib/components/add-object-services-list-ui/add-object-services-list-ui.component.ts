@@ -29,7 +29,6 @@ export class AddObjectServicesListUiComponent {
   }
 
   public hasService(service: string): boolean {
-    console.log(this.servicesArray.value.includes(service));
     return this.servicesArray.value.includes(service);
   }
 }

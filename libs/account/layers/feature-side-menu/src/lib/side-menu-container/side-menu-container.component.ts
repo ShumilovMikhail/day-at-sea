@@ -42,4 +42,8 @@ export class SideMenuContainerComponent implements OnInit {
         this.changeDetectorRef.detectChanges();
       });
   }
+
+  public onRedirectToHome(): void {
+    this.router.navigateByUrl('/');
+  }
 }

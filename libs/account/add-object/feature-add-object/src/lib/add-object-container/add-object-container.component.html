@@ -23,6 +23,7 @@
 <account-add-object-prices-container
   [pricesArray]="form.get('prices')! | formArray"
 ></account-add-object-prices-container>
+<button class="button-publish" [disabled]="!form.valid">Опубликовать</button>
 }} } @else {
 <div class="loader-container">
   <ui-indicators-loader></ui-indicators-loader>

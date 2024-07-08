@@ -1,3 +1,5 @@
+@import 'mixins';
+
 :host {
   display: block;
   width: 100%;
@@ -10,4 +12,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.button-publish {
+  @include button-primary();
+  padding: 13px 28px;
+  margin: 22px 50px;
+}
+
+@media (max-width: 480px) {
+  .button-publish {
+    width: calc(100% - 30px);
+    margin: 30px 15px;
+  }
 }

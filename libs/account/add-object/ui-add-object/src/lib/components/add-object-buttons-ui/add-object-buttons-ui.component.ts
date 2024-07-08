@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectButtonsUiComponent {
+  @Input() nextButtonDisable = false;
   @Output() saveButtonClickEvent = new EventEmitter<void>();
   @Output() nextButtonClickEvent = new EventEmitter<void>();
 

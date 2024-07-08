@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
+import { filter, take } from 'rxjs';
 
 import { AddObjectInfoContainerComponent } from '@account/add-object/feature-add-object-info';
 import { FormArrayPipe, FormControlPipe } from '@utils/pipes';
@@ -20,8 +21,7 @@ import { AddObjectPhotosContainerComponent } from '@account/add-object/feature-a
 import { AddObjectRulesContainerComponent } from '@account/add-object/feature-add-object-rules';
 import { AddObjectServicesContainerComponent } from '@account/add-object/feature-add-object-services';
 import { AddObjectPricesContainerComponent } from '@account/add-object/feature-add-object-prices';
-import { ObjectFormStore } from '@account/add-object/data-access';
-import { filter } from 'rxjs';
+import { ObjectFormState, ObjectFormStore } from '@account/add-object/data-access';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 
 @Component({
@@ -40,7 +40,6 @@ import { UiIndicatorsLoaderComponent } from '@ui/indicators';
     AddObjectPricesContainerComponent,
     UiIndicatorsLoaderComponent,
   ],
-  providers: [ObjectFormStore],
   templateUrl: './add-object-container.component.html',
   styleUrl: './add-object-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,6 +47,7 @@ import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 export class AddObjectContainerComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   private readonly formStore = inject(ObjectFormStore);
   public form!: FormGroup<ObjectForm> | null;
@@ -74,23 +74,20 @@ export class AddObjectContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.formStore.init();
     this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params: Params) => {
       this.step = params['step'];
       this.changeDetectorRef.detectChanges();
     });
-    this.formStore.init();
-    this.formStore.form$
+    this.formStore.formState$
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        filter((form: FormGroup<ObjectForm> | null): form is FormGroup<ObjectForm> => Boolean(form))
+        filter((formState: ObjectFormState) => Boolean(formState.form)),
+        take(1)
       )
-      .subscribe((form: FormGroup<ObjectForm>) => {
-        this.form = form;
+      .subscribe((formState: ObjectFormState) => {
+        this.form = formState.form;
+        this.router.navigateByUrl(`account/add-object${formState.isNewForm ? '' : '/infrastructure'}`);
         this.changeDetectorRef.detectChanges();
       });
-
-    this.form?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
-      console.log(value);
-    });
   }
 }

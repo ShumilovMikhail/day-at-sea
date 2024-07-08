@@ -1,6 +1,5 @@
 export const base64ToBlob = (base64: string): Blob => {
   const contentType = 'image/png';
-  console.log(base64);
   const byteCharacters = atob(base64);
   const byteArrays = [];
 

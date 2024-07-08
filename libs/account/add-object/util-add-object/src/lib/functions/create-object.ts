@@ -27,17 +27,17 @@ import { createDiscountFormByType } from './create-discount';
 
 export const createObjectForm = (fb: FormBuilder, form: AgencyObject | null): FormGroup<ObjectForm> => {
   return fb.nonNullable.group({
-    placement: [form?.placement ?? ''],
-    address: [form?.address ?? ''],
+    placement: [form?.placement ?? '', [Validators.required]],
+    address: [form?.address ?? '', [Validators.required, Validators.minLength(3)]],
     infrastructure: createInfrastructureForm(fb, form?.infrastructure),
     characteristics: createCharacteristicsForm(fb, form?.characteristics),
     photos: createPhotosForm(fb, form?.photos),
     rules: createRulesForm(fb, form?.rules),
     services: fb.array(
-      (form?.services.map((service) => new FormControl(service ?? '')) ?? []) as FormControl<string>[]
+      (form?.services?.map((service) => new FormControl(service ?? '')) ?? []) as FormControl<string>[]
     ),
     prices: fb.array(
-      (form?.prices.map((price) => createPricesItemForm(fb, price)) ?? [
+      (form?.prices?.map((price) => createPricesItemForm(fb, price)) ?? [
         createPricesItemForm(fb, {
           name: 'Цены по умолчанию',
           price: '',
@@ -75,6 +75,7 @@ const createInfrastructureForm = (
     infrastructureItems?.map((item) =>
       fb.nonNullable.group({ name: [item.name ?? ''], distance: [item.distance ?? ''] })
     ) ?? null;
+
   return fb.nonNullable.group({
     places: fb.array((createInfrastructureItemsArray(form?.places) ?? []) as FormGroup<InfrastructureItemForm>[]),
     leisure: fb.array((createInfrastructureItemsArray(form?.leisure) ?? []) as FormGroup<InfrastructureItemForm>[]),
@@ -102,7 +103,7 @@ const createCharacteristicsForm = (
     ) ?? null;
 
   return fb.nonNullable.group({
-    placementType: [form?.placementType ?? ''],
+    placementType: [form?.placementType ?? '', [Validators.required, Validators.minLength(1)]],
     square: [form?.square ?? ''],
     floor: [form?.floor ?? ''],
     floorCount: [form?.floorCount ?? ''],
@@ -144,23 +145,22 @@ const createPhotosForm = (fb: FormBuilder, form: ObjectPhotos | undefined): Form
 const createRulesForm = (fb: FormBuilder, form: ObjectRules | undefined): FormGroup<ObjectFormRules> => {
   return fb.nonNullable.group({
     arrivalTime: [form?.arrivalTime ?? '', [Validators.required]],
-    departureTime: [form?.departureTime ?? ''],
+    departureTime: [form?.departureTime ?? '', [Validators.required]],
     earlyArrival: [form?.earlyArrival ?? false],
     lateDeparture: [form?.lateDeparture ?? false],
     rules: fb.array((form?.rules.map((rule) => new FormControl(rule ?? '')) ?? []) as FormControl<string>[]),
-    paymentCheckIn: [form?.paymentCheckIn ?? ''],
-    pledge: [form?.pledge ?? ''],
-    freeCancellation: [form?.freeCancellation ?? '1 день'],
+    paymentCheckIn: [form?.paymentCheckIn ?? '', [Validators.required]],
+    pledge: [form?.pledge ?? '', [Validators.required]],
+    freeCancellation: [form?.freeCancellation ?? '1 день', [Validators.required]],
     description: [form?.description ?? ''],
   });
 };
 
 const createPricesItemForm = (fb: FormBuilder, form: ObjectPricesItem | undefined): FormGroup<ObjectFormPricesItem> => {
-  console.log(form);
   return fb.nonNullable.group({
     name: [form?.name ?? ''],
-    price: [form?.price ?? ''],
-    minStay: [form?.minStay ?? 0],
+    price: [form?.price ?? '', [Validators.required]],
+    minStay: [form?.minStay ?? 0, [Validators.required]],
     discounts: fb.nonNullable.group({
       durationStay: fb.array(
         (form?.discounts.durationStay.map((item) => createDiscountFormByType(fb, 'durationStay', item)) ??

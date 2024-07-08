@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -10,4 +10,10 @@ import { RouterModule } from '@angular/router';
   styleUrl: './ui-add-object-side-menu.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UiAddObjectSideMenuComponent {}
+export class UiAddObjectSideMenuComponent {
+  @Output() backButtonClickEvent = new EventEmitter<void>();
+
+  public onBackButtonClick(): void {
+    this.backButtonClickEvent.emit();
+  }
+}

@@ -25,13 +25,11 @@ export class LocalStorageObjectFormService {
 
   public updateObjectForm(id: number, partForm: Partial<AgencyObject>): void {
     const JSONForm: string | null = localStorage.getItem(`${this.formKey}-${id}`);
-    if (JSONForm) {
-      const form = JSON.parse(JSONForm);
-      try {
-        localStorage.setItem(`${this.formKey}-${id}`, JSON.stringify({ ...form, ...partForm }));
-      } catch {
-        throw Error('object form locale storage set: storage is full');
-      }
+    const form = JSONForm ? JSON.parse(JSONForm) : null;
+    try {
+      localStorage.setItem(`${this.formKey}-${id}`, JSON.stringify({ ...form, ...partForm }));
+    } catch {
+      throw Error('object form locale storage set: storage is full');
     }
   }
 

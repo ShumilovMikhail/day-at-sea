@@ -6,7 +6,11 @@
     } as vm"
   >
     @if (url.includes('add-object/')) {
-    <account-ui-add-object-side-menu accountSideMenuMobile [modalOpen]="isMobileOpen"></account-ui-add-object-side-menu>
+    <account-ui-add-object-side-menu
+      accountSideMenuMobile
+      [modalOpen]="isMobileOpen"
+      (backButtonClickEvent)="onRedirectToHome()"
+    ></account-ui-add-object-side-menu>
     } @else {
     <account-side-menu-ui
       [agencyVM]="agency ? vm : null"

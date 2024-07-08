@@ -19,7 +19,7 @@
   ></ui-forms-address-container>
   <button
     type="button"
-    [disabled]="(!addressControl.valid && !placementTypeControl.valid) || isLoading"
+    [disabled]="!(addressControl.valid && placementTypeControl.valid) || isLoading"
     (click)="onNextButtonClickEvent()"
   >
     Продолжить оформление

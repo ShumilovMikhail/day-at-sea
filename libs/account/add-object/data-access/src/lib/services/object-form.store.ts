@@ -6,22 +6,23 @@ import { filter, Observable, switchMap, tap } from 'rxjs';
 import { AgencyObject, createObjectForm, ObjectForm } from '@account/add-object/util';
 import { LocalStorageObjectFormService } from './local-storage-object-form.service';
 import { AgencyFacade } from '@account/data-access-agency';
-
-export interface ObjectFormState {
-  form: FormGroup<ObjectForm> | null;
-}
+import { ObjectFormState } from '../types/object-form.models';
 
 const initialState: ObjectFormState = {
   form: null,
+  isNewForm: true,
 };
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ObjectFormStore extends ComponentStore<ObjectFormState> {
   private readonly objectFormStorage = inject(LocalStorageObjectFormService);
   private readonly agencyFacade = inject(AgencyFacade);
   private readonly fb = inject(FormBuilder);
-  public readonly form$: Observable<FormGroup<ObjectForm> | null> = this.select((state: ObjectFormState) => state.form);
   private id: number | null = null;
+
+  public readonly form$: Observable<FormGroup<ObjectForm> | null> = this.select((state: ObjectFormState) => state.form);
+  public readonly formState$: Observable<ObjectFormState> = this.select((state: ObjectFormState) => state);
+  public readonly isNewForm$: Observable<boolean | null> = this.select((state: ObjectFormState) => state.isNewForm);
 
   constructor() {
     super(initialState);
@@ -46,6 +47,7 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
       tap((partForm: Partial<AgencyObject>) => {
         if (this.id) {
           this.objectFormStorage.updateObjectForm(this.id, partForm);
+          this.patchState({ isNewForm: false });
         }
       })
     );
@@ -54,14 +56,11 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
   private initForm = this.updater((state: ObjectFormState, id: number) => {
     const savedForm: AgencyObject | null = this.objectFormStorage.getObjectForm(id);
     const form = createObjectForm(this.fb, savedForm);
-    this.patchState({ form });
-    if (!savedForm) {
-      this.objectFormStorage.setObjectForm(id, form.value as AgencyObject);
-    }
 
     return {
       ...state,
       form,
+      isNewForm: !savedForm,
     };
   });
 }
