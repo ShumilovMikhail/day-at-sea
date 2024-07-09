@@ -6,22 +6,23 @@
   ></account-add-object-info-type-ui>
   @switch (selectedType) { @case ('flat') {
   <account-add-object-info-flat-ui
-    [addressControl]="addressControl"
-    [placementControl]="placementControl"
+    [titleControl]="form.get('title')! | formControl"
+    [addressControl]="form.get('address')! | formControl"
+    [placementControl]="form.get('placement')! | formControl"
     (nextButtonClickEvent)="onNext()"
   ></account-add-object-info-flat-ui>
   } @case ('house') {
   <account-add-object-info-house-ui
-    [addressControl]="addressControl"
-    [placementTypeControl]="placementTypeControl"
-    [placementControl]="placementControl"
+    [titleControl]="form.get('title')! | formControl"
+    [addressControl]="form.get('address')! | formControl"
+    [placementControl]="form.get('placement')! | formControl"
     (nextButtonClickEvent)="onNext()"
   ></account-add-object-info-house-ui>
   } @case ('room') {
   <account-add-object-info-room-ui
-    [addressControl]="addressControl"
-    [placementTypeControl]="placementTypeControl"
-    [placementControl]="placementControl"
+    [titleControl]="form.get('title')! | formControl"
+    [addressControl]="form.get('address')! | formControl"
+    [placementControl]="form.get('placement')! | formControl"
     (nextButtonClickEvent)="onNext()"
   ></account-add-object-info-room-ui>
   } @default {

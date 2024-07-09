@@ -1,27 +1,17 @@
 <form>
-  <div class="form-block">
-    <p>Выберите тип жилья</p>
-    <div class="radio-list">
-      @for (placementType of placementTypes; track $index) {
-      <label class="radio">
-        <input type="radio" name="type" [formControl]="placementTypeControl" [value]="placementType" />
-        <div></div>
-        {{ placementType }}
-      </label>
-      }
-    </div>
-  </div>
+  <ui-forms-input
+    class="title"
+    [control]="titleControl"
+    [label]="'Укажите название'"
+    [required]="true"
+  ></ui-forms-input>
   <ui-forms-address-container
     [control]="addressControl! | formControl"
     [label]="'Укажите место'"
     [placeholder]="'Город'"
     [crossEnable]="true"
   ></ui-forms-address-container>
-  <button
-    type="button"
-    [disabled]="!(addressControl.valid && placementTypeControl.valid) || isLoading"
-    (click)="onNextButtonClickEvent()"
-  >
+  <button type="button" [disabled]="!addressControl.valid || isLoading" (click)="onNextButtonClickEvent()">
     Продолжить оформление
     <div class="spinner-loader" *ngIf="isLoading"></div>
   </button>

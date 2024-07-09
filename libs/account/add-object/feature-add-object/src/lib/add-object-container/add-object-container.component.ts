@@ -1,15 +1,23 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
 import { filter, take } from 'rxjs';
 
-import { AddObjectInfoContainerComponent } from '@account/add-object/feature-add-object-info';
 import { FormArrayPipe, FormControlPipe } from '@utils/pipes';
 import { AddObjectInfrastructureContainerComponent } from '@account/add-object/feature-add-object-infrastructure';
 import {
+  AgencyObject,
   ObjectForm,
   ObjectFormCharacteristics,
   ObjectFormInfrastructure,
@@ -29,7 +37,6 @@ import { UiIndicatorsLoaderComponent } from '@ui/indicators';
   standalone: true,
   imports: [
     CommonModule,
-    AddObjectInfoContainerComponent,
     FormControlPipe,
     FormArrayPipe,
     AddObjectInfrastructureContainerComponent,
@@ -44,10 +51,9 @@ import { UiIndicatorsLoaderComponent } from '@ui/indicators';
   styleUrl: './add-object-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddObjectContainerComponent implements OnInit {
+export class AddObjectContainerComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly router = inject(Router);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   private readonly formStore = inject(ObjectFormStore);
   public form!: FormGroup<ObjectForm> | null;
@@ -74,7 +80,7 @@ export class AddObjectContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formStore.init();
+    this.formStore.initForm();
     this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params: Params) => {
       this.step = params['step'];
       this.changeDetectorRef.detectChanges();
@@ -86,8 +92,15 @@ export class AddObjectContainerComponent implements OnInit {
       )
       .subscribe((formState: ObjectFormState) => {
         this.form = formState.form;
-        this.router.navigateByUrl(`account/add-object${formState.isNewForm ? '' : '/infrastructure'}`);
         this.changeDetectorRef.detectChanges();
       });
+  }
+
+  public onPublish(): void {
+    this.formStore.publish(this.form?.value as AgencyObject);
+  }
+
+  ngOnDestroy(): void {
+    this.formStore.destroyForm();
   }
 }

@@ -22,6 +22,7 @@ import { houseNumberValidator } from '@utils/validators';
 })
 export class AddObjectInfoFlatUiComponent implements OnInit {
   @Input() isLoading = false;
+  @Input({ required: true }) titleControl!: FormControl<string>;
   @Input({ required: true }) addressControl!: FormControl<string>;
   @Input({ required: true }) placementControl!: FormControl<string>;
   @Output() nextButtonClickEvent = new EventEmitter<void>();

@@ -54,8 +54,8 @@ export class AddObjectPhotosContainerComponent implements OnInit {
         this.error = 'Поддерживаются только файлы с раширением: .png,.jpeg,.jpg,.webp';
       }
     }
-    if (!this.form.get('generalPhotoIndex')?.value) {
-      this.form.get('generalPhotoIndex')?.patchValue(0);
+    if (!this.form.get('primaryPhotoIndex')?.value) {
+      this.form.get('primaryPhotoIndex')?.patchValue(0);
     }
   }
 
@@ -65,7 +65,7 @@ export class AddObjectPhotosContainerComponent implements OnInit {
   }
 
   public onSelectPhoto(photoIndex: number): void {
-    this.form.get('generalPhotoIndex')?.patchValue(photoIndex);
+    this.form.get('primaryPhotoIndex')?.patchValue(photoIndex);
   }
 
   public onNext(): void {

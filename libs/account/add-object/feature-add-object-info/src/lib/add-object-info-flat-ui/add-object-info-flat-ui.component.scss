@@ -1,5 +1,9 @@
 @import 'mixins';
 
+.title {
+  width: 400px;
+}
+
 .content {
   display: flex;
   flex-direction: column;

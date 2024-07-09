@@ -1,11 +1,11 @@
 <form>
   <div class="content">
-    <ui-forms-select
-      [control]="placementTypeControl"
-      [options]="typeOptions"
-      [selectedOption]="typeOptions[0]"
-      [label]="'Выберите тип жилья'"
-    ></ui-forms-select>
+    <ui-forms-input
+      class="title"
+      [control]="titleControl"
+      [label]="'Укажите название'"
+      [required]="true"
+    ></ui-forms-input>
     <ui-forms-address-container
       [control]="addressControl"
       [label]="'Укажите место'"
@@ -13,11 +13,7 @@
       [crossEnable]="true"
     ></ui-forms-address-container>
   </div>
-  <button
-    type="button"
-    [disabled]="!(addressControl.valid && placementTypeControl.valid) || isLoading"
-    (click)="onNextButtonClickEvent()"
-  >
+  <button type="button" [disabled]="!addressControl.valid || isLoading" (click)="onNextButtonClickEvent()">
     Продолжить оформление
     <div class="spinner-loader" *ngIf="isLoading"></div>
   </button>

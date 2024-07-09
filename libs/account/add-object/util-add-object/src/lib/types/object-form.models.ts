@@ -1,6 +1,7 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export interface ObjectForm {
+  title: FormControl<string>;
   placement: FormControl<string>;
   address: FormControl<string>;
   infrastructure: FormGroup<ObjectFormInfrastructure>;
@@ -73,7 +74,7 @@ export interface ObjectFormRules {
 }
 
 export interface ObjectFormPhotos {
-  generalPhotoIndex: FormControl<number | null>;
+  primaryPhotoIndex: FormControl<number | null>;
   photos: FormArray<FormControl<string>>;
 }
 

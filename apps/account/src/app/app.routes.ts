@@ -1,3 +1,4 @@
+import { addObjectGuard, addObjectInfoGuard } from '@account/add-object/data-access';
 import { Route } from '@angular/router';
 import { authGuard } from '@auth/data-access';
 
@@ -28,12 +29,15 @@ export const appRoutes: Route[] = [
       {
         path: 'add-object',
         loadComponent: () =>
-          import('@account/add-object/feature-add-object').then((c) => c.AddObjectContainerComponent),
+          import('@account/add-object/feature-add-object-info').then((c) => c.AddObjectInfoContainerComponent),
+        pathMatch: 'full',
+        canActivate: [addObjectInfoGuard()],
       },
       {
         path: 'add-object/:step',
         loadComponent: () =>
           import('@account/add-object/feature-add-object').then((c) => c.AddObjectContainerComponent),
+        canActivate: [addObjectGuard()],
       },
     ],
   },

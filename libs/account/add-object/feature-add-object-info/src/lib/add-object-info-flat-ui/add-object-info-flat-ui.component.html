@@ -1,4 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="onNextButtonClick()">
+  <ui-forms-input
+    class="title"
+    [control]="titleControl"
+    [label]="'Укажите название'"
+    [required]="true"
+  ></ui-forms-input>
   <div class="content">
     <ui-forms-address-container
       [control]="form.get('city')! | formControl"

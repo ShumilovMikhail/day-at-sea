@@ -27,6 +27,7 @@ import { createDiscountFormByType } from './create-discount';
 
 export const createObjectForm = (fb: FormBuilder, form: AgencyObject | null): FormGroup<ObjectForm> => {
   return fb.nonNullable.group({
+    title: [form?.title ?? '', [Validators.required, Validators.minLength(3)]],
     placement: [form?.placement ?? '', [Validators.required]],
     address: [form?.address ?? '', [Validators.required, Validators.minLength(3)]],
     infrastructure: createInfrastructureForm(fb, form?.infrastructure),
@@ -103,22 +104,22 @@ const createCharacteristicsForm = (
     ) ?? null;
 
   return fb.nonNullable.group({
-    placementType: [form?.placementType ?? '', [Validators.required, Validators.minLength(1)]],
-    square: [form?.square ?? ''],
-    floor: [form?.floor ?? ''],
+    placementType: [form?.placementType ?? '', [Validators.required]],
+    square: [form?.square ?? '', [Validators.required]],
+    floor: [form?.floor ?? '', [Validators.required]],
     floorCount: [form?.floorCount ?? ''],
     lift: [form?.lift ?? false],
     attic: [form?.attic ?? false],
-    kitchen: [form?.kitchen ?? 'без кухни'],
-    repair: [form?.repair ?? 'косметический ремонт'],
-    roomCount: [form?.roomCount ?? 0],
-    bedroomCount: [form?.bedroomCount ?? ''],
-    guestCount: [form?.guestCount ?? 0],
+    kitchen: [form?.kitchen ?? 'без кухни', [Validators.required]],
+    repair: [form?.repair ?? 'косметический ремонт', [Validators.required]],
+    roomCount: [form?.roomCount ?? 0, [Validators.required, Validators.min(0)]],
+    bedroomCount: [form?.bedroomCount ?? '', [Validators.required, Validators.min(0)]],
+    guestCount: [form?.guestCount ?? 0, [Validators.required]],
     rooms: fb.nonNullable.group({
       bedrooms: fb.array((createRoomItemsArray(form?.rooms.bedrooms) ?? []) as FormGroup<RoomItemForm>[]),
       bathrooms: fb.array((createRoomItemsArray(form?.rooms.bathrooms) ?? []) as FormGroup<RoomItemForm>[]),
     }),
-    waterSupplyType: [form?.waterSupplyType ?? 'Центральное водоснабжение'],
+    waterSupplyType: [form?.waterSupplyType ?? 'Центральное водоснабжение', [Validators.required]],
     amenities: fb.nonNullable.group({
       flat: fb.array((form?.amenities.flat.map((item) => new FormControl(item ?? '')) ?? []) as FormControl<string>[]),
       bathroom: fb.array(
@@ -137,7 +138,7 @@ const createCharacteristicsForm = (
 
 const createPhotosForm = (fb: FormBuilder, form: ObjectPhotos | undefined): FormGroup<ObjectFormPhotos> => {
   return fb.nonNullable.group({
-    generalPhotoIndex: new FormControl(form?.generalPhotoIndex) as FormControl<number | null>,
+    primaryPhotoIndex: new FormControl(form?.primaryPhotoIndex) as FormControl<number | null>,
     photos: fb.array((form?.photos.map((photo) => new FormControl(photo ?? '')) ?? []) as FormControl<string>[]),
   });
 };

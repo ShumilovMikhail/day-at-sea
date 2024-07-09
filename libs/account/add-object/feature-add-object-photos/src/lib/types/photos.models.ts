@@ -1,4 +1,4 @@
 export interface ObjectPhotosVM {
-  generalPhotoIndex: number | null;
+  primaryPhotoIndex: number | null;
   photos: string[];
 }

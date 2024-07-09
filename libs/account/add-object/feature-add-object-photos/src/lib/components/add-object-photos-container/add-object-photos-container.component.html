@@ -7,7 +7,7 @@
     ></account-add-object-photos-file-uploader-ui>
     <account-add-object-photos-list-ui
       [photosList]="photosView"
-      [selectedPhotoIndex]="form.get('generalPhotoIndex')!.value"
+      [selectedPhotoIndex]="form.get('primaryPhotoIndex')!.value"
       (crossClickEvent)="onDeletePhoto($event)"
       (selectButtonClickEvent)="onSelectPhoto($event)"
     ></account-add-object-photos-list-ui>

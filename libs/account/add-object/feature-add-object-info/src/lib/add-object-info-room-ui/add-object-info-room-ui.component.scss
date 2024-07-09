@@ -1,21 +1,12 @@
 @import 'mixins';
 
-.form-block {
-  margin-top: 25px;
-  p {
-    font-size: 14px;
-    font-weight: 700;
-  }
-  .radio-list {
-    margin-top: 7px;
-    display: flex;
-    gap: 30px;
-  }
-}
-
 ui-forms-address-container {
   margin-top: 35px;
   display: block;
+  width: 400px;
+}
+
+.title {
   width: 400px;
 }
 

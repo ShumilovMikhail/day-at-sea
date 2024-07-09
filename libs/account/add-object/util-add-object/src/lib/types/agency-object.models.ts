@@ -1,4 +1,5 @@
 export interface AgencyObject {
+  title: string;
   placement: string;
   address: string;
   infrastructure: ObjectInfrastructure;
@@ -71,7 +72,7 @@ export interface ObjectRules {
 }
 
 export interface ObjectPhotos {
-  generalPhotoIndex: number | null;
+  primaryPhotoIndex: number | null;
   photos: string[];
 }
 

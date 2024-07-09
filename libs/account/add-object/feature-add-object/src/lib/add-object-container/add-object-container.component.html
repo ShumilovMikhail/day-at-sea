@@ -1,10 +1,4 @@
-@if (form) { @switch (step) { @case(undefined) {
-<account-add-object-info-container
-  [addressControl]="form.get('address')! | formControl"
-  [placementTypeControl]="form.get('characteristics')!.get('placementType')! | formControl"
-  [placementControl]="form.get('placement')! | formControl"
-></account-add-object-info-container>
-} @case ('infrastructure') {
+@if (form) { @switch (step) { @case ('infrastructure') {
 <account-add-object-infrastructure-container [form]="infrastructureForm"> </account-add-object-infrastructure-container>
 } @case ('characteristics') {
 <account-add-object-characteristics-container
@@ -23,7 +17,7 @@
 <account-add-object-prices-container
   [pricesArray]="form.get('prices')! | formArray"
 ></account-add-object-prices-container>
-<button class="button-publish" [disabled]="!form.valid">Опубликовать</button>
+<button class="button-publish" [disabled]="!form.valid" (click)="onPublish()">Опубликовать</button>
 }} } @else {
 <div class="loader-container">
   <ui-indicators-loader></ui-indicators-loader>
