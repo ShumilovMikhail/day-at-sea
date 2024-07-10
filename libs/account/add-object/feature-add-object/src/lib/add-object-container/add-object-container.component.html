@@ -17,7 +17,10 @@
 <account-add-object-prices-container
   [pricesArray]="form.get('prices')! | formArray"
 ></account-add-object-prices-container>
-<button class="button-publish" [disabled]="!form.valid" (click)="onPublish()">Опубликовать</button>
+<button class="button-publish" [disabled]="!form.valid" (click)="onPublish()" [disabled]="loading$ | async">
+  Опубликовать
+  <div class="spinner-loader" *ngIf="loading$ | async"></div>
+</button>
 }} } @else {
 <div class="loader-container">
   <ui-indicators-loader></ui-indicators-loader>

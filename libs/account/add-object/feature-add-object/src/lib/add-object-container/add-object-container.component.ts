@@ -12,7 +12,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
-import { filter, take } from 'rxjs';
+import { filter, Observable, share, take, tap } from 'rxjs';
 
 import { FormArrayPipe, FormControlPipe } from '@utils/pipes';
 import { AddObjectInfrastructureContainerComponent } from '@account/add-object/feature-add-object-infrastructure';
@@ -56,6 +56,10 @@ export class AddObjectContainerComponent implements OnInit, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   private readonly formStore = inject(ObjectFormStore);
+  public readonly loading$: Observable<boolean> = this.formStore.isLoading$.pipe(
+    tap((isLoading) => console.log(isLoading)),
+    share()
+  );
   public form!: FormGroup<ObjectForm> | null;
   public step: string | null = null;
 

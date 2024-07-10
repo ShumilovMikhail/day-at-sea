@@ -18,6 +18,10 @@
   @include button-primary();
   padding: 13px 28px;
   margin: 22px 50px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 480px) {

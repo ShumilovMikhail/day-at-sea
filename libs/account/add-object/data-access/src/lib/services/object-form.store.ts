@@ -15,6 +15,7 @@ import { ApiService } from '@http';
 const initialState: ObjectFormState = {
   form: null,
   isNewForm: null,
+  isLoading: false,
 };
 
 @Injectable({ providedIn: 'root' })
@@ -31,6 +32,7 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
   public readonly form$: Observable<FormGroup<ObjectForm> | null> = this.select((state: ObjectFormState) => state.form);
   public readonly formState$: Observable<ObjectFormState> = this.select((state: ObjectFormState) => state);
   public readonly isNewForm$: Observable<boolean | null> = this.select((state: ObjectFormState) => state.isNewForm);
+  public readonly isLoading$: Observable<boolean> = this.select((state: ObjectFormState) => state.isLoading);
 
   constructor() {
     super(initialState);
@@ -77,9 +79,10 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
         })
       ),
       switchMap((object: AgencyObjectDTO) => {
-        console.log(object);
+        this.patchState({ isLoading: true });
         return this.apiService.post('objects', object).pipe(
           tap((response) => {
+            this.patchState({ isLoading: false });
             console.log(response);
           })
         );
