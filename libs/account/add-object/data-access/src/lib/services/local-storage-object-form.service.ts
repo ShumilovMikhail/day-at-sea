@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AgencyObject } from '@account/add-object/util';
+import { ObjectEntity } from '@account/add-object/util';
 @Injectable({ providedIn: 'root' })
 export class LocalStorageObjectFormService {
   private readonly formKey = 'add-object-form';
@@ -9,7 +9,7 @@ export class LocalStorageObjectFormService {
     return Boolean(localStorage.getItem(`${this.formKey}-${id}`));
   }
 
-  public setObjectForm(id: number, form: AgencyObject): void {
+  public setObjectForm(id: number, form: ObjectEntity): void {
     try {
       localStorage.setItem(`${this.formKey}-${id}`, JSON.stringify(form));
     } catch {
@@ -17,12 +17,12 @@ export class LocalStorageObjectFormService {
     }
   }
 
-  public getObjectForm(id: number): AgencyObject | null {
+  public getObjectForm(id: number): ObjectEntity | null {
     const JSONForm: string | null = localStorage.getItem(`${this.formKey}-${id}`);
     return JSONForm ? JSON.parse(JSONForm) : null;
   }
 
-  public updateObjectForm(id: number, partForm: Partial<AgencyObject>): void {
+  public updateObjectForm(id: number, partForm: Partial<ObjectEntity>): void {
     const JSONForm: string | null = localStorage.getItem(`${this.formKey}-${id}`);
     const form = JSONForm ? JSON.parse(JSONForm) : null;
     try {

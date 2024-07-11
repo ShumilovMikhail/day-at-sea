@@ -1,7 +1,7 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
-  AgencyObject,
+  ObjectEntity,
   InfrastructureItem,
   ObjectCharacteristics,
   ObjectInfrastructure,
@@ -25,7 +25,7 @@ import {
 } from '../types/object-form.models';
 import { createDiscountFormByType } from './create-discount';
 
-export const createObjectForm = (fb: FormBuilder, form: AgencyObject | null): FormGroup<ObjectForm> => {
+export const createObjectForm = (fb: FormBuilder, form: ObjectEntity | null): FormGroup<ObjectForm> => {
   return fb.nonNullable.group({
     title: [form?.title ?? '', [Validators.required, Validators.minLength(3)]],
     placement: [form?.placement ?? '', [Validators.required]],

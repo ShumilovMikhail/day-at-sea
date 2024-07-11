@@ -1,4 +1,4 @@
-export interface AgencyObjectDTO {
+export interface ObjectDTO {
   title: string;
   placement: string;
   address: string;

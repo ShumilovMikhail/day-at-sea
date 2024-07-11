@@ -17,7 +17,7 @@ import { filter, Observable, share, take, tap } from 'rxjs';
 import { FormArrayPipe, FormControlPipe } from '@utils/pipes';
 import { AddObjectInfrastructureContainerComponent } from '@account/add-object/feature-add-object-infrastructure';
 import {
-  AgencyObject,
+  ObjectEntity,
   ObjectForm,
   ObjectFormCharacteristics,
   ObjectFormInfrastructure,
@@ -101,7 +101,7 @@ export class AddObjectContainerComponent implements OnInit, OnDestroy {
   }
 
   public onPublish(): void {
-    this.formStore.publish(this.form?.value as AgencyObject);
+    this.formStore.publish(this.form?.value as ObjectEntity);
   }
 
   ngOnDestroy(): void {

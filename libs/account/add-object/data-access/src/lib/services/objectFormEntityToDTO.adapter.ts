@@ -1,12 +1,12 @@
 import {
-  AgencyObject,
+  ObjectEntity,
   DurationStayDiscountItem,
   EarlyBookingDiscountItem,
   LastMinuteBookingDiscountItem,
   ObjectPricesItem,
 } from '@account/add-object/util';
 import {
-  AgencyObjectDTO,
+  ObjectDTO,
   DurationStayDiscountItemDTO,
   EarlyBookingDiscountItemDTO,
   LastMinuteBookingDiscountItemDTO,
@@ -14,12 +14,12 @@ import {
 } from '../types/agency-object-dto.models';
 
 export interface ObjectFormEntityToDTO {
-  entityToDTO: (form: AgencyObject) => Omit<AgencyObjectDTO, 'agencies_id'>;
+  entityToDTO: (form: ObjectEntity) => Omit<ObjectDTO, 'agencies_id'>;
   pricesEntityToDTO: (prices: ObjectPricesItem[]) => ObjectPricesItemDTO[];
 }
 
 export const objectFormEntityToDTOAdapter: ObjectFormEntityToDTO = {
-  entityToDTO: (form: AgencyObject): Omit<AgencyObjectDTO, 'agencies_id'> => {
+  entityToDTO: (form: ObjectEntity): Omit<ObjectDTO, 'agencies_id'> => {
     console.log('work');
     return {
       title: form.title,

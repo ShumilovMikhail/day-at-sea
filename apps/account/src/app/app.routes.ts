@@ -1,5 +1,6 @@
-import { addObjectGuard, addObjectInfoGuard } from '@account/add-object/data-access';
 import { Route } from '@angular/router';
+
+import { addObjectGuard, addObjectInfoGuard } from '@account/add-object/data-access';
 import { authGuard } from '@auth/data-access';
 
 export const appRoutes: Route[] = [

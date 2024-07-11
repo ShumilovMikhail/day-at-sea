@@ -1,4 +1,4 @@
-export interface AgencyObject {
+export interface ObjectEntity {
   title: string;
   placement: string;
   address: string;

@@ -1,16 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ComponentStore } from '@ngrx/component-store';
-import { catchError, filter, map, Observable, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, filter, map, Observable, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
-import { AgencyObject, createObjectForm, ObjectForm } from '@account/add-object/util';
+import { ObjectEntity, createObjectForm, ObjectForm } from '@account/add-object/util';
 import { LocalStorageObjectFormService } from './local-storage-object-form.service';
 import { AgencyFacade } from '@account/data-access-agency';
 import { ObjectFormState } from '../types/object-form.models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { objectFormEntityToDTOAdapter } from './objectFormEntityToDTO.adapter';
-import { AgencyObjectDTO } from '../types/agency-object-dto.models';
+import { ObjectDTO } from '../types/agency-object-dto.models';
 import { ApiService } from '@http';
+import { Router } from '@angular/router';
 
 const initialState: ObjectFormState = {
   form: null,
@@ -24,6 +25,7 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
   private readonly agencyFacade = inject(AgencyFacade);
   private readonly fb = inject(FormBuilder);
   private readonly apiService = inject(ApiService);
+  private readonly router = inject(Router);
   private readonly id$: Observable<number> = this.agencyFacade.id$.pipe(
     takeUntilDestroyed(),
     filter((id: number | null): id is number => Boolean(id))
@@ -50,10 +52,10 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
     )
   );
 
-  public saveForm = this.effect((partForm$: Observable<Partial<AgencyObject>>) => {
+  public saveForm = this.effect((partForm$: Observable<Partial<ObjectEntity>>) => {
     return partForm$.pipe(
       withLatestFrom(this.id$),
-      tap(([partForm, id]: [Partial<AgencyObject>, number]) => {
+      tap(([partForm, id]: [Partial<ObjectEntity>, number]) => {
         if (id) {
           this.objectFormStorage.updateObjectForm(id, partForm);
           this.patchState({ isNewForm: false });
@@ -69,21 +71,24 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
     };
   });
 
-  public publish = this.effect((form$: Observable<AgencyObject>) =>
+  public publish = this.effect((form$: Observable<ObjectEntity>) =>
     form$.pipe(
       withLatestFrom(this.id$),
       map(
-        ([object, id]: [AgencyObject, number]): AgencyObjectDTO => ({
+        ([object, id]: [ObjectEntity, number]): ObjectDTO => ({
           ...objectFormEntityToDTOAdapter.entityToDTO(object),
           agencies_id: id,
         })
       ),
-      switchMap((object: AgencyObjectDTO) => {
+      switchMap((object: ObjectDTO) => {
         this.patchState({ isLoading: true });
         return this.apiService.post('objects', object).pipe(
           tap((response) => {
             this.patchState({ isLoading: false });
-            console.log(response);
+            this.router.navigateByUrl('/');
+          }),
+          catchError((error) => {
+            return of(error);
           })
         );
       })
@@ -102,7 +107,7 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
   );
 
   private setForm = this.updater((state: ObjectFormState, id: number) => {
-    const savedForm: AgencyObject | null = this.objectFormStorage.getObjectForm(id);
+    const savedForm: ObjectEntity | null = this.objectFormStorage.getObjectForm(id);
     const form = createObjectForm(this.fb, savedForm);
 
     return {
