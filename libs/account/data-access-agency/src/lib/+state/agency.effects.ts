@@ -11,9 +11,12 @@ import {
   AgencyRequisitesDTO,
   AgencyRequisitesEntity,
   Contacts,
+  SalesChannelDTO,
+  SalesChannelEntity,
   UpdateRequisitesRequestDTO,
 } from '../types/agency.models';
 import { agencyDTOAdapter } from './agency-dto.adapter';
+import { SalesChannelRequestDTO } from '../types/agency-state.models';
 
 export const agencyInitEffect$ = createEffect(
   (actions$ = inject(Actions)) =>
@@ -101,4 +104,72 @@ export const updateAgencyRequisitesSuccessEffect$ = createEffect(
       })
     ),
   { functional: true, dispatch: false }
+);
+
+export const addAgencySalesChannel$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(agencyActions.addAgencySalesChannel),
+      switchMap(({ id, salesChannel }: { id: number; salesChannel: SalesChannelRequestDTO }) => {
+        return apiService.post<SalesChannelDTO[]>(`agencies/${id}/sales-channels`, salesChannel).pipe(
+          map((salesChannels: SalesChannelDTO[]) => {
+            const salesChannelsEntity: SalesChannelEntity[] = salesChannels.map(
+              (salesChannel: SalesChannelDTO): SalesChannelEntity =>
+                agencyDTOAdapter.salesChannelDTOToEntity(salesChannel)
+            );
+            return agencyActions.addAgencySalesChannelSuccess({ salesChannels: salesChannelsEntity });
+          }),
+          catchError(({ error }) => {
+            return of(agencyActions.addAgencySalesChannelFailure({ error }));
+          })
+        );
+      })
+    ),
+  { functional: true }
+);
+
+export const updateAgencySalesChannel$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(agencyActions.updateAgencySalesChannel),
+      switchMap(({ id, salesChannel }: { id: number; salesChannel: SalesChannelDTO }) => {
+        return apiService
+          .put<SalesChannelDTO>(
+            `agencies/${id}/sales-channels/${salesChannel.id}`,
+            agencyDTOAdapter.salesChannelDTOToRequestDTO(salesChannel)
+          )
+          .pipe(
+            map((salesChannel: SalesChannelDTO) => {
+              const salesChannelEntity: SalesChannelEntity = agencyDTOAdapter.salesChannelDTOToEntity(salesChannel);
+              return agencyActions.updateAgencySalesChannelSuccess({ salesChannel: salesChannelEntity });
+            }),
+            catchError(({ error }) => {
+              return of(agencyActions.updateAgencySalesChannelFailure({ error }));
+            })
+          );
+      })
+    ),
+  { functional: true }
+);
+
+export const deleteAgencySalesChannel$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(agencyActions.deleteAgencySalesChannel),
+      switchMap(({ id, salesChannelId }: { id: number; salesChannelId: number }) => {
+        return apiService.delete<SalesChannelDTO[]>(`agencies/${id}/sales-channels/${salesChannelId}`).pipe(
+          map((salesChannels: SalesChannelDTO[]) => {
+            const salesChannelsEntity: SalesChannelEntity[] = salesChannels.map(
+              (salesChannel: SalesChannelDTO): SalesChannelEntity =>
+                agencyDTOAdapter.salesChannelDTOToEntity(salesChannel)
+            );
+            return agencyActions.deleteAgencySalesChannelSuccess({ salesChannels: salesChannelsEntity });
+          }),
+          catchError(({ error }) => {
+            return of(agencyActions.deleteAgencySalesChannelFailure({ error }));
+          })
+        );
+      })
+    ),
+  { functional: true }
 );

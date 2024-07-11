@@ -1,8 +1,11 @@
+import { SalesChannelRequestDTO, SalesChannelRequestEntity } from '../types/agency-state.models';
 import {
   AgencyDTO,
   AgencyEntity,
   AgencyRequisitesDTO,
   AgencyRequisitesEntity,
+  SalesChannelDTO,
+  SalesChannelEntity,
   UpdateRequisitesRequestDTO,
   UpdateRequisitesRequestEntity,
 } from '../types/agency.models';
@@ -11,6 +14,10 @@ export interface AgencyDTOAdapter {
   agencyDTOToEntity: (agencyDTO: AgencyDTO) => AgencyEntity;
   requisitesRequestEntityToDTO: (requisitesRequest: UpdateRequisitesRequestEntity) => UpdateRequisitesRequestDTO;
   requisitesDTOToEntity: (requisites: AgencyRequisitesDTO) => AgencyRequisitesEntity;
+  salesChannelEntityToDTO: (salesChannel: SalesChannelEntity) => SalesChannelDTO;
+  salesChannelDTOToEntity: (salesChannel: SalesChannelDTO) => SalesChannelEntity;
+  salesChannelDTOToRequestDTO: (salesChannel: SalesChannelDTO) => SalesChannelRequestDTO;
+  salesChannelRequestEntityToDTO: (salesChannelRequest: SalesChannelRequestEntity) => SalesChannelRequestDTO;
 }
 
 export const agencyDTOAdapter: AgencyDTOAdapter = {
@@ -23,6 +30,15 @@ export const agencyDTOAdapter: AgencyDTOAdapter = {
       contacts: agencyDTO.contacts,
       city: agencyDTO.city,
       logo: agencyDTO.logo,
+      salesChannels: agencyDTO.sales_channels.map((salesChannel: SalesChannelDTO): SalesChannelEntity => {
+        return {
+          id: salesChannel.id,
+          channel: salesChannel.channel,
+          title: salesChannel.title,
+          accountId: salesChannel.account_id,
+          status: salesChannel.status,
+        };
+      }),
     };
   },
 
@@ -43,6 +59,42 @@ export const agencyDTOAdapter: AgencyDTOAdapter = {
       phone: requisites.phone,
       city: requisites.city,
       logo: requisites.logo,
+    };
+  },
+
+  salesChannelEntityToDTO: (salesChannel: SalesChannelEntity): SalesChannelDTO => {
+    return {
+      id: salesChannel.id,
+      channel: salesChannel.channel,
+      title: salesChannel.title,
+      account_id: salesChannel.accountId,
+      status: salesChannel.status,
+    };
+  },
+
+  salesChannelDTOToEntity: (salesChannel: SalesChannelDTO): SalesChannelEntity => {
+    return {
+      id: salesChannel.id,
+      channel: salesChannel.channel,
+      title: salesChannel.title,
+      accountId: salesChannel.account_id,
+      status: salesChannel.status,
+    };
+  },
+  salesChannelDTOToRequestDTO: (salesChannel: SalesChannelDTO): SalesChannelRequestDTO => {
+    return {
+      channel: salesChannel.channel,
+      title: salesChannel.title,
+      account_id: salesChannel.account_id,
+      status: salesChannel.status,
+    };
+  },
+  salesChannelRequestEntityToDTO: (salesChannelRequest: SalesChannelRequestEntity): SalesChannelRequestDTO => {
+    return {
+      channel: salesChannelRequest.channel,
+      title: salesChannelRequest.title,
+      account_id: salesChannelRequest.accountId,
+      status: salesChannelRequest.status,
     };
   },
 };

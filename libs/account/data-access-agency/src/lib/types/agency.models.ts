@@ -27,12 +27,32 @@ export interface AgencyRequisitesEntity {
 export interface AgencyDTO extends AgencyRequisitesDTO {
   id: number;
   contacts: Contacts;
+  sales_channels: SalesChannelDTO[];
 }
 
 export interface AgencyEntity extends AgencyRequisitesEntity {
   id: number;
   contacts: Contacts;
+  salesChannels: SalesChannelEntity[];
 }
+
+export interface SalesChannelEntity {
+  id: number;
+  channel: string;
+  title: string;
+  accountId: number;
+  status: ChannelStatusType;
+}
+
+export interface SalesChannelDTO {
+  id: number;
+  channel: string;
+  title: string;
+  account_id: number;
+  status: ChannelStatusType;
+}
+
+export type ChannelStatusType = 'active' | 'inactive';
 
 export interface UpdateRequisitesRequestEntity {
   name: string | null;

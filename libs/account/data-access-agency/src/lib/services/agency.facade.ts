@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 
-import { AgencyStatus } from '../types/agency-state.models';
+import { AgencyStatus, SalesChannelRequestEntity } from '../types/agency-state.models';
 import {
   selectAgency,
   selectAgencyContacts,
@@ -10,9 +10,16 @@ import {
   selectAgencyId,
   selectAgencyLoading,
   selectAgencyRequisites,
+  selectAgencySalesChannels,
   selectAgencyStatus,
 } from '../+state/agency.selectors';
-import { AgencyEntity, AgencyRequisitesEntity, Contacts, UpdateRequisitesRequestEntity } from '../types/agency.models';
+import {
+  AgencyEntity,
+  AgencyRequisitesEntity,
+  Contacts,
+  SalesChannelEntity,
+  UpdateRequisitesRequestEntity,
+} from '../types/agency.models';
 import { ResponseError } from '@http';
 import { agencyActions } from '../+state/agency.actions';
 import { agencyDTOAdapter } from '../+state/agency-dto.adapter';
@@ -26,6 +33,8 @@ export class AgencyFacade {
   public readonly agency$: Observable<AgencyEntity | null> = this.store.select(selectAgency);
   public readonly error$: Observable<ResponseError | null> = this.store.select(selectAgencyError);
   public readonly id$: Observable<number | null> = this.store.select(selectAgencyId);
+  public readonly salesChannels$: Observable<SalesChannelEntity[] | null> =
+    this.store.select(selectAgencySalesChannels);
 
   public readonly contacts$: Observable<Contacts | null> = this.store.select(selectAgencyContacts);
 
@@ -51,6 +60,35 @@ export class AgencyFacade {
       }
       const requisites = agencyDTOAdapter.requisitesRequestEntityToDTO(requisitesRequest);
       this.store.dispatch(agencyActions.updateAgencyRequisites({ id: agency.id, requisites }));
+    });
+  }
+
+  public addSalesChannels(salesChannelRequest: SalesChannelRequestEntity): void {
+    this.agency$.pipe(take(1)).subscribe((agency: AgencyEntity | null) => {
+      if (!agency) {
+        throw Error('addSalesChannel: agency is null');
+      }
+      const salesChannelRequestDTO = agencyDTOAdapter.salesChannelRequestEntityToDTO(salesChannelRequest);
+      this.store.dispatch(agencyActions.addAgencySalesChannel({ id: agency.id, salesChannel: salesChannelRequestDTO }));
+    });
+  }
+
+  public updateSalesChannel(salesChannel: SalesChannelEntity): void {
+    this.agency$.pipe(take(1)).subscribe((agency: AgencyEntity | null) => {
+      if (!agency) {
+        throw Error('addSalesChannel: agency is null');
+      }
+      const salesChannelDTO = agencyDTOAdapter.salesChannelEntityToDTO(salesChannel);
+      this.store.dispatch(agencyActions.updateAgencySalesChannel({ id: agency.id, salesChannel: salesChannelDTO }));
+    });
+  }
+
+  public deleteSalesChannel(salesChannelId: number): void {
+    this.agency$.pipe(take(1)).subscribe((agency: AgencyEntity | null) => {
+      if (!agency) {
+        throw Error('addSalesChannel: agency is null');
+      }
+      this.store.dispatch(agencyActions.deleteAgencySalesChannel({ id: agency.id, salesChannelId }));
     });
   }
 }

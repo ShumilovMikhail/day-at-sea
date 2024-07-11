@@ -1,8 +1,15 @@
 import { createReducer, on, createFeature } from '@ngrx/store';
 
-import { AgencyState } from '../types/agency-state.models';
+import { AgencyState, SalesChannelRequestDTO } from '../types/agency-state.models';
 import { agencyActions } from './agency.actions';
-import { AgencyEntity, AgencyRequisitesEntity, Contacts, UpdateRequisitesRequestDTO } from '../types/agency.models';
+import {
+  AgencyEntity,
+  AgencyRequisitesEntity,
+  Contacts,
+  SalesChannelDTO,
+  SalesChannelEntity,
+  UpdateRequisitesRequestDTO,
+} from '../types/agency.models';
 import { ResponseError } from '@http';
 
 export const initialAgencyState: AgencyState = {
@@ -94,6 +101,94 @@ export const agencyFeature = createFeature({
     ),
     on(
       agencyActions.updateAgencyRequisitesFailure,
+      (state: AgencyState, payload: { error: ResponseError }): AgencyState => ({
+        ...state,
+        status: 'error',
+        error: payload.error,
+      })
+    ),
+
+    on(
+      agencyActions.addAgencySalesChannel,
+      (state: AgencyState, payload: { id: number; salesChannel: SalesChannelRequestDTO }): AgencyState => ({
+        ...state,
+        status: 'loading',
+        error: null,
+      })
+    ),
+    on(
+      agencyActions.addAgencySalesChannelSuccess,
+      (state: AgencyState, payload: { salesChannels: SalesChannelEntity[] }): AgencyState => ({
+        ...state,
+        status: 'loaded',
+        agency: {
+          ...state.agency,
+          salesChannels: [...payload.salesChannels],
+        } as AgencyEntity,
+      })
+    ),
+    on(
+      agencyActions.addAgencySalesChannelFailure,
+      (state: AgencyState, payload: { error: ResponseError }): AgencyState => ({
+        ...state,
+        status: 'error',
+        error: payload.error,
+      })
+    ),
+
+    on(
+      agencyActions.updateAgencySalesChannel,
+      (state: AgencyState, payload: { id: number; salesChannel: SalesChannelDTO }): AgencyState => ({
+        ...state,
+        status: 'loading',
+        error: null,
+      })
+    ),
+    on(
+      agencyActions.updateAgencySalesChannelSuccess,
+      (state: AgencyState, payload: { salesChannel: SalesChannelEntity }): AgencyState => ({
+        ...state,
+        status: 'loaded',
+        agency: {
+          ...state.agency,
+          salesChannels: [
+            ...state.agency!.salesChannels.map((salesChannel: SalesChannelEntity) =>
+              salesChannel.id === payload.salesChannel.id ? payload.salesChannel : salesChannel
+            ),
+          ],
+        } as AgencyEntity,
+      })
+    ),
+    on(
+      agencyActions.updateAgencySalesChannelFailure,
+      (state: AgencyState, payload: { error: ResponseError }): AgencyState => ({
+        ...state,
+        status: 'error',
+        error: payload.error,
+      })
+    ),
+
+    on(
+      agencyActions.deleteAgencySalesChannel,
+      (state: AgencyState, payload: { id: number; salesChannelId: number }): AgencyState => ({
+        ...state,
+        status: 'loading',
+        error: null,
+      })
+    ),
+    on(
+      agencyActions.deleteAgencySalesChannelSuccess,
+      (state: AgencyState, payload: { salesChannels: SalesChannelEntity[] }): AgencyState => ({
+        ...state,
+        status: 'loaded',
+        agency: {
+          ...state.agency,
+          salesChannels: [...payload.salesChannels],
+        } as AgencyEntity,
+      })
+    ),
+    on(
+      agencyActions.deleteAgencySalesChannelFailure,
       (state: AgencyState, payload: { error: ResponseError }): AgencyState => ({
         ...state,
         status: 'error',
