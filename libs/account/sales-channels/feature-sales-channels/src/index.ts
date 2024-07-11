@@ -1,1 +1,1 @@
-export * from './lib/feature-sales-channels/feature-sales-channels.component';
+export * from './lib/components/sales-channels-container/sales-channels-container.component';

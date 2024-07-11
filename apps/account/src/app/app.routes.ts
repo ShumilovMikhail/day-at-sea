@@ -40,6 +40,11 @@ export const appRoutes: Route[] = [
           import('@account/add-object/feature-add-object').then((c) => c.AddObjectContainerComponent),
         canActivate: [addObjectGuard()],
       },
+      {
+        path: 'sales-channels',
+        loadComponent: () =>
+          import('@account/sales-channels/feature-sales-channels').then((c) => c.SalesChannelsContainerComponent),
+      },
     ],
   },
 ];
