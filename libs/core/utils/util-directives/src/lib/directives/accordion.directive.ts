@@ -1,12 +1,4 @@
-import {
-  DestroyRef,
-  Directive,
-  ElementRef,
-  Input,
-  OnInit,
-  Renderer2,
-  inject,
-} from '@angular/core';
+import { DestroyRef, Directive, ElementRef, Input, OnInit, Renderer2, inject } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

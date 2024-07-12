@@ -1,0 +1,61 @@
+@if (!isMobile) {
+<table class="table" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
+  <tr>
+    <th>Канал</th>
+    <th>Название канала</th>
+    <th>ID объекта</th>
+    <th>Статус</th>
+    <th>Настроить</th>
+    <th></th>
+  </tr>
+  @for (salesChannel of salesChannelsList; track $index) {
+  <tr>
+    <td class="channel">
+      {{ salesChannel.channel }}
+    </td>
+    <td class="title">
+      {{ salesChannel.title }}
+    </td>
+    <td class="account-id">
+      {{ salesChannel.accountId }}
+    </td>
+    <td class="status">
+      <label class="switch">
+        <input type="checkbox" [checked]="salesChannel.status === 'active'" />
+        <span class="toggler"></span>
+      </label>
+    </td>
+    <td class="settings"><img src="assets/images/icons/settings-primary-icon.svg" alt="settings-icon" />Настроить</td>
+    <td class="delete"><img src="assets/images/icons/trash-icon.svg" alt="" /></td>
+  </tr>
+  }
+</table>
+}@else {
+<ul class="sales-channels-list">
+  @for (salesChannel of salesChannelsList; track $index) {
+  <li class="sales-channels-item" utilsAccordion [buttonToggle]="salesChannelChangeButton">
+    <div class="sales-channels-item__header">
+      <h3>{{ salesChannel.title }}</h3>
+      <img src="assets/images/icons/arrow-toggle.svg" alt="" #salesChannelChangeButton />
+    </div>
+    <div class="sales-channels-item__content">
+      <p class="sales-channels-item__channel">{{ salesChannel.channel }}</p>
+      <div class="sales-channels-item__row">
+        <div class="sales-channels-item__account-id">
+          <span>ID объекта</span>
+          <p>{{ salesChannel.accountId }}</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" [checked]="salesChannel.status === 'active'" />
+          <span class="toggler"></span>
+        </label>
+      </div>
+      <div class="buttons-container">
+        <button class="button-settings">Настроить</button>
+        <button class="button-delete">Удалить</button>
+      </div>
+    </div>
+  </li>
+  }
+</ul>
+}

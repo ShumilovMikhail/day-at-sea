@@ -1,1 +1,7 @@
-<p>sales-channels-container works!</p>
+@if (salesChannels$ | async; as salesChannels) {
+<account-sales-channels-table-ui [salesChannelsList]="salesChannels"></account-sales-channels-table-ui>
+} @else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}
