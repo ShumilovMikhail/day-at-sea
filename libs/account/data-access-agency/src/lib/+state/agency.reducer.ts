@@ -118,12 +118,12 @@ export const agencyFeature = createFeature({
     ),
     on(
       agencyActions.addAgencySalesChannelSuccess,
-      (state: AgencyState, payload: { salesChannels: SalesChannelEntity[] }): AgencyState => ({
+      (state: AgencyState, payload: { salesChannel: SalesChannelEntity }): AgencyState => ({
         ...state,
         status: 'loaded',
         agency: {
           ...state.agency,
-          salesChannels: [...payload.salesChannels],
+          salesChannels: [...state.agency!.salesChannels, payload.salesChannel],
         } as AgencyEntity,
       })
     ),
@@ -178,12 +178,14 @@ export const agencyFeature = createFeature({
     ),
     on(
       agencyActions.deleteAgencySalesChannelSuccess,
-      (state: AgencyState, payload: { salesChannels: SalesChannelEntity[] }): AgencyState => ({
+      (state: AgencyState, payload: { id: number }): AgencyState => ({
         ...state,
         status: 'loaded',
         agency: {
           ...state.agency,
-          salesChannels: [...payload.salesChannels],
+          salesChannels: [...state.agency!.salesChannels].filter(
+            (salesChannel: SalesChannelEntity) => salesChannel.id !== payload.id
+          ),
         } as AgencyEntity,
       })
     ),

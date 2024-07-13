@@ -111,13 +111,10 @@ export const addAgencySalesChannel$ = createEffect(
     actions$.pipe(
       ofType(agencyActions.addAgencySalesChannel),
       switchMap(({ id, salesChannel }: { id: number; salesChannel: SalesChannelRequestDTO }) => {
-        return apiService.post<SalesChannelDTO[]>(`agencies/${id}/sales-channels`, salesChannel).pipe(
-          map((salesChannels: SalesChannelDTO[]) => {
-            const salesChannelsEntity: SalesChannelEntity[] = salesChannels.map(
-              (salesChannel: SalesChannelDTO): SalesChannelEntity =>
-                agencyDTOAdapter.salesChannelDTOToEntity(salesChannel)
-            );
-            return agencyActions.addAgencySalesChannelSuccess({ salesChannels: salesChannelsEntity });
+        return apiService.post<SalesChannelDTO>(`agencies/${id}/sales-channels`, salesChannel).pipe(
+          map((salesChannel: SalesChannelDTO) => {
+            const salesChannelEntity: SalesChannelEntity = agencyDTOAdapter.salesChannelDTOToEntity(salesChannel);
+            return agencyActions.addAgencySalesChannelSuccess({ salesChannel: salesChannelEntity });
           }),
           catchError(({ error }) => {
             return of(agencyActions.addAgencySalesChannelFailure({ error }));
@@ -159,11 +156,7 @@ export const deleteAgencySalesChannel$ = createEffect(
       mergeMap(({ id, salesChannelId }: { id: number; salesChannelId: number }) => {
         return apiService.delete<SalesChannelDTO[]>(`agencies/${id}/sales-channels/${salesChannelId}`).pipe(
           map((salesChannels: SalesChannelDTO[]) => {
-            const salesChannelsEntity: SalesChannelEntity[] = salesChannels.map(
-              (salesChannel: SalesChannelDTO): SalesChannelEntity =>
-                agencyDTOAdapter.salesChannelDTOToEntity(salesChannel)
-            );
-            return agencyActions.deleteAgencySalesChannelSuccess({ salesChannels: salesChannelsEntity });
+            return agencyActions.deleteAgencySalesChannelSuccess({ id: salesChannelId });
           }),
           catchError(({ error }) => {
             return of(agencyActions.deleteAgencySalesChannelFailure({ error }));

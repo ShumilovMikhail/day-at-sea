@@ -25,9 +25,9 @@ export const agencyActions = createActionGroup({
     getAgencySuccess: props<{ agency: AgencyEntity }>(),
     updateAgencyContactsSuccess: props<{ contacts: Contacts }>(),
     updateAgencyRequisitesSuccess: props<{ requisites: AgencyRequisitesEntity }>(),
-    addAgencySalesChannelSuccess: props<{ salesChannels: SalesChannelEntity[] }>(),
+    addAgencySalesChannelSuccess: props<{ salesChannel: SalesChannelEntity }>(),
     updateAgencySalesChannelSuccess: props<{ salesChannel: SalesChannelEntity }>(),
-    deleteAgencySalesChannelSuccess: props<{ salesChannels: SalesChannelEntity[] }>(),
+    deleteAgencySalesChannelSuccess: props<{ id: number }>(),
 
     getAgencyFailure: props<{ error: ResponseError }>(),
     updateAgencyContactsFailure: props<{ error: ResponseError }>(),
