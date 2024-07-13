@@ -1,14 +1,14 @@
 @if (!isMobile) {
 <table class="table" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
   <tr>
-    <th>Канал</th>
-    <th>Название канала</th>
-    <th>ID объекта</th>
-    <th>Статус</th>
-    <th>Настроить</th>
-    <th></th>
+    <th class="channel-cell">Канал</th>
+    <th class="title-cell">Название канала</th>
+    <th class="account-id-cell">ID объекта</th>
+    <th class="status-cell">Статус</th>
+    <th class="settings-cell">Настроить</th>
+    <th class="delete-cell"></th>
   </tr>
-  @for (salesChannel of salesChannelsList; track $index) {
+  @for (salesChannel of salesChannelsList; track salesChannel) {
   <tr>
     <td class="channel">
       {{ salesChannel.channel }}
@@ -21,18 +21,27 @@
     </td>
     <td class="status">
       <label class="switch">
-        <input type="checkbox" [checked]="salesChannel.status === 'active'" />
+        <input
+          type="checkbox"
+          #statusInput
+          [checked]="salesChannel.status === 'active'"
+          (change)="onStatusChange(salesChannel, statusInput.checked ? 'active' : 'inactive')"
+        />
         <span class="toggler"></span>
       </label>
     </td>
-    <td class="settings"><img src="assets/images/icons/settings-primary-icon.svg" alt="settings-icon" />Настроить</td>
-    <td class="delete"><img src="assets/images/icons/trash-icon.svg" alt="" /></td>
+    <td class="settings" (click)="onSettingsButtonClick(salesChannel)">
+      <img src="assets/images/icons/settings-primary-icon.svg" alt="settings-icon" />Настроить
+    </td>
+    <td class="delete" (click)="onDeleteButtonClick(salesChannel.id)">
+      <img src="assets/images/icons/trash-icon.svg" alt="" />
+    </td>
   </tr>
   }
 </table>
 }@else {
 <ul class="sales-channels-list">
-  @for (salesChannel of salesChannelsList; track $index) {
+  @for (salesChannel of salesChannelsList; track salesChannel) {
   <li class="sales-channels-item" utilsAccordion [buttonToggle]="salesChannelChangeButton">
     <div class="sales-channels-item__header">
       <h3>{{ salesChannel.title }}</h3>
@@ -46,13 +55,18 @@
           <p>{{ salesChannel.accountId }}</p>
         </div>
         <label class="switch">
-          <input type="checkbox" [checked]="salesChannel.status === 'active'" />
+          <input
+            type="checkbox"
+            #statusInput
+            [checked]="salesChannel.status === 'active'"
+            (change)="onStatusChange(salesChannel, statusInput.checked ? 'active' : 'inactive')"
+          />
           <span class="toggler"></span>
         </label>
       </div>
       <div class="buttons-container">
-        <button class="button-settings">Настроить</button>
-        <button class="button-delete">Удалить</button>
+        <button class="button-settings" (click)="onSettingsButtonClick(salesChannel)">Настроить</button>
+        <button class="button-delete" (click)="onDeleteButtonClick(salesChannel.id)">Удалить</button>
       </div>
     </div>
   </li>

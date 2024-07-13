@@ -1,6 +1,31 @@
 @if (salesChannels$ | async; as salesChannels) {
-<account-sales-channels-table-ui [salesChannelsList]="salesChannels"></account-sales-channels-table-ui>
-} @else {
+<div class="sales-channels">
+  <h1>Каналы продаж</h1>
+  <div class="top">
+    <button class="add-channel-button" (click)="onAddSalesChannelModalToggle(true)">+ Добавить канал</button>
+  </div>
+  <account-sales-channels-table-ui
+    [salesChannelsList]="salesChannels"
+    (deleteButtonClickEvent)="onDeleteSalesChannel($event)"
+    (settingsButtonClickEvent)="onUpdateSalesChannelModalToggle(true, $event)"
+    (changeStatusEvent)="onStatusChange($event.salesChannel, $event.newStatus)"
+  ></account-sales-channels-table-ui>
+</div>
+@if (addModalOpen) {
+<account-sales-channels-add-ui
+  [form]="addForm"
+  [isLoading]="isLoading"
+  (closeEvent)="onAddSalesChannelModalToggle(false)"
+  (submitEvent)="onAddSalesChannel()"
+></account-sales-channels-add-ui>
+} @if (updateModalOpen) {
+<account-sales-channels-update-ui
+  [form]="updateForm"
+  [isLoading]="isLoading"
+  (closeEvent)="onUpdateSalesChannelModalToggle(false)"
+  (submitEvent)="onUpdateSalesChannel()"
+></account-sales-channels-update-ui>
+} } @else {
 <div class="loader-container">
   <ui-indicators-loader></ui-indicators-loader>
 </div>

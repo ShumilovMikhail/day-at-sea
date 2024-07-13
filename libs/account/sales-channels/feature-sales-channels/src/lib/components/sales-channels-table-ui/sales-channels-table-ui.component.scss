@@ -1,34 +1,41 @@
 @import 'variables';
 @import 'mixins';
-
-.channel {
+.table {
+  border-radius: 10px;
+}
+.channel-cell {
   width: 249px;
 }
-
-.title {
+.title-cell {
   width: 527px;
 }
-.account-id {
+.account-id-cell {
   width: 370px;
 }
-.status {
+.status-cell {
   width: 127px;
 }
-.settings {
+.settings-cell {
   width: 147px;
+}
+.delete-cell {
+  width: 50px;
+}
+
+.settings {
   display: flex;
   gap: 11px;
   align-items: center;
   color: #0088cc;
   cursor: pointer;
   transition: 0.2s all ease-in;
+  height: 45px;
   &:hover {
     background-color: #f8f7f7b2;
   }
 }
 
 .delete {
-  width: 50px;
   cursor: pointer;
   transition: 0.2s all ease-in;
   &:hover {

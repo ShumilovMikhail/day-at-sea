@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, tap } from 'rxjs';
+import { switchMap, catchError, of, map, tap, mergeMap } from 'rxjs';
 
 import { agencyActions } from './agency.actions';
 import { ApiService } from '@http';
@@ -156,7 +156,7 @@ export const deleteAgencySalesChannel$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) =>
     actions$.pipe(
       ofType(agencyActions.deleteAgencySalesChannel),
-      switchMap(({ id, salesChannelId }: { id: number; salesChannelId: number }) => {
+      mergeMap(({ id, salesChannelId }: { id: number; salesChannelId: number }) => {
         return apiService.delete<SalesChannelDTO[]>(`agencies/${id}/sales-channels/${salesChannelId}`).pipe(
           map((salesChannels: SalesChannelDTO[]) => {
             const salesChannelsEntity: SalesChannelEntity[] = salesChannels.map(

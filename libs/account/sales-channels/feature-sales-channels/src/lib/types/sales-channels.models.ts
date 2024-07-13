@@ -1,4 +1,4 @@
-export interface SalesChannelsVM {
+export interface SalesChannelVM {
   id: number;
   channel: string;
   title: string;

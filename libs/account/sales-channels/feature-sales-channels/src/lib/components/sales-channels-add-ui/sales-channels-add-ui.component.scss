@@ -1,0 +1,38 @@
+@import 'mixins';
+
+.add-channel {
+  h2 {
+    font-size: 24px;
+  }
+  form {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    ui-forms-input {
+      width: 300px;
+    }
+    button {
+      @include button-primary();
+      width: 100%;
+      padding: 8px 42px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .add-channel {
+    h2 {
+      font-size: 24px;
+    }
+    form {
+      ui-forms-input {
+        width: 240px;
+      }
+    }
+  }
+}

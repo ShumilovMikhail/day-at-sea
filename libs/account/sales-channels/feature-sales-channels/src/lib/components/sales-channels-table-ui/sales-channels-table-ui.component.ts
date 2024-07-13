@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SalesChannelsVM } from '../../types/sales-channels.models';
+import { ChannelStatusVMType, SalesChannelVM } from '../../types/sales-channels.models';
 import { AccordionDirective, IsMobileDirective } from '@utils/directives';
 
 @Component({
@@ -21,9 +21,13 @@ import { AccordionDirective, IsMobileDirective } from '@utils/directives';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SalesChannelsTableUiComponent {
-  @Input({ required: true }) salesChannelsList!: SalesChannelsVM[];
-  @Output() settingsButtonClickEvent = new EventEmitter<void>();
-  @Output() deleteButtonClickEvent = new EventEmitter<void>();
+  @Input({ required: true }) salesChannelsList!: SalesChannelVM[];
+  @Output() settingsButtonClickEvent = new EventEmitter<SalesChannelVM>();
+  @Output() deleteButtonClickEvent = new EventEmitter<number>();
+  @Output() changeStatusEvent = new EventEmitter<{
+    salesChannel: SalesChannelVM;
+    newStatus: ChannelStatusVMType;
+  }>();
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   public isMobile = false;
@@ -35,10 +39,13 @@ export class SalesChannelsTableUiComponent {
     }
   }
 
-  public onSettingsButtonClick(): void {
-    this.settingsButtonClickEvent.emit();
+  public onSettingsButtonClick(salesChannel: SalesChannelVM): void {
+    this.settingsButtonClickEvent.emit(salesChannel);
   }
-  public onDeleteButtonClick(): void {
-    this.deleteButtonClickEvent.emit();
+  public onDeleteButtonClick(id: number): void {
+    this.deleteButtonClickEvent.emit(id);
+  }
+  public onStatusChange(salesChannel: SalesChannelVM, newStatus: ChannelStatusVMType): void {
+    this.changeStatusEvent.emit({ salesChannel, newStatus });
   }
 }

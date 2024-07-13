@@ -1,0 +1,31 @@
+<layers-modal (closeDialogBoxEvent)="onClose()">
+  <div class="add-channel">
+    <h2>Добавить канал</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ui-forms-input
+        [control]="form.get('channel')! | formControl"
+        [label]="'Канал'"
+        [required]="true"
+      ></ui-forms-input>
+      <ui-forms-input
+        [control]="form.get('title')! | formControl"
+        [label]="'Название канала'"
+        [required]="true"
+      ></ui-forms-input>
+      <ui-forms-input
+        [control]="form.get('accountId')! | formControl"
+        [label]="'Введите ID аккаунта'"
+        [required]="true"
+        [errors]="
+          form.get('accountId')?.errors
+            ? [(form.get('accountId')?.errors)!['isNotNumber'] ? 'ID должно состоять только из цифр' : '']
+            : undefined
+        "
+      ></ui-forms-input>
+      <button [disabled]="!form.valid || isLoading">
+        Добавить
+        <div class="spinner-loader" *ngIf="isLoading"></div>
+      </button>
+    </form>
+  </div>
+</layers-modal>

@@ -69,6 +69,8 @@ export class AgencyFacade {
         throw Error('addSalesChannel: agency is null');
       }
       const salesChannelRequestDTO = agencyDTOAdapter.salesChannelRequestEntityToDTO(salesChannelRequest);
+      console.log(salesChannelRequest);
+      console.log(salesChannelRequestDTO);
       this.store.dispatch(agencyActions.addAgencySalesChannel({ id: agency.id, salesChannel: salesChannelRequestDTO }));
     });
   }
