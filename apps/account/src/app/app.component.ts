@@ -6,6 +6,7 @@ import { AuthFacade, UserEntity } from '@auth/data-access';
 import { HeaderContainerComponent } from '@account/layers/header';
 import { SideMenuContainerComponent } from '@account/layers/side-menu';
 import { AgencyFacade } from '@account/data-access-agency';
+import { StorageFacade } from '@storage/data-access-storage';
 
 @Component({
   standalone: true,
@@ -16,9 +17,11 @@ import { AgencyFacade } from '@account/data-access-agency';
 })
 export class AppComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
+  private readonly storageFacade = inject(StorageFacade);
   public readonly agencyFacade = inject(AgencyFacade);
   public readonly router = inject(Router);
   public isSideMenuMobileOpen = false;
+  public userExist = false;
 
   ngOnInit(): void {
     this.authFacade.init();

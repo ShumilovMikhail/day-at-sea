@@ -92,7 +92,6 @@ export const authFeature = createFeature({
         ...state,
         authStatus: 'loaded',
         authToken: payload.authToken,
-        isAuthenticate: true,
       })
     ),
     on(
@@ -117,6 +116,7 @@ export const authFeature = createFeature({
         ...state,
         authStatus: 'loaded',
         loggedUser: payload.user,
+        isAuthenticate: true,
       })
     ),
     on(
@@ -125,6 +125,7 @@ export const authFeature = createFeature({
         ...state,
         authStatus: 'error',
         error: payload.error,
+        isAuthenticate: false,
       })
     ),
     on(

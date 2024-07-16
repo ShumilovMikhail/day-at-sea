@@ -12,6 +12,8 @@ import { API_URL } from '@http';
 import { agencyEffects, agencyFeature } from '@account/data-access-agency';
 import { DADATA_TOKEN } from '@dadata/data-access-address';
 import { WINDOW } from '@utils/types';
+import { REMOTE_STORAGE_URL } from '@storage/data-access-storage';
+import { addObjectInterceptor } from '@account/add-object/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,7 +30,7 @@ export const appConfig: ApplicationConfig = {
       traceLimit: 75,
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideHttpClient(withInterceptors([addObjectInterceptor, tokenInterceptor])),
     provideRouter(appRoutes),
     {
       provide: API_URL,
@@ -45,6 +47,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: WINDOW,
       useFactory: () => window,
+    },
+    {
+      provide: REMOTE_STORAGE_URL,
+      useValue: environment.STORAGE_URL,
     },
   ],
 };

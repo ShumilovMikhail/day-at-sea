@@ -81,7 +81,6 @@ export class SalesChannelsContainerComponent {
   public onUpdateSalesChannelModalToggle(isOpen: boolean, salesChannel: SalesChannelVM | null = null): void {
     this.updateModalOpen = isOpen;
     if (salesChannel) {
-      console.log(1);
       this.updateForm.patchValue({
         id: salesChannel.id,
         channel: salesChannel.channel,

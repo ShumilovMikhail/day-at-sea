@@ -20,7 +20,6 @@ export interface ObjectFormEntityToDTO {
 
 export const objectFormEntityToDTOAdapter: ObjectFormEntityToDTO = {
   entityToDTO: (form: ObjectEntity): Omit<ObjectDTO, 'agencies_id'> => {
-    console.log('work');
     return {
       title: form.title,
       placement: form.placement,

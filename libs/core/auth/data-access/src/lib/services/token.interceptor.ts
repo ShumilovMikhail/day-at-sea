@@ -10,6 +10,7 @@ const shouldIntercept = (req: HttpRequest<unknown>): boolean => {
 
   for (const url of urls) {
     if (req.url.includes(url)) {
+      console.log(req.url);
       return true;
     }
   }

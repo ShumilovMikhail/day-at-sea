@@ -8,7 +8,6 @@ export interface ObjectDTO {
   rules: ObjectRulesDTO;
   services: string[];
   prices: ObjectPricesItemDTO[];
-  agencies_id: number;
 }
 
 export interface ObjectInfrastructureDTO {

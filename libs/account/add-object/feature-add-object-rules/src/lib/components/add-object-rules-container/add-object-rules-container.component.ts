@@ -11,7 +11,7 @@ import { AddObjectRulesListUiComponent } from '../add-object-rules-list-ui/add-o
 import { AddObjectRulesBookingUiComponent } from '../add-object-rules-booking-ui/add-object-rules-booking-ui.component';
 import { AddObjectRulesDescriptionUiComponent } from '../add-object-rules-description-ui/add-object-rules-description-ui.component';
 import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
-import { LocalStorageObjectFormService, ObjectFormStore } from '@account/add-object/data-access';
+import { ObjectFormStore } from '@account/add-object/data-access';
 import { ObjectRulesVM } from '../../types/rules.models';
 
 @Component({

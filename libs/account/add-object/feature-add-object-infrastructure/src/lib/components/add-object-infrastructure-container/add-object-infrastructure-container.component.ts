@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import {
   InfrastructureListFormVM,
@@ -70,9 +70,11 @@ export class AddObjectInfrastructureContainerComponent {
 
   public onAddInfrastructureItem(type: string, name: string): void {
     (this.form.get(type) as FormArray).push(
-      new FormControl({
-        name,
-        distance: '',
+      new FormGroup({
+        name: new FormControl(name, { nonNullable: true }),
+        distance: new FormControl('', {
+          nonNullable: true,
+        }),
       })
     );
   }

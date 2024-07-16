@@ -56,10 +56,7 @@ export class AddObjectContainerComponent implements OnInit, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   private readonly formStore = inject(ObjectFormStore);
-  public readonly loading$: Observable<boolean> = this.formStore.isLoading$.pipe(
-    tap((isLoading) => console.log(isLoading)),
-    share()
-  );
+  public readonly loading$: Observable<boolean> = this.formStore.isLoading$.pipe(share());
   public form!: FormGroup<ObjectForm> | null;
   public step: string | null = null;
 
