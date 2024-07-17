@@ -10,5 +10,5 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiCommonNoteComponent {
-  @Input() note = 'Последний этаж в доме, совмещенный с крышей';
+  @Input() note: string | null = null;
 }
