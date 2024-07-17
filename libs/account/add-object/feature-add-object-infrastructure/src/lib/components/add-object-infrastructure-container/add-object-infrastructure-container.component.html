@@ -1,3 +1,4 @@
+@if (form) {
 <div class="infrastructure">
   <h1>Инфраструктура</h1>
   <form [formGroup]="form">
@@ -11,8 +12,14 @@
       [reaches]="infrastructureReaches"
     ></account-add-object-infrastructure-reaches-ui>
     <account-add-object-buttons-ui
+      [isSaving]="(isSaving$ | async) ?? false"
       (nextButtonClickEvent)="onNext()"
       (saveButtonClickEvent)="onSave()"
     ></account-add-object-buttons-ui>
   </form>
 </div>
+}@else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}

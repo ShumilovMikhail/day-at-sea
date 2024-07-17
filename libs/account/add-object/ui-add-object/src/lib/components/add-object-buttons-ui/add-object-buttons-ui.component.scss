@@ -19,6 +19,8 @@
 
 .save-button {
   @include button-primary();
+  align-items: center;
+  gap: 5px;
 }
 .next-button {
   @include button-secondary();

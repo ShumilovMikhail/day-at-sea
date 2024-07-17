@@ -1,5 +1,8 @@
 <div class="buttons-container">
-  <button class="save-button" type="button" (click)="onSaveButtonClick()">Сохранить</button>
+  <button class="save-button" type="button" [disabled]="isSaving" (click)="onSaveButtonClick()">
+    Сохранить
+    <div class="spinner-loader" *ngIf="isSaving"></div>
+  </button>
   <button class="next-button" type="button" [disabled]="nextButtonDisable" (click)="onNextButtonClick()">
     Продолжить
   </button>

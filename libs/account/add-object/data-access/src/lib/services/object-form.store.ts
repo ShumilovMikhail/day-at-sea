@@ -1,20 +1,30 @@
 import { inject, Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ComponentStore } from '@ngrx/component-store';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 
-import { ObjectEntity, createObjectForm, ObjectForm } from '@account/add-object/util';
+import {
+  ObjectEntity,
+  createObjectForm,
+  ObjectForm,
+  ObjectFormInfrastructure,
+  ObjectFormCharacteristics,
+  ObjectFormPhotos,
+  ObjectFormRules,
+  ObjectFormPricesItem,
+} from '@account/add-object/util';
 import { ObjectFormStorageService } from './object-form-storage.service';
 import { ObjectFormState } from '../types/object-form.models';
 import { objectFormEntityToDTOAdapter } from './objectFormEntityToDTO.adapter';
 import { ObjectDTO } from '../types/agency-object-dto.models';
 import { ApiService } from '@http';
-import { Router } from '@angular/router';
 
 const initialState: ObjectFormState = {
   form: null,
   isNewForm: null,
   isLoading: false,
+  isSaving: false,
 };
 
 @Injectable({ providedIn: 'root' })
@@ -24,10 +34,48 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
   private readonly apiService = inject(ApiService);
   private readonly router = inject(Router);
 
-  public readonly form$: Observable<FormGroup<ObjectForm> | null> = this.select((state: ObjectFormState) => state.form);
+  public readonly form$: Observable<FormGroup<ObjectForm> | null> = this.select(
+    (state: ObjectFormState) => state.form
+  ).pipe(
+    tap((form: FormGroup<ObjectForm> | null) => {
+      if (!form) {
+        this.initForm();
+      }
+    })
+  );
   public readonly formState$: Observable<ObjectFormState> = this.select((state: ObjectFormState) => state);
   public readonly isNewForm$: Observable<boolean | null> = this.select((state: ObjectFormState) => state.isNewForm);
   public readonly isLoading$: Observable<boolean> = this.select((state: ObjectFormState) => state.isLoading);
+  public readonly isSaving$: Observable<boolean> = this.select((state: ObjectFormState) => state.isSaving);
+  public readonly infrastructureForm$: Observable<FormGroup<ObjectFormInfrastructure> | null> = this.select(
+    this.form$,
+    (form: FormGroup<ObjectForm> | null) => (form?.get('infrastructure') as FormGroup<ObjectFormInfrastructure>) ?? null
+  );
+  public readonly characteristicsForm$: Observable<FormGroup<ObjectFormCharacteristics> | null> = this.select(
+    this.form$,
+    (form: FormGroup<ObjectForm> | null) =>
+      (form?.get('characteristics') as FormGroup<ObjectFormCharacteristics>) ?? null
+  );
+  public readonly photosForm$: Observable<FormGroup<ObjectFormPhotos> | null> = this.select(
+    this.form$,
+    (form: FormGroup<ObjectForm> | null) => (form?.get('photos') as FormGroup<ObjectFormPhotos>) ?? null
+  );
+  public readonly rulesForm$: Observable<FormGroup<ObjectFormRules> | null> = this.select(
+    this.form$,
+    (form: FormGroup<ObjectForm> | null) => (form?.get('rules') as FormGroup<ObjectFormRules>) ?? null
+  );
+  public readonly placementControl$: Observable<FormControl<string> | null> = this.select(
+    this.form$,
+    (form: FormGroup<ObjectForm> | null) => (form?.get('placement') as FormControl<string>) ?? null
+  );
+  public readonly pricesForm$: Observable<FormArray<FormGroup<ObjectFormPricesItem>> | null> = this.select(
+    this.form$,
+    (form: FormGroup<ObjectForm> | null) => (form?.get('prices') as FormArray<FormGroup<ObjectFormPricesItem>>) ?? null
+  );
+  public readonly servicesArray$: Observable<FormArray<FormControl<string>> | null> = this.select(
+    this.form$,
+    (form: FormGroup<ObjectForm> | null) => (form?.get('services') as FormArray<FormControl<string>>) ?? null
+  );
 
   constructor() {
     super(initialState);
@@ -48,8 +96,16 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
   public saveForm = this.effect((partForm$: Observable<Partial<ObjectEntity>>) => {
     return partForm$.pipe(
       tap((partForm: Partial<ObjectEntity>) => {
-        this.objectFormStorage.updateObjectForm(partForm);
-        this.patchState({ isNewForm: false });
+        this.patchState({ isSaving: true });
+      }),
+      switchMap((partForm: Partial<ObjectEntity>) => {
+        return this.objectFormStorage.updateObjectForm(partForm).pipe(
+          tap((isUpdated: boolean) => {
+            if (isUpdated) {
+              this.saveFormSuccess(partForm);
+            }
+          })
+        );
       })
     );
   });
@@ -95,7 +151,6 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
 
   private setForm = this.updater((state: ObjectFormState, savedForm: Partial<ObjectEntity> | null) => {
     const form = createObjectForm(this.fb, savedForm);
-
     return {
       ...state,
       form,
@@ -107,6 +162,16 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
       ...state,
       isLoading: false,
       form: null,
+    };
+  });
+
+  private saveFormSuccess = this.updater((state: ObjectFormState, partForm: Partial<ObjectEntity>) => {
+    const form = state.form ? state.form : createObjectForm(this.fb, partForm);
+    return {
+      ...state,
+      isNewForm: false,
+      isSaving: false,
+      form: form,
     };
   });
 

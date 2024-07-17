@@ -1,14 +1,18 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { filter, Observable } from 'rxjs';
 
 import { PhotosFormVM } from '../../types/photos-form.models';
 import { AddObjectPhotosListUiComponent } from '../add-object-photos-list-ui/add-object-photos-list-ui.component';
 import { AddObjectPhotosFileUploaderUiComponent } from '../add-object-photos-file-uploader-ui/add-object-photos-file-uploader-ui.component';
 import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
-import { Router } from '@angular/router';
 import { ObjectFormStore } from '@account/add-object/data-access';
 import { ObjectPhotosVM } from '../../types/photos.models';
+import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 
 @Component({
   selector: 'account-add-object-photos-container',
@@ -18,26 +22,44 @@ import { ObjectPhotosVM } from '../../types/photos.models';
     AddObjectPhotosListUiComponent,
     AddObjectPhotosFileUploaderUiComponent,
     AddObjectButtonsUiComponent,
+    UiIndicatorsLoaderComponent,
   ],
   templateUrl: './add-object-photos-container.component.html',
   styleUrl: './add-object-photos-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectPhotosContainerComponent implements OnInit {
-  @Input({ required: true }) form!: FormGroup<PhotosFormVM>;
   private readonly router = inject(Router);
   private readonly objectFormStore = inject(ObjectFormStore);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private loadedPhotosView: string[] = [];
+  public readonly isSaving$: Observable<boolean> = this.objectFormStore.isSaving$;
+  public form!: FormGroup<PhotosFormVM>;
+  public error: string | null = null;
+
   private get formArrayPhotos(): FormArray<FormControl<string>> {
     return this.form.get('photos') as FormArray;
   }
-  private loadedPhotosView: string[] = [];
   get photosView(): string[] {
     return [...this.loadedPhotosView];
   }
-  public error: string | null = null;
 
   ngOnInit(): void {
-    this.loadedPhotosView = Array.from(this.formArrayPhotos.controls).map((item) => item.value);
+    this.objectFormStore.photosForm$
+      .pipe(
+        filter((form: FormGroup<PhotosFormVM> | null): form is FormGroup<PhotosFormVM> => Boolean(form)),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((form: FormGroup<PhotosFormVM>) => {
+        this.form = form;
+        this.loadedPhotosView = Array.from(this.formArrayPhotos.controls).map((item) => item.value);
+        this.changeDetectorRef.detectChanges();
+      });
+  }
+
+  constructor(title: Title) {
+    title.setTitle('Добавить объект');
   }
 
   public onLoadPhotos(loadedPhotos: File[]): void {

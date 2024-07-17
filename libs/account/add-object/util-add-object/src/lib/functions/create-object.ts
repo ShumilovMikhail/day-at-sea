@@ -129,13 +129,13 @@ const createCharacteristicsForm = (
     amenities: fb.nonNullable.group({
       flat: fb.array((form?.amenities?.flat.map((item) => new FormControl(item ?? '')) ?? []) as FormControl<string>[]),
       bathroom: fb.array(
-        (form?.amenities.bathroom?.map((item) => new FormControl(item ?? '')) ?? []) as FormControl<string>[]
+        (form?.amenities?.bathroom?.map((item) => new FormControl(item ?? '')) ?? []) as FormControl<string>[]
       ),
       kitchen: fb.array(
-        (form?.amenities.kitchen?.map((item) => new FormControl(item ?? '')) ?? []) as FormControl<string>[]
+        (form?.amenities?.kitchen?.map((item) => new FormControl(item ?? '')) ?? []) as FormControl<string>[]
       ),
       children: fb.array(
-        (form?.amenities.children?.map((item) => new FormControl(item ?? '')) ?? []) as FormControl<string>[]
+        (form?.amenities?.children?.map((item) => new FormControl(item ?? '')) ?? []) as FormControl<string>[]
       ),
     }),
     description: [form?.description ?? ''],
@@ -145,7 +145,7 @@ const createCharacteristicsForm = (
 const createPhotosForm = (fb: FormBuilder, form: ObjectPhotos | undefined): FormGroup<ObjectFormPhotos> => {
   return fb.nonNullable.group({
     primaryPhotoIndex: new FormControl(form?.primaryPhotoIndex) as FormControl<number | null>,
-    photos: fb.array((form?.photos.map((photo) => new FormControl(photo ?? '')) ?? []) as FormControl<string>[]),
+    photos: fb.array((form?.photos?.map((photo) => new FormControl(photo ?? '')) ?? []) as FormControl<string>[]),
   });
 };
 
@@ -155,7 +155,7 @@ const createRulesForm = (fb: FormBuilder, form: ObjectRules | undefined): FormGr
     departureTime: [form?.departureTime ?? '', [Validators.required, Validators.minLength(4)]],
     earlyArrival: [form?.earlyArrival ?? false],
     lateDeparture: [form?.lateDeparture ?? false],
-    rules: fb.array((form?.rules.map((rule) => new FormControl(rule ?? '')) ?? []) as FormControl<string>[]),
+    rules: fb.array((form?.rules?.map((rule) => new FormControl(rule ?? '')) ?? []) as FormControl<string>[]),
     paymentCheckIn: [form?.paymentCheckIn ?? '', [Validators.required, Validators.minLength(1)]],
     pledge: [form?.pledge ?? '', [Validators.required]],
     freeCancellation: [form?.freeCancellation ?? '1 день', [Validators.required, Validators.minLength(1)]],
@@ -170,28 +170,28 @@ const createPricesItemForm = (fb: FormBuilder, form: ObjectPricesItem | undefine
     minStay: [form?.minStay ?? 0, [Validators.required, Validators.minLength(1)]],
     discounts: fb.nonNullable.group({
       durationStay: fb.array(
-        (form?.discounts?.durationStay.map((item) => createDiscountFormByType(fb, 'durationStay', item)) ??
+        (form?.discounts?.durationStay?.map((item) => createDiscountFormByType(fb, 'durationStay', item)) ??
           []) as FormGroup<DurationStayDiscountItemForm>[]
       ),
       lastMinuteBooking: fb.array(
-        (form?.discounts?.lastMinuteBooking.map((item) => createDiscountFormByType(fb, 'lastMinuteBooking', item)) ??
+        (form?.discounts?.lastMinuteBooking?.map((item) => createDiscountFormByType(fb, 'lastMinuteBooking', item)) ??
           []) as FormGroup<LastMinuteBookingDiscountItemForm>[]
       ),
       earlyBooking: fb.array(
-        (form?.discounts?.earlyBooking.map((item) => createDiscountFormByType(fb, 'earlyBooking', item)) ??
+        (form?.discounts?.earlyBooking?.map((item) => createDiscountFormByType(fb, 'earlyBooking', item)) ??
           []) as FormGroup<EarlyBookingDiscountItemForm>[]
       ),
     }),
     weekendDiscount: fb.nonNullable.group({
-      price: [form?.weekendDiscount.price ?? ''],
-      friday: [form?.weekendDiscount.friday ?? false],
-      saturday: [form?.weekendDiscount.saturday ?? false],
-      sunday: [form?.weekendDiscount.sunday ?? false],
+      price: [form?.weekendDiscount?.price ?? ''],
+      friday: [form?.weekendDiscount?.friday ?? false],
+      saturday: [form?.weekendDiscount?.saturday ?? false],
+      sunday: [form?.weekendDiscount?.sunday ?? false],
     }),
     additionalGuests: fb.nonNullable.group({
-      overGuests: [form?.additionalGuests.overGuests ?? 0],
-      surcharge: [form?.additionalGuests.surcharge ?? ''],
-      unit: [form?.additionalGuests.unit ?? 'руб'],
+      overGuests: [form?.additionalGuests?.overGuests ?? 0],
+      surcharge: [form?.additionalGuests?.surcharge ?? ''],
+      unit: [form?.additionalGuests?.unit ?? 'руб'],
     }),
     onRequest: [form?.onRequest ?? false],
     instant: [form?.onRequest ?? false],

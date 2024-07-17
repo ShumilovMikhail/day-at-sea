@@ -35,9 +35,49 @@ export const appRoutes: Route[] = [
         canActivate: [addObjectInfoGuard()],
       },
       {
-        path: 'add-object/:step',
+        path: 'add-object/infrastructure',
         loadComponent: () =>
-          import('@account/add-object/feature-add-object').then((c) => c.AddObjectContainerComponent),
+          import('@account/add-object/feature-add-object-infrastructure').then(
+            (c) => c.AddObjectInfrastructureContainerComponent
+          ),
+        canActivate: [addObjectGuard()],
+      },
+      {
+        path: 'add-object/characteristics',
+        loadComponent: () =>
+          import('@account/add-object/feature-add-object-characteristics').then(
+            (c) => c.AddObjectCharacteristicsContainerComponent
+          ),
+        canActivate: [addObjectGuard()],
+      },
+      {
+        path: 'add-object/photos',
+        loadComponent: () =>
+          import('@account/add-object/feature-add-object-photos').then((c) => c.AddObjectPhotosContainerComponent),
+        canActivate: [addObjectGuard()],
+      },
+      {
+        path: 'add-object/photos',
+        loadComponent: () =>
+          import('@account/add-object/feature-add-object-photos').then((c) => c.AddObjectPhotosContainerComponent),
+        canActivate: [addObjectGuard()],
+      },
+      {
+        path: 'add-object/rules',
+        loadComponent: () =>
+          import('@account/add-object/feature-add-object-rules').then((c) => c.AddObjectRulesContainerComponent),
+        canActivate: [addObjectGuard()],
+      },
+      {
+        path: 'add-object/services',
+        loadComponent: () =>
+          import('@account/add-object/feature-add-object-services').then((c) => c.AddObjectServicesContainerComponent),
+        canActivate: [addObjectGuard()],
+      },
+      {
+        path: 'add-object/prices',
+        loadComponent: () =>
+          import('@account/add-object/feature-add-object-prices').then((c) => c.AddObjectPricesContainerComponent),
         canActivate: [addObjectGuard()],
       },
       {

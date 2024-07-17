@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
+
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 import { API_URL } from '@http';
 
@@ -10,7 +11,6 @@ const shouldIntercept = (req: HttpRequest<unknown>): boolean => {
 
   for (const url of urls) {
     if (req.url.includes(url)) {
-      console.log(req.url);
       return true;
     }
   }

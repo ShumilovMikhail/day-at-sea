@@ -1,3 +1,7 @@
+:host {
+  width: 100%;
+}
+
 .services {
   padding: 40px 50px;
   h1 {
@@ -9,6 +13,14 @@
   account-add-object-buttons-ui {
     margin-top: 40px;
   }
+}
+
+.loader-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 480px) {

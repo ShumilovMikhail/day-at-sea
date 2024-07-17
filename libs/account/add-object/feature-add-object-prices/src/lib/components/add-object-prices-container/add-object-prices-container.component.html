@@ -1,9 +1,20 @@
+@if (pricesArray) {
 <div class="prices">
   <h1>Цены</h1>
   <form>
     <account-add-object-prices-default-container
+      [isSaving]="(isSaving$ | async) ?? false"
       [defaultPrices]="defaultPrices"
       (saveEvent)="onSave()"
     ></account-add-object-prices-default-container>
   </form>
+  <button class="button-publish" [disabled]="!pricesArray.parent?.valid || (loading$ | async)" (click)="onPublish()">
+    Опубликовать
+    <div class="spinner-loader" *ngIf="loading$ | async"></div>
+  </button>
 </div>
+} @else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}

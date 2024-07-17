@@ -1,4 +1,7 @@
 <div class="default-prices">
   <account-add-object-prices-item-container [pricesItem]="defaultPrices"></account-add-object-prices-item-container>
-  <button type="button" (click)="onSave()">Сохранить</button>
+  <button type="button" [disabled]="isSaving" (click)="onSave()">
+    Сохранить
+    <div class="spinner-loader" *ngIf="isSaving"></div>
+  </button>
 </div>

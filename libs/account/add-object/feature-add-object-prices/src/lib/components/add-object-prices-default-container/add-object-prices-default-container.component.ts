@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 
@@ -15,6 +15,7 @@ import { AddObjectPricesItemContainerComponent } from '@account/add-object/featu
 })
 export class AddObjectPricesDefaultContainerComponent {
   @Input({ required: true }) defaultPrices!: FormGroup<ObjectFormPricesItemVM>;
+  @Input() isSaving = false;
   @Output() saveEvent = new EventEmitter<void>();
 
   public onSave(): void {

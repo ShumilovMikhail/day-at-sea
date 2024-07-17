@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AddObjectButtonsUiComponent {
   @Input() nextButtonDisable = false;
+  @Input() isSaving = false;
   @Output() saveButtonClickEvent = new EventEmitter<void>();
   @Output() nextButtonClickEvent = new EventEmitter<void>();
 

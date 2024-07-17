@@ -1,3 +1,4 @@
+@if (form) {
 <div class="photos">
   <h1>Фотографии</h1>
   <form>
@@ -12,8 +13,15 @@
       (selectButtonClickEvent)="onSelectPhoto($event)"
     ></account-add-object-photos-list-ui>
     <account-add-object-buttons-ui
+      [isSaving]="(isSaving$ | async) ?? false"
       (nextButtonClickEvent)="onNext()"
       (saveButtonClickEvent)="onSave()"
     ></account-add-object-buttons-ui>
   </form>
 </div>
+
+} @else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}

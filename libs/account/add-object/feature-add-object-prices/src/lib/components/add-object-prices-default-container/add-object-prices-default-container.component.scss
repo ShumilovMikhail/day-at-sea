@@ -13,9 +13,17 @@
 }
 
 button {
-  padding: 13px 25px;
-  width: 192px;
   @include button-secondary();
+  box-sizing: content-box;
+  display: flex;
+  justify-content: center;
+  padding: 13px 28px;
+  width: 130px;
+  align-items: center;
+  gap: 10px;
+  .spinner-loader {
+    background-color: $grey;
+  }
 }
 
 @media (max-width: 480px) {

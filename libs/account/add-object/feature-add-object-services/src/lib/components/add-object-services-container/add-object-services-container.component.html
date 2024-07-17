@@ -1,3 +1,4 @@
+@if (servicesArray) {
 <div class="services">
   <h1>Услуги</h1>
   <form>
@@ -8,7 +9,13 @@
     ></account-add-object-services-list-ui>
   </form>
   <account-add-object-buttons-ui
+    [isSaving]="(isSaving$ | async) ?? false"
     (nextButtonClickEvent)="onNext()"
     (saveButtonClickEvent)="onSave()"
   ></account-add-object-buttons-ui>
 </div>
+}@else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}

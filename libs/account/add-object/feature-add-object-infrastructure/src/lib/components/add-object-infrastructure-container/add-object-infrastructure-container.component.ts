@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { filter, Observable } from 'rxjs';
 
 import {
   InfrastructureListFormVM,
@@ -13,6 +16,7 @@ import { AddObjectInfrastructureReachesUiComponent } from '../add-object-infrast
 import { AddObjectButtonsUiComponent } from '@account/add-object/ui';
 import { ObjectFormStore } from '@account/add-object/data-access';
 import { ObjectInfrastructureVM } from '../../types/infrastructure.models';
+import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 
 @Component({
   selector: 'account-add-object-infrastructure-container',
@@ -23,15 +27,37 @@ import { ObjectInfrastructureVM } from '../../types/infrastructure.models';
     ReactiveFormsModule,
     AddObjectInfrastructureReachesUiComponent,
     AddObjectButtonsUiComponent,
+    UiIndicatorsLoaderComponent,
   ],
   templateUrl: './add-object-infrastructure-container.component.html',
   styleUrl: './add-object-infrastructure-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddObjectInfrastructureContainerComponent {
-  @Input({ required: true }) form!: FormGroup<InfrastructureFormVM>;
+export class AddObjectInfrastructureContainerComponent implements OnInit {
+  public form!: FormGroup<InfrastructureFormVM>;
   private readonly router = inject(Router);
   private readonly objectFormStore = inject(ObjectFormStore);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  public readonly isSaving$: Observable<boolean> = this.objectFormStore.isSaving$;
+
+  ngOnInit(): void {
+    this.objectFormStore.infrastructureForm$
+      .pipe(
+        filter((form: FormGroup<InfrastructureFormVM> | null): form is FormGroup<InfrastructureFormVM> =>
+          Boolean(form)
+        ),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((form: FormGroup<InfrastructureFormVM>) => {
+        this.form = form;
+        this.changeDetectorRef.detectChanges();
+      });
+  }
+
+  constructor(title: Title) {
+    title.setTitle('Добавить объект');
+  }
 
   get infrastructureList(): InfrastructureListFormVM {
     return {
