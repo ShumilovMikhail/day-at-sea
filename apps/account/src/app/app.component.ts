@@ -2,11 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, take } from 'rxjs';
 
-import { AuthFacade, UserEntity } from '@auth/data-access';
+import { AuthFacade, UserEntity, UserFacade } from '@auth/data-access';
 import { HeaderContainerComponent } from '@account/layers/header';
 import { SideMenuContainerComponent } from '@account/layers/side-menu';
 import { AgencyFacade } from '@account/data-access-agency';
-import { StorageFacade } from '@storage/data-access-storage';
 
 @Component({
   standalone: true,
@@ -17,7 +16,7 @@ import { StorageFacade } from '@storage/data-access-storage';
 })
 export class AppComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
-  private readonly storageFacade = inject(StorageFacade);
+  private readonly userFacade = inject(UserFacade);
   public readonly agencyFacade = inject(AgencyFacade);
   public readonly router = inject(Router);
   public isSideMenuMobileOpen = false;
@@ -25,7 +24,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.authFacade.init();
-    this.authFacade.user$
+    this.userFacade.user$
       .pipe(
         filter((user: UserEntity | null) => Boolean(user)),
         take(1)

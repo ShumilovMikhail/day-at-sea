@@ -5,11 +5,11 @@ import { LocalStorageService } from './local-storage.service';
 import { SessionStorageService } from './session-storage.service';
 import { RemoteStorageService } from './remote-storage.service';
 import { StorageList, StorageOperationClearConfig, StorageOperationConfig } from '../types/storage.models';
-import { AuthFacade, UserEntity } from '@auth/data-access';
+import { UserEntity, UserFacade } from '@auth/data-access';
 
 @Injectable({ providedIn: 'root' })
 export class StorageFacade {
-  private readonly authFacade = inject(AuthFacade);
+  private readonly userFacade = inject(UserFacade);
   private readonly storageList: StorageList;
 
   constructor(
@@ -26,7 +26,7 @@ export class StorageFacade {
   }
 
   public init(): void {
-    this.authFacade.user$
+    this.userFacade.user$
       .pipe(filter((user: UserEntity | null): user is UserEntity => Boolean(user)))
       .subscribe((user) => {
         for (const key in this.storageList) {

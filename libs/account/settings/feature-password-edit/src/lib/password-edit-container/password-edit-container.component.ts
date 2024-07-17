@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { AuthFacade } from '@auth/data-access';
+import { UserFacade } from '@auth/data-access';
 import { Observable, filter } from 'rxjs';
 import { conformPasswordValidator, containsSpacesValidator, latinLettersValidator } from '@utils/validators';
 import { PasswordEditUiComponent } from '../password-edit-ui/password-edit-ui.component';
@@ -20,8 +20,8 @@ export class PasswordEditContainerComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly fb = inject(FormBuilder);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly authFacade = inject(AuthFacade);
-  private readonly password$: Observable<string> = this.authFacade.userPassword$.pipe(
+  private readonly userFacade = inject(UserFacade);
+  private readonly password$: Observable<string> = this.userFacade.userPassword$.pipe(
     filter((password: string | null): password is string => Boolean(password))
   );
   public readonly form = this.fb.nonNullable.group({
@@ -46,7 +46,7 @@ export class PasswordEditContainerComponent implements OnInit {
 
   public onSubmit(): void {
     if (this.form.valid) {
-      this.authFacade.changeUserPassword(this.form.value.password as string);
+      this.userFacade.changeUserPassword(this.form.value.password as string);
       this.loading = true;
     }
   }

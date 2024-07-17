@@ -1,6 +1,7 @@
 export * from './lib/validators/username-available';
 export * from './lib/validators/email-available';
 export * from './lib/services/auth.facade';
+export * from './lib/services/user.facade';
 export * as authEffects from './lib/+state/auth.effects';
 export * from './lib/+state/auth.reducer';
 export * from './lib/types/auth-state.models';

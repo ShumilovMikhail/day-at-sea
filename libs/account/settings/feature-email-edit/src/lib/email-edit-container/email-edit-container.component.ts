@@ -4,7 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, filter } from 'rxjs';
 
-import { AuthFacade, emailAvailableValidator } from '@auth/data-access';
+import { emailAvailableValidator, UserFacade } from '@auth/data-access';
 import { EmailEditUiComponent } from '../email-edit-ui/email-edit-ui.component';
 
 @Component({
@@ -19,8 +19,8 @@ export class EmailEditContainerComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly fb = inject(FormBuilder);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly authFacade = inject(AuthFacade);
-  private readonly email$: Observable<string> = this.authFacade.userEmail$.pipe(
+  private readonly userFacade = inject(UserFacade);
+  private readonly email$: Observable<string> = this.userFacade.userEmail$.pipe(
     filter((email: string | null): email is string => Boolean(email))
   );
   public readonly form = this.fb.nonNullable.group({
@@ -41,7 +41,7 @@ export class EmailEditContainerComponent implements OnInit {
   public onSubmit(): void {
     if (this.form.valid) {
       this.loading = true;
-      this.authFacade.changeUserEmail(this.form.value.email as string);
+      this.userFacade.changeUserEmail(this.form.value.email as string);
     }
   }
 

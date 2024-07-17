@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Observable, map } from 'rxjs';
 
 import { SettingsUiComponent } from '../settings-ui/settings-ui.component';
-import { AuthFacade, UserEntity } from '@auth/data-access';
+import { UserEntity, UserFacade } from '@auth/data-access';
 import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
 import { AgencyVM, UserVM } from '../types/settings.models';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
@@ -20,9 +20,9 @@ import { agencyEntityVMAdapter } from './agency-entity-vm.adapter';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsContainerComponent {
-  private readonly authFacade = inject(AuthFacade);
+  private readonly userFacade = inject(UserFacade);
   private readonly agencyFacade = inject(AgencyFacade);
-  public readonly userVM$: Observable<UserVM | null> = this.authFacade.user$.pipe(
+  public readonly userVM$: Observable<UserVM | null> = this.userFacade.user$.pipe(
     map((user: UserEntity | null) => {
       if (!user) {
         return null;

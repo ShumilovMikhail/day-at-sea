@@ -4,7 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, filter } from 'rxjs';
 
-import { AuthFacade, usernameAvailableValidator } from '@auth/data-access';
+import { UserFacade, usernameAvailableValidator } from '@auth/data-access';
 import { UsernameEditUiComponent } from '../username-edit-ui/username-edit-ui.component';
 import { usernameCorrectlyValidator } from '@utils/validators';
 
@@ -20,8 +20,8 @@ export class UsernameEditContainerComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly fb = inject(FormBuilder);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly authFacade = inject(AuthFacade);
-  private readonly username$: Observable<string> = this.authFacade.username$.pipe(
+  private readonly userFacade = inject(UserFacade);
+  private readonly username$: Observable<string> = this.userFacade.username$.pipe(
     filter((username: string | null): username is string => Boolean(username))
   );
   public readonly form = this.fb.nonNullable.group({
@@ -45,7 +45,7 @@ export class UsernameEditContainerComponent implements OnInit {
 
   public onSubmit(): void {
     if (this.form.valid) {
-      this.authFacade.changeUsername(this.form.value.username as string);
+      this.userFacade.changeUsername(this.form.value.username as string);
       this.loading = true;
     }
   }
