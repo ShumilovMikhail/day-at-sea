@@ -1,8 +1,9 @@
-@if (pricesArray) {
+@if (pricesArray && bookingMethodControl) {
 <div class="prices">
   <h1>Цены</h1>
   <form>
     <account-add-object-prices-default-container
+      [booingMethodControl]="bookingMethodControl"
       [isSaving]="(isSaving$ | async) ?? false"
       [defaultPrices]="defaultPrices"
       (saveEvent)="onSave()"

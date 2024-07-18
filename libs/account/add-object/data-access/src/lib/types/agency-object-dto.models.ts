@@ -8,6 +8,7 @@ export interface ObjectDTO {
   rules: ObjectRulesDTO;
   services: string[];
   prices: ObjectPricesItemDTO[];
+  booking_method: string;
 }
 
 export interface ObjectInfrastructureDTO {
@@ -83,8 +84,6 @@ export interface ObjectPricesItemDTO {
   discounts: DiscountsDTO;
   weekend_discount: WeekendDiscountDTO;
   additional_guests: AdditionalGuestsDTO;
-  on_request: boolean;
-  instant: boolean;
 }
 
 export interface DiscountsDTO {

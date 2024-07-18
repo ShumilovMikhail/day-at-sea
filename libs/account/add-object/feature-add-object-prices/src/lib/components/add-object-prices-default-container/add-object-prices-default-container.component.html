@@ -1,5 +1,22 @@
 <div class="default-prices">
   <account-add-object-prices-item-container [pricesItem]="defaultPrices"></account-add-object-prices-item-container>
+  <div class="checkboxes">
+    <label class="checkbox">
+      <input type="radio" name="bookingMethod" value="'Бронирование по заявке'" [formControl]="booingMethodControl" />
+      <div></div>
+      Бронирование по заявке
+    </label>
+    <label class="checkbox">
+      <input
+        type="radio"
+        name="bookingMethod"
+        value="'Моментальное бронирование'"
+        [formControl]="booingMethodControl"
+      />
+      <div></div>
+      Моментальное бронирование
+    </label>
+  </div>
   <button type="button" [disabled]="isSaving" (click)="onSave()">
     Сохранить
     <div class="spinner-loader" *ngIf="isSaving"></div>

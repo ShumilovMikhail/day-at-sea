@@ -18,16 +18,4 @@
   <account-add-object-prices-item-additional-guests-ui
     [additionalGuests]="pricesItem.get('additionalGuests')! | formGroup"
   ></account-add-object-prices-item-additional-guests-ui>
-  <div class="checkboxes">
-    <label class="checkbox">
-      <input type="checkbox" [formControl]="pricesItem.get('onRequest')! | formControl" />
-      <div></div>
-      Бронирование по заявке
-    </label>
-    <label class="checkbox">
-      <input type="checkbox" [formControl]="pricesItem.get('instant')! | formControl" />
-      <div></div>
-      Моментальное бронирование
-    </label>
-  </div>
 </div>

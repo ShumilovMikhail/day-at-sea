@@ -59,11 +59,10 @@ export const createObjectForm = (fb: FormBuilder, form: Partial<ObjectEntity> | 
             surcharge: '',
             unit: 'руб',
           },
-          onRequest: false,
-          instant: false,
         }),
       ]) as FormGroup<ObjectFormPricesItem>[]
     ),
+    bookingMethod: [form?.bookingMethod ?? '', [Validators.required]],
   });
 };
 const createInfrastructureForm = (
@@ -193,7 +192,5 @@ const createPricesItemForm = (fb: FormBuilder, form: ObjectPricesItem | undefine
       surcharge: [form?.additionalGuests?.surcharge ?? ''],
       unit: [form?.additionalGuests?.unit ?? 'руб'],
     }),
-    onRequest: [form?.onRequest ?? false],
-    instant: [form?.onRequest ?? false],
   });
 };

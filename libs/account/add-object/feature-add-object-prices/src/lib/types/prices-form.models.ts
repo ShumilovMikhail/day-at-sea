@@ -8,8 +8,6 @@ export interface ObjectFormPricesItemVM {
   discounts: FormGroup<DiscountsFormVM>;
   weekendDiscount: FormGroup<WeekendDiscountFormVM>;
   additionalGuests: FormGroup<AdditionalGuestsFormVM>;
-  onRequest: FormControl<boolean>;
-  instant: FormControl<boolean>;
 }
 
 export interface DiscountsFormVM {

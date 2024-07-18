@@ -5,8 +5,6 @@ export interface ObjectPricesItemVM {
   discounts: DiscountsVM;
   weekendDiscount: WeekendDiscountVM;
   additionalGuests: AdditionalGuestsVM;
-  onRequest: boolean;
-  instant: boolean;
 }
 
 export interface DiscountsVM {

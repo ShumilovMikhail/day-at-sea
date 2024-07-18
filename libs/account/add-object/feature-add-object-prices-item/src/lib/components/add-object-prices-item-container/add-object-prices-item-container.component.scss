@@ -4,12 +4,6 @@
   gap: 40px;
 }
 
-.checkboxes {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 @media (max-width: 480px) {
   .prices-item {
     gap: 30px;

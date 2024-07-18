@@ -76,6 +76,10 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
     this.form$,
     (form: FormGroup<ObjectForm> | null) => (form?.get('services') as FormArray<FormControl<string>>) ?? null
   );
+  public readonly bookingMethodControl$: Observable<FormControl<string> | null> = this.select(
+    this.form$,
+    (form: FormGroup<ObjectForm> | null) => (form?.get('bookingMethod') as FormControl<string>) ?? null
+  );
 
   constructor() {
     super(initialState);
@@ -125,6 +129,7 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
         })
       ),
       switchMap((object: ObjectDTO) => {
+        console.log(object);
         this.patchState({ isLoading: true });
         return this.apiService.post('add-object', object).pipe(
           tap((response) => {
@@ -161,16 +166,18 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
     return {
       ...state,
       isLoading: false,
+      isNewForm: true,
       form: null,
     };
   });
 
   private saveFormSuccess = this.updater((state: ObjectFormState, partForm: Partial<ObjectEntity>) => {
     const form = state.form ? state.form : createObjectForm(this.fb, partForm);
+    console.log(1);
     return {
       ...state,
-      isNewForm: false,
       isSaving: false,
+      isNewForm: false,
       form: form,
     };
   });

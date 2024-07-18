@@ -34,7 +34,7 @@ export const getAgencyEffect$ = createEffect(
     actions$.pipe(
       ofType(agencyActions.getAgency),
       switchMap(({ userId }) => {
-        return apiService.get<AgencyDTO>(`agencies/user/${userId}`).pipe(
+        return apiService.get<AgencyDTO>(`users/${userId}/agency`).pipe(
           map((agencyDTO: AgencyDTO) => {
             const agency: AgencyEntity = agencyDTOAdapter.agencyDTOToEntity(agencyDTO);
             return agencyActions.getAgencySuccess({ agency });

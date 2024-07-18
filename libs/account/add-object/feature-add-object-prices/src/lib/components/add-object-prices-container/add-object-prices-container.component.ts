@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { filter, Observable, share } from 'rxjs';
+import { filter, Observable, share, withLatestFrom } from 'rxjs';
 
 import { ObjectFormPricesItemVM, PricesType } from '../../types/prices-form.models';
 import { AddObjectPricesDefaultContainerComponent } from '../add-object-prices-default-container/add-object-prices-default-container.component';
@@ -21,21 +21,26 @@ import { ObjectEntity } from '@account/add-object/util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddObjectPricesContainerComponent implements OnInit {
-  public pricesArray!: PricesType;
   private readonly objectFormStore = inject(ObjectFormStore);
   private readonly destroyRef = inject(DestroyRef);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   public readonly loading$: Observable<boolean> = this.objectFormStore.isLoading$.pipe(share());
   public readonly isSaving$: Observable<boolean> = this.objectFormStore.isSaving$;
+  public pricesArray!: PricesType;
+  public bookingMethodControl!: FormControl<string>;
 
   ngOnInit(): void {
     this.objectFormStore.pricesForm$
       .pipe(
-        filter((pricesArray: PricesType | null): pricesArray is PricesType => Boolean(pricesArray)),
+        withLatestFrom(this.objectFormStore.bookingMethodControl$),
+        filter((args: [PricesType | null, FormControl<string> | null]): args is [PricesType, FormControl<string>] =>
+          Boolean(args)
+        ),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe((pricesArray: PricesType) => {
+      .subscribe(([pricesArray, bookingMethodControl]: [PricesType, FormControl<string>]) => {
         this.pricesArray = pricesArray;
+        this.bookingMethodControl = bookingMethodControl;
         this.changeDetectorRef.detectChanges();
       });
   }
@@ -53,10 +58,14 @@ export class AddObjectPricesContainerComponent implements OnInit {
   }
 
   public onSave(): void {
-    this.objectFormStore.saveForm({ prices: this.pricesArray.value as ObjectPricesItemVM[] });
+    this.objectFormStore.saveForm({
+      prices: this.pricesArray.value as ObjectPricesItemVM[],
+      bookingMethod: this.bookingMethodControl.value,
+    });
   }
 
   public onPublish(): void {
+    console.log(this.pricesArray?.parent?.value as ObjectEntity);
     this.objectFormStore.publish(this.pricesArray?.parent?.value as ObjectEntity);
   }
 }

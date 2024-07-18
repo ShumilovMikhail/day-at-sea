@@ -65,7 +65,8 @@ export const objectFormEntityToDTOAdapter: ObjectFormEntityToDTO = {
         description: form.rules.description,
       },
       services: form.services,
-      prices: [],
+      prices: objectFormEntityToDTOAdapter.pricesEntityToDTO(form.prices),
+      booking_method: form.bookingMethod,
     };
   },
   pricesEntityToDTO: (prices: ObjectPricesItem[]): ObjectPricesItemDTO[] => {
@@ -109,8 +110,6 @@ export const objectFormEntityToDTOAdapter: ObjectFormEntityToDTO = {
           surcharge: priceItem.additionalGuests.surcharge,
           unit: priceItem.additionalGuests.unit,
         },
-        on_request: priceItem.onRequest,
-        instant: priceItem.instant,
       };
     });
   },

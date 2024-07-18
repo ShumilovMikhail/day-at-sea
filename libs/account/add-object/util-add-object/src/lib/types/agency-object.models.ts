@@ -8,6 +8,7 @@ export interface ObjectEntity {
   rules: ObjectRules;
   services: string[];
   prices: ObjectPricesItem[];
+  bookingMethod: string;
 }
 
 export interface ObjectInfrastructure {
@@ -83,8 +84,6 @@ export interface ObjectPricesItem {
   discounts: Discounts;
   weekendDiscount: WeekendDiscount;
   additionalGuests: AdditionalGuests;
-  onRequest: boolean;
-  instant: boolean;
 }
 
 export interface Discounts {

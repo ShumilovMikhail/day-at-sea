@@ -10,6 +10,7 @@ export interface ObjectForm {
   rules: FormGroup<ObjectFormRules>;
   services: FormArray<FormControl<string>>;
   prices: FormArray<FormGroup<ObjectFormPricesItem>>;
+  bookingMethod: FormControl<string>;
 }
 
 export interface ObjectFormInfrastructure {
@@ -85,8 +86,6 @@ export interface ObjectFormPricesItem {
   discounts: FormGroup<DiscountsForm>;
   weekendDiscount: FormGroup<WeekendDiscountForm>;
   additionalGuests: FormGroup<AdditionalGuestsForm>;
-  onRequest: FormControl<boolean>;
-  instant: FormControl<boolean>;
 }
 
 export interface DiscountsForm {

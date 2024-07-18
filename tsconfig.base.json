@@ -45,6 +45,7 @@
       "@account/data-access-agency": ["libs/account/data-access-agency/src/index.ts"],
       "@account/layers/header": ["libs/account/layers/feature-header/src/index.ts"],
       "@account/layers/side-menu": ["libs/account/layers/feature-side-menu/src/index.ts"],
+      "@account/my-objects/data-access": ["libs/account/my-objects/data-access/src/index.ts"],
       "@account/sales-channels/feature-sales-channels": [
         "libs/account/sales-channels/feature-sales-channels/src/index.ts"
       ],

@@ -53,7 +53,7 @@ export class AddObjectCharacteristicsContainerComponent implements OnInit {
         filter(
           (
             args: [FormGroup<CharacteristicsFormVM> | null, FormControl<string> | null]
-          ): args is [FormGroup<CharacteristicsFormVM>, FormControl<string>] => Boolean(args)
+          ): args is [FormGroup<CharacteristicsFormVM>, FormControl<string>] => Boolean(args[0] && args[1])
         ),
         takeUntilDestroyed(this.destroyRef)
       )

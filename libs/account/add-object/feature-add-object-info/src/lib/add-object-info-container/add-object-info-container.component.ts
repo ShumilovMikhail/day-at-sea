@@ -10,6 +10,7 @@ import { AddObjectInfoHouseUiComponent } from '../add-object-info-house-ui/add-o
 import { Router } from '@angular/router';
 import { ObjectFormStore } from '@account/add-object/data-access';
 import { FormControlPipe } from '@utils/pipes';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'account-add-object-info-container',
@@ -48,6 +49,13 @@ export class AddObjectInfoContainerComponent {
       placement: this.form.get('placement')?.value,
       address: this.form.get('address')?.value,
     });
-    this.router.navigate(['/account/add-object/infrastructure']);
+    this.objectFormStore.isNewForm$
+      .pipe(
+        filter((isNewForm: boolean | null) => isNewForm === false),
+        take(1)
+      )
+      .subscribe((isNewForm) => {
+        this.router.navigate(['/account/add-object/infrastructure']);
+      });
   }
 }
