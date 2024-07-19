@@ -14,13 +14,15 @@ import { DADATA_TOKEN } from '@dadata/data-access-address';
 import { WINDOW } from '@utils/types';
 import { REMOTE_STORAGE_URL } from '@storage/data-access-storage';
 import { addObjectInterceptor } from '@account/add-object/data-access';
+import { myObjectsEffects, myObjectsFeature } from '@account/my-objects/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(authEffects, agencyEffects),
+    provideEffects(authEffects, agencyEffects, myObjectsEffects),
     provideStore({
       [authFeature.name]: authFeature.reducer,
       [agencyFeature.name]: agencyFeature.reducer,
+      [myObjectsFeature.name]: myObjectsFeature.reducer,
     }),
     provideStoreDevtools({
       maxAge: 25,

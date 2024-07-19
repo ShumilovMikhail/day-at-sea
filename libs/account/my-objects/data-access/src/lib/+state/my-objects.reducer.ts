@@ -20,12 +20,11 @@ export const myObjectsFeature = createFeature({
     initialMyObjectsState,
     on(
       myObjectsActions.getMyObjects,
-      (state: MyObjectsState, payload: { agencyId: number }): MyObjectsState =>
-        myObjectsAdapter.removeAll({
-          ...state,
-          status: 'loading',
-          error: null,
-        })
+      (state: MyObjectsState, payload: { agencyId: number }): MyObjectsState => ({
+        ...state,
+        status: 'loading',
+        error: null,
+      })
     ),
     on(
       myObjectsActions.getMyObjectsSuccess,

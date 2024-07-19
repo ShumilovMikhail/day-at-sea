@@ -1,0 +1,39 @@
+<div
+  class="select-container"
+  [ngClass]="{
+          active: isSelecting && options,
+        }"
+  utilsClickOutside
+  (clickOutsideEvent)="onBlur()"
+>
+  <div class="select">
+    @if (selectedOption) {
+    {{ selectedOption }}
+    } @else {
+    <p class="placeholder">{{ placeholder }}</p>
+    }
+    <div class="arrow" (click)="onSelectClick()">
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="#3CBADE" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12.2592 9.9177C12.5451 9.63187 12.5451 9.17104 12.2592 8.8852L7.41172 4.03767C7.18422 3.81017 6.81672 3.81017 6.58922 4.03767L1.74172 8.8852C1.45589 9.17104 1.45589 9.63187 1.74172 9.9177C2.02755 10.2035 2.48839 10.2035 2.77422 9.9177L7.00339 5.69434L11.2326 9.92354C11.5126 10.2035 11.9792 10.2035 12.2592 9.9177Z"
+        />
+      </svg>
+    </div>
+  </div>
+  @if (isSelecting && options) {
+  <div class="options">
+    <ul>
+      @for (option of options; track $index) {
+      <li
+        [ngClass]="{
+          selected: selectedOption === option
+        }"
+        (click)="onSelectOption(option)"
+      >
+        {{ option }}
+      </li>
+      }
+    </ul>
+  </div>
+  }
+</div>

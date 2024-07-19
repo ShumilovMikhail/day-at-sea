@@ -1,0 +1,36 @@
+@if (myObjectWithFilters$ | async; as myObjectsTableList) {
+<div class="my-objects" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
+  @if (isMobile) {
+  <div class="header-container">
+    <h1>Мои объекты</h1>
+    @if (salesChannels$ | async; as salesChannels) {
+    <account-my-objects-filters-ui
+      [salesChannels]="salesChannels"
+      [isMobile]="isMobile"
+      (changeFiltersEvent)="onChangeFilters($event)"
+    ></account-my-objects-filters-ui>
+    }
+  </div>
+  }@else {
+  <h1>Мои объекты</h1>
+  @if (salesChannels$ | async; as salesChannels) {
+  <account-my-objects-filters-ui
+    [salesChannels]="salesChannels"
+    [isMobile]="isMobile"
+    (changeFiltersEvent)="onChangeFilters($event)"
+  ></account-my-objects-filters-ui>
+  } } @if (!isMobile) {
+  <div class="my-objects-list">
+    <account-my-objects-table-ui [objectsList]="myObjectsTableList"></account-my-objects-table-ui>
+  </div>
+  } @else {
+  <div class="my-objects-list">
+    <account-my-objects-list-mobile-ui [objectsList]="myObjectsTableList"></account-my-objects-list-mobile-ui>
+  </div>
+  }
+</div>
+} @else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}

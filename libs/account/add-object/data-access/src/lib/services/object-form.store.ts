@@ -19,6 +19,7 @@ import { ObjectFormState } from '../types/object-form.models';
 import { objectFormEntityToDTOAdapter } from './objectFormEntityToDTO.adapter';
 import { ObjectDTO } from '../types/agency-object-dto.models';
 import { ApiService } from '@http';
+import { MyObjectsFacade, MyObjectDTO, MyObjectEntity, myObjectsDTOAdapter } from '@account/my-objects/data-access';
 
 const initialState: ObjectFormState = {
   form: null,
@@ -30,6 +31,7 @@ const initialState: ObjectFormState = {
 @Injectable({ providedIn: 'root' })
 export class ObjectFormStore extends ComponentStore<ObjectFormState> {
   private readonly objectFormStorage = inject(ObjectFormStorageService);
+  private readonly myObjectsFacade = inject(MyObjectsFacade);
   private readonly fb = inject(FormBuilder);
   private readonly apiService = inject(ApiService);
   private readonly router = inject(Router);
@@ -129,13 +131,13 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
         })
       ),
       switchMap((object: ObjectDTO) => {
-        console.log(object);
         this.patchState({ isLoading: true });
-        return this.apiService.post('add-object', object).pipe(
-          tap((response) => {
+        return this.apiService.post<MyObjectDTO>('add-object', object).pipe(
+          tap((object: MyObjectDTO) => {
             this.objectFormStorage.removeObjectForm();
             this.router.navigateByUrl('/');
-            this.publishFormSuccess();
+            const objectEntity = myObjectsDTOAdapter.DTOToEntity(object);
+            this.publishFormSuccess(objectEntity);
           }),
           catchError((error) => {
             return of(error);
@@ -162,7 +164,8 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
     };
   });
 
-  private publishFormSuccess = this.updater((state: ObjectFormState) => {
+  private publishFormSuccess = this.updater((state: ObjectFormState, object: MyObjectEntity) => {
+    this.myObjectsFacade.addObject(object);
     return {
       ...state,
       isLoading: false,
@@ -173,7 +176,6 @@ export class ObjectFormStore extends ComponentStore<ObjectFormState> {
 
   private saveFormSuccess = this.updater((state: ObjectFormState, partForm: Partial<ObjectEntity>) => {
     const form = state.form ? state.form : createObjectForm(this.fb, partForm);
-    console.log(1);
     return {
       ...state,
       isSaving: false,

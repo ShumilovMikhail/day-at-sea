@@ -1,0 +1,52 @@
+<div class="filters-container">
+  @if (!isMobile) {
+  <ng-container *ngTemplateOutlet="filters"></ng-container>
+  } @else {
+  <button class="filters-mobile-button" (click)="onIsModalChange(true)">
+    <img src="/assets/images/icons/filter-icon.svg" alt="filter-icon" />
+    Фильтры
+  </button>
+
+  @if (isModalOpen) {
+  <layers-modal (closeDialogBoxEvent)="onIsModalChange(false)">
+    <ng-container *ngTemplateOutlet="filters"></ng-container>
+  </layers-modal>
+  } }
+</div>
+
+<ng-template #filters>
+  <div class="filters">
+    <div class="title">
+      <ui-forms-input [control]="form.get('title')! | formControl" [placeholder]="'Поиск по названию'"></ui-forms-input>
+    </div>
+    <div class="content">
+      <ui-forms-select
+        class="booking-method"
+        [control]="form.get('bookingMethod')! | formControl"
+        [placeholder]="'Способ бронирования'"
+        [options]="['', 'Моментальное бронирование', 'Бронирование по заявке']"
+        [selectedOption]="form.get('bookingMethod')!.value"
+      ></ui-forms-select>
+      <ui-forms-input
+        class="price"
+        [control]="form.get('price')! | formControl"
+        [placeholder]="'Цена до'"
+      ></ui-forms-input>
+      <ui-forms-select
+        class="sales-channel"
+        [control]="form.get('salesChannel')! | formControl"
+        [placeholder]="'Канал продаж'"
+        [options]="salesChannelsList"
+        [selectedOption]="form.get('salesChannel')!.value"
+      ></ui-forms-select>
+      <ui-forms-select
+        class="guest-count"
+        [control]="form.get('guestCount')! | formControl"
+        [placeholder]="'Гостей'"
+        [options]="['', '0', '1', '2', '3', '4', '5 и более']"
+        [selectedOption]="form.get('guestCount')!.value"
+      ></ui-forms-select>
+      <button class="reset" (click)="onReset()">Сбросить</button>
+    </div>
+  </div>
+</ng-template>

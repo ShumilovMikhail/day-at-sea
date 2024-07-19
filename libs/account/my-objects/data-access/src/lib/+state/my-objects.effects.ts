@@ -15,7 +15,7 @@ export const getMyObjectsEffect$ = createEffect(
         return apiService.get<MyObjectsDTO>(`agencies/${agencyId}/my-objects`).pipe(
           map((myObjectsDTO: MyObjectsDTO) => {
             const myObjects: MyObjectsEntity = myObjectsDTO.map((myObjectDTO) =>
-              myObjectsDTOAdapter.myObjectDTOToEntity(myObjectDTO)
+              myObjectsDTOAdapter.DTOToEntity(myObjectDTO)
             );
             return myObjectsActions.getMyObjectsSuccess({ myObjects });
           }),
@@ -33,7 +33,7 @@ export const updateMyObjectsEffect$ = createEffect(
       switchMap(({ agencyId, id, myObject }: { agencyId: number; id: number; myObject: Omit<MyObjectDTO, 'id'> }) => {
         return apiService.put<MyObjectDTO>(`agencies/${agencyId}/my-objects/${id}`, myObject).pipe(
           map((myObjectDTO: MyObjectDTO) => {
-            const myObject: MyObjectEntity = myObjectsDTOAdapter.myObjectDTOToEntity(myObjectDTO);
+            const myObject: MyObjectEntity = myObjectsDTOAdapter.DTOToEntity(myObjectDTO);
             return myObjectsActions.updateMyObjectSuccess({ myObject });
           }),
           catchError((error: ResponseError) => of(myObjectsActions.updateMyObjectFailure({ error })))

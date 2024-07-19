@@ -1,4 +1,4 @@
-<div class="input-container" uiFormsSelect [isSelecting]="isSelecting" [options]="options">
+<div class="input-container" utilsSelect [isSelecting]="isSelecting" [options]="options">
   @if (label) {
   <label>{{ label }}</label>
   }
@@ -14,7 +14,11 @@
         (clickOutsideEvent)="onBlur()"
       >
         <div class="select">
+          @if (selectedOption) {
           {{ selectedOption }}
+          } @else {
+          <p class="placeholder">{{ placeholder }}</p>
+          }
           <div class="arrow" (click)="onSelectClick()">
             <svg width="12" height="12" viewBox="0 0 14 14" fill="#3CBADE" xmlns="http://www.w3.org/2000/svg">
               <path

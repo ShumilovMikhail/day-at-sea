@@ -1,12 +1,37 @@
-import { MyObjectDTO, MyObjectEntity } from '../types/my-object.models';
+import {
+  MyObjectDTO,
+  MyObjectEntity,
+  MyObjectPricesDTO,
+  MyObjectPricesEntity,
+  MyObjectStatusDTO,
+  MyObjectStatusEntity,
+} from '../types/my-object.models';
 
 export interface MyObjectsDTOAdapter {
-  myObjectDTOToEntity: (myObject: MyObjectDTO) => MyObjectEntity;
-  myObjectEntityToDTO: (myObject: MyObjectEntity) => MyObjectDTO;
+  DTOToEntity: (myObject: MyObjectDTO) => MyObjectEntity;
+  entityToDTO: (myObject: MyObjectEntity) => MyObjectDTO;
 }
 
+const statusTypesDTO = {
+  active: 'активное',
+  inactive: 'не активное',
+};
+
+export const myObjectsStatusDTOAdapter = (status: MyObjectStatusDTO): MyObjectStatusEntity => {
+  return statusTypesDTO[status] as MyObjectStatusEntity;
+};
+
+const statusTypesEntity = {
+  активное: 'active',
+  неактивное: 'inactive',
+};
+
+export const myObjectsStatusEntityAdapter = (status: MyObjectStatusEntity): MyObjectStatusDTO => {
+  return statusTypesEntity[status as keyof typeof statusTypesEntity] as MyObjectStatusDTO;
+};
+
 export const myObjectsDTOAdapter: MyObjectsDTOAdapter = {
-  myObjectDTOToEntity(myObject: MyObjectDTO): MyObjectEntity {
+  DTOToEntity(myObject: MyObjectDTO): MyObjectEntity {
     return {
       id: myObject.id,
       img: myObject.img,
@@ -14,12 +39,18 @@ export const myObjectsDTOAdapter: MyObjectsDTOAdapter = {
       address: myObject.address,
       placementType: myObject.placement_type,
       bookingMethod: myObject.booking_method,
-      status: myObject.status,
+      status: myObjectsStatusDTOAdapter(myObject.status),
       salesChannelId: myObject.sales_channel,
       guestCount: myObject.guest_count,
+      prices: myObject.prices.map(
+        (pricesItem: MyObjectPricesDTO): MyObjectPricesEntity => ({
+          price: pricesItem.price,
+          weekendDiscount: pricesItem.weekend_discount,
+        })
+      ),
     };
   },
-  myObjectEntityToDTO(myObject: MyObjectEntity): MyObjectDTO {
+  entityToDTO(myObject: MyObjectEntity): MyObjectDTO {
     return {
       id: myObject.id,
       img: myObject.img,
@@ -27,9 +58,15 @@ export const myObjectsDTOAdapter: MyObjectsDTOAdapter = {
       address: myObject.address,
       placement_type: myObject.placementType,
       booking_method: myObject.bookingMethod,
-      status: myObject.status,
+      status: myObjectsStatusEntityAdapter(myObject.status),
       sales_channel: myObject.salesChannelId,
       guest_count: myObject.guestCount,
+      prices: myObject.prices.map(
+        (pricesItem: MyObjectPricesEntity): MyObjectPricesDTO => ({
+          price: pricesItem.price,
+          weekend_discount: pricesItem.weekendDiscount,
+        })
+      ),
     };
   },
 };

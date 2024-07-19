@@ -316,13 +316,15 @@ fieldset {
   }
   tr:first-child {
     background-color: #e9f2fa;
-    th:not(:last-child) {
-      padding: 10px 15px;
-      border-right: 1px solid $blueLight;
+    th {
       font-size: 14px;
       font-weight: 400;
       text-align: left;
       height: 40px;
+      padding: 10px 15px;
+    }
+    th:not(:last-child) {
+      border-right: 1px solid $blueLight;
     }
   }
 }

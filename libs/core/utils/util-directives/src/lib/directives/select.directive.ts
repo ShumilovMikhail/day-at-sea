@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
 
 @Directive({
-  selector: '[uiFormsSelect]',
+  selector: '[utilsSelect]',
   standalone: true,
 })
 export class SelectDirective {

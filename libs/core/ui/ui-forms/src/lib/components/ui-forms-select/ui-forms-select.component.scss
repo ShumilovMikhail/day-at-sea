@@ -18,6 +18,10 @@
       }
     }
   }
+
+  .placeholder {
+    color: rgba(48, 48, 48, 0.4);
+  }
 }
 .select {
   position: relative;
@@ -45,6 +49,8 @@
 
 .options {
   display: none;
+  max-height: 150px;
+  overflow-y: scroll;
   width: 100%;
   position: absolute;
   top: 100%;
@@ -61,6 +67,7 @@
       padding: 5px 11px;
       cursor: pointer;
       transition: 0.2s all;
+      min-height: 30px;
       &.selected {
         background-color: rgba(60, 186, 222, 0.1);
       }

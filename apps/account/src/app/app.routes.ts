@@ -85,6 +85,11 @@ export const appRoutes: Route[] = [
         loadComponent: () =>
           import('@account/sales-channels/feature-sales-channels').then((c) => c.SalesChannelsContainerComponent),
       },
+      {
+        path: 'my-objects',
+        loadComponent: () =>
+          import('@account/my-objects/feature-my-objects').then((c) => c.MyObjectsContainerComponent),
+      },
     ],
   },
 ];

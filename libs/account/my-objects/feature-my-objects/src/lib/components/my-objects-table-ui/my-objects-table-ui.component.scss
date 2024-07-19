@@ -1,0 +1,53 @@
+@import 'variables';
+
+.table {
+  font-size: 14px;
+  width: 100%;
+}
+
+.object {
+  width: 250px;
+}
+.object-inner {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  .image-container {
+    position: relative;
+    width: 75px;
+    height: 50px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+}
+.edit {
+  width: 145px;
+  button {
+    background-color: transparent;
+    border: none;
+    color: $primary;
+    transition: 0.2s color ease-in;
+    cursor: pointer;
+    &:hover {
+      color: $primaryHover;
+    }
+  }
+}
+.status {
+  width: 110px;
+}
+.booking-method {
+  width: 168px;
+}
+.sales-channel {
+  width: 110px;
+}
+.guest-count {
+  width: 168px;
+}
+.address {
+  width: 298px;
+}
+.price {
+  width: auto;
+}

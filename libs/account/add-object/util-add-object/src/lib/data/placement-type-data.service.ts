@@ -7,7 +7,7 @@ export interface PlacementTypesData {
 @Injectable()
 export class PlacementTypeDataService {
   public readonly typesData: PlacementTypesData = {
-    'Квартира, апартаменты': [
+    'Квартира/апартаменты': [
       'Студия',
       '1 комната',
       '2 комнаты',

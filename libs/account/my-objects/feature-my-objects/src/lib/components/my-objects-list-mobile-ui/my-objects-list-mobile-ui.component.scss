@@ -1,0 +1,48 @@
+@import 'variables';
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 290px;
+  .image-container {
+    position: relative;
+    width: 290px;
+    height: 180px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h6 {
+      font-size: 16px;
+      font-weight: 400;
+    }
+    p {
+      font-size: 14px;
+      span {
+        font-weight: 700;
+      }
+    }
+  }
+
+  button {
+    padding: 9px 11px;
+    border-radius: 10px;
+    border: 1px solid $blueLight;
+    background-color: #ecf9fc;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    width: 290px;
+  }
+}

@@ -1,0 +1,33 @@
+<table class="table">
+  <tr>
+    <th>Объект</th>
+    <th></th>
+    <th>Статус</th>
+    <th>Способ бронирования</th>
+    <th>Канал продаж</th>
+    <th>Гостей</th>
+    <th>Адрес</th>
+    <th>Цена (сут) на сегодня</th>
+  </tr>
+  @for (object of objectsList; track $index) {
+  <tr>
+    <td class="object">
+      <div class="object-inner">
+        <div class="image-container">
+          <img [ngSrc]="object.img ? object.img : '/assets/images/photo-not-found.jpg'" fill />
+        </div>
+        <p>«{{ object.title }}»</p>
+      </div>
+    </td>
+    <td class="edit">
+      <button>Редактировать</button>
+    </td>
+    <td class="status">{{ object.status }}</td>
+    <td class="booking-method">{{ object.bookingMethod }}</td>
+    <td class="sales-channel">{{ object.salesChannel }}</td>
+    <td class="guest-count">{{ object.guestCount }}</td>
+    <td class="address">{{ object.address }}</td>
+    <td class="price">{{ object.price }}</td>
+  </tr>
+  }
+</table>

@@ -1,0 +1,19 @@
+@if (objectsList) {
+<ul class="list">
+  @for (object of objectsList; track $index) {
+  <li class="item">
+    <div class="image-container">
+      <img [ngSrc]="object.img ? object.img : '/assets/images/photo-not-found.jpg'" fill />
+    </div>
+    <div class="content">
+      <h6>«{{ object.title }}», {{ object.address }}</h6>
+      <p><span>Цена (сут) на сегодня:</span> {{ object.price }}</p>
+    </div>
+    <button>
+      <img src="/assets/images/icons/pencil-icon.svg" alt="pencil" />
+      Редактировать
+    </button>
+  </li>
+  }
+</ul>
+}

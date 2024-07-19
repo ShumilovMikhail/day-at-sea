@@ -65,7 +65,6 @@ export class AddObjectPricesContainerComponent implements OnInit {
   }
 
   public onPublish(): void {
-    console.log(this.pricesArray?.parent?.value as ObjectEntity);
     this.objectFormStore.publish(this.pricesArray?.parent?.value as ObjectEntity);
   }
 }
