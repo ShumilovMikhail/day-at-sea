@@ -40,7 +40,7 @@ export class UserFacade {
   public changeUserEmail(email: string): void {
     this.user$.pipe(take(1)).subscribe((user: UserEntity | null) => {
       if (!user) {
-        throw Error('changeUsername: user is null');
+        throw Error('changeUserEmail: user is null');
       }
       this.store.dispatch(authActions.changeUserEmail({ id: user.id, email }));
     });
@@ -49,7 +49,7 @@ export class UserFacade {
   public changeUserPassword(password: string): void {
     this.user$.pipe(take(1)).subscribe((user: UserEntity | null) => {
       if (!user) {
-        throw Error('changeUsername: user is null');
+        throw Error('changeUserPassword: user is null');
       }
       this.store.dispatch(authActions.changeUserPassword({ id: user.id, password }));
     });
