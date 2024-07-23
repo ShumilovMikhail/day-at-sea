@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { AuthFacade } from '../auth.facade';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
+
+import { AuthFacade } from '../lib/services/auth.facade';
 
 describe('AuthFacade', () => {
   let authFacade: AuthFacade;

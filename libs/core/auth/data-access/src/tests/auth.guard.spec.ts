@@ -1,15 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthFacade } from '../auth.facade';
-import { authGuard } from '../auth.guard';
-import { Observable, of } from 'rxjs';
+import { lastValueFrom, Observable, of } from 'rxjs';
+
+import { AuthFacade } from '../lib/services/auth.facade';
+import { authGuard } from '../lib/services/auth.guard';
 
 describe('authGuard', () => {
   const fakeAuthFacade = {
     isAuthenticate$: of(false),
   };
   const fakeRouter = {
-    router: jest.fn(),
+    navigate: jest.fn(),
   };
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -30,28 +31,25 @@ describe('authGuard', () => {
         },
       ],
     });
-
-    jest.resetAllMocks();
   });
 
-  it('authGuard: should allow access if isAuthenticate is true', () => {
+  it('authGuard: should not allow access if isAuthenticate is false', fakeAsync(() => {
+    jest.replaceProperty(fakeAuthFacade, 'isAuthenticate$', of(false));
+    const activatedRoute = TestBed.inject(ActivatedRoute);
+    const authGuardResponse = TestBed.runInInjectionContext(
+      () => authGuard()(activatedRoute.snapshot, {} as RouterStateSnapshot) as Observable<boolean>
+    );
+    authGuardResponse.subscribe(() => {
+      expect(fakeRouter.navigate).toHaveBeenCalledWith(['/']);
+    });
+  }));
+
+  it('authGuard: should allow access if isAuthenticate is true', async () => {
     jest.replaceProperty(fakeAuthFacade, 'isAuthenticate$', of(true));
     const activatedRoute = TestBed.inject(ActivatedRoute);
     const authGuardResponse = TestBed.runInInjectionContext(
       () => authGuard()(activatedRoute.snapshot, {} as RouterStateSnapshot) as Observable<boolean>
     );
-    authGuardResponse.subscribe((response: boolean) => {
-      expect(response).toBeTruthy();
-    });
-  });
-
-  it('authGuard: should not allow access if isAuthenticate is false', () => {
-    const activatedRoute = TestBed.inject(ActivatedRoute);
-    const authGuardResponse = TestBed.runInInjectionContext(
-      () => authGuard()(activatedRoute.snapshot, {} as RouterStateSnapshot) as Observable<boolean>
-    );
-    authGuardResponse.subscribe((response: boolean) => {
-      expect(response).toBeFalsy();
-    });
+    await expect(lastValueFrom(authGuardResponse)).resolves.toBeTruthy();
   });
 });

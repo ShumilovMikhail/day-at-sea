@@ -6,14 +6,16 @@ import { DataStorage } from '../types/storage.models';
 @Injectable({ providedIn: 'root' })
 export class LocalStorageService implements DataStorage {
   private readonly keyList: BehaviorSubject<Set<string>> = new BehaviorSubject(null).pipe(
-    filter((keyList: Set<string> | null): keyList is Set<string> => Boolean(keyList))
+    filter((keyList: Set<string> | null): keyList is Set<string> => Boolean(keyList)),
+    tap((keyList) => Boolean(keyList))
   ) as BehaviorSubject<Set<string>>;
 
   public init(): void {
-    const keyList = new Set();
+    const keyList: Set<string> = new Set();
     for (const key in localStorage) {
       keyList.add(key);
     }
+    this.keyList.next(keyList);
   }
 
   public setItem(key: string, value: unknown): Observable<boolean> {
@@ -56,7 +58,7 @@ export class LocalStorageService implements DataStorage {
       map((keyList: Set<string>) => {
         if (keyList.has(key)) {
           localStorage.removeItem(key);
-          const newKeyList = new Set(...keyList);
+          const newKeyList = new Set([...keyList]);
           newKeyList.delete(key);
           this.keyList.next(newKeyList);
           return true;

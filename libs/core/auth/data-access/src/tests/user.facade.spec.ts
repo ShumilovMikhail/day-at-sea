@@ -1,7 +1,8 @@
 import { Store } from '@ngrx/store';
-import { UserFacade } from '../user.facade';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+
+import { UserFacade } from '../lib/services/user.facade';
 
 describe('UserFacade', () => {
   let userFacade: UserFacade;

@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { LocalStorageJwtService } from '../local-storage-jwt.service';
+
+import { LocalStorageJwtService } from '../lib/services/local-storage-jwt.service';
 
 describe('LocalStorageJwtService', () => {
   let localStorageJwtService: LocalStorageJwtService;

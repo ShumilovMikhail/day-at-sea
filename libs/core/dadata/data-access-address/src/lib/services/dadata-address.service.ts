@@ -29,8 +29,8 @@ export class DadataAddressService {
         }
       )
       .pipe(
-        map((reponse: AddressResponse) => {
-          return reponse.suggestions.map((suggestion: Suggestion) => suggestion.value);
+        map((response: AddressResponse) => {
+          return response.suggestions.map((suggestion: Suggestion) => suggestion.value);
         })
       );
   }

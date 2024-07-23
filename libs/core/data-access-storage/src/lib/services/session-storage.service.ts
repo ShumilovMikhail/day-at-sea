@@ -10,10 +10,8 @@ export class SessionStorageService implements DataStorage {
   ) as BehaviorSubject<Set<string>>;
 
   public init(): void {
-    const keyList = new Set();
-    for (const key in sessionStorage) {
-      keyList.add(key);
-    }
+    const keyList: Set<string> = new Set(Object.keys(sessionStorage));
+    this.keyList.next(keyList);
   }
 
   public setItem(key: string, value: unknown): Observable<boolean> {
@@ -56,7 +54,7 @@ export class SessionStorageService implements DataStorage {
       map((keyList: Set<string>) => {
         if (keyList.has(key)) {
           sessionStorage.removeItem(key);
-          const newKeyList = new Set(...keyList);
+          const newKeyList = new Set([...keyList]);
           newKeyList.delete(key);
           this.keyList.next(newKeyList);
           return true;

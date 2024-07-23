@@ -35,9 +35,7 @@ export class AgencyFacade {
   public readonly id$: Observable<number | null> = this.store.select(selectAgencyId);
   public readonly salesChannels$: Observable<SalesChannelEntity[] | null> =
     this.store.select(selectAgencySalesChannels);
-
   public readonly contacts$: Observable<Contacts | null> = this.store.select(selectAgencyContacts);
-
   public readonly requisites$: Observable<AgencyRequisitesEntity | null> = this.store.select(selectAgencyRequisites);
 
   public init(userId: number): void {
