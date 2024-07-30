@@ -1,0 +1,24 @@
+@import 'variables';
+:host {
+  display: block;
+}
+
+.write-excel {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .write-excel {
+    padding: 10px;
+    background-color: #ecf9fc;
+    border: 1px solid $blueLight;
+    border-radius: 5px;
+    justify-content: center;
+  }
+}

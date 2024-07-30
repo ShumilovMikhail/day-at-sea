@@ -29,8 +29,14 @@
       ></account-my-objects-filters-ui>
       }
     </div>
+    <div class="write-excel">
+      <ui-common-write-excel (clickEvent)="onExportTableToExcel()"></ui-common-write-excel>
+    </div>
     }@else {
     <h1>Мои объекты</h1>
+    <div class="write-excel">
+      <ui-common-write-excel (clickEvent)="onExportTableToExcel()"></ui-common-write-excel>
+    </div>
     @if (variables.salesChannels) {
     <account-my-objects-filters-ui
       [salesChannels]="variables.salesChannels"

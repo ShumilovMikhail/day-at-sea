@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { filter, Observable, share } from 'rxjs';
+import { filter, Observable, shareReplay, take } from 'rxjs';
 import { LetDirective } from '@ngrx/component';
 
 import { MyObjectsTableList, MyObjectTableItem, ObjectEditForm } from '../../types/my-objects-vm.models';
@@ -15,6 +15,9 @@ import { MyObjectsStore } from './my-objects-container.store';
 import { MyObjectsFilters, ObjectEdit } from '../../types/my-objects-state';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 import { MyObjectsEditModalUiComponent } from '../my-objects-edit-modal-ui/my-objects-edit-modal-ui.component';
+import { UiCommonWriteExcelComponent } from '@ui/common';
+import { myObjectsEntityAdapter } from './my-objects-entity.adapter';
+import { FilesService } from '@utils/files';
 
 @Component({
   selector: 'account-my-objects-container',
@@ -28,6 +31,7 @@ import { MyObjectsEditModalUiComponent } from '../my-objects-edit-modal-ui/my-ob
     UiIndicatorsLoaderComponent,
     MyObjectsEditModalUiComponent,
     LetDirective,
+    UiCommonWriteExcelComponent,
   ],
   providers: [MyObjectsStore],
   templateUrl: './my-objects-container.component.html',
@@ -37,11 +41,14 @@ import { MyObjectsEditModalUiComponent } from '../my-objects-edit-modal-ui/my-ob
 export class MyObjectsContainerComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly filesService = inject(FilesService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly myObjectsStore = inject(MyObjectsStore);
   public readonly salesChannels$: Observable<string[] | null> = this.myObjectsStore.salesChannels$;
-  public readonly myObjectWithFilters$: Observable<MyObjectsTableList | null> =
-    this.myObjectsStore.myObjectsWithFilters.pipe(share());
+  public readonly myObjectWithFilters$: Observable<MyObjectsTableList> = this.myObjectsStore.myObjectsWithFilters.pipe(
+    filter((myObjects: MyObjectsTableList | null): myObjects is MyObjectsTableList => Boolean(myObjects)),
+    shareReplay()
+  );
   public readonly objectEditForm: FormGroup<ObjectEditForm> = this.fb.nonNullable.group({
     title: [''],
     status: ['', [Validators.required, Validators.minLength(3)]],
@@ -57,14 +64,9 @@ export class MyObjectsContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.myObjectWithFilters$
-      .pipe(
-        filter((myObjects: MyObjectsTableList | null): myObjects is MyObjectsTableList => Boolean(myObjects)),
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe(() => {
-        this.closeEditModal();
-      });
+    this.myObjectWithFilters$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      this.closeEditModal();
+    });
   }
 
   public onIsMobileChange(isMobile: boolean): void {
@@ -94,6 +96,17 @@ export class MyObjectsContainerComponent implements OnInit {
 
   public onSubmitObjectSubmit(): void {
     this.myObjectsStore.editObject(this.selectedObjectId as number, this.objectEditForm.value as ObjectEdit);
+  }
+
+  public onExportTableToExcel(): void {
+    this.myObjectWithFilters$.pipe(take(1)).subscribe((tableList: MyObjectsTableList) => {
+      console.log(1);
+      const tableExcelData = myObjectsEntityAdapter.VMToExcelData(tableList);
+      this.filesService.createFile(tableExcelData, 'xlsx', {
+        name: 'Мои объекты',
+        sheetName: 'Мои объекты',
+      });
+    });
   }
 
   private closeEditModal(): void {

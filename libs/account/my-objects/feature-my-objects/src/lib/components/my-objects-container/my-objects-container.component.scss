@@ -13,6 +13,15 @@
   }
 }
 
+.write-excel {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 10px;
+  ui-common-write-excel {
+    width: auto;
+  }
+}
+
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -32,6 +41,13 @@
     padding: 20px 15px;
     h1 {
       font-size: 24px;
+    }
+
+    .write-excel {
+      margin-top: 10px;
+      ui-common-write-excel {
+        width: 100%;
+      }
     }
 
     .my-objects-list {
