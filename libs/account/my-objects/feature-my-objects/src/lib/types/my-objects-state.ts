@@ -12,3 +12,10 @@ export interface MyObjectsFilters {
   salesChannel: string;
   guestCount: string;
 }
+
+export interface ObjectEdit {
+  title: string;
+  status: string;
+  bookingMethod: string;
+  salesChannel: string | null;
+}

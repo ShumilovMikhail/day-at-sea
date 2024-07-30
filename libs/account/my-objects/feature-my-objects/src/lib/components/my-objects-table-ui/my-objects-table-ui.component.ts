@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 
-import { MyObjectsTableList } from '../../types/my-objects-vm.models';
+import { MyObjectsTableList, MyObjectTableItem } from '../../types/my-objects-vm.models';
 
 @Component({
   selector: 'account-my-objects-table-ui',
@@ -13,4 +13,9 @@ import { MyObjectsTableList } from '../../types/my-objects-vm.models';
 })
 export class MyObjectsTableUiComponent {
   @Input({ required: true }) objectsList!: MyObjectsTableList;
+  @Output() editObjectEvent = new EventEmitter<MyObjectTableItem>();
+
+  public onEditButtonClick(index:number): void {
+    this.editObjectEvent.emit(this.objectsList[index]);
+  }
 }

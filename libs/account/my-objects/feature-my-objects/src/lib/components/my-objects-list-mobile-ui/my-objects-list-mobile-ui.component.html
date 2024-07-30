@@ -9,7 +9,7 @@
       <h6>«{{ object.title }}», {{ object.address }}</h6>
       <p><span>Цена (сут) на сегодня:</span> {{ object.price }}</p>
     </div>
-    <button>
+    <button (click)="onEditButtonClick($index)">
       <img src="/assets/images/icons/pencil-icon.svg" alt="pencil" />
       Редактировать
     </button>

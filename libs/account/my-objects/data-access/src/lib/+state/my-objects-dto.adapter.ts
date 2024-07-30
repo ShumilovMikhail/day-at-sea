@@ -23,7 +23,7 @@ export const myObjectsStatusDTOAdapter = (status: MyObjectStatusDTO): MyObjectSt
 
 const statusTypesEntity = {
   активное: 'active',
-  неактивное: 'inactive',
+  'не активное': 'inactive',
 };
 
 export const myObjectsStatusEntityAdapter = (status: MyObjectStatusEntity): MyObjectStatusDTO => {

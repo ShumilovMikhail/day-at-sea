@@ -1,0 +1,29 @@
+<layers-modal (closeDialogBoxEvent)="onModalClose()">
+  <div class="edit-form">
+    <h3>{{ title }}</h3>
+    <form [formGroup]="objectForm" (ngSubmit)="onSubmit()">
+      <ui-forms-select
+        [control]="objectForm.get('status')! | formControl"
+        [options]="['активное', 'не активное']"
+        [selectedOption]="objectForm.get('status')!.value"
+        [label]="'Статус'"
+      ></ui-forms-select>
+      <ui-forms-select
+        [control]="objectForm.get('bookingMethod')! | formControl"
+        [options]="['Бронирование по заявке', 'Моментальное бронирование']"
+        [selectedOption]="objectForm.get('bookingMethod')!.value"
+        [label]="'Метод бронирования'"
+      ></ui-forms-select>
+      <ui-forms-select
+        [control]="objectForm.get('salesChannel')! | formControl"
+        [options]="salesChannelsList"
+        [selectedOption]="objectForm.get('salesChannel')!.value ?? 'нет'"
+        [label]="'Канал продаж'"
+      ></ui-forms-select>
+      <button [disabled]="isLoading">
+        Сохранить
+        <div class="spinner-loader" *ngIf="isLoading"></div>
+      </button>
+    </form>
+  </div>
+</layers-modal>

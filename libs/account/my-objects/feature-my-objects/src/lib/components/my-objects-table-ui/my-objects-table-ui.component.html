@@ -20,7 +20,7 @@
       </div>
     </td>
     <td class="edit">
-      <button>Редактировать</button>
+      <button (click)="onEditButtonClick($index)">Редактировать</button>
     </td>
     <td class="status">{{ object.status }}</td>
     <td class="booking-method">{{ object.bookingMethod }}</td>

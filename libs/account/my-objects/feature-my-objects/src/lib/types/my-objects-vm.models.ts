@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+
 export type MyObjectsVM = MyObjectVM[];
 
 export interface MyObjectVM {
@@ -38,4 +40,11 @@ export interface MyObjectTableItem {
   salesChannel: string;
   guestCount: string;
   price: string;
+}
+
+export interface ObjectEditForm {
+  title: FormControl<string>;
+  status: FormControl<string>;
+  bookingMethod: FormControl<string>;
+  salesChannel: FormControl<string | null>;
 }

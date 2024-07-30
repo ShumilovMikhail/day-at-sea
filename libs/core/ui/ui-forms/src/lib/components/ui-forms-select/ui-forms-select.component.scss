@@ -23,6 +23,7 @@
     color: rgba(48, 48, 48, 0.4);
   }
 }
+
 .select {
   position: relative;
   width: 100%;
@@ -59,6 +60,7 @@
   border: 1px solid $blueLight;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  scrollbar-width: none;
   ul {
     width: 100%;
     display: flex;
@@ -85,6 +87,14 @@
       }
     }
   }
+}
+
+.options::-webkit-scrollbar {
+  display: none;
+}
+
+.options::-webkit-scrollbar-thumb {
+  display: none;
 }
 
 .select-container.active {

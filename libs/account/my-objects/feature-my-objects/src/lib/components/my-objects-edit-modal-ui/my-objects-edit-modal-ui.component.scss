@@ -1,0 +1,32 @@
+@import 'mixins';
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  button {
+    @include button-primary();
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+}
+
+ui-forms-select {
+  width: 300px;
+}
+
+@media (max-width: 480px) {
+  ui-forms-select {
+    width: 250px;
+  }
+}
