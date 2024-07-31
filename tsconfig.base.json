@@ -51,6 +51,9 @@
       "@account/sales-channels/feature-sales-channels": [
         "libs/account/sales-channels/feature-sales-channels/src/index.ts"
       ],
+      "@account/sales-channels/feature-sales-channels-add-modal": [
+        "libs/account/sales-channels/feature-sales-channels-add-modal/src/index.ts"
+      ],
       "@account/settings/feature-auth-edit": ["libs/account/settings/feature-auth-edit/src/index.ts"],
       "@account/settings/feature-contacts-edit": ["libs/account/settings/feature-contacts-edit/src/index.ts"],
       "@account/settings/feature-email-edit": ["libs/account/settings/feature-email-edit/src/index.ts"],

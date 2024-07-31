@@ -11,6 +11,11 @@
         [control]="form.get('title')! | formControl"
         [label]="'Название канала'"
         [required]="true"
+        [errors]="
+          form.get('title')?.errors
+            ? [(form.get('title')?.errors)!['salesChannelTitle'] ? 'Такое название канала уже существует' : '']
+            : undefined
+        "
       ></ui-forms-input>
       <ui-forms-input
         [control]="form.get('accountId')! | formControl"

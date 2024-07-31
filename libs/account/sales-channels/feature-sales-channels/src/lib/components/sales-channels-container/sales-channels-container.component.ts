@@ -9,11 +9,10 @@ import { AgencyFacade, SalesChannelEntity } from '@account/data-access-agency';
 import { ChannelStatusVMType, SalesChannelVM } from '../../types/sales-channels.models';
 import { SalesChannelsTableUiComponent } from '../sales-channels-table-ui/sales-channels-table-ui.component';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
-import { SalesChannelsAddUiComponent } from '../sales-channels-add-ui/sales-channels-add-ui.component';
-import { AddChannelForm } from '../../types/add-channel-form.models';
 import { isNotNumberValidator } from '@utils/validators';
 import { SalesChannelsUpdateUiComponent } from '../sales-channels-update-ui/sales-channels-update-ui.component';
 import { UpdateChannelForm } from '../../types/update-channel-form.models';
+import { SalesChannelsAddModalContainerComponent } from '@account/sales-channels/feature-sales-channels-add-modal';
 
 @Component({
   selector: 'account-sales-channels-container',
@@ -22,8 +21,8 @@ import { UpdateChannelForm } from '../../types/update-channel-form.models';
     CommonModule,
     SalesChannelsTableUiComponent,
     UiIndicatorsLoaderComponent,
-    SalesChannelsAddUiComponent,
     SalesChannelsUpdateUiComponent,
+    SalesChannelsAddModalContainerComponent,
   ],
   templateUrl: './sales-channels-container.component.html',
   styleUrl: './sales-channels-container.component.scss',
@@ -33,11 +32,11 @@ export class SalesChannelsContainerComponent {
   private readonly agencyFacade = inject(AgencyFacade);
   private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
-  public readonly addForm: FormGroup<AddChannelForm> = this.fb.nonNullable.group({
-    channel: ['', [Validators.required]],
-    title: ['', [Validators.required]],
-    accountId: ['', [Validators.required, isNotNumberValidator()]],
-  });
+  public readonly salesChannels$: Observable<SalesChannelVM[]> = this.agencyFacade.salesChannels$.pipe(
+    filter((salesChannels: SalesChannelEntity[] | null): salesChannels is SalesChannelEntity[] =>
+      Boolean(salesChannels)
+    )
+  );
   public readonly updateForm: FormGroup<UpdateChannelForm> = this.fb.nonNullable.group({
     id: [0],
     channel: ['', [Validators.required]],
@@ -45,18 +44,11 @@ export class SalesChannelsContainerComponent {
     accountId: ['', [Validators.required, isNotNumberValidator()]],
     status: [''],
   });
-  public readonly salesChannels$: Observable<SalesChannelVM[]> = this.agencyFacade.salesChannels$.pipe(
-    takeUntilDestroyed(this.destroyRef),
-    filter((salesChannels: SalesChannelEntity[] | null): salesChannels is SalesChannelEntity[] =>
-      Boolean(salesChannels)
-    )
-  );
   public readonly isLoadingSubscription: Subscription = this.agencyFacade.loading$
     .pipe(
       takeUntilDestroyed(this.destroyRef),
       tap((isLoading: boolean) => {
         if (!isLoading) {
-          this.closeAddSalesChannelModal();
           this.closeUpdateSalesChannelModal();
         }
       })
@@ -65,8 +57,8 @@ export class SalesChannelsContainerComponent {
       this.isLoading = isLoading;
     });
   public isLoading = false;
-  public addModalOpen = false;
   public updateModalOpen = false;
+  public addModalOpen = false;
 
   constructor(title: Title) {
     title.setTitle('Каналы продаж');
@@ -91,16 +83,6 @@ export class SalesChannelsContainerComponent {
     }
   }
 
-  public onAddSalesChannel(): void {
-    const formValue = this.addForm.value;
-    this.agencyFacade.addSalesChannels({
-      channel: formValue.channel as string,
-      title: formValue.title as string,
-      accountId: +(formValue.accountId as string),
-      status: 'active',
-    });
-  }
-
   public onUpdateSalesChannel(): void {
     const formValue = this.updateForm.value;
     this.agencyFacade.updateSalesChannel({
@@ -120,15 +102,6 @@ export class SalesChannelsContainerComponent {
     this.agencyFacade.updateSalesChannel({
       ...channel,
       status: newStatus,
-    });
-  }
-
-  private closeAddSalesChannelModal(): void {
-    this.addModalOpen = false;
-    this.addForm.reset({
-      channel: '',
-      title: '',
-      accountId: '',
     });
   }
 

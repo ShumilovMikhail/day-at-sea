@@ -12,12 +12,10 @@
   ></account-sales-channels-table-ui>
 </div>
 @if (addModalOpen) {
-<account-sales-channels-add-ui
-  [form]="addForm"
-  [isLoading]="isLoading"
+<account-sales-channels-add-modal-container
+  [salesChannels]="salesChannels"
   (closeEvent)="onAddSalesChannelModalToggle(false)"
-  (submitEvent)="onAddSalesChannel()"
-></account-sales-channels-add-ui>
+></account-sales-channels-add-modal-container>
 } @if (updateModalOpen) {
 <account-sales-channels-update-ui
   [form]="updateForm"
