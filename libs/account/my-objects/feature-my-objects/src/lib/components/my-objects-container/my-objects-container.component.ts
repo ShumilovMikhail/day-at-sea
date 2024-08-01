@@ -47,7 +47,7 @@ export class MyObjectsContainerComponent implements OnInit {
   public readonly salesChannels$: Observable<string[] | null> = this.myObjectsStore.salesChannels$;
   public readonly myObjectWithFilters$: Observable<MyObjectsTableList> = this.myObjectsStore.myObjectsWithFilters.pipe(
     filter((myObjects: MyObjectsTableList | null): myObjects is MyObjectsTableList => Boolean(myObjects)),
-    shareReplay()
+    shareReplay(1)
   );
   public readonly objectEditForm: FormGroup<ObjectEditForm> = this.fb.nonNullable.group({
     title: [''],
@@ -100,7 +100,6 @@ export class MyObjectsContainerComponent implements OnInit {
 
   public onExportTableToExcel(): void {
     this.myObjectWithFilters$.pipe(take(1)).subscribe((tableList: MyObjectsTableList) => {
-      console.log(1);
       const tableExcelData = myObjectsEntityAdapter.VMToExcelData(tableList);
       this.filesService.createFile(tableExcelData, 'xlsx', {
         name: 'Мои объекты',

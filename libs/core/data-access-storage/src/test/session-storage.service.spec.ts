@@ -26,6 +26,10 @@ describe('SessionStorageService', () => {
     );
   });
 
+  it('sessionStorageService: should be created', () => {
+    expect(sessionStorageService).toBeDefined();
+  });
+
   it('init: should take the keys from sessionStorage and pass them to keyList', async () => {
     jest.replaceProperty(
       sessionStorageService as unknown as { keyList: BehaviorSubject<null> },

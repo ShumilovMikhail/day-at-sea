@@ -25,6 +25,10 @@ describe('LocalStorageService', () => {
     );
   });
 
+  it('localStorageService: should be created', () => {
+    expect(localStorageService).toBeDefined();
+  });
+
   it('init: should take the keys from localStorage and pass them to keyList', async () => {
     jest.replaceProperty(
       localStorageService as unknown as { keyList: BehaviorSubject<null> },
