@@ -1,5 +1,4 @@
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
-import { LocalStorageService } from '../lib/services/local-storage.service';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { SessionStorageService } from '../lib/services/session-storage.service';
 

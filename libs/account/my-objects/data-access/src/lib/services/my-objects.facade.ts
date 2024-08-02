@@ -38,7 +38,6 @@ export class MyObjectsFacade {
       return myObjects;
     })
   );
-
   public readonly myObjectsVM$: Observable<MyObjectsVM> = this.myObjectsEntity$.pipe(
     combineLatestWith(this.agencyFacade.salesChannels$),
     filter((args: [MyObjectsEntity, SalesChannelVM[] | null]): args is [MyObjectsEntity, SalesChannelVM[]] =>
