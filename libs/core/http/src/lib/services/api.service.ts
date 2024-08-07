@@ -15,6 +15,7 @@ export class ApiService {
       params,
     });
   }
+
   public post<T>(url: string, data: unknown): Observable<T> {
     return this.http.post<T>(`${this.apiUrl}/${url}`, JSON.stringify(data), {
       headers: this.headers,
@@ -26,6 +27,7 @@ export class ApiService {
       headers: this.headers,
     });
   }
+
   public delete<T>(url: string): Observable<T> {
     return this.http.delete<T>(`${this.apiUrl}/${url}`, {
       headers: this.headers,
