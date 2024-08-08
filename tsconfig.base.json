@@ -61,6 +61,7 @@
       "@account/settings/feature-requisites-edit": ["libs/account/settings/feature-requisites-edit/src/index.ts"],
       "@account/settings/feature-settings": ["libs/account/settings/feature-settings/src/index.ts"],
       "@account/settings/feature-username-edit": ["libs/account/settings/feature-username-edit/src/index.ts"],
+      "@account/staff/data-access-staff": ["libs/account/data-access-staff/src/index.ts"],
       "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
       "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
       "@auth/feature-register": ["libs/core/auth/feature-register/src/index.ts"],
