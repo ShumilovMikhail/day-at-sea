@@ -1,0 +1,14 @@
+<ul class="pagination-list">
+  @for (item of paginationItems; track $index) {
+  <li>
+    <a
+      [routerLink]="url"
+      [queryParams]="{ page: item.pageParam }"
+      [ngClass]="{
+        active: currentPage === item.pageParam
+      }"
+      >{{ item.title }}</a
+    >
+  </li>
+  }
+</ul>

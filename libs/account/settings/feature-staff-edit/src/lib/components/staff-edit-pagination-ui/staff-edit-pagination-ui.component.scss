@@ -1,0 +1,44 @@
+@import 'variables';
+
+.pagination-list {
+  display: flex;
+  width: min-content;
+  gap: 48px;
+  border-bottom: 1px solid $blueLight;
+  li a {
+    transition: 0.2s color ease-in;
+    cursor: pointer;
+    &:hover {
+      color: black;
+    }
+    &.active {
+      font-weight: 700;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-list {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0px;
+    border-bottom: none;
+    li a {
+      padding: 10px 18px;
+      background-color: transparent;
+      border: 1px solid $blueLight;
+      border-radius: 5px;
+      transition: 0.2s all ease-in;
+      cursor: pointer;
+      &:hover {
+        background-color: #ecf9fc;
+        color: $text;
+      }
+      &.active {
+        background-color: #ecf9fc;
+        font-weight: 400;
+      }
+    }
+  }
+}

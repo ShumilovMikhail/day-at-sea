@@ -1,7 +1,16 @@
 <div class="staff-edit">
   <h2>Сотрудники</h2>
-  <account-add-staff-member-ui
-    [isLoading]="isLoading()"
-    (submitEvent)="onAddStaffMember($event)"
-  ></account-add-staff-member-ui>
+  <div class="add-staff-member">
+    <account-add-staff-member-ui
+      [isLoading]="isLoading()"
+      (submitEvent)="onAddStaffMember($event)"
+    ></account-add-staff-member-ui>
+  </div>
+  <div class="pagination">
+    <account-staff-edit-pagination-ui
+      [url]="url"
+      [currentPage]="currentPage"
+      [paginationItems]="paginationItems"
+    ></account-staff-edit-pagination-ui>
+  </div>
 </div>
