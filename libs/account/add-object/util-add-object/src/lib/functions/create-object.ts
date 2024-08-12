@@ -39,27 +39,7 @@ export const createObjectForm = (fb: FormBuilder, form: Partial<ObjectEntity> | 
     ),
     prices: fb.array(
       (form?.prices?.map((price) => createPricesItemForm(fb, price)) ?? [
-        createPricesItemForm(fb, {
-          name: 'Цены по умолчанию',
-          price: '',
-          minStay: 0,
-          discounts: {
-            durationStay: [],
-            lastMinuteBooking: [],
-            earlyBooking: [],
-          },
-          weekendDiscount: {
-            price: '',
-            friday: false,
-            saturday: false,
-            sunday: false,
-          },
-          additionalGuests: {
-            overGuests: 0,
-            surcharge: '',
-            unit: 'руб',
-          },
-        }),
+        createPricesItemForm(fb, getDefaultPriceItem()),
       ]) as FormGroup<ObjectFormPricesItem>[]
     ),
     bookingMethod: [form?.bookingMethod ?? '', [Validators.required]],
@@ -194,3 +174,25 @@ const createPricesItemForm = (fb: FormBuilder, form: ObjectPricesItem | undefine
     }),
   });
 };
+
+const getDefaultPriceItem = (): ObjectPricesItem => ({
+  name: 'Цены по умолчанию',
+  price: '',
+  minStay: 0,
+  discounts: {
+    durationStay: [],
+    lastMinuteBooking: [],
+    earlyBooking: [],
+  },
+  weekendDiscount: {
+    price: '',
+    friday: false,
+    saturday: false,
+    sunday: false,
+  },
+  additionalGuests: {
+    overGuests: 0,
+    surcharge: '',
+    unit: 'руб',
+  },
+});
