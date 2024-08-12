@@ -1,17 +1,18 @@
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { catchError, map, Observable, of, take } from 'rxjs';
 import { patchState, signalStore, withState } from '@ngrx/signals';
-import { setEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
+import { addEntity, setEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
 
 import { StaffState } from '../types/staff-state.models';
 import { StaffService } from './staff.service';
 import { ResponseError } from '@http';
-import { StaffDTO, StaffEntity, StaffMemberDTO, StaffMemberEntity } from '../types/staff.models';
+import { AddStaffMemberRequest, StaffDTO, StaffEntity, StaffMemberDTO, StaffMemberEntity } from '../types/staff.models';
 import { staffDTOAdapter } from './staff-dto.adapter';
 
 const initialState: StaffState = {
   isLoading: false,
   error: null,
+  status: 'init',
 };
 
 @Injectable({ providedIn: 'root' })
@@ -22,11 +23,12 @@ export class StaffStore extends signalStore(
 ) {
   private readonly staffService = inject(StaffService);
 
-  public readonly staff: WritableSignal<StaffEntity | null> = signal(null);
+  public staff$: Signal<StaffEntity | null> = computed(() => (this.status() === 'loaded' ? this.entities() : null));
 
   public getStaff(agencyId: number) {
     patchState(this, {
       isLoading: true,
+      status: 'loading',
     });
     this.staffService
       .getStaff(agencyId)
@@ -41,12 +43,8 @@ export class StaffStore extends signalStore(
         take(1)
       )
       .subscribe((staff: StaffEntity | null) => {
-        if (staff) {
-          patchState(this, setEntities(staff));
-          this.staff.set(staff);
-          return;
-        }
-        patchState(this, { isLoading: false });
+        if (staff) patchState(this, setEntities(staff));
+        patchState(this, { isLoading: false, status: 'loaded' });
       });
   }
 
@@ -54,7 +52,7 @@ export class StaffStore extends signalStore(
     patchState(this, {
       isLoading: true,
     });
-    const staffMemberDTO = staffDTOAdapter.entityToDTO(staffMember);
+    const staffMemberDTO = staffDTOAdapter.entityToDTO(staffMember, agencyId);
     this.staffService
       .updateStaffMember(agencyId, staffMemberDTO)
       .pipe(
@@ -67,16 +65,29 @@ export class StaffStore extends signalStore(
         }),
         take(1)
       )
-      .subscribe((staffMember: StaffMemberEntity | null) =>
-        staffMember
-          ? patchState(
-              this,
-              {
-                isLoading: false,
-              },
-              updateEntity({ id: staffMember.id, changes: staffMember })
-            )
-          : patchState(this, { isLoading: false })
-      );
+      .subscribe((staffMember: StaffMemberEntity | null) => {
+        if (staffMember) patchState(this, updateEntity({ id: staffMember.id, changes: staffMember }));
+        patchState(this, { isLoading: false });
+      });
+  }
+
+  public addStaffMember(agencyId: number, staffMember: AddStaffMemberRequest) {
+    patchState(this, { isLoading: true });
+    this.staffService
+      .addStaffMember(agencyId, staffMember)
+      .pipe(
+        map((staffMember: StaffMemberDTO): StaffMemberEntity => {
+          return staffDTOAdapter.DTOToEntity(staffMember);
+        }),
+        catchError((response: ResponseError): Observable<null> => {
+          patchState(this, { error: response });
+          return of(null);
+        }),
+        take(1)
+      )
+      .subscribe((staffMember: StaffMemberEntity | null) => {
+        if (staffMember) patchState(this, addEntity(staffMember));
+        patchState(this, { isLoading: false });
+      });
   }
 }

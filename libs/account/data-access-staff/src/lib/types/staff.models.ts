@@ -20,8 +20,14 @@ export interface StaffMemberEntity {
   agencyObjectsId: number[];
   role: string;
   status: StaffStatusTypes;
-  agenciesId: number;
   createdAt: string;
+}
+
+export interface AddStaffMemberRequest {
+  name: string;
+  email: string;
+  role: string;
+  status: StaffStatusTypes;
 }
 
 export enum StaffStatusTypes {

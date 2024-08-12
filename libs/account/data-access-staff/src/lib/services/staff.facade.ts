@@ -1,9 +1,9 @@
-import { inject, Injectable, Signal } from '@angular/core';
+import { inject, Injectable, signal, Signal } from '@angular/core';
 import { filter, take } from 'rxjs';
 
 import { StaffStore } from './staff-store';
 import { AgencyFacade } from '@account/data-access-agency';
-import { StaffEntity } from '../types/staff.models';
+import { AddStaffMemberRequest, StaffEntity } from '../types/staff.models';
 
 @Injectable({ providedIn: 'root' })
 export class StaffFacade {
@@ -11,8 +11,19 @@ export class StaffFacade {
   private readonly agencyFacade = inject(AgencyFacade);
 
   public get staff(): Signal<StaffEntity | null> {
-    if (!this.staffStore.staff()) this.getStaff();
-    return this.staffStore.staff.asReadonly();
+    if (!this.staffStore.staff$()) this.getStaff();
+    return this.staffStore.staff$;
+  }
+
+  public addStaffMember(staffMember: AddStaffMemberRequest): void {
+    this.agencyFacade.id$
+      .pipe(
+        filter((id: number | null): id is number => Boolean(id)),
+        take(1)
+      )
+      .subscribe((id: number) => {
+        this.staffStore.addStaffMember(id, staffMember);
+      });
   }
 
   private getStaff(): void {
