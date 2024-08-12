@@ -28,6 +28,10 @@ export const appRoutes: Route[] = [
           import('@account/settings/feature-requisites-edit').then((c) => c.RequisitesEditContainerComponent),
       },
       {
+        path: 'settings/staff/edit',
+        loadComponent: () => import('@account/settings/feature-staff-edit').then((c) => c.StaffEditContainerComponent),
+      },
+      {
         path: 'add-object',
         loadComponent: () =>
           import('@account/add-object/feature-add-object-info').then((c) => c.AddObjectInfoContainerComponent),
