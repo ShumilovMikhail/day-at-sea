@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, Signal, signal } from '@angular/core';
+import { computed, inject, Injectable, Signal } from '@angular/core';
 import { catchError, map, Observable, of, take } from 'rxjs';
 import { patchState, signalStore, withState } from '@ngrx/signals';
 import { addEntity, setEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
@@ -25,7 +25,7 @@ export class StaffStore extends signalStore(
 
   public staff$: Signal<StaffEntity | null> = computed(() => (this.status() === 'loaded' ? this.entities() : null));
 
-  public getStaff(agencyId: number) {
+  public getStaff(agencyId: number): void {
     patchState(this, {
       isLoading: true,
       status: 'loading',
@@ -48,7 +48,7 @@ export class StaffStore extends signalStore(
       });
   }
 
-  public updateStaffMember(agencyId: number, staffMember: StaffMemberEntity) {
+  public updateStaffMember(agencyId: number, staffMember: StaffMemberEntity): void {
     patchState(this, {
       isLoading: true,
     });
@@ -71,7 +71,7 @@ export class StaffStore extends signalStore(
       });
   }
 
-  public addStaffMember(agencyId: number, staffMember: AddStaffMemberRequest) {
+  public addStaffMember(agencyId: number, staffMember: AddStaffMemberRequest): void {
     patchState(this, { isLoading: true });
     this.staffService
       .addStaffMember(agencyId, staffMember)

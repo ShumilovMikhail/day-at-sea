@@ -1,4 +1,4 @@
-import { inject, Injectable, signal, Signal } from '@angular/core';
+import { inject, Injectable, Signal } from '@angular/core';
 import { filter, take } from 'rxjs';
 
 import { StaffStore } from './staff-store';
@@ -10,6 +10,7 @@ export class StaffFacade {
   private readonly staffStore = inject(StaffStore);
   private readonly agencyFacade = inject(AgencyFacade);
 
+  public readonly isLoading: Signal<boolean> = this.staffStore.isLoading;
   public get staff(): Signal<StaffEntity | null> {
     if (!this.staffStore.staff$()) this.getStaff();
     return this.staffStore.staff$;
@@ -21,9 +22,7 @@ export class StaffFacade {
         filter((id: number | null): id is number => Boolean(id)),
         take(1)
       )
-      .subscribe((id: number) => {
-        this.staffStore.addStaffMember(id, staffMember);
-      });
+      .subscribe((id: number) => this.staffStore.addStaffMember(id, staffMember));
   }
 
   private getStaff(): void {
@@ -32,8 +31,6 @@ export class StaffFacade {
         filter((id: number | null): id is number => Boolean(id)),
         take(1)
       )
-      .subscribe((id: number) => {
-        this.staffStore.getStaff(id);
-      });
+      .subscribe((id: number) => this.staffStore.getStaff(id));
   }
 }

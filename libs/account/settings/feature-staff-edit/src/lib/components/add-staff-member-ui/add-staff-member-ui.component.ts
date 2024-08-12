@@ -1,7 +1,17 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  input,
+  Input,
+  Output,
+  signal,
+  Signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AddStaffMemberForm } from '../../types/add-staff-member.models';
+import { AddStaffMember, AddStaffMemberForm } from '../../types/add-staff-member.models';
 import { fullNameValidator } from '@utils/validators';
 import { UiFormsInputComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
@@ -15,10 +25,16 @@ import { FormControlPipe } from '@utils/pipes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddStaffMemberUiComponent {
+  @Output() submitEvent = new EventEmitter<AddStaffMember>();
+  isLoading = input<boolean>();
   private readonly fb = inject(FormBuilder);
   public readonly form: FormGroup<AddStaffMemberForm> = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     name: ['', [Validators.required, Validators.minLength(5), fullNameValidator()]],
     role: ['', [Validators.required, Validators.minLength(3)]],
   });
+
+  public onSubmit(): void {
+    this.submitEvent.emit(this.form.value as AddStaffMember);
+  }
 }

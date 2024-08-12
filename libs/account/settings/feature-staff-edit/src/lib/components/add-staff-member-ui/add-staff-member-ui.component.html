@@ -34,6 +34,9 @@
       [absoluteError]="true"
       [placeholder]="'Менеджер'"
     ></ui-forms-input>
-    <button [disabled]="!form.valid">Добавить</button>
+    <button [disabled]="!form.valid || isLoading()" (click)="onSubmit()">
+      Добавить
+      <div class="spinner-loader" *ngIf="isLoading()"></div>
+    </button>
   </form>
 </div>

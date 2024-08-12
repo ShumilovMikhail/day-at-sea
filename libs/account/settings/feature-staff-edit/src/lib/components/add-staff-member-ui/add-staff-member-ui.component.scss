@@ -16,13 +16,43 @@
   width: 280px;
 }
 
-.name {
+.role {
   width: 220px;
 }
 
 button {
   @include button-primary();
+  display: flex;
+  gap: 5px;
+  align-items: center;
   padding: 10px;
   width: 130px;
   margin-top: 16px;
+  justify-content: center;
+}
+
+@media (max-width: 480px) {
+  .add-staff-form {
+    form {
+      flex-direction: column;
+      gap: 10px;
+      align-items: start;
+    }
+  }
+
+  .email {
+    width: 290px;
+  }
+
+  .role {
+    width: 290px;
+  }
+
+  .name {
+    width: 290px;
+  }
+
+  button {
+    width: 100%;
+  }
 }
