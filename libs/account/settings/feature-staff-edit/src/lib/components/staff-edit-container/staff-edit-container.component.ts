@@ -9,6 +9,7 @@ import { StaffEntity, StaffFacade, StaffStatusTypes } from '@account/staff/data-
 import { AddStaffMember } from '../../types/add-staff-member.models';
 import { StaffEditPaginationUiComponent } from '../staff-edit-pagination-ui/staff-edit-pagination-ui.component';
 import { PaginationItem } from '../../types/pagination.models';
+import { StaffEditTableContainerComponent } from '../staff-edit-table-container/staff-edit-table-container.component';
 
 const PAGINATION_ITEMS: PaginationItem[] = [
   {
@@ -24,7 +25,7 @@ const PAGINATION_ITEMS: PaginationItem[] = [
 @Component({
   selector: 'account-staff-edit-container',
   standalone: true,
-  imports: [CommonModule, AddStaffMemberUiComponent, StaffEditPaginationUiComponent],
+  imports: [CommonModule, AddStaffMemberUiComponent, StaffEditPaginationUiComponent, StaffEditTableContainerComponent],
   templateUrl: './staff-edit-container.component.html',
   styleUrl: './staff-edit-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
