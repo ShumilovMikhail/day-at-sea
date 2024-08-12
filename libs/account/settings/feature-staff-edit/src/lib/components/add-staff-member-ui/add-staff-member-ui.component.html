@@ -1,0 +1,39 @@
+<div class="add-staff-form">
+  <form [formGroup]="form">
+    <ui-forms-input
+      class="email"
+      [control]="form.get('email')! | formControl"
+      [required]="true"
+      [label]="'Email нового сотрудника'"
+      [placeholder]="'primer@gmail.com'"
+      [absoluteError]="true"
+      [errors]="
+        form.get('email')?.errors
+          ? [(form.get('email')?.errors)!['email'] ? 'Введите корректный email' : '']
+          : undefined
+      "
+    ></ui-forms-input>
+    <ui-forms-input
+      class="name"
+      [control]="form.get('name')! | formControl"
+      [required]="true"
+      [label]="'ФИО'"
+      [placeholder]="'ФИО'"
+      [absoluteError]="true"
+      [errors]="
+        form.get('name')?.errors
+          ? [(form.get('name')?.errors)!['isIncorrectly'] ? 'Введите корректное ФИО' : '']
+          : undefined
+      "
+    ></ui-forms-input>
+    <ui-forms-input
+      class="role"
+      [control]="form.get('role')! | formControl"
+      [required]="true"
+      [label]="'Роль'"
+      [absoluteError]="true"
+      [placeholder]="'Менеджер'"
+    ></ui-forms-input>
+    <button [disabled]="!form.valid">Добавить</button>
+  </form>
+</div>

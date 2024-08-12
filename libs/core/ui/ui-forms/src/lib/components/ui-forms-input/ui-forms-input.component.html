@@ -1,4 +1,9 @@
-<div class="input-container">
+<div
+  class="input-container"
+  [ngClass]="{
+    'form-error-absolute': absoluteError
+  }"
+>
   @if (label) {
   <label
     [ngClass]="{
@@ -11,7 +16,7 @@
     class="input-wrapper"
     [ngClass]="{
       'cross-enable': crossEnable,
-      disabled: disabled
+      disabled: disabled,
     }"
   >
     <input

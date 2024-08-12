@@ -1,1 +1,1 @@
-export * from './lib/staff-edit-container/staff-edit-container.component';
+export * from './lib/components/staff-edit-container/staff-edit-container.component';

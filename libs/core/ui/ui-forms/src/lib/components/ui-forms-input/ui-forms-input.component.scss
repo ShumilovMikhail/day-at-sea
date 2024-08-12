@@ -1,3 +1,11 @@
 :host {
   display: block;
 }
+
+.form-error-absolute {
+  position: relative;
+  .errors {
+    position: absolute;
+    bottom: -20px;
+  }
+}

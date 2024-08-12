@@ -1,0 +1,28 @@
+@import 'mixins';
+
+.add-staff-form {
+  form {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+  }
+}
+
+.email {
+  width: 400px;
+}
+
+.name {
+  width: 280px;
+}
+
+.name {
+  width: 220px;
+}
+
+button {
+  @include button-primary();
+  padding: 10px;
+  width: 130px;
+  margin-top: 16px;
+}
