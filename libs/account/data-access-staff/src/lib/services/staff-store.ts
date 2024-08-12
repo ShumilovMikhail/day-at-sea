@@ -1,24 +1,28 @@
-import { patchState, signalStore, withState } from '@ngrx/signals';
-import { StaffState } from '../types/staff-state.models';
-import { inject } from '@angular/core';
-import { StaffService } from './staff.service';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { catchError, map, Observable, of, take } from 'rxjs';
+import { patchState, signalStore, withState } from '@ngrx/signals';
+import { setEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
+
+import { StaffState } from '../types/staff-state.models';
+import { StaffService } from './staff.service';
 import { ResponseError } from '@http';
 import { StaffDTO, StaffEntity, StaffMemberDTO, StaffMemberEntity } from '../types/staff.models';
 import { staffDTOAdapter } from './staff-dto.adapter';
-import { setEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
 
 const initialState: StaffState = {
   isLoading: false,
   error: null,
 };
 
+@Injectable({ providedIn: 'root' })
 export class StaffStore extends signalStore(
   { protectedState: false },
   withState(initialState),
   withEntities<StaffMemberEntity>()
 ) {
   private readonly staffService = inject(StaffService);
+
+  public readonly staff: WritableSignal<StaffEntity | null> = signal(null);
 
   public getStaff(agencyId: number) {
     patchState(this, {
@@ -36,17 +40,14 @@ export class StaffStore extends signalStore(
         }),
         take(1)
       )
-      .subscribe((staff: StaffEntity | null) =>
-        staff
-          ? patchState(
-              this,
-              {
-                isLoading: false,
-              },
-              setEntities(staff)
-            )
-          : patchState(this, { isLoading: false })
-      );
+      .subscribe((staff: StaffEntity | null) => {
+        if (staff) {
+          patchState(this, setEntities(staff));
+          this.staff.set(staff);
+          return;
+        }
+        patchState(this, { isLoading: false });
+      });
   }
 
   public updateStaffMember(agencyId: number, staffMember: StaffMemberEntity) {
