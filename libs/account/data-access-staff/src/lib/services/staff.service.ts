@@ -17,6 +17,11 @@ export class StaffService {
     return this.apiService.put<StaffMemberDTO>(url + `/${staffMember.id}`, staffMember);
   }
 
+  public deleteStaffMember(agencyId: number, staffMemberId: number): Observable<null> {
+    const url = this.getUrl(agencyId);
+    return this.apiService.delete<null>(url + `/${staffMemberId}`);
+  }
+
   public addStaffMember(agencyId: number, staffMember: AddStaffMemberRequest): Observable<StaffMemberDTO> {
     const url = this.getUrl(agencyId);
     return this.apiService.post<StaffMemberDTO>(url, staffMember);

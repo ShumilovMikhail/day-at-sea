@@ -1,0 +1,47 @@
+<div class="active-members" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
+  @if (staffActive(); as staffActive) { @if (!isMobile) {
+  <table class="table">
+    <tr>
+      <th class="name">Имя</th>
+      <th class="email">Email</th>
+      <th class="email">Роль</th>
+      <th class="status">Статус</th>
+      <th class="delete"></th>
+    </tr>
+    @for (staffMember of staffActive; track staffMember) {
+    <tr>
+      <td>{{ staffMember.name }}</td>
+      <td>{{ staffMember.email }}</td>
+      <td>{{ staffMember.role }}</td>
+      <td><button class="status-button" (click)="onStatusButtonClick(staffMember.id)">Заблокировать</button></td>
+      <td (click)="onDeleteButtonClick(staffMember.id)"><img src="assets/images/icons/trash-icon.svg" alt="" /></td>
+    </tr>
+    }
+  </table>
+  } @else {
+  <ul class="staff-list">
+    @for (staffMember of staffActive; track staffMember) {
+    <li>
+      <div class="staff-item" utilsAccordion [buttonToggle]="staffMemberChangeButton">
+        <div class="staff-item__header">
+          {{ staffMember.name }}
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" #staffMemberChangeButton />
+        </div>
+        <div class="staff-item__content">
+          <div class="staff-member-item__email">
+            <h5>Email</h5>
+            <p>{{ staffMember.email }}</p>
+          </div>
+          <div class="staff-member-item__email">
+            <h5>Роль</h5>
+            <p>{{ staffMember.role }}</p>
+          </div>
+          <button class="status-button" (click)="onStatusButtonClick(staffMember.id)">Заблокировать</button>
+          <button class="delete-button" (click)="onDeleteButtonClick(staffMember.id)">Удалить</button>
+        </div>
+      </div>
+    </li>
+    }
+  </ul>
+  } }
+</div>

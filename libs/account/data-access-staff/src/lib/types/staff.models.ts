@@ -4,7 +4,6 @@ export interface StaffMemberDTO {
   id: number;
   name: string;
   email: string;
-  agency_objects_id: number[];
   role: string;
   status: StaffStatusTypes;
   agencies_id: number;
@@ -17,7 +16,6 @@ export interface StaffMemberEntity {
   id: number;
   name: string;
   email: string;
-  agencyObjectsId: number[];
   role: string;
   status: StaffStatusTypes;
   createdAt: string;

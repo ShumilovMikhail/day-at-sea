@@ -1,1 +1,12 @@
-<p>staff-edit-table-container works!</p>
+@if (staffVM(); as staff) { @switch (currentPage) { @case ('blocked') {
+<account-staff-edit-table-blocked-members-ui
+  [staffVM]="staff"
+  (statusButtonClickEvent)="changeStaffMemberStatus($event)"
+></account-staff-edit-table-blocked-members-ui>
+} @case ('active') {
+<account-staff-edit-table-active-members-ui
+  [staffVM]="staff"
+  (statusButtonClickEvent)="changeStaffMemberStatus($event)"
+  (deleteButtonClickEvent)="deleteStaffMemberStatus($event)"
+></account-staff-edit-table-active-members-ui>
+} } }

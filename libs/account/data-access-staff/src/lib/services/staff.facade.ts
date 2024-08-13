@@ -3,7 +3,7 @@ import { filter, take } from 'rxjs';
 
 import { StaffStore } from './staff-store';
 import { AgencyFacade } from '@account/data-access-agency';
-import { AddStaffMemberRequest, StaffEntity } from '../types/staff.models';
+import { AddStaffMemberRequest, StaffEntity, StaffMemberEntity } from '../types/staff.models';
 
 @Injectable({ providedIn: 'root' })
 export class StaffFacade {
@@ -23,6 +23,24 @@ export class StaffFacade {
         take(1)
       )
       .subscribe((id: number) => this.staffStore.addStaffMember(id, staffMember));
+  }
+
+  public updateStaffMember(staffMember: StaffMemberEntity): void {
+    this.agencyFacade.id$
+      .pipe(
+        filter((id: number | null): id is number => Boolean(id)),
+        take(1)
+      )
+      .subscribe((id: number) => this.staffStore.updateStaffMember(id, staffMember));
+  }
+
+  public deleteStaffMember(staffMemberId: number): void {
+    this.agencyFacade.id$
+      .pipe(
+        filter((id: number | null): id is number => Boolean(id)),
+        take(1)
+      )
+      .subscribe((id: number) => this.staffStore.deleteStaffMember(id, staffMemberId));
   }
 
   private getStaff(): void {

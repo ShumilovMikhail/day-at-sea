@@ -1,1 +1,38 @@
-<p>staff-edit-table-blocked-members-ui works!</p>
+<div class="blocked-members" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
+  @if (staffBlocked(); as staffBlocked) { @if (!isMobile) {
+  <table class="table">
+    <tr>
+      <th class="name">Имя</th>
+      <th class="email">Email</th>
+      <th class="status">Статус</th>
+    </tr>
+    @for (staffMember of staffBlocked; track staffMember) {
+    <tr>
+      <td>{{ staffMember.name }}</td>
+      <td>{{ staffMember.email }}</td>
+      <td><button class="status-button" (click)="onStatusButtonClick(staffMember.id)">Восстановить</button></td>
+    </tr>
+    }
+  </table>
+  } @else {
+  <ul class="staff-list">
+    @for (staffMember of staffBlocked; track staffMember) {
+    <li>
+      <div class="staff-item" utilsAccordion [buttonToggle]="staffMemberChangeButton">
+        <div class="staff-item__header">
+          {{ staffMember.name }}
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" #staffMemberChangeButton />
+        </div>
+        <div class="staff-item__content">
+          <div class="staff-member-item__email">
+            <h5>Email</h5>
+            <p>{{ staffMember.email }}</p>
+          </div>
+          <button class="status-button" (click)="onStatusButtonClick(staffMember.id)">Восстановить</button>
+        </div>
+      </div>
+    </li>
+    }
+  </ul>
+  } }
+</div>

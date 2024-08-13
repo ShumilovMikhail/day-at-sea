@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, Signal } from '@angular/core';
 import { catchError, map, Observable, of, take } from 'rxjs';
 import { patchState, signalStore, withState } from '@ngrx/signals';
-import { addEntity, setEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
+import { addEntity, removeEntity, setEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
 
 import { StaffState } from '../types/staff-state.models';
 import { StaffService } from './staff.service';
@@ -67,6 +67,28 @@ export class StaffStore extends signalStore(
       )
       .subscribe((staffMember: StaffMemberEntity | null) => {
         if (staffMember) patchState(this, updateEntity({ id: staffMember.id, changes: staffMember }));
+        patchState(this, { isLoading: false });
+      });
+  }
+
+  public deleteStaffMember(agencyId: number, staffMemberId: number): void {
+    patchState(this, {
+      isLoading: true,
+    });
+    this.staffService
+      .deleteStaffMember(agencyId, staffMemberId)
+      .pipe(
+        map((): boolean => {
+          return true;
+        }),
+        catchError((response: ResponseError): Observable<boolean> => {
+          patchState(this, { error: response });
+          return of(false);
+        }),
+        take(1)
+      )
+      .subscribe((isDeleted: boolean) => {
+        if (isDeleted) patchState(this, removeEntity(staffMemberId));
         patchState(this, { isLoading: false });
       });
   }
