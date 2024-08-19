@@ -118,9 +118,9 @@
       <div class="settings-block">
         <div class="settings-block__header">
           <h3>Сотрудники</h3>
-          <a [routerLink]="['staff/edit']">Изменить</a>
+          <a [routerLink]="['staff/edit']" [queryParams]="{ page: 'active' }">Изменить</a>
         </div>
-        <a class="link-edit-button" [routerLink]="['staff/edit']">Изменить</a>
+        <a class="link-edit-button" [routerLink]="['staff/edit']" [queryParams]="{ page: 'active' }">Изменить</a>
       </div>
     </div>
   </div>

@@ -1,0 +1,80 @@
+@import 'variables';
+
+.pagination {
+  width: 280px;
+  border: 1px solid $blueLight;
+  border-radius: 5px;
+  display: flex;
+  padding: 4px 2.5px;
+  height: 35px;
+}
+
+.previous-arrows svg {
+  padding: 6px 12.5px;
+  width: 37.5px;
+  height: 25px;
+  &:not(:last-child) {
+    border-right: 1px solid $blueLight;
+  }
+  transition: 0.1s all ease-in;
+  cursor: pointer;
+  &:hover {
+    fill: $primary;
+    fill-opacity: 1;
+  }
+}
+
+.pages-list {
+  display: flex;
+  border-left: 1px solid $blueLight;
+  border-right: 1px solid $blueLight;
+  li {
+    height: 25px;
+    &:not(:last-child) {
+      border-right: 1px solid $blueLight;
+    }
+    button {
+      height: 25px;
+      padding: 5px;
+      width: 39px;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      transition: 0.1s all ease-in;
+      cursor: pointer;
+      color: $primary;
+      &:hover {
+        background-color: $blueLight;
+      }
+      &.active {
+        background-color: $blueLight;
+      }
+    }
+  }
+}
+
+.next-arrows svg {
+  padding: 6px 12.5px;
+  width: 37.5px;
+  height: 25px;
+  transform: rotate(-180deg);
+  &:not(:last-child) {
+    border-left: 1px solid $blueLight;
+  }
+  transition: 0.1s all ease-in;
+  cursor: pointer;
+  &:hover {
+    fill: $primary;
+    fill-opacity: 1;
+  }
+}
+
+.next-arrows svg.disabled,
+.previous-arrows svg.disabled {
+  fill: $grey;
+  fill-opacity: 1;
+  &:hover {
+    fill: $grey;
+    fill-opacity: 1;
+  }
+}
