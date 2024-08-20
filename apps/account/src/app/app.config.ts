@@ -15,6 +15,7 @@ import { WINDOW } from '@utils/types';
 import { REMOTE_STORAGE_URL } from '@storage/data-access-storage';
 import { addObjectInterceptor } from '@account/add-object/data-access';
 import { myObjectsEffects, myObjectsFeature } from '@account/my-objects/data-access';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -54,5 +55,6 @@ export const appConfig: ApplicationConfig = {
       provide: REMOTE_STORAGE_URL,
       useValue: environment.STORAGE_URL,
     },
+    provideAnimationsAsync(),
   ],
 };

@@ -1,0 +1,31 @@
+<div
+  class="input-container"
+  [ngClass]="{
+    'form-error-absolute': absoluteError
+  }"
+>
+  @if (label) {
+  <label
+    [ngClass]="{
+      required: required
+    }"
+    >{{ label }}</label
+  >
+  }
+  <div>
+    <mat-form-field class="example-full-width" subscriptSizing="dynamic">
+      <input matInput [matDatepicker]="picker" disabled="" (dateInput)="onDateChange($event)" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>
+          <img src="/assets/images/icons/calendar-icon.svg" alt="" />
+        </mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <ul class="errors">
+    @if (errors) { @for (error of errors; track error) { @if (error !== '') {
+    <li>{{ error }}</li>
+    } } }
+  </ul>
+</div>

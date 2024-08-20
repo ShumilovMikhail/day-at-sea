@@ -9,3 +9,5 @@ export * from './lib/components/ui-forms-address/ui-forms-address-ui/ui-forms-ad
 export * from './lib/components/ui-forms-select/ui-forms-select.component';
 
 export * from './lib/components/ui-forms-counter/ui-forms-counter.component';
+
+export * from './lib/components/ui-forms-calendar/ui-forms-calendar.component';

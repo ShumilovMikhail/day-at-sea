@@ -1,0 +1,22 @@
+@import 'variables';
+
+:host {
+  display: block;
+}
+
+.form-error-absolute {
+  position: relative;
+  .errors {
+    position: absolute;
+    bottom: -20px;
+  }
+}
+
+.example-full-width {
+  --mdc-filled-text-field-disabled-active-indicator-color: transparent;
+  --mdc-filled-text-field-disabled-container-color: transparent;
+  --mat-form-field-disabled-input-text-placeholder-color: $text;
+  --mdc-filled-text-field-disabled-input-text-color: $text;
+  border: 1px solid $blueHover;
+  border-radius: 5px;
+}

@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
   public readonly router = inject(Router);
   public isSideMenuMobileOpen = false;
   public userExist = false;
-
   ngOnInit(): void {
     this.authFacade.init();
     this.userFacade.user$
