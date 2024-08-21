@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingForm, BookingFormInstalment } from '../../types/add-booking.models';
+import { departureDateValidator } from '../../validators/departure-date.validator';
 
 @Component({
   selector: 'account-add-booking-container',
@@ -11,7 +12,7 @@ import { BookingForm, BookingFormInstalment } from '../../types/add-booking.mode
   styleUrl: './add-booking-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddBookingContainerComponent {
+export class AddBookingContainerComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   public readonly form: FormGroup<BookingForm> = this.fb.nonNullable.group({
     agencyObjectId: [null as number | null, [Validators.required]],
@@ -27,4 +28,8 @@ export class AddBookingContainerComponent {
     status: ['', [Validators.required]],
     instalments: this.fb.array([] as FormGroup<BookingFormInstalment>[]),
   });
+
+  ngOnInit(): void {
+    this.form.get('departure')?.addValidators(departureDateValidator(this.form.get('arrival')!));
+  }
 }
