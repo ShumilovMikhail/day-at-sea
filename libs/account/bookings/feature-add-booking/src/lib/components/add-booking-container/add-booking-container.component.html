@@ -29,6 +29,9 @@
         <account-add-booking-amount-ui [amount]="amount"></account-add-booking-amount-ui>
       </div>
     </ng-container>
+    <div class="note">
+      <account-add-booking-note-ui [note]="form.get('note')! | formControl"></account-add-booking-note-ui>
+    </div>
   </div>
   <div class="buttons-container">
     <button class="save-button">Сохранить</button>

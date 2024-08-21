@@ -26,6 +26,11 @@
   margin-top: 20px;
 }
 
+.note {
+  margin-top: 20px;
+  width: 100%;
+}
+
 .save-button {
   @include button-primary();
   width: 180px;

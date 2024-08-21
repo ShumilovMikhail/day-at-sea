@@ -11,6 +11,7 @@ import { map, Observable } from 'rxjs';
 import { AddBookingClientUiComponent } from '../add-booking-client-ui/add-booking-client-ui.component';
 import { fullNameValidator, isNotNumberValidator } from '@utils/validators';
 import { AddBookingAmountUiComponent } from '../add-booking-amount-ui/add-booking-amount-ui.component';
+import { AddBookingNoteUiComponent } from '../add-booking-note-ui/add-booking-note-ui.component';
 
 @Component({
   selector: 'account-add-booking-container',
@@ -23,6 +24,7 @@ import { AddBookingAmountUiComponent } from '../add-booking-amount-ui/add-bookin
     AddBookingClientUiComponent,
     FormGroupPipe,
     AddBookingAmountUiComponent,
+    AddBookingNoteUiComponent,
   ],
   templateUrl: './add-booking-container.component.html',
   styleUrl: './add-booking-container.component.scss',
