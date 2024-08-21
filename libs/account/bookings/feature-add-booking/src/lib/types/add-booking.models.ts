@@ -7,6 +7,7 @@ export interface BookingForm extends BookingInfoForm {
   pledge: FormControl<number>;
   paid: FormControl<number>;
   instalments: FormArray<FormGroup<BookingFormInstalment>>;
+  client: FormGroup<BookingClientForm>;
 }
 
 export interface BookingInfoForm {
@@ -16,6 +17,12 @@ export interface BookingInfoForm {
   guestCount: FormControl<number>;
   status: FormControl<string>;
   source: FormControl<string>;
+}
+
+export interface BookingClientForm {
+  fullName: FormControl<string>;
+  phone: FormControl<string>;
+  email: FormControl<string>;
 }
 
 export interface BookingFormInstalment {

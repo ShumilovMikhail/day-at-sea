@@ -5,14 +5,23 @@ import { BookingForm, BookingFormInstalment } from '../../types/add-booking.mode
 import { departureDateValidator } from '../../validators/departure-date.validator';
 import { AddBookingInfoUiComponent } from '../add-booking-info-ui/add-booking-info-ui.component';
 import { LetDirective } from '@ngrx/component';
-import { FormControlPipe } from '@utils/pipes';
+import { FormControlPipe, FormGroupPipe } from '@utils/pipes';
 import { MyObjectsFacade, MyObjectsVM } from '@account/my-objects/data-access';
 import { map, Observable } from 'rxjs';
+import { AddBookingClientUiComponent } from '../add-booking-client-ui/add-booking-client-ui.component';
+import { fullNameValidator } from '@utils/validators';
 
 @Component({
   selector: 'account-add-booking-container',
   standalone: true,
-  imports: [CommonModule, AddBookingInfoUiComponent, LetDirective, FormControlPipe],
+  imports: [
+    CommonModule,
+    AddBookingInfoUiComponent,
+    LetDirective,
+    FormControlPipe,
+    AddBookingClientUiComponent,
+    FormGroupPipe,
+  ],
   templateUrl: './add-booking-container.component.html',
   styleUrl: './add-booking-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,6 +42,11 @@ export class AddBookingContainerComponent implements OnInit {
     source: [''],
     status: ['', [Validators.required]],
     instalments: this.fb.array([] as FormGroup<BookingFormInstalment>[]),
+    client: this.fb.nonNullable.group({
+      fullName: ['', [Validators.required, Validators.minLength(3), fullNameValidator()]],
+      phone: ['', [Validators.required, Validators.minLength(10)]],
+      email: ['', [Validators.required, Validators.email]],
+    }),
   });
   public readonly myObjectsList$: Observable<string[]> = this.myObjectsFacade.myObjectsVM$.pipe(
     map((myObjects: MyObjectsVM) => myObjects.map((myObject) => myObject.title))

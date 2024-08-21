@@ -1,0 +1,19 @@
+.add-booking-client {
+  display: flex;
+  gap: 5px;
+}
+ui-forms-input,
+ui-forms-phone {
+  width: 290px;
+}
+
+@media (max-width: 480px) {
+  .add-booking-client {
+    flex-direction: column;
+    gap: 20px;
+  }
+  ui-forms-input,
+  ui-forms-phone {
+    width: 100%;
+  }
+}
