@@ -1,0 +1,38 @@
+<div class="add-object-info">
+  <ui-forms-select [control]="info.agencyObjectId" [options]="myObjectsList" [label]="'Объект'"></ui-forms-select>
+  <div class="dates">
+    <ui-forms-calendar [control]="info.arrival" [label]="'Заезд'"></ui-forms-calendar>
+    <ui-forms-calendar
+      [control]="info.departure"
+      [errors]="
+        info.departure.errors
+          ? [(info.departure.errors?.['departureBeforeArrival'] ? 'Выезд не может произойти раньше,чем въезд' : '')]
+          : undefined
+      "
+      [label]="'Выезд'"
+      [absoluteError]="true"
+    ></ui-forms-calendar>
+  </div>
+  <div class="other-info">
+    <ui-forms-input
+      class="guest-count"
+      [control]="info.guestCount"
+      [label]="'Количество гостей'"
+      [absoluteError]="true"
+    ></ui-forms-input>
+    <ui-forms-select
+      class="status"
+      [control]="info.status"
+      [options]="['Бронь', 'Заявка', 'Отменено', 'Спец.цена']"
+      [label]="'Статус'"
+      [selectedOption]="'Бронь'"
+    ></ui-forms-select>
+    <ui-forms-select
+      class="source"
+      [control]="info.source"
+      [options]="['Свой сайт', 'Авито', 'Booking', 'Tvil']"
+      [label]="'Источник бронирования'"
+      [selectedOption]="'Свой сайт'"
+    ></ui-forms-select>
+  </div>
+</div>

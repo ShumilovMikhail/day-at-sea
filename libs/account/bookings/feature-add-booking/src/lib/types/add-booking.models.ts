@@ -1,18 +1,21 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
-export interface BookingForm {
+export interface BookingForm extends BookingInfoForm {
+  dailyPrice: FormControl<number>;
+  amount: FormControl<number>;
+  note: FormControl<string>;
+  pledge: FormControl<number>;
+  paid: FormControl<number>;
+  instalments: FormArray<FormGroup<BookingFormInstalment>>;
+}
+
+export interface BookingInfoForm {
   agencyObjectId: FormControl<number | null>;
   arrival: FormControl<string>;
   departure: FormControl<string>;
   guestCount: FormControl<number>;
-  dailyPrice: FormControl<number>;
-  amount: FormControl<number>;
-  note: FormControl<string>;
-  source: FormControl<string>;
   status: FormControl<string>;
-  pledge: FormControl<number>;
-  paid: FormControl<number>;
-  instalments: FormArray<FormGroup<BookingFormInstalment>>;
+  source: FormControl<string>;
 }
 
 export interface BookingFormInstalment {

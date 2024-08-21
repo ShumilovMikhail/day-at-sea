@@ -1,0 +1,52 @@
+.add-object-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.dates {
+  display: flex;
+  gap: 30px;
+}
+
+.other-info {
+  display: flex;
+  gap: 5px;
+}
+.guest-count {
+  width: 200px;
+}
+.status {
+  width: 200px;
+}
+.source {
+  width: 240px;
+}
+
+@media (max-width: 480px) {
+  .add-object-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .dates {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .other-info {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .guest-count {
+    width: 100%;
+  }
+  .status {
+    width: 100%;
+  }
+  .source {
+    width: 100%;
+  }
+}

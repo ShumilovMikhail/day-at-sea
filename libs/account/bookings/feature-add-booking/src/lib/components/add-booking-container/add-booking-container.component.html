@@ -1,5 +1,21 @@
 <div class="add-booking">
   <h1>Добавить бронь</h1>
+  <div class="form">
+    <ng-container
+      *ngrxLet="{
+        agencyObjectId: form.get('agencyObjectId')! |formControl,
+        arrival: form.get('arrival')! |formControl,
+        departure: form.get('departure')! |formControl,
+        guestCount: form.get('guestCount')! |formControl,
+        status: form.get('status')! |formControl,
+        source: form.get('source')! |formControl,
+    } as info"
+    >
+      @if (myObjectsList$ | async; as myObjectsList) {
+      <account-add-booking-info-ui [info]="info" [myObjectsList]="myObjectsList"></account-add-booking-info-ui>
+      }
+    </ng-container>
+  </div>
   <div class="buttons-container">
     <button class="save-button">Сохранить</button>
     <button class="return-button">Вернуться к списку броней</button>

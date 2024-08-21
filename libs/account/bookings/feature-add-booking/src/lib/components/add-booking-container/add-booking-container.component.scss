@@ -5,6 +5,7 @@
 }
 
 .add-booking {
+  width: 780px;
   padding: 40px 50px;
   h1 {
     font-size: 30px;
@@ -31,6 +32,7 @@
 
 @media (max-width: 480px) {
   .add-booking {
+    width: auto;
     padding: 20px 15px;
     h1 {
       font-size: 24px;
