@@ -1,15 +1,16 @@
+@if (isLoaded$ | async) {
 <div class="add-booking">
   <h1>Добавить бронь</h1>
   <div class="form">
     <ng-container
       *ngrxLet="{
-        agencyObjectId: form.get('agencyObjectId')! |formControl,
-        arrival: form.get('arrival')! |formControl,
-        departure: form.get('departure')! |formControl,
-        guestCount: form.get('guestCount')! |formControl,
-        status: form.get('status')! |formControl,
-        source: form.get('source')! |formControl,
-    } as info"
+          agencyObjectId: form.get('agencyObjectId')! |formControl,
+          arrival: form.get('arrival')! |formControl,
+          departure: form.get('departure')! |formControl,
+          guestCount: form.get('guestCount')! |formControl,
+          status: form.get('status')! |formControl,
+          source: form.get('source')! |formControl,
+      } as info"
     >
       @if (myObjectsList$ | async; as myObjectsList) {
       <account-add-booking-info-ui [info]="info" [myObjectsList]="myObjectsList"></account-add-booking-info-ui>
@@ -20,11 +21,11 @@
       <div
         class="amount"
         *ngrxLet="{
-          dailyPrice: form.get('dailyPrice')! |formControl,
-          amount: form.get('amount')! |formControl,
-          pledge: form.get('pledge')! |formControl,
-          paid: form.get('paid')! |formControl,
-      } as amount"
+            dailyPrice: form.get('dailyPrice')! |formControl,
+            amount: form.get('amount')! |formControl,
+            pledge: form.get('pledge')! |formControl,
+            paid: form.get('paid')! |formControl,
+        } as amount"
       >
         <account-add-booking-amount-ui [amount]="amount"></account-add-booking-amount-ui>
       </div>
@@ -32,9 +33,28 @@
     <div class="note">
       <account-add-booking-note-ui [note]="form.get('note')! | formControl"></account-add-booking-note-ui>
     </div>
+
+    <div class="instalments">
+      <account-add-booking-instalments-ui
+        [instalments]="[
+          {
+            date: '321321',
+            amount: 321,
+            commentary: 'dsdsasadd'
+          }
+        ]"
+      ></account-add-booking-instalments-ui>
+    </div>
   </div>
   <div class="buttons-container">
-    <button class="save-button">Сохранить</button>
+    <button class="save-button" [disabled]="form.invalid || (loading$ | async)" (click)="onSave()">Сохранить</button>
     <button class="return-button">Вернуться к списку броней</button>
   </div>
 </div>
+} @else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}
+
+<!-- [instalments]="form.get('instalments')!.value" -->

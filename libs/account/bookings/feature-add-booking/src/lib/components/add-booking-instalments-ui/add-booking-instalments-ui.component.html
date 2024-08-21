@@ -1,0 +1,43 @@
+<div class="instalments-container" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
+  @if (!isMobile) {
+  <button class="add-instalment-button" (click)="onAddInstalmentClick()">+Добавить платеж</button>
+  <table class="table instalments-table">
+    <tr>
+      <th class="date">Дата</th>
+      <th class="amount">Сумма</th>
+      <th class="commentary">Комментарий</th>
+      <th></th>
+    </tr>
+    @for (instalment of instalments; track instalment) {
+    <tr>
+      <td>
+        {{ instalment.date }}
+      </td>
+      <td>
+        {{ instalment.amount }}
+      </td>
+      <td>
+        {{
+          instalment.commentary.length > 35 ? (instalment.commentary | slice : 0 : 35) + '...' : instalment.commentary
+        }}
+      </td>
+      <td>
+        <button class="cross-button" (click)="onDeleteInstalmentClick($index)"><div class="cross"></div></button>
+      </td>
+    </tr>
+    }
+  </table>
+  }@else {
+  <ul class="instalment-list">
+    @for (instalment of instalments; track instalment) {
+    <div class="instalment-item">
+      <p>Дата: {{ instalment.date }}</p>
+      <p>Сумма: {{ instalment.amount }}</p>
+      <p>Коммантарий: {{ instalment.commentary }}</p>
+      <button class="cross-button" (click)="onDeleteInstalmentClick($index)"><div class="cross"></div></button>
+    </div>
+    }
+  </ul>
+  <button class="add-instalment-button" (click)="onAddInstalmentClick()">+Добавить платеж</button>
+  }
+</div>

@@ -2,7 +2,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
 import { ResponseError } from '@http';
-import { BookingDTO, BookingEntity } from '../types/bookings.models';
+import { AddBookingDTO, BookingDTO, BookingEntity } from '../types/bookings.models';
 import { BookingsState } from '../types/bookings-state.models';
 import { bookingsActions } from './bookings.actions';
 
@@ -46,7 +46,7 @@ export const bookingsFeature = createFeature({
 
     on(
       bookingsActions.addBooking,
-      (state: BookingsState, payload: { agencyId: number; booking: BookingDTO }): BookingsState => ({
+      (state: BookingsState, payload: { agencyId: number; booking: AddBookingDTO }): BookingsState => ({
         ...state,
         status: 'loading',
       })

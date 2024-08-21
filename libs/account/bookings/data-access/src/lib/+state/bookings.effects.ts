@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ApiService, ResponseError } from '@http';
 import { bookingsActions } from './bookings.actions';
-import { BookingDTO, BookingEntity } from '../types/bookings.models';
+import { AddBookingDTO, BookingDTO, BookingEntity } from '../types/bookings.models';
 import { bookingsDTOAdapter } from './bookings-dto.adapter';
 
 export const getBookingsEffect$ = createEffect(
@@ -12,12 +12,20 @@ export const getBookingsEffect$ = createEffect(
     actions$.pipe(
       ofType(bookingsActions.getBookings),
       switchMap(({ agencyId }: { agencyId: number }) => {
-        return apiService.get<BookingDTO[]>(`agencies/${agencyId}/bookings`).pipe(
-          map((bookingsDTO: BookingDTO[]) => {
-            const bookings: BookingEntity[] = bookingsDTO.map((booking) => bookingsDTOAdapter.dtoToEntity(booking));
+        return apiService.get<BookingDTO[] | BookingDTO>(`agencies/${agencyId}/bookings`).pipe(
+          map((bookingsDTO: BookingDTO[] | BookingDTO) => {
+            let bookings: BookingEntity[] = [];
+            if (Array.isArray(bookingsDTO)) {
+              bookings = bookingsDTO.map((booking) => bookingsDTOAdapter.dtoToEntity(booking));
+            } else {
+              bookings.push(bookingsDTOAdapter.dtoToEntity(bookingsDTO));
+            }
             return bookingsActions.getBookingsSuccess({ bookings });
           }),
-          catchError((error: ResponseError) => of(bookingsActions.getBookingsFailure({ error })))
+          catchError((error: ResponseError) => {
+            console.log(error);
+            return of(bookingsActions.getBookingsFailure({ error }));
+          })
         );
       })
     ),
@@ -28,7 +36,7 @@ export const addBookingEffect$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) =>
     actions$.pipe(
       ofType(bookingsActions.addBooking),
-      switchMap(({ agencyId, booking }: { agencyId: number; booking: BookingDTO }) => {
+      switchMap(({ agencyId, booking }: { agencyId: number; booking: AddBookingDTO }) => {
         return apiService.post<BookingDTO>(`agencies/${agencyId}/bookings`, booking).pipe(
           map((bookingDTO: BookingDTO) => {
             const booking: BookingEntity = bookingsDTOAdapter.dtoToEntity(bookingDTO);

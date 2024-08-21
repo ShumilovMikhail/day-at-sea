@@ -33,3 +33,9 @@ export interface BookingFormInstalment {
   amount: FormControl<number>;
   commentary: FormControl<string>;
 }
+
+export interface InstalmentVM {
+  date: string;
+  amount: number;
+  commentary: string;
+}

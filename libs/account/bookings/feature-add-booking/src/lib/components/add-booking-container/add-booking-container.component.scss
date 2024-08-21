@@ -31,6 +31,10 @@
   width: 100%;
 }
 
+.instalments {
+  margin-top: 20px;
+}
+
 .save-button {
   @include button-primary();
   width: 180px;
@@ -41,6 +45,14 @@
   @include button-secondary();
   width: 270px;
   height: 50px;
+}
+
+.loader-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 480px) {

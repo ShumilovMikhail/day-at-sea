@@ -1,12 +1,12 @@
-import { BookingDTO, BookingEntity } from '../types/bookings.models';
+import { AddBookingDTO, AddBookingEntity } from '../types/bookings.models';
 
-export interface BookingsDTOAdapter {
-  dtoToEntity: (booking: BookingDTO) => BookingEntity;
-  entityToDTO: (booking: BookingEntity) => BookingDTO;
+export interface AddBookingDTOAdapter {
+  dtoToEntity: (booking: AddBookingDTO) => AddBookingEntity;
+  entityToDTO: (booking: AddBookingEntity) => AddBookingDTO;
 }
 
-export const bookingsDTOAdapter = {
-  dtoToEntity: (booking: BookingDTO): BookingEntity => {
+export const addBookingDTOAdapter = {
+  dtoToEntity: (booking: AddBookingDTO): AddBookingEntity => {
     return {
       id: booking.id,
       agencyObjectId: booking.agency_object_id,
@@ -21,10 +21,14 @@ export const bookingsDTOAdapter = {
       pledge: booking.pledge,
       paid: booking.paid,
       instalments: booking.instalments,
-      clientId: booking.client_id,
+      client: {
+        fullName: booking.client.full_name,
+        phone: booking.client.phone,
+        email: booking.client.email,
+      },
     };
   },
-  entityToDTO: (booking: BookingEntity): BookingDTO => {
+  entityToDTO: (booking: AddBookingEntity): AddBookingDTO => {
     return {
       id: booking.id,
       agency_object_id: booking.agencyObjectId,
@@ -39,7 +43,11 @@ export const bookingsDTOAdapter = {
       pledge: booking.pledge,
       paid: booking.paid,
       instalments: booking.instalments,
-      client_id: booking.clientId,
+      client: {
+        full_name: booking.client.fullName,
+        phone: booking.client.phone,
+        email: booking.client.email,
+      },
     };
   },
 };

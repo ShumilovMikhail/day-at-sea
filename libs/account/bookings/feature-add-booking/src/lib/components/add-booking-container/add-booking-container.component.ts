@@ -7,11 +7,14 @@ import { AddBookingInfoUiComponent } from '../add-booking-info-ui/add-booking-in
 import { LetDirective } from '@ngrx/component';
 import { FormControlPipe, FormGroupPipe } from '@utils/pipes';
 import { MyObjectsFacade, MyObjectsVM } from '@account/my-objects/data-access';
-import { map, Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { AddBookingClientUiComponent } from '../add-booking-client-ui/add-booking-client-ui.component';
 import { fullNameValidator, isNotNumberValidator } from '@utils/validators';
 import { AddBookingAmountUiComponent } from '../add-booking-amount-ui/add-booking-amount-ui.component';
 import { AddBookingNoteUiComponent } from '../add-booking-note-ui/add-booking-note-ui.component';
+import { AddBookingEntity, BookingsFacade } from '@account/bookings/data-access';
+import { UiIndicatorsLoaderComponent } from '@ui/indicators';
+import { AddBookingInstalmentsUiComponent } from '../add-booking-instalments-ui/add-booking-instalments-ui.component';
 
 @Component({
   selector: 'account-add-booking-container',
@@ -25,6 +28,8 @@ import { AddBookingNoteUiComponent } from '../add-booking-note-ui/add-booking-no
     FormGroupPipe,
     AddBookingAmountUiComponent,
     AddBookingNoteUiComponent,
+    UiIndicatorsLoaderComponent,
+    AddBookingInstalmentsUiComponent,
   ],
   templateUrl: './add-booking-container.component.html',
   styleUrl: './add-booking-container.component.scss',
@@ -33,6 +38,7 @@ import { AddBookingNoteUiComponent } from '../add-booking-note-ui/add-booking-no
 export class AddBookingContainerComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly myObjectsFacade = inject(MyObjectsFacade);
+  private readonly bookingsFacade = inject(BookingsFacade);
   public readonly form: FormGroup<BookingForm> = this.fb.nonNullable.group({
     agencyObjectId: [null as number | null, [Validators.required]],
     arrival: ['', [Validators.required]],
@@ -55,8 +61,22 @@ export class AddBookingContainerComponent implements OnInit {
   public readonly myObjectsList$: Observable<string[]> = this.myObjectsFacade.myObjectsVM$.pipe(
     map((myObjects: MyObjectsVM) => myObjects.map((myObject) => myObject.title))
   );
+  public readonly isLoaded$: Observable<boolean> = combineLatest([this.myObjectsList$]).pipe(
+    map((args) => args.reduce((accum, item) => (item ? accum : false), true))
+  );
+  public readonly loading$: Observable<boolean> = this.bookingsFacade.loading$;
 
   ngOnInit(): void {
     this.form.get('departure')?.addValidators(departureDateValidator(this.form.get('arrival')!));
+    this.bookingsFacade.bookings$.subscribe((bookings) => {
+      console.log(bookings);
+    });
+  }
+
+  public onSave(): void {
+    if (this.form.invalid) {
+      throw Error('Add booking save: Form is not valid');
+    }
+    this.bookingsFacade.addBooking(this.form.value as AddBookingEntity);
   }
 }

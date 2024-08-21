@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { combineLatestWith, filter, map, Observable, take, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -12,10 +12,12 @@ import {
   selectBookingsStatus,
 } from '../+state/bookings.selectors';
 import { ResponseError } from '@http';
-import { BookingEntity } from '../types/bookings.models';
+import { AddBookingEntity, BookingEntity } from '../types/bookings.models';
 import { bookingsActions } from '../+state/bookings.actions';
 import { bookingsDTOAdapter } from '../+state/bookings-dto.adapter';
+import { addBookingDTOAdapter } from '../+state/add-booking-dto.adapter';
 
+@Injectable({ providedIn: 'root' })
 export class BookingsFacade {
   private readonly store = inject(Store);
   private readonly agencyFacade = inject(AgencyFacade);
@@ -24,7 +26,7 @@ export class BookingsFacade {
   public readonly bookingsLoaded$: Observable<boolean> = this.store.select(selectBookingsLoaded);
   public readonly error$: Observable<ResponseError | null> = this.store.select(selectBookingsError);
   public readonly loading$: Observable<boolean> = this.store.select(selectBookingsLoading);
-  public readonly myObjectsEntity$: Observable<BookingEntity[]> = this.store.select(selectBookings).pipe(
+  public readonly bookings$: Observable<BookingEntity[]> = this.store.select(selectBookings).pipe(
     combineLatestWith(this.bookingsLoaded$, this.agencyFacade.id$),
     tap(([bookings, isLoaded, agencyId]: [BookingEntity[], boolean, number | null]) => {
       if (!isLoaded && agencyId) {
@@ -37,14 +39,16 @@ export class BookingsFacade {
     })
   );
 
-  public addBooking(booking: BookingEntity): void {
+  public addBooking(booking: AddBookingEntity): void {
     this.agencyFacade.id$
       .pipe(
         filter((id: number | null): id is number => Boolean(id)),
         take(1)
       )
       .subscribe((agencyId: number) => {
-        this.store.dispatch(bookingsActions.addBooking({ agencyId, booking: bookingsDTOAdapter.entityToDTO(booking) }));
+        this.store.dispatch(
+          bookingsActions.addBooking({ agencyId, booking: addBookingDTOAdapter.entityToDTO(booking) })
+        );
       });
   }
 
