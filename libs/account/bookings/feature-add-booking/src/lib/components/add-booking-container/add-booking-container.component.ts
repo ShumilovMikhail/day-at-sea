@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BookingForm, BookingFormInstalment } from '../../types/add-booking.models';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BookingForm, BookingFormInstalment, InstalmentVM } from '../../types/add-booking.models';
 import { departureDateValidator } from '../../validators/departure-date.validator';
 import { AddBookingInfoUiComponent } from '../add-booking-info-ui/add-booking-info-ui.component';
 import { LetDirective } from '@ngrx/component';
 import { FormControlPipe, FormGroupPipe } from '@utils/pipes';
 import { MyObjectsFacade, MyObjectsVM } from '@account/my-objects/data-access';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, take } from 'rxjs';
 import { AddBookingClientUiComponent } from '../add-booking-client-ui/add-booking-client-ui.component';
 import { fullNameValidator, isNotNumberValidator } from '@utils/validators';
 import { AddBookingAmountUiComponent } from '../add-booking-amount-ui/add-booking-amount-ui.component';
@@ -15,6 +15,7 @@ import { AddBookingNoteUiComponent } from '../add-booking-note-ui/add-booking-no
 import { AddBookingEntity, BookingsFacade } from '@account/bookings/data-access';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 import { AddBookingInstalmentsUiComponent } from '../add-booking-instalments-ui/add-booking-instalments-ui.component';
+import { AddBookingAddInstalmentUiComponent } from '../add-booking-add-instalment-ui/add-booking-add-instalment-ui.component';
 
 @Component({
   selector: 'account-add-booking-container',
@@ -30,6 +31,7 @@ import { AddBookingInstalmentsUiComponent } from '../add-booking-instalments-ui/
     AddBookingNoteUiComponent,
     UiIndicatorsLoaderComponent,
     AddBookingInstalmentsUiComponent,
+    AddBookingAddInstalmentUiComponent,
   ],
   templateUrl: './add-booking-container.component.html',
   styleUrl: './add-booking-container.component.scss',
@@ -40,7 +42,7 @@ export class AddBookingContainerComponent implements OnInit {
   private readonly myObjectsFacade = inject(MyObjectsFacade);
   private readonly bookingsFacade = inject(BookingsFacade);
   public readonly form: FormGroup<BookingForm> = this.fb.nonNullable.group({
-    agencyObjectId: [null as number | null, [Validators.required]],
+    agencyObjectTitle: ['', [Validators.required]],
     arrival: ['', [Validators.required]],
     departure: ['', [Validators.required]],
     guestCount: [0, [Validators.required, Validators.min(0)]],
@@ -65,6 +67,7 @@ export class AddBookingContainerComponent implements OnInit {
     map((args) => args.reduce((accum, item) => (item ? accum : false), true))
   );
   public readonly loading$: Observable<boolean> = this.bookingsFacade.loading$;
+  public modalOpen = false;
 
   ngOnInit(): void {
     this.form.get('departure')?.addValidators(departureDateValidator(this.form.get('arrival')!));
@@ -77,6 +80,37 @@ export class AddBookingContainerComponent implements OnInit {
     if (this.form.invalid) {
       throw Error('Add booking save: Form is not valid');
     }
-    this.bookingsFacade.addBooking(this.form.value as AddBookingEntity);
+    this.myObjectsFacade.myObjectsVM$.pipe(take(1)).subscribe((myObjects) => {
+      const booking = this.form.value;
+      const agencyObject = myObjects.find((myObject) => myObject.title === booking.agencyObjectTitle);
+      if (agencyObject) {
+        delete booking['agencyObjectTitle'];
+        console.log({ ...this.form.value, agencyObjectId: agencyObject.id });
+        this.bookingsFacade.addBooking({ ...this.form.value, agencyObjectId: agencyObject.id } as AddBookingEntity);
+      }
+    });
+  }
+
+  public onToggleModal(modalOpen: boolean): void {
+    this.modalOpen = modalOpen;
+  }
+
+  public onAddInstalment(instalment: FormGroup<BookingFormInstalment>) {
+    (this.form.get('instalments') as FormArray).push(instalment);
+    this.modalOpen = false;
+    this.calcPaid();
+  }
+
+  public onDeleteInstalment(index: number): void {
+    (this.form.get('instalments') as FormArray).removeAt(index);
+    this.calcPaid();
+  }
+
+  private calcPaid(): void {
+    const instalments: number = (this.form.get('instalments')!.value as InstalmentVM[]).reduce(
+      (sum, item) => sum + +item.amount,
+      0
+    );
+    this.form.get('paid')?.patchValue(instalments);
   }
 }

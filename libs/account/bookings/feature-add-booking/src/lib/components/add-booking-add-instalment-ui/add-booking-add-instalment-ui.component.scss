@@ -1,0 +1,14 @@
+@import 'mixins';
+
+.form {
+  margin-top: 10px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+button {
+  @include button-primary();
+  width: 100%;
+  height: 40px;
+}

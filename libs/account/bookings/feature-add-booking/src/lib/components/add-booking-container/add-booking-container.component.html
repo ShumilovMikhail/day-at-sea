@@ -4,7 +4,7 @@
   <div class="form">
     <ng-container
       *ngrxLet="{
-          agencyObjectId: form.get('agencyObjectId')! |formControl,
+          agencyObjectTitle: form.get('agencyObjectTitle')! |formControl,
           arrival: form.get('arrival')! |formControl,
           departure: form.get('departure')! |formControl,
           guestCount: form.get('guestCount')! |formControl,
@@ -36,13 +36,9 @@
 
     <div class="instalments">
       <account-add-booking-instalments-ui
-        [instalments]="[
-          {
-            date: '321321',
-            amount: 321,
-            commentary: 'dsdsasadd'
-          }
-        ]"
+        [instalments]="form.get('instalments')!.value"
+        (addInstalmentEvent)="onToggleModal(true)"
+        (deleteInstalmentEvent)="onDeleteInstalment($event)"
       ></account-add-booking-instalments-ui>
     </div>
   </div>
@@ -51,10 +47,13 @@
     <button class="return-button">Вернуться к списку броней</button>
   </div>
 </div>
-} @else {
+@if (modalOpen) {
+<account-add-booking-add-instalment-ui
+  (closeEvent)="onToggleModal(false)"
+  (submitEvent)="onAddInstalment($event)"
+></account-add-booking-add-instalment-ui>
+} } @else {
 <div class="loader-container">
   <ui-indicators-loader></ui-indicators-loader>
 </div>
 }
-
-<!-- [instalments]="form.get('instalments')!.value" -->

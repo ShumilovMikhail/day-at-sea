@@ -1,0 +1,9 @@
+<layers-modal (closeDialogBoxEvent)="onClose()">
+  <h3>Добавить платеж</h3>
+  <div class="form">
+    <ui-forms-calendar [control]="form.get('date')! | formControl" [label]="'Дата'"></ui-forms-calendar>
+    <ui-forms-input [control]="form.get('amount')! | formControl" [label]="'Сумма'"></ui-forms-input>
+    <ui-forms-input [control]="form.get('commentary')! | formControl" [label]="'Комментарий'"></ui-forms-input>
+    <button [disabled]="form.invalid" (click)="onSubmit()">Добавить</button>
+  </div>
+</layers-modal>

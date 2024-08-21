@@ -14,7 +14,7 @@ export interface BookingAmountForm {
 }
 
 export interface BookingInfoForm {
-  agencyObjectId: FormControl<number | null>;
+  agencyObjectTitle: FormControl<string>;
   arrival: FormControl<string>;
   departure: FormControl<string>;
   guestCount: FormControl<number>;
