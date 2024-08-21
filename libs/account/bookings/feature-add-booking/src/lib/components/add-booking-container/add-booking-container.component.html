@@ -17,6 +17,17 @@
       <div class="client">
         <account-add-booking-client-ui [client]="form.get('client')! | formGroup"></account-add-booking-client-ui>
       </div>
+      <div
+        class="amount"
+        *ngrxLet="{
+          dailyPrice: form.get('dailyPrice')! |formControl,
+          amount: form.get('amount')! |formControl,
+          pledge: form.get('pledge')! |formControl,
+          paid: form.get('paid')! |formControl,
+      } as amount"
+      >
+        <account-add-booking-amount-ui [amount]="amount"></account-add-booking-amount-ui>
+      </div>
     </ng-container>
   </div>
   <div class="buttons-container">

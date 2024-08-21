@@ -9,7 +9,8 @@ import { FormControlPipe, FormGroupPipe } from '@utils/pipes';
 import { MyObjectsFacade, MyObjectsVM } from '@account/my-objects/data-access';
 import { map, Observable } from 'rxjs';
 import { AddBookingClientUiComponent } from '../add-booking-client-ui/add-booking-client-ui.component';
-import { fullNameValidator } from '@utils/validators';
+import { fullNameValidator, isNotNumberValidator } from '@utils/validators';
+import { AddBookingAmountUiComponent } from '../add-booking-amount-ui/add-booking-amount-ui.component';
 
 @Component({
   selector: 'account-add-booking-container',
@@ -21,6 +22,7 @@ import { fullNameValidator } from '@utils/validators';
     FormControlPipe,
     AddBookingClientUiComponent,
     FormGroupPipe,
+    AddBookingAmountUiComponent,
   ],
   templateUrl: './add-booking-container.component.html',
   styleUrl: './add-booking-container.component.scss',
@@ -34,10 +36,10 @@ export class AddBookingContainerComponent implements OnInit {
     arrival: ['', [Validators.required]],
     departure: ['', [Validators.required]],
     guestCount: [0, [Validators.required, Validators.min(0)]],
-    dailyPrice: [0, [Validators.required, Validators.min(1)]],
-    amount: [0, [Validators.required, Validators.min(1)]],
-    pledge: [0, [Validators.required, Validators.min(1)]],
-    paid: [0, [Validators.required, Validators.min(1)]],
+    dailyPrice: [0, [Validators.required, Validators.min(1), isNotNumberValidator()]],
+    amount: [0, [Validators.required, Validators.min(1), isNotNumberValidator()]],
+    pledge: [0, [Validators.required, Validators.min(1), isNotNumberValidator()]],
+    paid: [0, [Validators.required, isNotNumberValidator()]],
     note: [''],
     source: [''],
     status: ['', [Validators.required]],

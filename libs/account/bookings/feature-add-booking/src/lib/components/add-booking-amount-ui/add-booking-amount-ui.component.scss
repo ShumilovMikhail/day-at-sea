@@ -1,0 +1,20 @@
+.add-booking-amount {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+ui-forms-input {
+  width: 190px;
+}
+
+@media (max-width: 480px) {
+  .add-booking-amount {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  ui-forms-input {
+    width: 100%;
+  }
+}

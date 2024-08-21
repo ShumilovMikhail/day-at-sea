@@ -22,6 +22,10 @@
   margin-top: 20px;
 }
 
+.amount {
+  margin-top: 20px;
+}
+
 .save-button {
   @include button-primary();
   width: 180px;
