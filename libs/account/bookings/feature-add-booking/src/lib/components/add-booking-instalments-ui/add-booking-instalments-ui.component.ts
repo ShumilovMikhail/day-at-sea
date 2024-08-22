@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { InstalmentVM } from '../../types/add-booking.models';
 import { IsMobileDirective } from '@utils/directives';
 

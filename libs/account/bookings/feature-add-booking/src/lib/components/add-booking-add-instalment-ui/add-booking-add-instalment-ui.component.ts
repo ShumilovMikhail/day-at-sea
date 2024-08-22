@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { ModalComponent } from '@layers';
 import { UiFormsCalendarComponent, UiFormsInputComponent } from '@ui/forms';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormControlPipe } from '@utils/pipes';
-import { BookingFormInstalment, InstalmentVM } from '../../types/add-booking.models';
+import { BookingFormInstalment } from '../../types/add-booking.models';
 
 @Component({
   selector: 'account-add-booking-add-instalment-ui',

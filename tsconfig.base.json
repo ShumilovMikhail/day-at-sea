@@ -44,6 +44,7 @@
       "@account/add-object/util": ["libs/account/add-object/util-add-object/src/index.ts"],
       "@account/bookings/data-access": ["libs/account/bookings/data-access/src/index.ts"],
       "@account/bookings/feature-add-booking": ["libs/account/bookings/feature-add-booking/src/index.ts"],
+      "@account/bookings/feature-my-bookings": ["libs/account/bookings/feature-my-bookings/src/index.ts"],
       "@account/data-access-agency": ["libs/account/data-access-agency/src/index.ts"],
       "@account/layers/header": ["libs/account/layers/feature-header/src/index.ts"],
       "@account/layers/side-menu": ["libs/account/layers/feature-side-menu/src/index.ts"],

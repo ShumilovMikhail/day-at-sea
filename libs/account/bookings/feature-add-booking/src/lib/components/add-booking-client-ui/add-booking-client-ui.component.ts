@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup } from '@angular/forms';
+
 import { BookingClientForm } from '../../types/add-booking.models';
 import { UiFormsInputComponent, UiFormsPhoneComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';

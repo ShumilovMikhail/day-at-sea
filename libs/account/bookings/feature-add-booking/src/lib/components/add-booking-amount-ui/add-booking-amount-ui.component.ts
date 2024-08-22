@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { BookingAmountForm } from '../../types/add-booking.models';
 import { UiFormsInputComponent } from '@ui/forms';
 

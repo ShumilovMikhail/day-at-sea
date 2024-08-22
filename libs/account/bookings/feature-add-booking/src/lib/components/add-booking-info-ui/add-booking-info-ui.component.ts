@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { BookingInfoForm } from '../../types/add-booking.models';
 import { UiFormsCalendarComponent, UiFormsInputComponent, UiFormsSelectComponent } from '@ui/forms';
 

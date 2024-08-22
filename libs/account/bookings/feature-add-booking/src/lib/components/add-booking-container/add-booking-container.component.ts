@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { combineLatest, map, Observable, take } from 'rxjs';
+import { LetDirective } from '@ngrx/component';
+
 import { BookingForm, BookingFormInstalment, InstalmentVM } from '../../types/add-booking.models';
 import { departureDateValidator } from '../../validators/departure-date.validator';
 import { AddBookingInfoUiComponent } from '../add-booking-info-ui/add-booking-info-ui.component';
-import { LetDirective } from '@ngrx/component';
 import { FormControlPipe, FormGroupPipe } from '@utils/pipes';
 import { MyObjectsFacade, MyObjectsVM } from '@account/my-objects/data-access';
-import { combineLatest, map, Observable, take } from 'rxjs';
 import { AddBookingClientUiComponent } from '../add-booking-client-ui/add-booking-client-ui.component';
 import { fullNameValidator, isNotNumberValidator } from '@utils/validators';
 import { AddBookingAmountUiComponent } from '../add-booking-amount-ui/add-booking-amount-ui.component';
