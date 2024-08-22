@@ -1,0 +1,60 @@
+<div class="filters-container">
+  @if (!isMobile) {
+  <ng-container *ngTemplateOutlet="filters"></ng-container>
+  } @else {
+  <button class="filters-mobile-button" (click)="onIsModalChange(true)">
+    <img src="/assets/images/icons/filter-icon.svg" alt="filter-icon" />
+    Фильтры
+  </button>
+
+  @if (isModalOpen) {
+  <layers-modal (closeDialogBoxEvent)="onIsModalChange(false)">
+    <ng-container *ngTemplateOutlet="filters"></ng-container>
+  </layers-modal>
+  } }
+</div>
+
+<ng-template #filters>
+  <div class="filters">
+    <div class="title">
+      <ui-forms-input
+        [control]="form.get('title')! | formControl"
+        [placeholder]="'Поиск по названию объекта'"
+      ></ui-forms-input>
+    </div>
+    <div class="content">
+      <!-- source -->
+      <ui-forms-select
+        class="source"
+        [control]="form.get('source')! | formControl"
+        [placeholder]="'Источник бронирования'"
+        [options]="['', 'Свой сайт', 'Авито', 'Booking', 'Tvil']"
+        [selectedOption]="form.get('source')!.value"
+      ></ui-forms-select>
+      <!-- price -->
+      <ui-forms-input
+        class="amount"
+        [control]="form.get('amount')! | formControl"
+        [placeholder]="'Сумма до'"
+      ></ui-forms-input>
+      <!-- guestCount -->
+      <ui-forms-select
+        class="status"
+        [control]="form.get('status')! | formControl"
+        [placeholder]="'Статус'"
+        [options]="[
+          '',
+          'Ждут заселения',
+          'Активные брони',
+          'Не оплаченные',
+          'Ждут подтверждения',
+          'Гости проживают',
+          'Возник спор',
+          'Завершенные'
+        ]"
+        [selectedOption]="form.get('status')!.value"
+      ></ui-forms-select>
+      <button class="reset" (click)="onReset()">Сбросить</button>
+    </div>
+  </div>
+</ng-template>

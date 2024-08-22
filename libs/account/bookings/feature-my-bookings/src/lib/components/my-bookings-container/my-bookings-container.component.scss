@@ -1,15 +1,29 @@
+:host {
+  width: 100%;
+}
+
 .my-bookings {
   padding: 40px 50px;
   h1 {
     font-size: 30px;
   }
+  .filters {
+    margin-top: 35px;
+  }
 }
 
 @media (max-width: 480px) {
+  .top {
+    display: flex;
+    justify-content: space-between;
+  }
   .my-bookings {
     padding: 20px 15px;
     h1 {
       font-size: 24px;
+    }
+    .filters {
+      margin-top: 0;
     }
   }
 }

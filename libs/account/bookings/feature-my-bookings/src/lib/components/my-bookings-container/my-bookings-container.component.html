@@ -1,3 +1,15 @@
-<div class="my-bookings">
+<div class="my-bookings" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
+  @if (!isMobile) {
   <h1>Мои брони</h1>
+  <div class="filters">
+    <account-my-bookings-filters-ui [isMobile]="isMobile"></account-my-bookings-filters-ui>
+  </div>
+  } @else {
+  <div class="top">
+    <h1>Мои брони</h1>
+    <div class="filters">
+      <account-my-bookings-filters-ui [isMobile]="isMobile"></account-my-bookings-filters-ui>
+    </div>
+  </div>
+  }
 </div>
