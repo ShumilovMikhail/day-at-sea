@@ -72,9 +72,6 @@ export class AddBookingContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.get('departure')?.addValidators(departureDateValidator(this.form.get('arrival')!));
-    this.bookingsFacade.bookings$.subscribe((bookings) => {
-      console.log(bookings);
-    });
   }
 
   public onSave(): void {
@@ -86,7 +83,6 @@ export class AddBookingContainerComponent implements OnInit {
       const agencyObject = myObjects.find((myObject) => myObject.title === booking.agencyObjectTitle);
       if (agencyObject) {
         delete booking['agencyObjectTitle'];
-        console.log({ ...this.form.value, agencyObjectId: agencyObject.id });
         this.bookingsFacade.addBooking({ ...this.form.value, agencyObjectId: agencyObject.id } as AddBookingEntity);
       }
     });

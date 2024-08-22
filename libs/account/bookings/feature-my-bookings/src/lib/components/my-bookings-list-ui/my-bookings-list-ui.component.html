@@ -1,0 +1,71 @@
+@if (!isMobile) {
+<table class="table bookings-table">
+  <tr>
+    <th class="id">№ брони</th>
+    <th class="object">Объект</th>
+    <th class="arrival">Заезд</th>
+    <th class="departure">Выезд</th>
+    <th class="guest">Гостей</th>
+    <th class="amount">Сумма</th>
+    <th class="note">Примечание</th>
+    <th class="source">Источник</th>
+    <th class="status">Статус</th>
+  </tr>
+  @for (booking of bookings; track booking) {
+  <tr>
+    <td>{{ booking.id }}</td>
+    <td>{{ booking.agencyObjectTitle }}</td>
+    <td>{{ booking.arrival }}</td>
+    <td>{{ booking.departure }}</td>
+    <td>{{ booking.guestCount }}</td>
+    <td>{{ booking.amount }}</td>
+    <td>{{ booking.note }}</td>
+    <td>{{ booking.source }}</td>
+    <td>{{ booking.status }}</td>
+  </tr>
+  }
+</table>
+} @else {
+<ul class="bookings-list">
+  @for (booking of bookings; track booking) {
+  <ng-container *ngTemplateOutlet="bookingItem; context: { booking }"></ng-container>
+  }
+</ul>
+}
+
+<ng-template let-booking="booking" #bookingItem>
+  <div class="bookings-item" utilsAccordion [buttonToggle]="bookingChangeButton">
+    <div class="bookings-item__header">
+      <div class="bookings-item__inner">
+        <span>{{ booking.id }}</span>
+        <span>{{ booking.arrival }}-{{ booking.departure }}</span>
+        <span>{{ booking.agencyObjectTitle }}</span>
+      </div>
+      <img src="assets/images/icons/arrow-toggle.svg" alt="" #bookingChangeButton />
+    </div>
+    <div class="bookings-item__content contacts-content">
+      <ul class="bookings-item__list">
+        <li>
+          <span>Гостей:</span>
+          <p>{{ booking.guestCount }}</p>
+        </li>
+        <li>
+          <span>Сумма:</span>
+          <p>{{ booking.amount }}</p>
+        </li>
+        <li>
+          <span>Примечание:</span>
+          <p>{{ booking.note }}</p>
+        </li>
+        <li>
+          <span>Источник:</span>
+          <p>{{ booking.source }}</p>
+        </li>
+        <li>
+          <span>Статус:</span>
+          <p>{{ booking.status }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-template>

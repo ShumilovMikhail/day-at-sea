@@ -23,7 +23,6 @@ export const getBookingsEffect$ = createEffect(
             return bookingsActions.getBookingsSuccess({ bookings });
           }),
           catchError((error: ResponseError) => {
-            console.log(error);
             return of(bookingsActions.getBookingsFailure({ error }));
           })
         );

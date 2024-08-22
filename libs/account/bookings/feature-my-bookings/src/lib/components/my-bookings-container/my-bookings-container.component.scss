@@ -12,6 +12,16 @@
   }
 }
 
+.excel {
+  display: flex;
+  justify-content: right;
+  margin-top: 12px;
+}
+
+.list {
+  margin-top: 20px;
+}
+
 @media (max-width: 480px) {
   .top {
     display: flex;
@@ -24,6 +34,13 @@
     }
     .filters {
       margin-top: 0;
+    }
+  }
+
+  .excel {
+    margin-top: 15px;
+    ui-common-write-excel {
+      width: 100%;
     }
   }
 }

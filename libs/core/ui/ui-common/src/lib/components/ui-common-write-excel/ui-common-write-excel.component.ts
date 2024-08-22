@@ -14,6 +14,5 @@ export class UiCommonWriteExcelComponent {
 
   public onClick(): void {
     this.clickEvent.emit();
-    console.log(2);
   }
 }

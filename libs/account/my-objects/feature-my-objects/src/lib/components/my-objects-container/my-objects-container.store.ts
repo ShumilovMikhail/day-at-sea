@@ -1,5 +1,5 @@
 import { ComponentStore } from '@ngrx/component-store';
-import { inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MyObjectsFilters, MyObjectsState, ObjectEdit } from '../../types/my-objects-state';
 import { combineLatestWith, filter, map, Observable, take } from 'rxjs';
@@ -37,7 +37,7 @@ export const filtersFunctions = {
       ? myObjects.filter((myObject: MyObjectTableItem) => myObject.guestCount === guestCount)
       : myObjects,
 };
-
+@Injectable()
 export class MyObjectsStore extends ComponentStore<MyObjectsState> {
   private readonly agencyFacade = inject(AgencyFacade);
   private readonly myObjectsFacade = inject(MyObjectsFacade);

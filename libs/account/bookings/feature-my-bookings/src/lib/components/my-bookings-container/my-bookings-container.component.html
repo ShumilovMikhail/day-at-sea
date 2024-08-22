@@ -1,8 +1,15 @@
+@if (bookings$ | async; as bookings) {
 <div class="my-bookings" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
   @if (!isMobile) {
   <h1>Мои брони</h1>
+  <div class="excel">
+    <ui-common-write-excel (clickEvent)="onExportXLSX()"></ui-common-write-excel>
+  </div>
   <div class="filters">
-    <account-my-bookings-filters-ui [isMobile]="isMobile"></account-my-bookings-filters-ui>
+    <account-my-bookings-filters-ui
+      [isMobile]="isMobile"
+      (changeFiltersEvent)="onChangeFilters($event)"
+    ></account-my-bookings-filters-ui>
   </div>
   } @else {
   <div class="top">
@@ -11,5 +18,13 @@
       <account-my-bookings-filters-ui [isMobile]="isMobile"></account-my-bookings-filters-ui>
     </div>
   </div>
+  <div class="excel">
+    <ui-common-write-excel></ui-common-write-excel>
+  </div>
   }
+  <div class="list">
+    <account-my-bookings-list-ui [bookings]="bookings" [isMobile]="isMobile"></account-my-bookings-list-ui>
+  </div>
 </div>
+
+}

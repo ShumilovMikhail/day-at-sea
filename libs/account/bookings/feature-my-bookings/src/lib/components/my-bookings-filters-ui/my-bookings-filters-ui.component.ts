@@ -10,11 +10,12 @@ import {
   Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 import { ModalComponent } from '@layers';
 import { UiFormsInputComponent, UiFormsSelectComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
-import { FormBuilder } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MyBookingsFilters } from '../../types/filters.models';
 
 @Component({
