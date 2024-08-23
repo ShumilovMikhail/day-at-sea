@@ -100,6 +100,11 @@ export const appRoutes: Route[] = [
           import('@account/bookings/feature-add-booking').then((c) => c.AddBookingContainerComponent),
       },
       {
+        path: 'bookings/update/:id',
+        loadComponent: () =>
+          import('@account/bookings/feature-update-booking').then((c) => c.UpdateBookingContainerComponent),
+      },
+      {
         path: 'bookings',
         loadComponent: () =>
           import('@account/bookings/feature-my-bookings').then((c) => c.MyBookingsContainerComponent),

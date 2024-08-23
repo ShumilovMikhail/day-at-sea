@@ -11,6 +11,7 @@ import { BookingVM } from '../../types/bookings.models';
 import { MyBookingsFilters } from '../../types/filters.models';
 import { FilesService } from '@utils/files';
 import { bookingEntityAdapter } from '../../utils/booking-entity.adapter';
+import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 
 @Component({
   selector: 'account-my-bookings-container',
@@ -21,6 +22,7 @@ import { bookingEntityAdapter } from '../../utils/booking-entity.adapter';
     IsMobileDirective,
     UiCommonWriteExcelComponent,
     MyBookingsListUiComponent,
+    UiIndicatorsLoaderComponent,
   ],
   providers: [MyBookingsService],
   templateUrl: './my-bookings-container.component.html',
