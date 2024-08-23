@@ -44,7 +44,7 @@
   </div>
   <div class="buttons-container">
     <button class="save-button" [disabled]="form.invalid || (loading$ | async)" (click)="onSave()">Сохранить</button>
-    <button class="return-button">Вернуться к списку броней</button>
+    <button class="return-button" [routerLink]="['/', 'account', 'bookings']">Вернуться к списку броней</button>
   </div>
 </div>
 @if (modalOpen) {

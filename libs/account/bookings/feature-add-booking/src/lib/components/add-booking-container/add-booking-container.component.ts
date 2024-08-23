@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { combineLatest, map, Observable, take } from 'rxjs';
 import { LetDirective } from '@ngrx/component';
@@ -33,6 +34,7 @@ import { AddBookingAddInstalmentUiComponent } from '../add-booking-add-instalmen
     UiIndicatorsLoaderComponent,
     AddBookingInstalmentsUiComponent,
     AddBookingAddInstalmentUiComponent,
+    RouterLink,
   ],
   templateUrl: './add-booking-container.component.html',
   styleUrl: './add-booking-container.component.scss',

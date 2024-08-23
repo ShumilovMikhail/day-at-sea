@@ -1,5 +1,6 @@
 import { inject } from '@angular/core';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ApiService, ResponseError } from '@http';
@@ -46,6 +47,17 @@ export const addBookingEffect$ = createEffect(
       })
     ),
   { functional: true }
+);
+
+export const addBookingSuccessEffect$ = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) =>
+    actions$.pipe(
+      ofType(bookingsActions.addBookingSuccess),
+      tap(() => {
+        router.navigateByUrl('/account/bookings');
+      })
+    ),
+  { functional: true, dispatch: false }
 );
 
 export const updateBookingEffect$ = createEffect(
