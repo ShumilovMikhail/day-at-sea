@@ -1,0 +1,83 @@
+@import 'mixins';
+
+:host {
+  width: 100%;
+}
+
+.add-booking {
+  width: 780px;
+  padding: 40px 50px;
+  h1 {
+    font-size: 30px;
+  }
+}
+.buttons-container {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 330px;
+}
+
+.client {
+  margin-top: 20px;
+}
+
+.amount {
+  margin-top: 20px;
+}
+
+.note {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.instalments {
+  margin-top: 20px;
+}
+
+.save-button {
+  @include button-primary();
+  width: 180px;
+  height: 50px;
+}
+
+.return-button {
+  @include button-secondary();
+  width: 270px;
+  height: 50px;
+}
+
+.loader-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .add-booking {
+    width: auto;
+    padding: 20px 15px;
+    h1 {
+      font-size: 24px;
+    }
+  }
+  .buttons-container {
+    margin-top: 25px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .save-button {
+    @include button-primary();
+    width: 100%;
+    height: 40px;
+  }
+
+  .return-button {
+    @include button-secondary();
+    width: 100%;
+    height: 40px;
+  }
+}

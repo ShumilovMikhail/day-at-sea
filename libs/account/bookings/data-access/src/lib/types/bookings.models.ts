@@ -50,8 +50,8 @@ export interface Instalment {
   commentary: string;
 }
 
-export interface AddBookingEntity {
-  id: number;
+export interface SaveBookingEntity {
+  id?: number;
   agencyObjectId: number;
   arrival: string;
   departure: string;
@@ -64,11 +64,11 @@ export interface AddBookingEntity {
   pledge: number;
   paid: number;
   instalments: Instalment[];
-  client: BookingClientEntity;
+  client: BookingClientEntity | number;
 }
 
-export interface AddBookingDTO {
-  id: number;
+export interface SaveBookingDTO {
+  id?: number;
   agency_object_id: number;
   arrival: string;
   departure: string;
@@ -81,5 +81,5 @@ export interface AddBookingDTO {
   pledge: number;
   paid: number;
   instalments: Instalment[];
-  client: BookingClientDTO;
+  client: BookingClientDTO | number;
 }

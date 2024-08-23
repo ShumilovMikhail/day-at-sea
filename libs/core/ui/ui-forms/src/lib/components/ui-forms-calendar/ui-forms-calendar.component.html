@@ -14,7 +14,7 @@
   }
   <div>
     <mat-form-field class="example-full-width" subscriptSizing="dynamic">
-      <input matInput [matDatepicker]="picker" disabled="" (dateInput)="onDateChange($event)" />
+      <input matInput [matDatepicker]="picker" disabled="" (dateInput)="onDateChange($event)" [value]="value" />
       <mat-datepicker-toggle matIconSuffix [for]="picker">
         <mat-icon matDatepickerToggleIcon>
           <img src="/assets/images/icons/calendar-icon.svg" alt="" />

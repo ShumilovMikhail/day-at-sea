@@ -14,7 +14,7 @@ import { AddBookingClientUiComponent } from '../add-booking-client-ui/add-bookin
 import { fullNameValidator, isNotNumberValidator } from '@utils/validators';
 import { AddBookingAmountUiComponent } from '../add-booking-amount-ui/add-booking-amount-ui.component';
 import { AddBookingNoteUiComponent } from '../add-booking-note-ui/add-booking-note-ui.component';
-import { AddBookingEntity, BookingsFacade } from '@account/bookings/data-access';
+import { SaveBookingEntity, BookingsFacade } from '@account/bookings/data-access';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 import { AddBookingInstalmentsUiComponent } from '../add-booking-instalments-ui/add-booking-instalments-ui.component';
 import { AddBookingAddInstalmentUiComponent } from '../add-booking-add-instalment-ui/add-booking-add-instalment-ui.component';
@@ -85,7 +85,7 @@ export class AddBookingContainerComponent implements OnInit {
       const agencyObject = myObjects.find((myObject) => myObject.title === booking.agencyObjectTitle);
       if (agencyObject) {
         delete booking['agencyObjectTitle'];
-        this.bookingsFacade.addBooking({ ...this.form.value, agencyObjectId: agencyObject.id } as AddBookingEntity);
+        this.bookingsFacade.addBooking({ ...this.form.value, agencyObjectId: agencyObject.id } as SaveBookingEntity);
       }
     });
   }

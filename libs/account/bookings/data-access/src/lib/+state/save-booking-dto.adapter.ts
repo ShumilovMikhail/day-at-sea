@@ -1,12 +1,12 @@
-import { AddBookingDTO, AddBookingEntity } from '../types/bookings.models';
+import { SaveBookingDTO, SaveBookingEntity } from '../types/bookings.models';
 
-export interface AddBookingDTOAdapter {
-  dtoToEntity: (booking: AddBookingDTO) => AddBookingEntity;
-  entityToDTO: (booking: AddBookingEntity) => AddBookingDTO;
+export interface SaveBookingDTOAdapter {
+  dtoToEntity: (booking: SaveBookingDTO) => SaveBookingEntity;
+  entityToDTO: (booking: SaveBookingEntity) => SaveBookingDTO;
 }
 
-export const addBookingDTOAdapter = {
-  dtoToEntity: (booking: AddBookingDTO): AddBookingEntity => {
+export const saveBookingDTOAdapter = {
+  dtoToEntity: (booking: SaveBookingDTO): SaveBookingEntity => {
     return {
       id: booking.id,
       agencyObjectId: booking.agency_object_id,
@@ -21,14 +21,17 @@ export const addBookingDTOAdapter = {
       pledge: booking.pledge,
       paid: booking.paid,
       instalments: booking.instalments,
-      client: {
-        fullName: booking.client.full_name,
-        phone: booking.client.phone,
-        email: booking.client.email,
-      },
+      client:
+        typeof booking.client === 'number'
+          ? booking.client
+          : {
+              fullName: booking.client.full_name,
+              phone: booking.client.phone,
+              email: booking.client.email,
+            },
     };
   },
-  entityToDTO: (booking: AddBookingEntity): AddBookingDTO => {
+  entityToDTO: (booking: SaveBookingEntity): SaveBookingDTO => {
     return {
       id: booking.id,
       agency_object_id: booking.agencyObjectId,
@@ -43,11 +46,14 @@ export const addBookingDTOAdapter = {
       pledge: booking.pledge,
       paid: booking.paid,
       instalments: booking.instalments,
-      client: {
-        full_name: booking.client.fullName,
-        phone: booking.client.phone,
-        email: booking.client.email,
-      },
+      client:
+        typeof booking.client === 'number'
+          ? booking.client
+          : {
+              full_name: booking.client.fullName,
+              phone: booking.client.phone,
+              email: booking.client.email,
+            },
     };
   },
 };

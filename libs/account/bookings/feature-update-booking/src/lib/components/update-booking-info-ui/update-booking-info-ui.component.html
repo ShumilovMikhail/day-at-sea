@@ -1,0 +1,48 @@
+<div class="add-object-info">
+  <ui-forms-select
+    [control]="info.agencyObjectTitle"
+    [options]="myObjectsList"
+    [label]="'Объект'"
+    [selectedOption]="info.agencyObjectTitle.value"
+  ></ui-forms-select>
+  <div class="dates">
+    <ui-forms-calendar
+      [control]="info.arrival"
+      [label]="'Заезд'"
+      [initialValue]="info.arrival.value"
+    ></ui-forms-calendar>
+    <ui-forms-calendar
+      [control]="info.departure"
+      [errors]="
+        info.departure.errors
+          ? [(info.departure.errors?.['departureBeforeArrival'] ? 'Выезд не может произойти раньше,чем въезд' : '')]
+          : undefined
+      "
+      [initialValue]="info.departure.value"
+      [label]="'Выезд'"
+      [absoluteError]="true"
+    ></ui-forms-calendar>
+  </div>
+  <div class="other-info">
+    <ui-forms-input
+      class="guest-count"
+      [control]="info.guestCount"
+      [label]="'Количество гостей'"
+      [absoluteError]="true"
+    ></ui-forms-input>
+    <ui-forms-select
+      class="status"
+      [control]="info.status"
+      [options]="['Ждут заселения', 'Ждут подтверждения', 'Гости проживают', 'Возник спор', 'Завершенно']"
+      [label]="'Статус'"
+      [selectedOption]="'Бронь'"
+    ></ui-forms-select>
+    <ui-forms-select
+      class="source"
+      [control]="info.source"
+      [options]="['Свой сайт', 'Авито', 'Booking', 'Tvil']"
+      [label]="'Источник бронирования'"
+      [selectedOption]="'Свой сайт'"
+    ></ui-forms-select>
+  </div>
+</div>

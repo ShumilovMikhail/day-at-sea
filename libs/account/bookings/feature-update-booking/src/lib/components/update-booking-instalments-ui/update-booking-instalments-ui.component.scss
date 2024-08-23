@@ -1,0 +1,67 @@
+@import 'variables';
+@import 'mixins';
+
+.cross-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.date {
+  width: 135px;
+}
+
+.amount {
+  width: 125px;
+}
+
+.commentary {
+  width: 315px;
+}
+
+.add-instalment-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: $primary;
+  font-size: 14px;
+  transition: 0.2s color ease-in;
+  cursor: pointer;
+  &:hover {
+    color: $primaryHover;
+  }
+}
+
+.instalments-table {
+  margin-top: 7px;
+}
+
+@media (max-width: 480px) {
+  .instalment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .instalment-item {
+    position: relative;
+    width: 100%;
+    padding: 20px 15px;
+    border: 1px solid $blueLight;
+    border-radius: 5px;
+    .cross-button {
+      position: absolute;
+      top: 24px;
+      right: 16px;
+    }
+  }
+
+  .add-instalment-button {
+    @include button-primary();
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    &:hover {
+      color: $white;
+    }
+  }
+}

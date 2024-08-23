@@ -12,10 +12,9 @@ import {
   selectBookingsStatus,
 } from '../+state/bookings.selectors';
 import { ResponseError } from '@http';
-import { AddBookingEntity, BookingEntity } from '../types/bookings.models';
+import { SaveBookingEntity, BookingEntity } from '../types/bookings.models';
 import { bookingsActions } from '../+state/bookings.actions';
-import { bookingsDTOAdapter } from '../+state/bookings-dto.adapter';
-import { addBookingDTOAdapter } from '../+state/add-booking-dto.adapter';
+import { saveBookingDTOAdapter } from '../+state/save-booking-dto.adapter';
 
 @Injectable({ providedIn: 'root' })
 export class BookingsFacade {
@@ -39,7 +38,7 @@ export class BookingsFacade {
     })
   );
 
-  public addBooking(booking: AddBookingEntity): void {
+  public addBooking(booking: SaveBookingEntity): void {
     this.agencyFacade.id$
       .pipe(
         filter((id: number | null): id is number => Boolean(id)),
@@ -47,12 +46,12 @@ export class BookingsFacade {
       )
       .subscribe((agencyId: number) => {
         this.store.dispatch(
-          bookingsActions.addBooking({ agencyId, booking: addBookingDTOAdapter.entityToDTO(booking) })
+          bookingsActions.addBooking({ agencyId, booking: saveBookingDTOAdapter.entityToDTO(booking) })
         );
       });
   }
 
-  public updateMyObject(booking: BookingEntity): void {
+  public updateBooking(booking: SaveBookingEntity): void {
     this.agencyFacade.id$
       .pipe(
         filter((id: number | null): id is number => Boolean(id)),
@@ -60,7 +59,7 @@ export class BookingsFacade {
       )
       .subscribe((agencyId: number) => {
         this.store.dispatch(
-          bookingsActions.updateBooking({ agencyId, booking: bookingsDTOAdapter.entityToDTO(booking) })
+          bookingsActions.updateBooking({ agencyId, booking: saveBookingDTOAdapter.entityToDTO(booking) })
         );
       });
   }

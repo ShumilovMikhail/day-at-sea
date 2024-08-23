@@ -15,7 +15,7 @@ import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
-import { formatDate } from '@utils/functions';
+import { formatDate, stringToDate } from '@utils/functions';
 
 @Component({
   selector: 'ui-forms-calendar',
@@ -28,6 +28,9 @@ import { formatDate } from '@utils/functions';
 })
 export class UiFormsCalendarComponent implements OnInit {
   @Input({ required: true }) control!: FormControl;
+  @Input() set initialValue(date: string) {
+    this.value = stringToDate(date);
+  }
   @Input() label: string | undefined;
   @Input() required: boolean | undefined;
   @Input() placeholder: string | undefined;
@@ -36,6 +39,7 @@ export class UiFormsCalendarComponent implements OnInit {
   @Input() absoluteError = false;
   private readonly changeDetectionRef = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
+  public value: Date | null = null;
 
   ngOnInit(): void {
     this.control.statusChanges

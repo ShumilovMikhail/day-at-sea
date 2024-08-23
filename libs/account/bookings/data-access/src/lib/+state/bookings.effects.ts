@@ -5,7 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ApiService, ResponseError } from '@http';
 import { bookingsActions } from './bookings.actions';
-import { AddBookingDTO, BookingDTO, BookingEntity } from '../types/bookings.models';
+import { SaveBookingDTO, BookingDTO, BookingEntity } from '../types/bookings.models';
 import { bookingsDTOAdapter } from './bookings-dto.adapter';
 
 export const getBookingsEffect$ = createEffect(
@@ -36,7 +36,7 @@ export const addBookingEffect$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) =>
     actions$.pipe(
       ofType(bookingsActions.addBooking),
-      switchMap(({ agencyId, booking }: { agencyId: number; booking: AddBookingDTO }) => {
+      switchMap(({ agencyId, booking }: { agencyId: number; booking: SaveBookingDTO }) => {
         return apiService.post<BookingDTO>(`agencies/${agencyId}/bookings`, booking).pipe(
           map((bookingDTO: BookingDTO) => {
             const booking: BookingEntity = bookingsDTOAdapter.dtoToEntity(bookingDTO);
@@ -64,7 +64,7 @@ export const updateBookingEffect$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) =>
     actions$.pipe(
       ofType(bookingsActions.updateBooking),
-      switchMap(({ agencyId, booking }: { agencyId: number; booking: BookingDTO }) => {
+      switchMap(({ agencyId, booking }: { agencyId: number; booking: SaveBookingDTO }) => {
         return apiService.put<BookingDTO>(`agencies/${agencyId}/bookings`, booking).pipe(
           map((bookingDTO: BookingDTO) => {
             const booking: BookingEntity = bookingsDTOAdapter.dtoToEntity(bookingDTO);
@@ -75,4 +75,15 @@ export const updateBookingEffect$ = createEffect(
       })
     ),
   { functional: true }
+);
+
+export const updateBookingSuccessEffect$ = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) =>
+    actions$.pipe(
+      ofType(bookingsActions.updateBookingSuccess),
+      tap(() => {
+        router.navigateByUrl('/account/bookings');
+      })
+    ),
+  { functional: true, dispatch: false }
 );
