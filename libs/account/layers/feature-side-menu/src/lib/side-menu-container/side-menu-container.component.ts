@@ -26,7 +26,7 @@ import { NavigationEnd, Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideMenuContainerComponent implements OnInit {
-  @Input({ required: true }) isMobileOpen!: boolean;
+  @Input({ required: true }) isModalOpen!: boolean;
   private readonly router = inject(Router);
   private readonly location = inject(Location);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);

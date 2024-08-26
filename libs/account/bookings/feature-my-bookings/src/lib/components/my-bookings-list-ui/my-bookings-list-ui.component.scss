@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .id {
   width: 100px;
@@ -32,6 +33,14 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.link-id {
+  color: $primary;
+  transition: 0.2s color ease-in;
+  &:hover {
+    color: $blueLight;
+  }
 }
 
 .bookings-item {
@@ -91,4 +100,10 @@
     padding: 20px;
     height: auto;
   }
+}
+
+.change-button {
+  @include button-secondary();
+  width: 100%;
+  padding: 5px;
 }

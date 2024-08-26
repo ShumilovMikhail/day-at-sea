@@ -6,7 +6,7 @@
       [control]="info.departure"
       [errors]="
         info.departure.errors
-          ? [(info.departure.errors?.['departureBeforeArrival'] ? 'Выезд не может произойти раньше,чем въезд' : '')]
+          ? [info.departure.errors['departureBeforeArrival'] ? 'Выезд не может произойти раньше,чем въезд' : '']
           : undefined
       "
       [label]="'Выезд'"
