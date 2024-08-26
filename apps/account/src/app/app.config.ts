@@ -1,7 +1,7 @@
 import { ApplicationConfig, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-import { provideStore, provideState } from '@ngrx/store';
+import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 
@@ -17,6 +17,7 @@ import { addObjectInterceptor } from '@account/add-object/data-access';
 import { myObjectsEffects, myObjectsFeature } from '@account/my-objects/data-access';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { bookingEffects, bookingsFeature } from '@account/bookings/data-access';
+import { clientsFeature } from '@account/clients/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +27,7 @@ export const appConfig: ApplicationConfig = {
       [agencyFeature.name]: agencyFeature.reducer,
       [myObjectsFeature.name]: myObjectsFeature.reducer,
       [bookingsFeature.name]: bookingsFeature.reducer,
+      [clientsFeature.name]: clientsFeature.reducer,
     }),
     provideStoreDevtools({
       maxAge: 25,
