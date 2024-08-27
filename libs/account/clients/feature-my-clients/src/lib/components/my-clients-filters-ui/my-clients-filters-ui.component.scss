@@ -1,0 +1,85 @@
+@import 'mixins';
+@import 'variables';
+
+.filters-mobile-button {
+  display: flex;
+  gap: 8.5px;
+  align-items: center;
+  background-color: #ecf9fc;
+  border: 1px solid $blueLight;
+  padding: 5px 12px;
+  width: 100px;
+  border-radius: 17px;
+  font-size: 12px;
+  transition: 0.2s all ease-in;
+  cursor: pointer;
+  &:hover {
+    background-color: $blueLight;
+  }
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  .full-name {
+    ui-forms-input {
+      width: 240px;
+    }
+    margin-right: 5px;
+  }
+  .content {
+    display: flex;
+    gap: 5px;
+    .is-vip {
+      min-width: 230px;
+      max-width: 350px;
+    }
+    .object-title {
+      width: 160px;
+    }
+    .bookings-count {
+      width: 165px;
+    }
+    .reset {
+      @include button-primary();
+      width: 140px;
+      height: 40px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    padding: 5px;
+    flex-direction: column;
+    .title {
+      ui-forms-input {
+        width: 240px;
+      }
+      margin-right: 0;
+    }
+    .content {
+      flex-direction: column;
+      gap: 5px;
+      .source {
+        width: 100%;
+        max-width: none;
+      }
+      .amount {
+        width: 100%;
+        max-width: none;
+      }
+      .status {
+        width: 100%;
+        max-width: none;
+      }
+      .reset {
+        width: 100%;
+      }
+    }
+  }
+}

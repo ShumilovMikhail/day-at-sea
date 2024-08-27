@@ -1,0 +1,54 @@
+<ng-container
+  *ngrxLet="{
+    clients: clients$,
+    titles: objectsTitle$
+  } as variables"
+>
+  @if (variables.clients) {
+  <div class="my-clients" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
+    @if (!isMobile) {
+    <h1>Мои Клиенты</h1>
+    <div class="excel">
+      <ui-common-write-excel (clickEvent)="onExportXLSX()"></ui-common-write-excel>
+    </div>
+    <div class="filters">
+      @if (variables.titles) {
+      <account-my-clients-filters-ui
+        [isMobile]="isMobile"
+        [objectsTitle]="variables.titles"
+        (changeFiltersEvent)="onChangeFilters($event)"
+      ></account-my-clients-filters-ui>
+      }
+    </div>
+    } @else {
+    <div class="top">
+      <h1>Мои брони</h1>
+      @if (variables.titles) {
+      <div class="filters">
+        <account-my-clients-filters-ui
+          [isMobile]="isMobile"
+          [objectsTitle]="variables.titles"
+          (changeFiltersEvent)="onChangeFilters($event)"
+        ></account-my-clients-filters-ui>
+      </div>
+      }
+    </div>
+    <div class="excel">
+      <ui-common-write-excel></ui-common-write-excel>
+    </div>
+    }
+    <div class="list">
+      <account-my-clients-list-ui
+        [clients]="variables.clients"
+        [isMobile]="isMobile"
+        (vipChangeEvent)="onChangeVip($event)"
+      ></account-my-clients-list-ui>
+    </div>
+  </div>
+
+  }@else {
+  <div class="loader-container">
+    <ui-indicators-loader></ui-indicators-loader>
+  </div>
+  }
+</ng-container>

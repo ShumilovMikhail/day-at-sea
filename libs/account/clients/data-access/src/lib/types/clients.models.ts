@@ -4,6 +4,9 @@ export interface ClientDTO {
   is_vip: boolean;
   phone: string;
   email: string;
+  bookings_count: number;
+  total_amount: number;
+  bookings: BookingHistoryItemDTO[];
 }
 
 export interface ClientEntity {
@@ -12,6 +15,9 @@ export interface ClientEntity {
   isVip: boolean;
   phone: string;
   email: string;
+  bookingsCount: number;
+  totalAmount: number;
+  bookings: BookingHistoryItemEntity[];
 }
 
 export interface BookingHistoryItemDTO {

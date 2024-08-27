@@ -1,0 +1,47 @@
+<div class="filters-container">
+  @if (!isMobile) {
+  <ng-container *ngTemplateOutlet="filters"></ng-container>
+  } @else {
+  <button class="filters-mobile-button" (click)="onIsModalChange(true)">
+    <img src="/assets/images/icons/filter-icon.svg" alt="filter-icon" />
+    Фильтры
+  </button>
+
+  @if (isModalOpen) {
+  <layers-modal (closeDialogBoxEvent)="onIsModalChange(false)">
+    <ng-container *ngTemplateOutlet="filters"></ng-container>
+  </layers-modal>
+  } }
+</div>
+
+<ng-template #filters>
+  <div class="filters">
+    <div class="full-name">
+      <ui-forms-input [control]="form.get('fullName')! | formControl" [placeholder]="'Поиск по ФИО'"></ui-forms-input>
+    </div>
+    <div class="content">
+      <!-- source -->
+      <ui-forms-select
+        class="is-vip"
+        [control]="form.get('isVip')! | formControl"
+        [placeholder]="'VIP'"
+        [options]="['', 'VIP', 'Обычные']"
+        [selectedOption]="form.get('isVip')!.value"
+      ></ui-forms-select>
+      <ui-forms-select
+        class="object-title"
+        [control]="form.get('objectTitle')! | formControl"
+        [placeholder]="'Объекты'"
+        [options]="objectsTitle"
+        [selectedOption]="form.get('objectTitle')!.value"
+      ></ui-forms-select>
+      <ui-forms-counter
+        class="bookings-count"
+        [control]="form.get('bookingsCount')! | formControl"
+        [count]="bookingsCount"
+        [minCount]="0"
+      ></ui-forms-counter>
+      <button class="reset" (click)="onReset()">Сбросить</button>
+    </div>
+  </div>
+</ng-template>

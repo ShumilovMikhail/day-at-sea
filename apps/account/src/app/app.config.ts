@@ -17,11 +17,11 @@ import { addObjectInterceptor } from '@account/add-object/data-access';
 import { myObjectsEffects, myObjectsFeature } from '@account/my-objects/data-access';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { bookingEffects, bookingsFeature } from '@account/bookings/data-access';
-import { clientsFeature } from '@account/clients/data-access';
+import { clientsEffects, clientsFeature } from '@account/clients/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(authEffects, agencyEffects, myObjectsEffects, bookingEffects),
+    provideEffects(authEffects, agencyEffects, myObjectsEffects, bookingEffects, clientsEffects),
     provideStore({
       [authFeature.name]: authFeature.reducer,
       [agencyFeature.name]: agencyFeature.reducer,

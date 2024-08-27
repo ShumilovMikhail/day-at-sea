@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { combineLatestWith, filter, map, Observable, take, tap } from 'rxjs';
+import { combineLatestWith, filter, map, Observable, take, tap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AgencyFacade } from '@account/data-access-agency';
@@ -37,17 +37,6 @@ export class ClientsFacade {
       return clients;
     })
   );
-
-  public getClientBookingHistory(clientId: number): void {
-    this.agencyFacade.id$
-      .pipe(
-        filter((id: number | null): id is number => Boolean(id)),
-        take(1)
-      )
-      .subscribe((agencyId: number) => {
-        this.store.dispatch(clientsActions.getClientBookingHistory({ agencyId, clientId }));
-      });
-  }
 
   public updateClient(client: ClientEntity): void {
     this.agencyFacade.id$

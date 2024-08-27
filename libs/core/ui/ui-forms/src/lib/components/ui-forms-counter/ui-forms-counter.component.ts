@@ -14,6 +14,7 @@ export class UiFormsCounterComponent implements OnInit {
   @Input({ required: true }) control!: FormControl;
   @Input({ required: true }) set count(count: number | string) {
     if (!this.disabled && !isNaN(+count)) {
+      console.log('change');
       this.countModel = +count;
     }
   }

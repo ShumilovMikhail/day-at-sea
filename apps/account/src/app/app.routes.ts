@@ -109,6 +109,10 @@ export const appRoutes: Route[] = [
         loadComponent: () =>
           import('@account/bookings/feature-my-bookings').then((c) => c.MyBookingsContainerComponent),
       },
+      {
+        path: 'clients',
+        loadComponent: () => import('@account/clients/feature-my-clients').then((c) => c.MyClientsContainerComponent),
+      },
     ],
   },
 ];

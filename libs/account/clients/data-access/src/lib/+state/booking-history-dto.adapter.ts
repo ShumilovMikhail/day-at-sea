@@ -2,6 +2,7 @@ import { BookingHistoryItemDTO, BookingHistoryItemEntity } from '../types/client
 
 export interface BookingHistoryDTOAdapter {
   dtoToEntity: (bookingHistoryItem: BookingHistoryItemDTO) => BookingHistoryItemEntity;
+  entityToDTO: (bookingHistoryItem: BookingHistoryItemEntity) => BookingHistoryItemDTO;
 }
 
 export const bookingHistoryDTOAdapter = {
@@ -10,6 +11,16 @@ export const bookingHistoryDTOAdapter = {
       arrival: bookingHistoryItem.arrival,
       departure: bookingHistoryItem.departure,
       agencyObjectId: bookingHistoryItem.agency_object_id,
+      amount: bookingHistoryItem.amount,
+      source: bookingHistoryItem.source,
+      note: bookingHistoryItem.note,
+    };
+  },
+  entityToDTO: (bookingHistoryItem: BookingHistoryItemEntity): BookingHistoryItemDTO => {
+    return {
+      arrival: bookingHistoryItem.arrival,
+      departure: bookingHistoryItem.departure,
+      agency_object_id: bookingHistoryItem.agencyObjectId,
       amount: bookingHistoryItem.amount,
       source: bookingHistoryItem.source,
       note: bookingHistoryItem.note,

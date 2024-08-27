@@ -22,5 +22,3 @@ export const selectClientsLoading = createSelector(
 export const selectClients = createSelector(selectClientsState, (state: ClientsState) =>
   clientsEntitiesSelectors.selectAll(state)
 );
-
-export const selectBookingHistory = createSelector(selectClientsState, (state: ClientsState) => state.bookingHistory);
