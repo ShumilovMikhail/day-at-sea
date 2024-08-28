@@ -29,6 +29,14 @@
   }
 }
 
+.bookings-count-cell {
+  transition: 0.2s all ease-in;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(60, 186, 222, 0.3);
+  }
+}
+
 .star-active {
   fill: $primary;
 }
@@ -46,8 +54,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 5px;
     background-color: transparent;
+    gap: 5px;
     padding: 10px;
     border-radius: 10px;
     h3 {
@@ -76,6 +84,8 @@
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
   }
   &__list li {
     span {
@@ -85,14 +95,14 @@
 }
 
 .accordion-open {
-  .bookings-item__header {
+  .clients-item__header {
     border-bottom: 1px solid $blueLight;
     img {
       transform: rotate(0deg);
     }
   }
 
-  .bookings-item__content {
+  .clients-item__content {
     padding: 20px;
     height: auto;
   }
@@ -100,6 +110,12 @@
 
 .change-button {
   @include button-secondary();
+  width: 100%;
+  padding: 5px;
+}
+
+.booking-history-button {
+  @include button-primary();
   width: 100%;
   padding: 5px;
 }

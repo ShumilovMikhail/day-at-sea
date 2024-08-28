@@ -10,7 +10,7 @@ import { MyClientsService } from '../../services/my-clients.service';
 import { MyClientsListUiComponent } from '../my-clients-list-ui/my-clients-list-ui.component';
 import { FilesService } from '@utils/files';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
-import { ClientVM } from '../../types/clients.models';
+import { BookingHistoryItemVM, ClientVM } from '../../types/clients.models';
 import { MyClientsFilters } from '../../types/filters.models';
 import { clientEntityAdapter } from '../../utils/client-entity.adapter';
 import { MyClientsBookingHistoryUiComponent } from '../my-clients-booking-history-ui/my-clients-booking-history-ui.component';
@@ -37,11 +37,12 @@ export class MyClientsContainerComponent {
   private readonly filesService = inject(FilesService);
   private readonly myClientsService = inject(MyClientsService);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  public readonly clients$: Observable<ClientVM[]> = this.myClientsService.clientsWithFilters$.pipe(shareReplay(1));
+  public readonly clients$: Observable<ClientVM[]> = this.myClientsService.clientsWithFilters$;
   public readonly objectsTitle$: Observable<string[]> = this.myClientsService.objectsTitle$.pipe(
     map((titles) => ['', ...titles])
   );
   public isMobile = false;
+  public selectedBookingHistory: BookingHistoryItemVM[] | null = null;
 
   public onIsMobileChange(isMobile: boolean): void {
     if (this.isMobile !== isMobile) {
@@ -56,7 +57,6 @@ export class MyClientsContainerComponent {
 
   public onChangeVip(id: number): void {
     this.clients$.pipe(take(1)).subscribe((clients) => {
-      console.log(1);
       const client = clients.find((client) => client.id === id);
       if (!client) {
         throw Error('client change vip: client not found');
@@ -68,7 +68,21 @@ export class MyClientsContainerComponent {
     });
   }
 
-  onExportXLSX(): void {
+  public onShowClientBookingHistory(id: number): void {
+    this.clients$.pipe(take(1)).subscribe((clients) => {
+      const client = clients.find((client) => client.id === id);
+      if (!client) {
+        throw Error('onShowClientBookingHistory: client not found');
+      }
+      this.selectedBookingHistory = client.bookings;
+    });
+  }
+
+  public onCloseShowClientBookingHistory(): void {
+    this.selectedBookingHistory = null;
+  }
+
+  public onExportXLSX(): void {
     this.clients$.pipe(take(1)).subscribe((tableList: ClientVM[]) => {
       const tableExcelData = clientEntityAdapter.vmToXLSXFileData(tableList);
       this.filesService.createFile(tableExcelData, 'xlsx', {

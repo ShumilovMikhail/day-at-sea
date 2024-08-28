@@ -25,6 +25,17 @@
   background-color: $white;
   z-index: 1000;
   border-radius: 20px;
+  max-height: 90%;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  display: none;
 }
 
 .cross {

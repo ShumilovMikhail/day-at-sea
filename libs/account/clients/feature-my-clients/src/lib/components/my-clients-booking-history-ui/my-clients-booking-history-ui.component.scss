@@ -1,0 +1,99 @@
+@import 'variables';
+@import 'mixins';
+
+.dates {
+  width: 115px;
+}
+.days-count {
+  width: 70px;
+}
+.object {
+  width: 195px;
+}
+.amount {
+  width: 130px;
+}
+.status {
+  width: 90px;
+}
+.source {
+  width: 90px;
+}
+.note {
+  width: 175px;
+}
+
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.booking-item {
+  border: 1px solid $blueLight;
+  border-radius: 10px;
+  width: 250px;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    h3 {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    img {
+      display: block;
+      transform: rotate(180deg);
+      transition: 0.15s ease-in transform;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    height: 0;
+    padding: 0;
+    margin: 0;
+  }
+  &__inner {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+  &__list li {
+    span {
+      font-weight: 700;
+    }
+  }
+}
+
+.accordion-open {
+  .booking-item__header {
+    border-bottom: 1px solid $blueLight;
+    img {
+      transform: rotate(0deg);
+    }
+  }
+
+  .booking-item__content {
+    padding: 20px;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .vip {
+    display: flex;
+    gap: 5px;
+  }
+}

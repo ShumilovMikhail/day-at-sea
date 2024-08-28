@@ -1,1 +1,78 @@
-<layers-modal></layers-modal>
+<layers-modal (closeDialogBoxEvent)="onClose()">
+  @if (!isMobile) {
+  <table class="table booking-table">
+    <tr>
+      <th class="dates">Даты</th>
+      <th class="days-count">Сутки</th>
+      <th class="object">Объект</th>
+      <th class="amount">Сумма</th>
+      <th class="status">Статус</th>
+      <th class="source">Источник</th>
+      <th class="note">Примечание</th>
+    </tr>
+    @for (bookingItem of bookingHistory; track bookingItem) {
+    <tr>
+      <td>{{ bookingItem.arrival }} - {{ bookingItem.departure }}</td>
+      <td>
+        {{ bookingItem.daysCount }}
+      </td>
+      <td>
+        {{ bookingItem.agencyObjectTitle }}
+      </td>
+      <td>
+        {{ bookingItem.amount }}
+      </td>
+      <td>
+        {{ bookingItem.status }}
+      </td>
+      <td>
+        {{ bookingItem.source }}
+      </td>
+      <td>
+        {{ bookingItem.note.length > 35 ? (bookingItem.note | slice : 0 : 35) + '...' : bookingItem.note }}
+      </td>
+    </tr>
+    }
+  </table>
+  } @else {
+  <ul class="booking-list">
+    @for (booking of bookingHistory; track booking) {
+    <ng-container *ngTemplateOutlet="bookingItem; context: { booking }"></ng-container>
+    }
+  </ul>
+  }
+  <ng-template let-booking="booking" #bookingItem>
+    <div class="booking-item" utilsAccordion [buttonToggle]="bookingChangeButton">
+      <div class="booking-item__header">
+        <div class="booking-item__inner">
+          <span>{{ booking.arrival }} - {{ booking.departure }}, {{ booking.daysCount }}</span>
+        </div>
+        <img src="assets/images/icons/arrow-toggle.svg" alt="" #bookingChangeButton />
+      </div>
+      <div class="booking-item__content contacts-content">
+        <ul class="booking-item__list">
+          <li>
+            <span>Объект:</span>
+            <p>{{ booking.agencyObjectTitle }}</p>
+          </li>
+          <li>
+            <span>Сумма:</span>
+            <p>{{ booking.amount }}</p>
+          </li>
+          <li>
+            <span>Статус:</span>
+            <p>{{ booking.status }}</p>
+          </li>
+          <li>
+            <span>Источник:</span>
+            <p>{{ booking.source }}</p>
+          </li>
+          <li>
+            <span>Примечание:</span>
+            <p>{{ booking.note.length > 35 ? (booking.note | slice : 0 : 35) + '...' : booking.note }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-template>
+</layers-modal>

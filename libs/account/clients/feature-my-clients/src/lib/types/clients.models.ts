@@ -6,6 +6,7 @@ export interface BookingHistoryItemVM {
   source: string;
   note: string;
   status: string;
+  daysCount: number;
 }
 
 export interface ClientVM {

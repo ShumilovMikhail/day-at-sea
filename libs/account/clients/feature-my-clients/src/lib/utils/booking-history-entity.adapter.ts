@@ -1,6 +1,7 @@
 import { MyObjectVM } from '@account/my-objects/data-access';
 import { BookingHistoryItemVM } from '../types/clients.models';
 import { BookingHistoryItemEntity } from '@account/clients/data-access';
+import { getDaysCount } from './get-days-count';
 
 export const bookingEntityAdapter = {
   entityToVM: (bookings: BookingHistoryItemEntity[], myObjects: MyObjectVM[]): BookingHistoryItemVM[] => {
@@ -12,6 +13,7 @@ export const bookingEntityAdapter = {
       source: booking.source,
       note: booking.note,
       status: booking.status,
+      daysCount: getDaysCount(booking.arrival, booking.departure),
     }));
   },
 

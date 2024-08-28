@@ -34,7 +34,7 @@
       }
     </div>
     <div class="excel">
-      <ui-common-write-excel></ui-common-write-excel>
+      <ui-common-write-excel (clickEvent)="onExportXLSX()"></ui-common-write-excel>
     </div>
     }
     <div class="list">
@@ -42,12 +42,17 @@
         [clients]="variables.clients"
         [isMobile]="isMobile"
         (vipChangeEvent)="onChangeVip($event)"
+        (showBookingHistoryEvent)="onShowClientBookingHistory($event)"
       ></account-my-clients-list-ui>
     </div>
   </div>
-  <account-my-clients-booking-history-ui></account-my-clients-booking-history-ui>
-
-  }@else {
+  @if (selectedBookingHistory) {
+  <account-my-clients-booking-history-ui
+    [bookingHistory]="selectedBookingHistory"
+    [isMobile]="isMobile"
+    (closeEvent)="onCloseShowClientBookingHistory()"
+  ></account-my-clients-booking-history-ui>
+  } }@else {
   <div class="loader-container">
     <ui-indicators-loader></ui-indicators-loader>
   </div>
