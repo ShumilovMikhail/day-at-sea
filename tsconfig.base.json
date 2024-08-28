@@ -77,6 +77,7 @@
       "@layers": ["libs/core/layers/src/index.ts"],
       "@object/feature-object": ["libs/core/feature-object/src/index.ts"],
       "@storage/data-access-storage": ["libs/core/data-access-storage/src/index.ts"],
+      "@tables/feature-settings-table-view": ["libs/core/feature-settings-table-view/src/index.ts"],
       "@ui/common": ["libs/core/ui/ui-common/src/index.ts"],
       "@ui/forms": ["libs/core/ui/ui-forms/src/index.ts"],
       "@ui/indicators": ["libs/core/ui/ui-indicators/src/index.ts"],
