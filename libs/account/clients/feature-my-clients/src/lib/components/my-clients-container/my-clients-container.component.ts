@@ -13,6 +13,7 @@ import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 import { ClientVM } from '../../types/clients.models';
 import { MyClientsFilters } from '../../types/filters.models';
 import { clientEntityAdapter } from '../../utils/client-entity.adapter';
+import { MyClientsBookingHistoryUiComponent } from '../my-clients-booking-history-ui/my-clients-booking-history-ui.component';
 
 @Component({
   selector: 'account-my-clients-container',
@@ -25,6 +26,7 @@ import { clientEntityAdapter } from '../../utils/client-entity.adapter';
     MyClientsListUiComponent,
     UiIndicatorsLoaderComponent,
     LetDirective,
+    MyClientsBookingHistoryUiComponent,
   ],
   providers: [MyClientsService],
   templateUrl: './my-clients-container.component.html',

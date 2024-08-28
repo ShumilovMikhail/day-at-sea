@@ -11,6 +11,7 @@ export const bookingEntityAdapter = {
       amount: booking.amount,
       source: booking.source,
       note: booking.note,
+      status: booking.status,
     }));
   },
 
@@ -22,19 +23,7 @@ export const bookingEntityAdapter = {
       amount: booking.amount,
       source: booking.source,
       note: booking.note,
+      status: booking.status,
     }));
   },
-  // vmToXLSXFileData: (bookings: BookingVM[]): XLSXFileData => {
-  //   return bookings.map((booking) => ({
-  //     '№ объекта': booking.id,
-  //     Объект: booking.agencyObjectTitle,
-  //     Заезд: booking.arrival,
-  //     Выезд: booking.departure,
-  //     Гостей: booking.guestCount,
-  //     Сумма: booking.amount,
-  //     Примечание: booking.note,
-  //     Источник: booking.source,
-  //     Статус: booking.status,
-  //   }));
-  // },
 };

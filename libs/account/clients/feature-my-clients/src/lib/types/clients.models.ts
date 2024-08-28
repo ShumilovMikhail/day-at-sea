@@ -5,6 +5,7 @@ export interface BookingHistoryItemVM {
   amount: string;
   source: string;
   note: string;
+  status: string;
 }
 
 export interface ClientVM {

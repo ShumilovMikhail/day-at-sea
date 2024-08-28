@@ -14,6 +14,7 @@ export const bookingHistoryDTOAdapter = {
       amount: bookingHistoryItem.amount,
       source: bookingHistoryItem.source,
       note: bookingHistoryItem.note,
+      status: bookingHistoryItem.status,
     };
   },
   entityToDTO: (bookingHistoryItem: BookingHistoryItemEntity): BookingHistoryItemDTO => {
@@ -24,6 +25,7 @@ export const bookingHistoryDTOAdapter = {
       amount: bookingHistoryItem.amount,
       source: bookingHistoryItem.source,
       note: bookingHistoryItem.note,
+      status: bookingHistoryItem.status,
     };
   },
 };

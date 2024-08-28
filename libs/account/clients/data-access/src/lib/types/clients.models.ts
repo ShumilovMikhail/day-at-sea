@@ -26,6 +26,7 @@ export interface BookingHistoryItemDTO {
   agency_object_id: number;
   amount: string;
   source: string;
+  status: string;
   note: string;
 }
 
@@ -35,5 +36,6 @@ export interface BookingHistoryItemEntity {
   agencyObjectId: number;
   amount: string;
   source: string;
+  status: string;
   note: string;
 }
