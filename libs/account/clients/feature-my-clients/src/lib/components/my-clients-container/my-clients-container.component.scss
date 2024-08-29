@@ -1,3 +1,5 @@
+@import 'variables';
+
 :host {
   width: 100%;
 }
@@ -12,10 +14,22 @@
   }
 }
 
-.excel {
+.user-actions {
   display: flex;
   justify-content: right;
   margin-top: 12px;
+  align-items: bottom;
+  gap: 10px;
+}
+
+.settings-button {
+  transition: 0.2s all ease-in;
+  cursor: pointer;
+  &:hover {
+    svg {
+      fill: $primaryHover;
+    }
+  }
 }
 
 .list {
