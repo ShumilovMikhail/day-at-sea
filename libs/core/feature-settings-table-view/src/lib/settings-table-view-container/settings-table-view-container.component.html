@@ -1,0 +1,7 @@
+<div class="settings-table-view">
+  <account-settings-table-view-ui
+    [table]="table"
+    (saveTableSettingsEvent)="onSaveTableSettings($event)"
+  ></account-settings-table-view-ui>
+  <div class="cross" (click)="onCrossClick()"></div>
+</div>

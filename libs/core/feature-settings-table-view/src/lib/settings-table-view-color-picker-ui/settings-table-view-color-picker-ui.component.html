@@ -1,0 +1,27 @@
+<div class="color-picker">
+  <p>Подсветка колонки</p>
+  <button
+    [ngClass]="{
+      active: initialColor === 'white'
+    }"
+    (click)="onPickColorEvent('transparent')"
+  >
+    Не выбрано
+  </button>
+  <ul class="colors-list">
+    @for (color of colors; track $index) {
+    <li class="colors-item">
+      <div
+        class="color"
+        [ngClass]="{
+          active: color === initialColor
+        }"
+        [ngStyle]="{
+          backgroundColor: color
+        }"
+        (click)="onPickColorEvent(color)"
+      ></div>
+    </li>
+    }
+  </ul>
+</div>

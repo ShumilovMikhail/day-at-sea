@@ -1,0 +1,23 @@
+@import 'variables';
+
+:host {
+  position: absolute;
+  bottom: 5%;
+  right: 2%;
+  z-index: 2;
+}
+
+.settings-table-view {
+  width: 400px;
+  padding: 20px 30px 50px 30px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: $white;
+  position: relative;
+}
+
+.cross {
+  position: absolute;
+  top: 5%;
+  right: 4%;
+}

@@ -1,0 +1,77 @@
+@import 'mixins';
+@import 'variables';
+
+h2 {
+  font-size: 20px;
+}
+
+.columns-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+}
+
+.columns-item {
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgba(32, 119, 202, 0.1);
+  padding: 5px 8px;
+  display: flex;
+  position: relative;
+  gap: 10px;
+  align-items: center;
+}
+.content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.save-button {
+  margin-top: 15px;
+  @include button-secondary();
+  width: 100%;
+  padding: 8px;
+}
+
+.color-block {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.arrows {
+  position: relative;
+  height: 30px;
+  width: 10px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 7px solid transparent;
+  transition: 0.2s all ease-in;
+  cursor: pointer;
+}
+
+.arrow-up {
+  border-bottom: 7px solid $primary;
+  &:hover {
+    border-bottom: 7px solid $primaryHover;
+  }
+  margin-top: -10px;
+}
+
+.arrow-down {
+  border-top: 7px solid $primary;
+  margin-top: 10px;
+  &:hover {
+    border-top: 7px solid $primaryHover;
+  }
+}

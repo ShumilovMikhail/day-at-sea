@@ -1,0 +1,46 @@
+<div class="table-settings">
+  <h2>Настройки вида таблицы</h2>
+  <ul class="columns-list">
+    @for (column of sortedTable; track column) {
+    <li class="columns-item">
+      <div class="content">
+        <label class="checkbox">
+          <input
+            type="checkbox"
+            #checkbox
+            [checked]="column.enabled"
+            (change)="onChangeColumn(column.position, { enabled: checkbox.checked })"
+          />
+          <div></div>
+          {{ column.title }}
+        </label>
+        <div class="color">
+          <div
+            class="color-block"
+            [ngStyle]="{
+              backgroundColor: column.color === 'transparent' ? 'white' : column.color
+            }"
+            (click)="onShowColorPicker(column.position)"
+          ></div>
+          @if (positionColorPicker && positionColorPicker === column.position) {
+          <account-settings-table-view-color-picker-ui
+            utilsClickOutside
+            [initialColor]="column.color"
+            (clickOutsideEvent)="onCloseColorPicker()"
+            (pickColorEvent)="onChangeColumn(column.position, { color: $event })"
+          ></account-settings-table-view-color-picker-ui>
+          }
+        </div>
+      </div>
+      <div class="arrows">
+        @if (column.position > 1) {
+        <div class="arrow arrow-up" (click)="onChangePosition(column.position, column.position - 1)"></div>
+        } @if (column.position < sortedTable.length) {
+        <div class="arrow arrow-down" (click)="onChangePosition(column.position, column.position + 1)"></div>
+        }
+      </div>
+    </li>
+    }
+  </ul>
+  <button class="save-button" (click)="onSaveTableSettings()">Сохранить настройки</button>
+</div>

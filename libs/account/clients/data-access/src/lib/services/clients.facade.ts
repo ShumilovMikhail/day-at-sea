@@ -26,15 +26,16 @@ export class ClientsFacade {
   public readonly error$: Observable<ResponseError | null> = this.store.select(selectClientsError);
   public readonly loading$: Observable<boolean> = this.store.select(selectClientsLoading);
   public readonly clients$: Observable<ClientEntity[]> = this.store.select(selectClients).pipe(
-    combineLatestWith(this.clientsLoaded$, this.agencyFacade.id$),
-    tap(([clients, isLoaded, agencyId]: [ClientEntity[], boolean, number | null]) => {
-      if (!isLoaded && agencyId) {
-        this.store.dispatch(clientsActions.getClients({ agencyId }));
+    combineLatestWith(this.agencyFacade.id$),
+    withLatestFrom(this.clientsLoaded$),
+    tap(([args, isLoaded]: [[ClientEntity[], number | null], boolean]) => {
+      if (!isLoaded && args[1]) {
+        this.store.dispatch(clientsActions.getClients({ agencyId: args[1] }));
       }
     }),
-    filter(([clients, isLoaded, agencyId]: [ClientEntity[], boolean, number | null]) => isLoaded),
-    map(([clients, isLoaded, agencyId]: [ClientEntity[], boolean, number | null]) => {
-      return clients;
+    filter(([args, isLoaded]: [[ClientEntity[], number | null], boolean]) => isLoaded),
+    map(([args, isLoaded]: [[ClientEntity[], number | null], boolean]) => {
+      return args[0];
     })
   );
 

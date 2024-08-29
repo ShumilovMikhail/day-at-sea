@@ -1,0 +1,55 @@
+:host {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translate(0, 100%);
+  z-index: 3;
+}
+
+.color-picker {
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 15px 25px;
+  background-color: #fff;
+  width: 168px;
+}
+
+p {
+  font-size: 13px;
+}
+button {
+  margin-top: 10px;
+  padding: 3px;
+  width: 100%;
+  color: rgba(48, 48, 48, 0.1);
+  border: 1px solid rgba(48, 48, 48, 0.1);
+  background-color: transparent;
+  transition: 0.2s all ease;
+  cursor: pointer;
+  &:hover {
+    color: rgba(48, 48, 48);
+    border: 1px solid rgba(48, 48, 48);
+  }
+  &.active {
+    color: rgba(48, 48, 48);
+    border: 1px solid rgba(48, 48, 48);
+  }
+}
+
+.colors-list {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 16px);
+  justify-content: space-between;
+  gap: 5px;
+  width: 100%;
+}
+.color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  &.active {
+    border: 1px solid black;
+  }
+}
