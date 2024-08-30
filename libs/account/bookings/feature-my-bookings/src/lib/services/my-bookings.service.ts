@@ -6,6 +6,7 @@ import { MyObjectsFacade, MyObjectVM } from '@account/my-objects/data-access';
 import { BookingsStatusFilter, bookingsStatusFilter } from '../utils/bookings-status-filter';
 import { BookingVM } from '../types/bookings.models';
 import { bookingEntityAdapter } from '../utils/booking-entity.adapter';
+import { ClientEntity, ClientsFacade } from '@account/clients/data-access';
 
 const filtersFunctions = {
   status: (bookings: BookingVM[], { status }: { status: string }) =>
@@ -20,19 +21,21 @@ const filtersFunctions = {
 
 @Injectable()
 export class MyBookingsService {
+  private readonly clientsFacade = inject(ClientsFacade);
   private readonly bookingsFacade = inject(BookingsFacade);
   private readonly myObjectsFacade = inject(MyObjectsFacade);
   private readonly bookingsEntity$: Observable<BookingEntity[]> = this.bookingsFacade.bookings$;
   private readonly filters$: Subject<MyBookingsFilters | null> = new BehaviorSubject<MyBookingsFilters | null>(null);
 
   public readonly bookingsWithFilters$ = combineLatest([this.bookingsEntity$, this.filters$]).pipe(
-    combineLatestWith(this.myObjectsFacade.myObjectsVM$),
+    combineLatestWith(this.myObjectsFacade.myObjectsVM$, this.clientsFacade.clients$),
     map(
-      ([[bookings, filters], myObjects]: [[BookingEntity[], MyBookingsFilters | null], MyObjectVM[]]): [
-        BookingVM[],
-        MyBookingsFilters | null
-      ] => {
-        return [bookingEntityAdapter.entityToVM(bookings, myObjects), filters];
+      ([[bookings, filters], myObjects, clients]: [
+        [BookingEntity[], MyBookingsFilters | null],
+        MyObjectVM[],
+        ClientEntity[]
+      ]): [BookingVM[], MyBookingsFilters | null] => {
+        return [bookingEntityAdapter.entityToVM(bookings, myObjects, clients), filters];
       }
     ),
     map(([bookings, filters]: [BookingVM[], MyBookingsFilters | null]) => {

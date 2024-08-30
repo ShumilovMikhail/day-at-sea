@@ -1,5 +1,6 @@
 export interface BookingVM {
   id: number;
+  client: string;
   agencyObjectTitle: string;
   arrival: string;
   departure: string;

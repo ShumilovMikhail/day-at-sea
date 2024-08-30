@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 import { AccordionDirective } from '@utils/directives';
-import { RouterLink } from '@angular/router';
 import { ClientVM } from '../../types/clients.models';
 import { TableColumn } from '@tables/feature-settings-table-view';
 

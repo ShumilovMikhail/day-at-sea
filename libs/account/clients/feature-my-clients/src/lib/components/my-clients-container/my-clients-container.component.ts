@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { map, Observable, shareReplay, take } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { LetDirective } from '@ngrx/component';
 
 import { MyClientsFiltersUiComponent } from '../my-clients-filters-ui/my-clients-filters-ui.component';

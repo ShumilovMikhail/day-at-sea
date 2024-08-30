@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { combineLatestWith, filter, map, Observable, take, tap } from 'rxjs';
+import { combineLatestWith, filter, map, Observable, take, tap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AgencyFacade } from '@account/data-access-agency';
@@ -26,14 +26,15 @@ export class BookingsFacade {
   public readonly error$: Observable<ResponseError | null> = this.store.select(selectBookingsError);
   public readonly loading$: Observable<boolean> = this.store.select(selectBookingsLoading);
   public readonly bookings$: Observable<BookingEntity[]> = this.store.select(selectBookings).pipe(
-    combineLatestWith(this.bookingsLoaded$, this.agencyFacade.id$),
-    tap(([bookings, isLoaded, agencyId]: [BookingEntity[], boolean, number | null]) => {
+    combineLatestWith(this.agencyFacade.id$),
+    withLatestFrom(this.bookingsLoaded$),
+    tap(([[bookings, agencyId], isLoaded]: [[BookingEntity[], number | null], boolean]) => {
       if (!isLoaded && agencyId) {
         this.store.dispatch(bookingsActions.getBookings({ agencyId }));
       }
     }),
-    filter(([bookings, isLoaded, agencyId]: [BookingEntity[], boolean, number | null]) => isLoaded),
-    map(([bookings, isLoaded, agencyId]: [BookingEntity[], boolean, number | null]) => {
+    filter(([[bookings, agencyId], isLoaded]: [[BookingEntity[], number | null], boolean]) => isLoaded),
+    map(([[bookings, agencyId], isLoaded]: [[BookingEntity[], number | null], boolean]) => {
       return bookings;
     })
   );

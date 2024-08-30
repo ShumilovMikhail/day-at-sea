@@ -3,6 +3,7 @@
   <tr>
     <th class="id">№ брони</th>
     <th class="object">Объект</th>
+    <th class="client">Клиент</th>
     <th class="arrival">Заезд</th>
     <th class="departure">Выезд</th>
     <th class="guest">Гостей</th>
@@ -17,6 +18,7 @@
       <a class="link-id" [routerLink]="['update', booking.id]">{{ booking.id }}</a>
     </td>
     <td>{{ booking.agencyObjectTitle }}</td>
+    <td>{{ booking.client }}</td>
     <td>{{ booking.arrival }}</td>
     <td>{{ booking.departure }}</td>
     <td>{{ booking.guestCount }}</td>
@@ -47,6 +49,10 @@
     </div>
     <div class="bookings-item__content contacts-content">
       <ul class="bookings-item__list">
+        <li>
+          <span>Клиент:</span>
+          <p>{{ booking.client }}</p>
+        </li>
         <li>
           <span>Гостей:</span>
           <p>{{ booking.guestCount }}</p>
