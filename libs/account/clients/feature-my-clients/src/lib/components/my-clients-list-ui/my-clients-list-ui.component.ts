@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -14,14 +25,15 @@ import { TableColumn } from '@tables/feature-settings-table-view';
   styleUrl: './my-clients-list-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyClientsListUiComponent {
+export class MyClientsListUiComponent implements AfterViewInit {
   @Output() vipChangeEvent = new EventEmitter<number>();
   @Output() showBookingHistoryEvent = new EventEmitter<number>();
   @Input({ required: true }) tableSettings!: TableColumn[];
   @Input({ required: true }) clients!: ClientVM[];
   @Input() isMobile = false;
-  @ViewChild('isVip', { read: TemplateRef }) isVip!: TemplateRef<HTMLElement> | null;
-  @ViewChild('bookingsCount', { read: TemplateRef }) bookingsCount!: TemplateRef<HTMLElement> | null;
+  @ViewChild('isVip', { read: TemplateRef, static: false }) isVip!: TemplateRef<HTMLElement> | null;
+  @ViewChild('bookingsCount', { read: TemplateRef, static: false }) bookingsCount!: TemplateRef<HTMLElement> | null;
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   public onVipChange(id: number): void {
     this.vipChangeEvent.emit(id);
@@ -29,5 +41,10 @@ export class MyClientsListUiComponent {
 
   public onShowBookingHistory(id: number): void {
     this.showBookingHistoryEvent.emit(id);
+  }
+
+  ngAfterViewInit(): void {
+    console.log(1);
+    this.changeDetectorRef.detectChanges();
   }
 }

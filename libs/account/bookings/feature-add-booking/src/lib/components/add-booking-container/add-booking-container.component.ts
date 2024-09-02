@@ -18,6 +18,8 @@ import { SaveBookingEntity, BookingsFacade } from '@account/bookings/data-access
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 import { AddBookingInstalmentsUiComponent } from '../add-booking-instalments-ui/add-booking-instalments-ui.component';
 import { AddBookingAddInstalmentUiComponent } from '../add-booking-add-instalment-ui/add-booking-add-instalment-ui.component';
+import { PickClientContainerComponent } from '@account/clients/feature-pick-client';
+import { ClientEntity } from '@account/clients/data-access';
 
 @Component({
   selector: 'account-add-booking-container',
@@ -35,6 +37,7 @@ import { AddBookingAddInstalmentUiComponent } from '../add-booking-add-instalmen
     AddBookingInstalmentsUiComponent,
     AddBookingAddInstalmentUiComponent,
     RouterLink,
+    PickClientContainerComponent,
   ],
   templateUrl: './add-booking-container.component.html',
   styleUrl: './add-booking-container.component.scss',
@@ -71,6 +74,7 @@ export class AddBookingContainerComponent implements OnInit {
   );
   public readonly loading$: Observable<boolean> = this.bookingsFacade.loading$;
   public modalOpen = false;
+  public selectedClientId: number | null = null;
 
   ngOnInit(): void {
     this.form.get('departure')?.addValidators(departureDateValidator(this.form.get('arrival')!));
@@ -82,10 +86,15 @@ export class AddBookingContainerComponent implements OnInit {
     }
     this.myObjectsFacade.myObjectsVM$.pipe(take(1)).subscribe((myObjects) => {
       const booking = this.form.value;
+
       const agencyObject = myObjects.find((myObject) => myObject.title === booking.agencyObjectTitle);
       if (agencyObject) {
         delete booking['agencyObjectTitle'];
-        this.bookingsFacade.addBooking({ ...this.form.value, agencyObjectId: agencyObject.id } as SaveBookingEntity);
+        this.bookingsFacade.addBooking({
+          ...this.form.value,
+          agencyObjectId: agencyObject.id,
+          client: this.selectedClientId ? +this.selectedClientId : booking.client,
+        } as SaveBookingEntity);
       }
     });
   }
@@ -103,6 +112,28 @@ export class AddBookingContainerComponent implements OnInit {
   public onDeleteInstalment(index: number): void {
     (this.form.get('instalments') as FormArray).removeAt(index);
     this.calcPaid();
+  }
+
+  public onPickClient(client: ClientEntity): void {
+    this.form.patchValue({
+      client: {
+        fullName: client.fullName,
+        phone: client.phone,
+        email: client.email,
+      },
+    });
+    this.selectedClientId = client.id;
+  }
+
+  public onResetClient(): void {
+    this.selectedClientId = null;
+    this.form.patchValue({
+      client: {
+        fullName: '',
+        phone: '',
+        email: '',
+      },
+    });
   }
 
   private calcPaid(): void {

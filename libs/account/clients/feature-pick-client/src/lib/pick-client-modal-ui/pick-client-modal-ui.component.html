@@ -1,0 +1,48 @@
+<layers-modal (closeDialogBoxEvent)="onClose()">
+  @if (!isMobile) {
+  <table class="table">
+    <tr>
+      <th class="id">ID клиента</th>
+      <th class="fullName">ФИО клиента</th>
+      <th class="phone">Телефон</th>
+      <th class="email">Email</th>
+    </tr>
+    @for (client of clients; track $index) {
+    <tr class="client-item" (click)="onPickClient(client.id)">
+      <td>{{ client.id }}</td>
+      <td>{{ client.fullName }}</td>
+      <td>{{ client.phone }}</td>
+      <td>{{ client.email }}</td>
+    </tr>
+    }
+  </table>
+  } @else {
+  <ul class="clients-list">
+    @for (client of clients; track $index) {
+    <ng-container *ngTemplateOutlet="clientItem; context: { client }"></ng-container>
+    }
+  </ul>
+  }
+</layers-modal>
+
+<ng-template let-client="client" #clientItem>
+  <div class="clients-item" utilsAccordion [buttonToggle]="clientChangeButton">
+    <div class="clients-item__header">
+      <span>{{ client.fullName }}</span>
+      <img src="assets/images/icons/arrow-toggle.svg" alt="" #clientChangeButton />
+    </div>
+    <div class="clients-item__content contacts-content">
+      <ul class="clients-item__list">
+        <li>
+          <span>Телефон:</span>
+          <p>{{ client.phone }}</p>
+        </li>
+        <li>
+          <span>Email:</span>
+          <p>{{ client.email }}</p>
+        </li>
+      </ul>
+      <button class="pick-button" (click)="onPickClient(client.id)">Выбрать</button>
+    </div>
+  </div>
+</ng-template>

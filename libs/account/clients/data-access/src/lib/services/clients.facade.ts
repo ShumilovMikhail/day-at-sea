@@ -15,6 +15,8 @@ import { ResponseError } from '@http';
 import { ClientEntity } from '../types/clients.models';
 import { clientsActions } from '../+state/clients.actions';
 import { clientsDTOAdapter } from '../+state/clients-dto.adapter';
+import { BookingEntity } from '@account/bookings/data-access';
+import { bookingEntityAdapter } from '../+state/booking-entity.adapter';
 
 @Injectable({ providedIn: 'root' })
 export class ClientsFacade {
@@ -48,5 +50,11 @@ export class ClientsFacade {
       .subscribe((agencyId: number) => {
         this.store.dispatch(clientsActions.updateClient({ agencyId, client: clientsDTOAdapter.entityToDTO(client) }));
       });
+  }
+
+  public addBooking(id: number, booking: BookingEntity): void {
+    this.store.dispatch(
+      clientsActions.addBooking({ id, booking: bookingEntityAdapter.entityToBookingHistoryItemEntity(booking) })
+    );
   }
 }

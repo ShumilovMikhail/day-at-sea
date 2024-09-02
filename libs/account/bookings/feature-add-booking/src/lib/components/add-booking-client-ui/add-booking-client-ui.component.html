@@ -1,5 +1,17 @@
 <div class="add-booking-client">
-  <ui-forms-input [control]="client.get('fullName')! | formControl" [label]="'ФИО клиента'"></ui-forms-input>
-  <ui-forms-phone [control]="client.get('phone')! | formControl" [label]="'Телефон'"></ui-forms-phone>
-  <ui-forms-input [control]="client.get('email')! | formControl" [label]="'Email'"></ui-forms-input>
+  <ui-forms-input
+    [control]="client.get('fullName')! | formControl"
+    [label]="'ФИО клиента'"
+    [disabled]="selectedClient"
+  ></ui-forms-input>
+  <ui-forms-phone
+    [control]="client.get('phone')! | formControl"
+    [label]="'Телефон'"
+    [disabled]="selectedClient"
+  ></ui-forms-phone>
+  <ui-forms-input
+    [control]="client.get('email')! | formControl"
+    [label]="'Email'"
+    [disabled]="selectedClient"
+  ></ui-forms-input>
 </div>

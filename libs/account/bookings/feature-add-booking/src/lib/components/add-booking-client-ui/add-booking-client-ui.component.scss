@@ -9,6 +9,7 @@ ui-forms-phone {
 
 @media (max-width: 480px) {
   .add-booking-client {
+    width: 100%;
     flex-direction: column;
     gap: 20px;
   }

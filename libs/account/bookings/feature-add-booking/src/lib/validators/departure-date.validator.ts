@@ -3,6 +3,7 @@ import { dateAdapter } from '../utils/date.adapter';
 
 export function departureDateValidator(arrivalDateControl: AbstractControl): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
+    if (arrivalDateControl.value === '' || control.value === '') return null;
     const arrivalDate = dateAdapter.stringToDate(arrivalDateControl.value);
     const departureDate = dateAdapter.stringToDate(control.value);
     return arrivalDate.getTime() < departureDate.getTime() ? null : { departureBeforeArrival: true };

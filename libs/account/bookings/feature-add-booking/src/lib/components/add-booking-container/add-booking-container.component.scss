@@ -18,8 +18,19 @@
   gap: 330px;
 }
 
-.client {
+.add-booking-client-container {
   margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pick-client {
+  margin-top: 20px;
+}
+
+.client-cross {
+  margin-top: 13px;
 }
 
 .amount {
@@ -67,6 +78,21 @@
     margin-top: 25px;
     flex-direction: column;
     gap: 10px;
+  }
+
+  .add-booking-client-container {
+    display: flex;
+    gap: 5px;
+    align-items: start;
+  }
+
+  .client {
+    width: 100%;
+  }
+
+  .pick-client {
+    margin-top: 28px;
+    width: 24px;
   }
 
   .save-button {

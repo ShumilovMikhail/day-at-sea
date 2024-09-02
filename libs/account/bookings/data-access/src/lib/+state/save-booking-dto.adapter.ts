@@ -32,6 +32,7 @@ export const saveBookingDTOAdapter = {
     };
   },
   entityToDTO: (booking: SaveBookingEntity): SaveBookingDTO => {
+    console.log(typeof booking.client);
     return {
       id: booking.id,
       agency_object_id: booking.agencyObjectId,

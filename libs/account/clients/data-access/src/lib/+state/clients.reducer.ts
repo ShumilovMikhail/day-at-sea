@@ -4,7 +4,8 @@ import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { ResponseError } from '@http';
 import { ClientsState } from '../types/clients-state.models';
 import { clientsActions } from './clients.actions';
-import { ClientDTO, ClientEntity } from '../types/clients.models';
+import { BookingHistoryItemEntity, ClientDTO, ClientEntity } from '../types/clients.models';
+import { BookingEntity } from '@account/bookings/data-access';
 
 export const clientsAdapter: EntityAdapter<ClientEntity> = createEntityAdapter<ClientEntity>();
 
@@ -70,6 +71,21 @@ export const clientsFeature = createFeature({
         status: 'error',
         error: payload.error,
       })
+    ),
+    on(
+      clientsActions.addBooking,
+      (state: ClientsState, payload: { id: number; booking: BookingHistoryItemEntity }): ClientsState =>
+        clientsAdapter.updateOne(
+          {
+            id: payload.id,
+            changes: {
+              bookings: [...state.entities[payload.id]!.bookings, payload.booking],
+              bookingsCount: state.entities[payload.id]!.bookingsCount + 1,
+              totalAmount: state.entities[payload.id]!.totalAmount + +payload.booking.amount,
+            },
+          },
+          { ...state }
+        )
     )
   ),
 });

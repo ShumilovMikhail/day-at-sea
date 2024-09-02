@@ -7,6 +7,7 @@ import { ApiService, ResponseError } from '@http';
 import { bookingsActions } from './bookings.actions';
 import { SaveBookingDTO, BookingDTO, BookingEntity } from '../types/bookings.models';
 import { bookingsDTOAdapter } from './bookings-dto.adapter';
+import { ClientEntity, ClientsFacade } from '@account/clients/data-access';
 
 export const getBookingsEffect$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) =>
@@ -50,11 +51,12 @@ export const addBookingEffect$ = createEffect(
 );
 
 export const addBookingSuccessEffect$ = createEffect(
-  (actions$ = inject(Actions), router = inject(Router)) =>
+  (actions$ = inject(Actions), router = inject(Router), clientFacade = inject(ClientsFacade)) =>
     actions$.pipe(
       ofType(bookingsActions.addBookingSuccess),
-      tap(() => {
+      tap(({ booking }: { booking: BookingEntity }) => {
         router.navigateByUrl('/account/bookings');
+        clientFacade.addBooking(booking.clientId, booking);
       })
     ),
   { functional: true, dispatch: false }

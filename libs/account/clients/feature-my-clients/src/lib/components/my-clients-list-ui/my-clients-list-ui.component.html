@@ -106,5 +106,5 @@
 </ng-template>
 
 <ng-template #bookingsCount let-client="client">
-  <div (click)="onShowBookingHistory(client.id)">{{ client.bookingsCount }} ({{ client.totalAmount }}₽)</div>
+  <p (click)="onShowBookingHistory(client.id)">{{ client.bookingsCount }} ({{ client.totalAmount }}₽)</p>
 </ng-template>

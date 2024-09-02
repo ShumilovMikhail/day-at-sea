@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'ui-pick-client',
+  displayName: 'feature-pick-client',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/account/clients/ui-pick-client',
+  coverageDirectory: '../../../../coverage/libs/account/clients/feature-pick-client',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

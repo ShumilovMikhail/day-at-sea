@@ -15,8 +15,19 @@
       @if (myObjectsList$ | async; as myObjectsList) {
       <account-add-booking-info-ui [info]="info" [myObjectsList]="myObjectsList"></account-add-booking-info-ui>
       }
-      <div class="client">
-        <account-add-booking-client-ui [client]="form.get('client')! | formGroup"></account-add-booking-client-ui>
+      <div class="add-booking-client-container">
+        <div class="client">
+          <account-add-booking-client-ui
+            [client]="form.get('client')! | formGroup"
+            [selectedClient]="!!selectedClientId"
+          ></account-add-booking-client-ui>
+        </div>
+        <div class="pick-client">
+          <account-pick-client-container (pickClientEvent)="onPickClient($event)"></account-pick-client-container>
+        </div>
+        @if (selectedClientId) {
+        <div class="cross client-cross" (click)="onResetClient()"></div>
+        }
       </div>
       <div
         class="amount"

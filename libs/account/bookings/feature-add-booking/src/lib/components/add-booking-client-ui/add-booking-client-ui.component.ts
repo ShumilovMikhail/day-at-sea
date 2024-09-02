@@ -16,4 +16,5 @@ import { FormControlPipe } from '@utils/pipes';
 })
 export class AddBookingClientUiComponent {
   @Input({ required: true }) client!: FormGroup<BookingClientForm>;
+  @Input() selectedClient = false;
 }

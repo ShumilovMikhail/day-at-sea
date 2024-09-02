@@ -1,13 +1,14 @@
 import { createActionGroup, props } from '@ngrx/store';
 
 import { ResponseError } from '@http';
-import { ClientDTO, ClientEntity } from '../types/clients.models';
+import { BookingHistoryItemEntity, ClientDTO, ClientEntity } from '../types/clients.models';
 
 export const clientsActions = createActionGroup({
   source: 'Clients',
   events: {
     getClients: props<{ agencyId: number }>(),
     updateClient: props<{ agencyId: number; client: ClientDTO }>(),
+    addBooking: props<{ id: number; booking: BookingHistoryItemEntity }>(),
 
     getClientsSuccess: props<{ clients: ClientEntity[] }>(),
     updateClientSuccess: props<{ client: ClientEntity }>(),

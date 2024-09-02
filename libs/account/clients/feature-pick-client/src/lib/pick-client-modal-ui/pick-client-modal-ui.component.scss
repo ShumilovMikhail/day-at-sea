@@ -1,0 +1,94 @@
+@import 'variables';
+@import 'mixins';
+
+tr {
+  font-size: 14px;
+}
+
+.id {
+  width: 100px;
+}
+.fullName {
+  width: 190px;
+}
+.phone {
+  width: 200px;
+}
+.email {
+  width: 210px;
+}
+
+.client-item {
+  cursor: pointer;
+  transition: 0.15s all ease-in;
+  &:hover {
+    background-color: rgba(236, 249, 252, 0.5);
+  }
+}
+
+.clients-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.clients-item {
+  width: 250px;
+  border: 1px solid $blueLight;
+  border-radius: 10px;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    h3 {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    img {
+      display: block;
+      transform: rotate(180deg);
+      transition: 0.15s ease-in transform;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    height: 0;
+    padding: 0;
+    margin: 0;
+  }
+  &__list li {
+    span {
+      font-weight: 700;
+    }
+  }
+}
+
+.pick-button {
+  @include button-primary();
+  width: 100%;
+  padding: 5px;
+}
+
+.accordion-open {
+  .clients-item__header {
+    border-bottom: 1px solid $blueLight;
+    img {
+      transform: rotate(0deg);
+    }
+  }
+
+  .clients-item__content {
+    padding: 20px;
+    height: auto;
+  }
+}
