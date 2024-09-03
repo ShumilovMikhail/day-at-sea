@@ -18,6 +18,7 @@ import { myObjectsEffects, myObjectsFeature } from '@account/my-objects/data-acc
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { bookingEffects, bookingsFeature } from '@account/bookings/data-access';
 import { clientsEffects, clientsFeature } from '@account/clients/data-access';
+import { NOTIFICATION_EXECUTION_TIME } from '@notifications/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -58,6 +59,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: REMOTE_STORAGE_URL,
       useValue: environment.STORAGE_URL,
+    },
+    {
+      provide: NOTIFICATION_EXECUTION_TIME,
+      useValue: 4000,
     },
     provideAnimationsAsync(),
   ],

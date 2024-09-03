@@ -1,0 +1,22 @@
+@if (notification$ | async; as notification) {
+<div
+  class="notification"
+  [ngClass]="{
+  error: notification.type === 'error',
+  success: notification.type === 'success',
+  info: notification.type === 'info',
+}"
+>
+  <div class="content">
+    @switch (notification.type) { @case ('error') {
+    <img class="notification-icon" src="assets/images/icons/error-notification-icon.svg" alt="notification-icon" />
+    } @case ('success') {
+    <img class="notification-icon" src="assets/images/icons/success-notification-icon.svg" alt="notification-icon" />
+    } @default {
+    <img class="notification-icon" src="assets/images/icons/info-notification-icon.svg" alt="notification-icon" />
+    } }
+    <p>{{ notification.message }}</p>
+  </div>
+  <div class="cross" (click)="onCloseNotification()"></div>
+</div>
+}

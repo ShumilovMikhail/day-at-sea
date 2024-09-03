@@ -76,6 +76,8 @@
       "@dadata/data-access-address": ["libs/core/dadata/data-access-address/src/index.ts"],
       "@http": ["libs/core/http/src/index.ts"],
       "@layers": ["libs/core/layers/src/index.ts"],
+      "@notifications/data-access": ["libs/core/notifications/data-access/src/index.ts"],
+      "@notifications/feature-notifications": ["libs/core/notifications/feature-notifications/src/index.ts"],
       "@object/feature-object": ["libs/core/feature-object/src/index.ts"],
       "@storage/data-access-storage": ["libs/core/data-access-storage/src/index.ts"],
       "@tables/feature-settings-table-view": ["libs/core/feature-settings-table-view/src/index.ts"],
