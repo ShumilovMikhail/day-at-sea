@@ -49,6 +49,7 @@
       "@account/clients/data-access": ["libs/account/clients/data-access/src/index.ts"],
       "@account/clients/feature-my-clients": ["libs/account/clients/feature-my-clients/src/index.ts"],
       "@account/clients/feature-pick-client": ["libs/account/clients/feature-pick-client/src/index.ts"],
+      "@account/costs/data-access": ["libs/account/costs/data-access/src/index.ts"],
       "@account/data-access-agency": ["libs/account/data-access-agency/src/index.ts"],
       "@account/layers/header": ["libs/account/layers/feature-header/src/index.ts"],
       "@account/layers/side-menu": ["libs/account/layers/feature-side-menu/src/index.ts"],
