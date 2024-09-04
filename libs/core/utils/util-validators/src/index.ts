@@ -6,3 +6,4 @@ export * from './lib/util-validators/site.validator';
 export * from './lib/util-validators/conform-password.validator';
 export * from './lib/util-validators/house-number.validator';
 export * from './lib/util-validators/is-not-number.validator';
+export * from './lib/util-validators/is-correct-date.validator';

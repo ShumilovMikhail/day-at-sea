@@ -1,1 +1,1 @@
-export * from './lib/add-cost-container/add-cost-container.component';
+export * from './lib/components/add-cost-container/add-cost-container.component';
