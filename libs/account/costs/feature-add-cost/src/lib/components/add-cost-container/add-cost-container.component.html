@@ -1,5 +1,12 @@
 <div class="add-cost">
   <h2>Добавить расход</h2>
+  @if (myObjects$ | async; as myObjects) {
+  <ui-forms-objects-picker
+    [array]="form.get('objectsIds')! | formArray"
+    [objects]="myObjects"
+    [label]="'Квартиры'"
+  ></ui-forms-objects-picker>
+  }
   <div class="buttons-container">
     <button class="buttons-item save-button">Сохранить</button>
     <button class="buttons-item cancel-button">Отменить</button>

@@ -11,3 +11,5 @@ export * from './lib/components/ui-forms-select/ui-forms-select.component';
 export * from './lib/components/ui-forms-counter/ui-forms-counter.component';
 
 export * from './lib/components/ui-forms-calendar/ui-forms-calendar.component';
+
+export * from './lib/components/ui-forms-objects-picker/ui-forms-objects-picker.component';

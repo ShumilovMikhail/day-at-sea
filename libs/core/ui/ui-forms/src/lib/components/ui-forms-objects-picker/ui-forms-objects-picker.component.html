@@ -1,0 +1,30 @@
+<div class="objects-picker-container">
+  @if (label) {
+  <label>{{ label }}</label>
+  }
+  <div class="objects-picker">
+    <input
+      type="text"
+      class="object-search"
+      placeholder="Поиск по объектам"
+      #searchInput
+      (input)="onSearch(searchInput.value)"
+    />
+    <ul class="objects-list">
+      @for (object of sortedObjects; track object) {
+      <li class="objects-item">
+        <label class="checkbox">
+          <input
+            type="checkbox"
+            [checked]="isChecked(object.id)"
+            #objectsItemCheckbox
+            (change)="onCheckboxToggle(object.id, objectsItemCheckbox.checked)"
+          />
+          <div></div>
+        </label>
+        {{ object.title }}
+      </li>
+      }
+    </ul>
+  </div>
+</div>
