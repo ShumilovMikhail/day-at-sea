@@ -16,9 +16,9 @@ export const getCostsEffect$ = createEffect(
           map((costsDTO: CostsDTO | CostDTO) => {
             let costs: CostsEntity = [];
             if (Array.isArray(costsDTO)) {
-              costs = costsDTO.map((costDTO) => costDTOAdapter.DTOToEntity(costDTO));
+              costs = costsDTO.map((costDTO) => costDTOAdapter.DTOToEntity(costDTO) as CostEntity);
             } else {
-              costs = [costDTOAdapter.DTOToEntity(costsDTO)];
+              costs = [costDTOAdapter.DTOToEntity(costsDTO) as CostEntity];
             }
             return costsActions.getCostsSuccess({ costs });
           }),
@@ -36,7 +36,7 @@ export const addCostEffect$ = createEffect(
       switchMap(({ agencyId, cost }: { agencyId: number; cost: Omit<CostDTO, 'id'> }) => {
         return apiService.put<CostDTO>(`agencies/${agencyId}/costs`, cost).pipe(
           map((costDTO: CostDTO) => {
-            const cost: CostEntity = costDTOAdapter.DTOToEntity(costDTO);
+            const cost: CostEntity = costDTOAdapter.DTOToEntity(costDTO) as CostEntity;
             return costsActions.addCostSuccess({ cost });
           }),
           catchError((error: ResponseError) => of(costsActions.addCostFailure({ error })))
@@ -53,7 +53,7 @@ export const updateCostEffect$ = createEffect(
       switchMap(({ agencyId, cost }: { agencyId: number; cost: CostDTO }) => {
         return apiService.put<CostDTO>(`agencies/${agencyId}/costs`, cost).pipe(
           map((costDTO: CostDTO) => {
-            const cost: CostEntity = costDTOAdapter.DTOToEntity(costDTO);
+            const cost: CostEntity = costDTOAdapter.DTOToEntity(costDTO) as CostEntity;
             return costsActions.updateCostSuccess({ cost });
           }),
           catchError((error: ResponseError) => of(costsActions.updateCostFailure({ error })))

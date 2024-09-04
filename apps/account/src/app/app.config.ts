@@ -19,16 +19,18 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { bookingEffects, bookingsFeature } from '@account/bookings/data-access';
 import { clientsEffects, clientsFeature } from '@account/clients/data-access';
 import { NOTIFICATION_EXECUTION_TIME } from '@notifications/data-access';
+import { costsEffects, costsFeature } from '@account/costs/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(authEffects, agencyEffects, myObjectsEffects, bookingEffects, clientsEffects),
+    provideEffects(authEffects, agencyEffects, myObjectsEffects, bookingEffects, clientsEffects, costsEffects),
     provideStore({
       [authFeature.name]: authFeature.reducer,
       [agencyFeature.name]: agencyFeature.reducer,
       [myObjectsFeature.name]: myObjectsFeature.reducer,
       [bookingsFeature.name]: bookingsFeature.reducer,
       [clientsFeature.name]: clientsFeature.reducer,
+      [costsFeature.name]: costsFeature.reducer,
     }),
     provideStoreDevtools({
       maxAge: 25,
