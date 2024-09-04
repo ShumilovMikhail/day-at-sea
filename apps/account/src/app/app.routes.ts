@@ -113,6 +113,10 @@ export const appRoutes: Route[] = [
         path: 'clients',
         loadComponent: () => import('@account/clients/feature-my-clients').then((c) => c.MyClientsContainerComponent),
       },
+      {
+        path: 'costs/add',
+        loadComponent: () => import('@account/costs/feature-add-cost').then((c) => c.AddCostContainerComponent),
+      },
     ],
   },
 ];
