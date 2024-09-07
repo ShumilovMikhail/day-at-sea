@@ -137,6 +137,15 @@ fieldset {
   .input-wrapper {
     position: relative;
     z-index: 1;
+    &.cross-enable {
+      input {
+        padding: 11px 15px;
+        padding-right: 35px;
+      }
+      .cross {
+        display: block;
+      }
+    }
     input {
       width: 100%;
       padding: 11px 15px;
@@ -152,22 +161,14 @@ fieldset {
       position: absolute;
       display: none;
       top: 50%;
-      right: 15px;
+      transform: translate(0, -45%);
+      right: 9px;
     }
   }
   &.disabled {
     input {
       border: 1px solid $greyBorder;
     }
-  }
-}
-.cross-enable {
-  input {
-    padding: 11px 15px;
-    padding-right: 35px;
-  }
-  .cross {
-    display: block;
   }
 }
 

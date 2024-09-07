@@ -1,0 +1,42 @@
+<div
+  class="input-container"
+  [ngClass]="{
+    'form-error-absolute': absoluteError
+  }"
+>
+  @if (label) {
+  <label
+    [ngClass]="{
+      required: required
+    }"
+    >{{ label }}</label
+  >
+  }
+  <div
+    class="input-wrapper"
+    [ngClass]="{
+      'cross-enable': crossEnable,
+      disabled: disabled,
+    }"
+  >
+    <input
+      utilsNumbersOnly
+      [type]="type ?? 'text'"
+      [ngClass]="{
+        error: control.errors && control.touched
+      }"
+      [formControl]="control"
+      [readonly]="disabled"
+      [placeholder]="placeholder ?? ''"
+      (focus)="onFocus()"
+    />
+    @if (crossEnable) {
+    <button class="cross" type="button" (click)="onReset()"></button>
+    }
+  </div>
+  <ul class="errors">
+    @if (errors && control.touched) { @for (error of errors; track error) { @if (error !== '') {
+    <li>{{ error }}</li>
+    } } }
+  </ul>
+</div>

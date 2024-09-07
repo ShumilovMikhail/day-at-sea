@@ -1,11 +1,12 @@
 import { inject } from '@angular/core';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ApiService, ResponseError } from '@http';
 import { costsActions } from './costs.actions';
 import { costDTOAdapter } from './cost-dto.adapter';
 import { CostDTO, CostEntity, CostsDTO, CostsEntity } from '../types/costs.models';
+import { NotificationsService } from '@notifications/data-access';
 
 export const getCostsEffect$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) =>
@@ -34,7 +35,7 @@ export const addCostEffect$ = createEffect(
     actions$.pipe(
       ofType(costsActions.addCost),
       switchMap(({ agencyId, cost }: { agencyId: number; cost: Omit<CostDTO, 'id'> }) => {
-        return apiService.put<CostDTO>(`agencies/${agencyId}/costs`, cost).pipe(
+        return apiService.post<CostDTO>(`agencies/${agencyId}/costs`, cost).pipe(
           map((costDTO: CostDTO) => {
             const cost: CostEntity = costDTOAdapter.DTOToEntity(costDTO) as CostEntity;
             return costsActions.addCostSuccess({ cost });
@@ -44,6 +45,17 @@ export const addCostEffect$ = createEffect(
       })
     ),
   { functional: true }
+);
+
+export const addCostAfterEffect$ = createEffect(
+  (actions$ = inject(Actions), notificationsService = inject(NotificationsService)) =>
+    actions$.pipe(
+      ofType(costsActions.addCostSuccess),
+      tap(() => {
+        notificationsService.send({ message: 'Расход добавлен', type: 'success' });
+      })
+    ),
+  { functional: true, dispatch: false }
 );
 
 export const updateCostEffect$ = createEffect(

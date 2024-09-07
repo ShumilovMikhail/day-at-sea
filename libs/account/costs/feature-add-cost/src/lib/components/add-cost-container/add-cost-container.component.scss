@@ -1,11 +1,19 @@
 @import 'mixins';
 
+:host {
+  width: 100%;
+}
+
 .add-cost {
   padding: 40px 50px;
 }
 
 h2 {
   font-size: 30px;
+}
+
+.form {
+  margin-top: 40px;
 }
 
 .buttons-container {
