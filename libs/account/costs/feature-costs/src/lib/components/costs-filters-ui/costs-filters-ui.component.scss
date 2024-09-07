@@ -1,0 +1,62 @@
+@import 'mixins';
+@import 'variables';
+
+.filters-mobile-button {
+  display: flex;
+  gap: 8.5px;
+  align-items: center;
+  background-color: #ecf9fc;
+  border: 1px solid $blueLight;
+  padding: 5px 12px;
+  width: 100px;
+  border-radius: 17px;
+  font-size: 12px;
+  transition: 0.2s all ease-in;
+  cursor: pointer;
+  &:hover {
+    background-color: $blueLight;
+  }
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .reset {
+      @include button-primary();
+      width: 140px;
+      height: 40px;
+    }
+  }
+}
+
+.date-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .filters {
+    padding: 5px;
+    flex-direction: column;
+    .object-title {
+      width: 100%;
+    }
+    .content {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+  ui-forms-input {
+    width: 100%;
+  }
+}

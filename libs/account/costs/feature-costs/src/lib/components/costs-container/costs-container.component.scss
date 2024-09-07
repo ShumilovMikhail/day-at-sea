@@ -1,0 +1,54 @@
+:host {
+  width: 100%;
+}
+
+.costs {
+  padding: 40px 50px;
+  h1 {
+    font-size: 30px;
+  }
+  .filters {
+    margin-top: 35px;
+  }
+}
+
+.excel {
+  display: flex;
+  justify-content: right;
+  margin-top: 12px;
+}
+
+.list {
+  margin-top: 20px;
+}
+
+.loader-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .top {
+    display: flex;
+    justify-content: space-between;
+  }
+  .costs {
+    padding: 20px 15px;
+    h1 {
+      font-size: 24px;
+    }
+    .filters {
+      margin-top: 0;
+    }
+  }
+
+  .excel {
+    margin-top: 15px;
+    ui-common-write-excel {
+      width: 100%;
+    }
+  }
+}

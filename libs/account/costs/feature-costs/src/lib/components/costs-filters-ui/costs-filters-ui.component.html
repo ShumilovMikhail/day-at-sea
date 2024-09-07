@@ -1,0 +1,41 @@
+<div class="filters-container">
+  @if (!isMobile) {
+  <ng-container *ngTemplateOutlet="filters"></ng-container>
+  } @else {
+  <button class="filters-mobile-button" (click)="onIsModalChange(true)">
+    <img src="/assets/images/icons/filter-icon.svg" alt="filter-icon" />
+    Фильтры
+  </button>
+
+  @if (isModalOpen) {
+  <layers-modal (closeDialogBoxEvent)="onIsModalChange(false)">
+    <ng-container *ngTemplateOutlet="filters"></ng-container>
+  </layers-modal>
+  } }
+</div>
+
+<ng-template #filters>
+  <div class="filters">
+    <div class="object-title">
+      <ui-forms-input [control]="form.get('objectTitle')! | formControl" [placeholder]="'Объект'"></ui-forms-input>
+    </div>
+    <div class="content">
+      <ui-forms-input [control]="form.get('expenseItem')! | formControl" [placeholder]="'Статья'"></ui-forms-input>
+      <span class="date-container">
+        <p>От:</p>
+        <ui-forms-calendar
+          [control]="form.get('from')! | formControl"
+          [initialValue]="form.get('from')!.value"
+        ></ui-forms-calendar>
+      </span>
+      <span class="date-container">
+        <p>До:</p>
+        <ui-forms-calendar
+          [control]="form.get('until')! | formControl"
+          [initialValue]="form.get('until')!.value"
+        ></ui-forms-calendar>
+      </span>
+      <button class="reset" (click)="onReset()">Сбросить</button>
+    </div>
+  </div>
+</ng-template>

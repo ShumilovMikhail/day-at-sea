@@ -24,7 +24,7 @@ export class CostsFacade {
   public readonly costsLoaded$: Observable<boolean> = this.store.select(selectCostsLoaded);
   public readonly error$: Observable<ResponseError | null> = this.store.select(selectCostsError);
   public readonly loading$: Observable<boolean> = this.store.select(selectCostsLoading);
-  public readonly clients$: Observable<CostsEntity> = this.store.select(selectCosts).pipe(
+  public readonly costs$: Observable<CostsEntity> = this.store.select(selectCosts).pipe(
     combineLatestWith(this.agencyFacade.id$),
     withLatestFrom(this.costsLoaded$),
     tap(([args, isLoaded]: [[CostsEntity, number | null], boolean]) => {

@@ -54,10 +54,4 @@ export class UiFormsCalendarComponent implements OnInit {
   public onFocus(): void {
     this.control.markAsUntouched();
   }
-
-  onReset() {
-    if (!this.disabled) {
-      this.control.patchValue('');
-    }
-  }
 }

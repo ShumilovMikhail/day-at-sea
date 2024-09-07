@@ -1,0 +1,62 @@
+@if (!isMobile) {
+<table class="table bookings-table">
+  <tr>
+    <th class="expense-item">Статья</th>
+    <th class="date">Дата</th>
+    <th class="amount">Сумма</th>
+    <th class="objects">Квартиры</th>
+    <th class="commentary">Комментарий</th>
+    <th class="edit"></th>
+    <th class="delete"></th>
+  </tr>
+  @for (cost of costs; track cost) {
+  <tr>
+    <td>{{ cost.expenseItem }}</td>
+    <td>{{ cost.date }}</td>
+    <td>{{ cost.amount }}</td>
+    <td>{{ cost.objects }}</td>
+    <td>
+      {{ cost.commentary.length > 40 ? (cost.commentary | slice : 0 : 35) + '...' : cost.commentary }}
+    </td>
+    <td class="edit-cell" [routerLink]="['edit', cost.id]">
+      <img src="/assets/images/icons/pen-icon.svg" alt="delete-icon" />
+    </td>
+    <td class="delete-cell" (click)="onDeleteCost(cost.id)">
+      <img src="/assets/images/icons/trash-icon.svg" alt="delete-icon" />
+    </td>
+  </tr>
+  }
+</table>
+} @else {
+<ul class="costs-list">
+  @for (cost of costs; track cost) {
+  <ng-container *ngTemplateOutlet="costItem; context: { cost }"></ng-container>
+  }
+</ul>
+}
+
+<ng-template let-cost="cost" #costItem>
+  <div class="costs-item" utilsAccordion [buttonToggle]="costChangeButton">
+    <div class="costs-item__header">
+      <div class="costs-item__inner">
+        <span>{{ cost.date }}</span>
+        <span>{{ cost.expenseItem }}</span>
+      </div>
+      <img src="assets/images/icons/arrow-toggle.svg" alt="" #costChangeButton />
+    </div>
+    <div class="costs-item__content">
+      <ul class="costs-item__list">
+        <li>
+          <span>Сумма:</span>
+          <p>{{ cost.amount }}</p>
+        </li>
+        <li>
+          <span>Квартиры:</span>
+          <p>{{ cost.objects }}</p>
+        </li>
+      </ul>
+      <button class="change-button" [routerLink]="['edit', cost.id]">Изменить</button>
+      <button class="delete-button" (click)="onDeleteCost(cost.id)">Удалить</button>
+    </div>
+  </div>
+</ng-template>

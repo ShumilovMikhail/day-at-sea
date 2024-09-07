@@ -1,0 +1,112 @@
+@import 'variables';
+@import 'mixins';
+
+.costs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.expense-item {
+  width: 200px;
+}
+
+.date {
+  width: 150px;
+}
+
+.amount {
+  width: 100px;
+}
+.objects {
+  width: 385px;
+}
+.commentary {
+  width: 385px;
+}
+
+.costs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.costs-item {
+  border: 1px solid $blueLight;
+  border-radius: 10px;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    h3 {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    img {
+      display: block;
+      transform: rotate(180deg);
+      transition: 0.15s ease-in transform;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    height: 0;
+    padding: 0;
+    margin: 0;
+  }
+  &__inner {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  &__list li {
+    span {
+      font-weight: 700;
+    }
+  }
+}
+
+.accordion-open {
+  .costs-item__header {
+    border-bottom: 1px solid $blueLight;
+    img {
+      transform: rotate(0deg);
+    }
+  }
+
+  .costs-item__content {
+    padding: 20px;
+    height: auto;
+  }
+}
+
+.change-button {
+  @include button-secondary();
+  width: 100%;
+  padding: 5px;
+}
+
+.delete-button {
+  @include button-primary();
+  width: 100%;
+  padding: 5px;
+}
+
+.edit-cell,
+.delete-cell {
+  cursor: pointer;
+  transition: 0.2s all ease;
+  &:hover {
+    background-color: $blueLight;
+  }
+}
