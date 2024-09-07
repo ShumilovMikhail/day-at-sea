@@ -118,6 +118,10 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('@account/costs/feature-add-cost').then((c) => c.AddCostContainerComponent),
       },
       {
+        path: 'costs/edit/:id',
+        loadComponent: () => import('@account/costs/feature-edit-cost').then((c) => c.EditCostContainerComponent),
+      },
+      {
         path: 'costs',
         loadComponent: () => import('@account/costs/feature-costs').then((c) => c.CostsContainerComponent),
       },

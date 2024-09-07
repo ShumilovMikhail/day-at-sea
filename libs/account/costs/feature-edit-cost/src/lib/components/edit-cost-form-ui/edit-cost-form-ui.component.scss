@@ -1,0 +1,48 @@
+@import 'variables';
+
+.form {
+  width: 510px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.commentary {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  h3 {
+    font-size: 16px;
+  }
+
+  textarea {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 218px;
+    resize: none;
+    border: 1px solid $blueLight;
+    border-radius: 5px;
+    font-family: 'Gilroy', sans-serif;
+    padding: 10px;
+    scrollbar-width: none;
+  }
+  textarea::-webkit-scrollbar {
+    display: none;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    width: 100%;
+  }
+  .commentary {
+    textarea {
+      height: 178px;
+    }
+  }
+}

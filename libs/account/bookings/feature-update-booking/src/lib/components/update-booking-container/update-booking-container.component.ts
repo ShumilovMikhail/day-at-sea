@@ -110,6 +110,7 @@ export class UpdateBookingContainerComponent implements OnInit {
   private initializeForm(): void {
     const booking = this.booking;
     this.myObjectsFacade.myObjectsVM$.pipe(take(1)).subscribe((myObjects) => {
+      console.log(booking.instalments);
       const agencyObject = myObjects.find((myObject) => myObject.id === booking.agencyObjectId);
       if (!agencyObject) return;
       this.form = this.fb.nonNullable.group({

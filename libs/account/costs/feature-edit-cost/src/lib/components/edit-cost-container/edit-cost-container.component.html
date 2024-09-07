@@ -1,0 +1,14 @@
+@if (form) {
+<div class="edit-cost">
+  <h2>Добавить расход</h2>
+  @if (myObjects$ | async; as myObjects) {
+  <div class="form">
+    <account-edit-cost-form-ui [myObjects]="myObjects" [form]="form"></account-edit-cost-form-ui>
+  </div>
+  }
+  <div class="buttons-container">
+    <button class="buttons-item save-button" [disabled]="form.invalid" (click)="onSubmit()">Изменить</button>
+    <button class="buttons-item cancel-button" (click)="onCancel()">Отменить</button>
+  </div>
+</div>
+}

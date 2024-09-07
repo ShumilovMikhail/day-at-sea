@@ -7,6 +7,7 @@ import { costsActions } from './costs.actions';
 import { costDTOAdapter } from './cost-dto.adapter';
 import { CostDTO, CostEntity, CostsDTO, CostsEntity } from '../types/costs.models';
 import { NotificationsService } from '@notifications/data-access';
+import { Router } from '@angular/router';
 
 export const getCostsEffect$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) =>
@@ -48,10 +49,11 @@ export const addCostEffect$ = createEffect(
 );
 
 export const addCostAfterEffect$ = createEffect(
-  (actions$ = inject(Actions), notificationsService = inject(NotificationsService)) =>
+  (actions$ = inject(Actions), notificationsService = inject(NotificationsService), router = inject(Router)) =>
     actions$.pipe(
       ofType(costsActions.addCostSuccess),
       tap(() => {
+        router.navigateByUrl('account/costs');
         notificationsService.send({ message: 'Расход добавлен', type: 'success' });
       })
     ),
@@ -63,7 +65,7 @@ export const updateCostEffect$ = createEffect(
     actions$.pipe(
       ofType(costsActions.updateCost),
       switchMap(({ agencyId, cost }: { agencyId: number; cost: CostDTO }) => {
-        return apiService.put<CostDTO>(`agencies/${agencyId}/costs`, cost).pipe(
+        return apiService.put<CostDTO>(`agencies/${agencyId}/costs/${cost.id}`, cost).pipe(
           map((costDTO: CostDTO) => {
             const cost: CostEntity = costDTOAdapter.DTOToEntity(costDTO) as CostEntity;
             return costsActions.updateCostSuccess({ cost });
@@ -73,6 +75,29 @@ export const updateCostEffect$ = createEffect(
       })
     ),
   { functional: true }
+);
+
+export const updateCostSuccessAfterEffect$ = createEffect(
+  (actions$ = inject(Actions), notificationsService = inject(NotificationsService), router = inject(Router)) =>
+    actions$.pipe(
+      ofType(costsActions.updateCostSuccess),
+      tap(() => {
+        router.navigateByUrl('account/costs');
+        notificationsService.send({ message: 'Расход обновлен', type: 'success' });
+      })
+    ),
+  { functional: true, dispatch: false }
+);
+
+export const updateCostFailureAfterEffect$ = createEffect(
+  (actions$ = inject(Actions), notificationsService = inject(NotificationsService)) =>
+    actions$.pipe(
+      ofType(costsActions.updateCostFailure),
+      tap(() => {
+        notificationsService.send({ message: 'Расход не обновлен', type: 'error' });
+      })
+    ),
+  { functional: true, dispatch: false }
 );
 
 export const deleteCostEffect$ = createEffect(
@@ -89,4 +114,15 @@ export const deleteCostEffect$ = createEffect(
       })
     ),
   { functional: true }
+);
+
+export const deleteCostAfterEffect$ = createEffect(
+  (actions$ = inject(Actions), notificationsService = inject(NotificationsService)) =>
+    actions$.pipe(
+      ofType(costsActions.deleteCostSuccess),
+      tap(() => {
+        notificationsService.send({ message: 'Расход удален', type: 'success' });
+      })
+    ),
+  { functional: true, dispatch: false }
 );

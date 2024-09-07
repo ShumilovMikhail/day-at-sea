@@ -49,6 +49,7 @@
       "@account/clients/data-access": ["libs/account/clients/data-access/src/index.ts"],
       "@account/clients/feature-my-clients": ["libs/account/clients/feature-my-clients/src/index.ts"],
       "@account/clients/feature-pick-client": ["libs/account/clients/feature-pick-client/src/index.ts"],
+      "@account/costs/feature-edit-cost": ["libs/account/costs/feature-edit-cost/src/index.ts"],
       "@account/costs/data-access": ["libs/account/costs/data-access/src/index.ts"],
       "@account/costs/feature-add-cost": ["libs/account/costs/feature-add-cost/src/index.ts"],
       "@account/costs/feature-costs": ["libs/account/costs/feature-costs/src/index.ts"],

@@ -1,0 +1,26 @@
+<div class="form" [formGroup]="form">
+  <ui-forms-calendar
+    [control]="form.get('date')! | formControl"
+    [label]="'Дата'"
+    [initialValue]="form.get('date')!.value"
+  ></ui-forms-calendar>
+  <ui-forms-input-numbers
+    [control]="form.get('amount')! | formControl"
+    [label]="'Сумма'"
+    [crossEnable]="true"
+  ></ui-forms-input-numbers>
+  <ui-forms-input
+    [control]="form.get('expenseItem')! | formControl"
+    [label]="'Статья расходов'"
+    [crossEnable]="true"
+  ></ui-forms-input>
+  <div class="commentary">
+    <h3>Комментарий</h3>
+    <textarea formControlName="commentary"></textarea>
+  </div>
+  <ui-forms-objects-picker
+    [array]="form.get('objectsIds')! | formArray"
+    [objects]="myObjects"
+    [label]="'Квартиры'"
+  ></ui-forms-objects-picker>
+</div>
