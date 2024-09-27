@@ -1,0 +1,25 @@
+@if (moveVM$ | async; as move) {
+<div class="move" utilsIsMobile (isMobileEvent)="onIsMobileChange($event)">
+  @if (!isMobile) {
+  <h1>Заезды/Выезды</h1>
+  <div class="excel">
+    <ui-common-write-excel (clickEvent)="onExportXLSX()"></ui-common-write-excel>
+  </div>
+  } @else {
+  <div class="top">
+    <h1>Заезды/Выезды</h1>
+  </div>
+  <div class="excel">
+    <ui-common-write-excel (clickEvent)="onExportXLSX()"></ui-common-write-excel>
+  </div>
+  }
+  <div class="list">
+    <account-move-list-ui [moving]="move" [isMobile]="isMobile"></account-move-list-ui>
+  </div>
+</div>
+
+}@else {
+<div class="loader-container">
+  <ui-indicators-loader></ui-indicators-loader>
+</div>
+}

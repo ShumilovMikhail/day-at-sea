@@ -1,0 +1,56 @@
+@if (!isMobile) {
+<table class="table moving-table">
+  <tr>
+    <th class="booking-id">№ брони</th>
+    <th class="type">Заезд/выезд</th>
+    <th class="date">Время</th>
+    <th class="object">Объект</th>
+    <th class="guest-count">Гостей</th>
+    <th class="amount">Сумма</th>
+  </tr>
+  @for (move of moving; track move) {
+  <tr>
+    <td>{{ move.bookingId }}</td>
+    <td>{{ move.type }}</td>
+    <td>{{ move.date }}</td>
+    <td>{{ move.objectTitle }}</td>
+    <td>{{ move.guestCount }}</td>
+    <td>{{ move.amount }}</td>
+  </tr>
+  }
+</table>
+} @else {
+<ul class="moving-list">
+  @for (move of moving; track move) {
+  <ng-container *ngTemplateOutlet="moveItem; context: { move }"></ng-container>
+  }
+</ul>
+}
+
+<ng-template let-move="move" #moveItem>
+  <div class="move-item" utilsAccordion [buttonToggle]="moveChangeButton">
+    <div class="move-item__header">
+      <div class="move-item__inner">
+        <span>{{ move.type }}</span>
+        <span>{{ move.objectTitle }}</span>
+      </div>
+      <img src="assets/images/icons/arrow-toggle.svg" alt="" #moveChangeButton />
+    </div>
+    <div class="move-item__content contacts-content">
+      <ul class="move-item__list">
+        <li>
+          <span>Даты проживания:</span>
+          <p>{{ move.date }}</p>
+        </li>
+        <li>
+          <span>Гостей:</span>
+          <p>{{ move.guestCount }}</p>
+        </li>
+        <li>
+          <span>Сумма:</span>
+          <p>{{ move.amount }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-template>
