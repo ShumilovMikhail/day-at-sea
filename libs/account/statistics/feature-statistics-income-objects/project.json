@@ -1,7 +1,7 @@
 {
-  "name": "feature-statistics-income",
+  "name": "feature-statistics-income-objects",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/account/statistics/feature-statistics-income/src",
+  "sourceRoot": "libs/account/statistics/feature-statistics-income-objects/src",
   "prefix": "account",
   "projectType": "library",
   "tags": [],
