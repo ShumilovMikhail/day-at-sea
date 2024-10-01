@@ -77,6 +77,9 @@
       "@account/settings/feature-username-edit": ["libs/account/settings/feature-username-edit/src/index.ts"],
       "@account/staff/data-access-staff": ["libs/account/data-access-staff/src/index.ts"],
       "@account/statistics/feature-statistics": ["libs/account/statistics/feature-statistics/src/index.ts"],
+      "@account/statistics/feature-statistics-income": [
+        "libs/account/statistics/feature-statistics-income/src/index.ts"
+      ],
       "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
       "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
       "@auth/feature-register": ["libs/core/auth/feature-register/src/index.ts"],
