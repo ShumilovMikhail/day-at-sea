@@ -129,6 +129,10 @@ export const appRoutes: Route[] = [
         path: 'move',
         loadComponent: () => import('@account/move/feature-move').then((c) => c.MoveContainerComponent),
       },
+      {
+        path: 'statistics',
+        loadComponent: () => import('@account/statistics/feature-statistics').then((c) => c.FeatureStatisticsComponent),
+      },
     ],
   },
 ];

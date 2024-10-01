@@ -1,0 +1,15 @@
+.statistics {
+  padding: 40px 50px;
+  h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statistics {
+    padding: 20px 15px;
+    h1 {
+      font-size: 24px;
+    }
+  }
+}
