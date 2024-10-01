@@ -25,6 +25,8 @@ const CLIENTS_TABLE_SETTINGS: TableColumn[] = [
     color: 'transparent',
     position: 1,
     enabled: true,
+    width: '100px',
+    projected: false,
   },
   {
     name: 'fullName',
@@ -33,6 +35,8 @@ const CLIENTS_TABLE_SETTINGS: TableColumn[] = [
     color: 'transparent',
     position: 2,
     enabled: true,
+    width: '340px',
+    projected: false,
   },
   {
     name: 'isVip',
@@ -42,6 +46,8 @@ const CLIENTS_TABLE_SETTINGS: TableColumn[] = [
     position: 3,
     cellClass: 'vip-cell',
     enabled: true,
+    width: '60px',
+    projected: true,
   },
   {
     name: 'phone',
@@ -50,6 +56,8 @@ const CLIENTS_TABLE_SETTINGS: TableColumn[] = [
     color: 'transparent',
     position: 4,
     enabled: true,
+    width: '200px',
+    projected: false,
   },
   {
     name: 'email',
@@ -58,6 +66,8 @@ const CLIENTS_TABLE_SETTINGS: TableColumn[] = [
     color: 'transparent',
     position: 5,
     enabled: true,
+    width: '200px',
+    projected: false,
   },
   {
     name: 'bookingsCount',
@@ -67,6 +77,8 @@ const CLIENTS_TABLE_SETTINGS: TableColumn[] = [
     position: 6,
     cellClass: 'bookings-count-cell',
     enabled: true,
+    width: '200px',
+    projected: false,
   },
 ];
 

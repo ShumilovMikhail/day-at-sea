@@ -1,0 +1,28 @@
+<table class="table">
+  <tr>
+    @for (column of tableSettings; track column) { @if (column.enabled) {
+    <th [class]="column.class">
+      {{ column.title }}
+    </th>
+    } }
+  </tr>
+  @for (item of list; track item; let index = $index) {
+  <tr>
+    @for (column of tableSettings; track column;) { @if(column.enabled) {
+    <td
+      [class]="column.cellClass"
+      [ngStyle]="{
+        backgroundColor: column.color,
+        width: column.width
+      }"
+    >
+      @if (column.projected) {
+      <ng-container *ngTemplateOutlet="column.projected; context: { item }"></ng-container>
+      } @else {
+      {{ $any(item)[column.name] }}
+      }
+    </td>
+    } }
+  </tr>
+  }
+</table>

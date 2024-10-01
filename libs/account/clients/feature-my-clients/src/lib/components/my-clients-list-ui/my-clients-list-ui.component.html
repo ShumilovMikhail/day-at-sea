@@ -1,31 +1,9 @@
 @if (!isMobile) {
-<table class="table clients-table">
-  <tr>
-    @for (column of tableSettings; track column) { @if (column.enabled) {
-    <th [class]="column.class">
-      {{ column.title }}
-    </th>
-    } }
-  </tr>
-  @for (client of clients; track client; let clientIndex = $index) {
-  <tr>
-    @for (column of tableSettings; track column;) { @if(column.enabled) {
-    <td
-      [class]="column.cellClass"
-      [ngStyle]="{
-        backgroundColor: column.color
-      }"
-    >
-      @if ($any(this)[column.name]) {
-      <ng-container *ngTemplateOutlet="$any(this)[column.name]; context: { client }"></ng-container>
-      } @else {
-      {{ $any(client)[column.name] }}
-      }
-    </td>
-    } }
-  </tr>
-  }
-</table>
+<account-feature-table [list]="clients" [tableSettings]="tableSettingsVM">
+  <ng-template #bookingsCount let-item="item">
+    <p (click)="onShowBookingHistory(item.id)">{{ item.bookingsCount }} ({{ item.totalAmount }}₽)</p>
+  </ng-template>
+</account-feature-table>
 } @else {
 <ul class="clients-list">
   @for (client of clients; track client) {
@@ -82,18 +60,18 @@
   </div>
 </ng-template>
 
-<ng-template #isVip let-client="client">
+<ng-template #isVip let-item="item">
   <svg
     width="20"
     height="20"
     viewBox="0 0 20 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    (click)="onVipChange(client.id)"
+    (click)="onVipChange(item.id)"
   >
     <path
       [ngClass]="{
-        'star-active': client.isVip
+        'star-active': item.isVip
       }"
       d="M14.54 11.5081L17.385 8.61C17.5475 8.445 17.4968 8.2425 17.4768 8.18375C17.455 8.11812 17.3837 7.96187 17.1981 7.93375L13.2668 7.33687C12.745 7.25813 12.295 6.91875 12.0643 6.43062L10.3062 2.70813C10.2175 2.52063 10.0625 2.5 9.99996 2.5C9.93746 2.5 9.78246 2.52063 9.69371 2.70813L7.93558 6.43062C7.70433 6.91875 7.25496 7.25813 6.73246 7.33687L2.80121 7.93375C2.61621 7.96187 2.54496 8.1175 2.52308 8.18375C2.50371 8.24187 2.45308 8.44438 2.61496 8.61L5.45996 11.5081C5.82746 11.8825 5.99621 12.42 5.90996 12.9456L5.23871 17.0375C5.19933 17.2788 5.34933 17.4056 5.39621 17.4388C5.47058 17.4913 5.58746 17.535 5.73058 17.4587L9.24683 15.5269C9.71808 15.2663 10.2812 15.2675 10.7531 15.5269L14.2693 17.4587C14.4106 17.5356 14.5293 17.4913 14.6031 17.4394C14.65 17.4056 14.8 17.2788 14.7612 17.0375L14.09 12.9456C14.0037 12.4194 14.1725 11.8825 14.54 11.5081Z"
       fill="transparent"
@@ -105,6 +83,6 @@
   </svg>
 </ng-template>
 
-<ng-template #bookingsCount let-client="client">
-  <p (click)="onShowBookingHistory(client.id)">{{ client.bookingsCount }} ({{ client.totalAmount }}₽)</p>
+<ng-template #bookingsCount let-item="item">
+  <p (click)="onShowBookingHistory(item.id)">{{ item.bookingsCount }} ({{ item.totalAmount }}₽)</p>
 </ng-template>

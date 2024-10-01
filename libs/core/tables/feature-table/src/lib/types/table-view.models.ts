@@ -1,4 +1,6 @@
-export interface TableColumn {
+import { TemplateRef } from '@angular/core';
+
+export interface TableColumnVM {
   name: string;
   title: string;
   position: number;
@@ -7,5 +9,5 @@ export interface TableColumn {
   cellClass?: string;
   enabled: boolean;
   width: string;
-  projected: boolean;
+  projected: TemplateRef<unknown> | null;
 }
