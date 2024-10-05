@@ -10,12 +10,14 @@ import {
   selectAgencyId,
   selectAgencyLoading,
   selectAgencyRequisites,
+  selectAgencyRules,
   selectAgencySalesChannels,
   selectAgencyStatus,
 } from '../+state/agency.selectors';
 import {
   AgencyEntity,
   AgencyRequisitesEntity,
+  AgencyRulesEntity,
   Contacts,
   SalesChannelEntity,
   UpdateRequisitesRequestEntity,
@@ -37,6 +39,7 @@ export class AgencyFacade {
     this.store.select(selectAgencySalesChannels);
   public readonly contacts$: Observable<Contacts | null> = this.store.select(selectAgencyContacts);
   public readonly requisites$: Observable<AgencyRequisitesEntity | null> = this.store.select(selectAgencyRequisites);
+  public readonly rules$: Observable<AgencyRulesEntity | null> = this.store.select(selectAgencyRules);
 
   public init(userId: number): void {
     this.store.dispatch(agencyActions.init({ userId }));

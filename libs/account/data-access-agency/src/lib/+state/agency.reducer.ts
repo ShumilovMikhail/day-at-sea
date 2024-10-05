@@ -6,6 +6,8 @@ import {
   AgencyEntity,
   AgencyRequisitesEntity,
   Contacts,
+  AgencyRulesDTO,
+  AgencyRulesEntity,
   SalesChannelDTO,
   SalesChannelEntity,
   UpdateRequisitesRequestDTO,
@@ -80,6 +82,35 @@ export const agencyFeature = createFeature({
         error: payload.error,
       })
     ),
+
+    on(
+      agencyActions.updateAgencyRules,
+      (state: AgencyState, payload: { id: number; rules: AgencyRulesDTO }): AgencyState => ({
+        ...state,
+        status: 'loading',
+        error: null,
+      })
+    ),
+    on(
+      agencyActions.updateAgencyRulesSuccess,
+      (state: AgencyState, payload: { rules: AgencyRulesEntity }): AgencyState => ({
+        ...state,
+        status: 'loaded',
+        agency: {
+          ...state.agency,
+          rules: payload.rules,
+        } as AgencyEntity,
+      })
+    ),
+    on(
+      agencyActions.updateAgencyRulesFailure,
+      (state: AgencyState, payload: { error: ResponseError }): AgencyState => ({
+        ...state,
+        status: 'error',
+        error: payload.error,
+      })
+    ),
+
     on(
       agencyActions.updateAgencyRequisites,
       (state: AgencyState, payload: { id: number; requisites: UpdateRequisitesRequestDTO }): AgencyState => ({

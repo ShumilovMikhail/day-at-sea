@@ -11,6 +11,8 @@ import {
   AgencyRequisitesDTO,
   AgencyRequisitesEntity,
   Contacts,
+  AgencyRulesDTO,
+  AgencyRulesEntity,
   SalesChannelDTO,
   SalesChannelEntity,
   UpdateRequisitesRequestDTO,
@@ -65,6 +67,26 @@ export const updateAgencyContactsEffect$ = createEffect(
     ),
   { functional: true }
 );
+
+export const updateAgencyRulesEffect$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) =>
+    actions$.pipe(
+      ofType(agencyActions.updateAgencyRules),
+      switchMap(({ id, rules }: { id: number; rules: AgencyRulesDTO }) => {
+        return apiService.put<AgencyRulesDTO>(`agencies/${id}/rules`, rules).pipe(
+          map((rules: AgencyRulesDTO) => {
+            const rulesEntity = agencyDTOAdapter.rulesDTOToEntity(rules);
+            return agencyActions.updateAgencyRulesSuccess({ rules: rulesEntity });
+          }),
+          catchError(({ error }) => {
+            return of(agencyActions.updateAgencyRulesFailure({ error }));
+          })
+        );
+      })
+    ),
+  { functional: true }
+);
+
 export const updateAgencyContactsSuccessEffect$ = createEffect(
   (actions$ = inject(Actions), router = inject(Router)) =>
     actions$.pipe(

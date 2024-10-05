@@ -4,6 +4,8 @@ import {
   AgencyEntity,
   AgencyRequisitesDTO,
   AgencyRequisitesEntity,
+  AgencyRulesDTO,
+  AgencyRulesEntity,
   SalesChannelDTO,
   SalesChannelEntity,
   UpdateRequisitesRequestDTO,
@@ -18,6 +20,8 @@ export interface AgencyDTOAdapter {
   salesChannelDTOToEntity: (salesChannel: SalesChannelDTO) => SalesChannelEntity;
   salesChannelDTOToRequestDTO: (salesChannel: SalesChannelDTO) => SalesChannelRequestDTO;
   salesChannelRequestEntityToDTO: (salesChannelRequest: SalesChannelRequestEntity) => SalesChannelRequestDTO;
+  rulesEntityToDTO: (rules: AgencyRulesEntity) => AgencyRulesDTO;
+  rulesDTOToEntity: (rules: AgencyRulesDTO) => AgencyRulesEntity;
 }
 
 export const agencyDTOAdapter: AgencyDTOAdapter = {
@@ -39,6 +43,33 @@ export const agencyDTOAdapter: AgencyDTOAdapter = {
           status: salesChannel.status,
         };
       }),
+      rules: {
+        arrivalTime: agencyDTO.rules.arrival_time,
+        departureTime: agencyDTO.rules.departure_time,
+        limitations: agencyDTO.rules.limitations,
+        additionally: agencyDTO.rules.additionally,
+        seasons: agencyDTO.rules.seasons,
+      },
+    };
+  },
+
+  rulesEntityToDTO: (rules: AgencyRulesEntity): AgencyRulesDTO => {
+    return {
+      arrival_time: rules.arrivalTime,
+      departure_time: rules.departureTime,
+      limitations: rules.limitations,
+      additionally: rules.additionally,
+      seasons: rules.seasons,
+    };
+  },
+
+  rulesDTOToEntity: (rules: AgencyRulesDTO): AgencyRulesEntity => {
+    return {
+      arrivalTime: rules.arrival_time,
+      departureTime: rules.departure_time,
+      limitations: rules.limitations,
+      additionally: rules.additionally,
+      seasons: rules.seasons,
     };
   },
 

@@ -28,12 +28,14 @@ export interface AgencyDTO extends AgencyRequisitesDTO {
   id: number;
   contacts: Contacts;
   sales_channels: SalesChannelDTO[];
+  rules: AgencyRulesDTO;
 }
 
 export interface AgencyEntity extends AgencyRequisitesEntity {
   id: number;
   contacts: Contacts;
   salesChannels: SalesChannelEntity[];
+  rules: AgencyRulesEntity;
 }
 
 export interface SalesChannelEntity {
@@ -68,4 +70,31 @@ export interface UpdateRequisitesRequestDTO {
   city: string | null;
   phone: string | null;
   logo: string | ArrayBuffer | null;
+}
+
+export interface AgencyRulesDTO {
+  arrival_time: string;
+  departure_time: string;
+  limitations: RulesLimitation[];
+  additionally: string;
+  seasons: RulesSeason[];
+}
+
+export interface AgencyRulesEntity {
+  arrivalTime: string;
+  departureTime: string;
+  limitations: RulesLimitation[];
+  additionally: string;
+  seasons: RulesSeason[];
+}
+
+export interface RulesLimitation {
+  via: number;
+  term: number;
+}
+
+export interface RulesSeason {
+  title: string;
+  start: string;
+  end: string;
 }
