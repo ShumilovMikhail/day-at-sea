@@ -1,1 +1,32 @@
-<p>statistics-income-container works!</p>
+@if (incomeObjects$ | async; as incomeObjects) {
+<h2>
+  Доходы за год с {{ month }} {{ year - 1 }} года по {{ month }} {{ year }}:
+  <span>{{ totalIncome | async }} рублей</span>
+</h2>
+<table class="table">
+  <tr>
+    <th class="title">Объект</th>
+    <th class="total-income">Доход общий</th>
+    <th class="average-income">Среднесут. доход</th>
+    <th class="costs">Расходы</th>
+    <th class="profit">Прибыль</th>
+    <th class="downtime">Простои, дн.</th>
+    <th class="bookings-count">Брони</th>
+    <th class="rental-days">Срок проживания, дн.</th>
+  </tr>
+  @for (incomeObject of incomeObjects; track $index) {
+  <tr>
+    <td class="title">{{ incomeObject.title }}</td>
+    <td class="total-income">{{ incomeObject.totalIncome }}</td>
+    <td class="average-income">{{ incomeObject.averageIncome }}</td>
+    <td class="costs">{{ incomeObject.totalCost }}</td>
+    <td class="profit">{{ incomeObject.profit }}</td>
+    <td class="downtime">
+      {{ incomeObject.downtime }}
+    </td>
+    <td class="bookings-count">{{ incomeObject.bookingsCount }}</td>
+    <td class="rental-days">{{ incomeObject.rentalDays }}</td>
+  </tr>
+  }
+</table>
+}

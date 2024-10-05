@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, filter, map, Observable, switchMap, take, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, Subject, switchMap, take, tap, withLatestFrom } from 'rxjs';
 
 import { IncomeObjectDTO, IncomeObjectEntity } from '../types/income-object.models';
 import { ApiService } from '@http';
@@ -12,8 +12,10 @@ export class StatisticsIncomeObjectsService {
   private readonly myObjectsFacade = inject(MyObjectsFacade);
   private readonly agencyFacade = inject(AgencyFacade);
   private readonly apiService = inject(ApiService);
-  private readonly incomeObjectsEntity = new BehaviorSubject<IncomeObjectEntity[] | null>(null);
-  public readonly IncomeObjectsEntity$: Observable<IncomeObjectEntity[]> = this.incomeObjectsEntity.asObservable().pipe(
+  private readonly incomeObjectsEntity: Subject<IncomeObjectEntity[] | null> = new BehaviorSubject<
+    IncomeObjectEntity[] | null
+  >(null);
+  public readonly incomeObjectsEntity$: Observable<IncomeObjectEntity[]> = this.incomeObjectsEntity.asObservable().pipe(
     tap((incomes: IncomeObjectEntity[] | null) => {
       if (!incomes) this.getIncomeObjects();
     }),

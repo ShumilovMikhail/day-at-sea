@@ -1,0 +1,62 @@
+h2 {
+  font-size: 20px;
+  span {
+    font-weight: 400;
+  }
+}
+
+table {
+  margin-top: 20px;
+}
+
+.title {
+  width: 390px;
+}
+.total-income {
+  width: 150px;
+}
+.average-income {
+  width: 190px;
+}
+.costs {
+  width: 120px;
+}
+.profit {
+  width: 110px;
+}
+.downtime {
+  width: 170px;
+}
+.bookings-count {
+  width: 140px;
+}
+.rental-days {
+  width: 200px;
+}
+
+@media (max-width: 480px) {
+  .title {
+    width: 190px;
+  }
+  .total-income {
+    width: 99px;
+  }
+  .average-income {
+    display: none;
+  }
+  .costs {
+    display: none;
+  }
+  .profit {
+    display: none;
+  }
+  .downtime {
+    display: none;
+  }
+  .bookings-count {
+    display: none;
+  }
+  .rental-days {
+    display: none;
+  }
+}
