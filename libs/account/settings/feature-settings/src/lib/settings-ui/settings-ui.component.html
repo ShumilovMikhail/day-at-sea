@@ -77,6 +77,47 @@
         </div>
         <a class="link-edit-button" [routerLink]="['contacts/edit']">Изменить</a>
       </div>
+      <div class="settings-block rules" utilsAccordion [buttonToggle]="rulesChangeButton">
+        <div class="settings-block__header">
+          <h3>Правила и ограничения</h3>
+          <a [routerLink]="['rules/edit']">Изменить</a>
+          <img src="assets/images/icons/arrow-toggle.svg" alt="" #rulesChangeButton />
+        </div>
+        <div class="settings-block__content rules-content">
+          <div class="rules-time">
+            <div class="rules-item">
+              <span>Время заезда</span>
+              <p>{{ agencyVM.rules.arrivalTime ?? 'нет данных' }}</p>
+            </div>
+            <div class="rules-item">
+              <span>Время выезда</span>
+              <p>{{ agencyVM.rules.departureTime ?? 'нет данных' }}</p>
+            </div>
+          </div>
+          <div class="rules-limitations">
+            <span>Ограничения на бронирование</span>
+            @for (limitation of agencyVM.rules.limitations; track $index) {
+            <div class="rules-limitations__item">
+              <div class="rules-time">
+                <span>Заезд через</span>
+                <p>{{ limitation.via }}</p>
+              </div>
+              <div class="rules-time">
+                <span>Мин. срок проживания</span>
+                <p>{{ limitation.term }}</p>
+              </div>
+            </div>
+            }
+          </div>
+          <div class="rules-seasons">
+            <span>Сезоны</span>
+            @for (season of agencyVM.rules.seasons; track $index) {
+            <p>{{ season.title }}: {{ season.start }} - {{ season.end }}</p>
+            }
+          </div>
+        </div>
+        <a class="link-edit-button" [routerLink]="['contacts/edit']">Изменить</a>
+      </div>
     </div>
     <div class="settings-content__item">
       <div class="settings-block login-details" utilsAccordion [buttonToggle]="loginChangeButton">

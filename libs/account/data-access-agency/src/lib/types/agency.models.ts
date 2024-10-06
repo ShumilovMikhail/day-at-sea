@@ -73,18 +73,18 @@ export interface UpdateRequisitesRequestDTO {
 }
 
 export interface AgencyRulesDTO {
-  arrival_time: string;
-  departure_time: string;
+  arrival_time: string | null;
+  departure_time: string | null;
   limitations: RulesLimitation[];
-  additionally: string;
+  additionally: string | null;
   seasons: RulesSeason[];
 }
 
 export interface AgencyRulesEntity {
-  arrivalTime: string;
-  departureTime: string;
+  arrivalTime: string | null;
+  departureTime: string | null;
   limitations: RulesLimitation[];
-  additionally: string;
+  additionally: string | null;
   seasons: RulesSeason[];
 }
 

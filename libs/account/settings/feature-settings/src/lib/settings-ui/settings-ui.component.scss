@@ -122,6 +122,26 @@ h1 {
   padding: 6px 29px;
 }
 
+.rules-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.rules-time {
+  display: flex;
+  gap: 120px;
+  p {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.rules-limitations__item {
+  display: flex;
+  gap: 60px;
+}
+
 @media (max-width: 480px) {
   h1 {
     font-size: 24px;
