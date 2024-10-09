@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
@@ -34,6 +34,7 @@ export class StaffEditContainerComponent {
   private readonly staffFacade = inject(StaffFacade);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
   public readonly isLoading: Signal<boolean> = this.staffFacade.isLoading;
   public readonly paginationItems: PaginationItem[] = PAGINATION_ITEMS;
   public currentPage = '';
@@ -43,6 +44,7 @@ export class StaffEditContainerComponent {
     title.setTitle('Настройки - сотрудники');
     this.route.queryParams.pipe(takeUntilDestroyed()).subscribe((params) => {
       this.currentPage = params['page'];
+      this.changeDetectorRef.detectChanges();
     });
   }
 
