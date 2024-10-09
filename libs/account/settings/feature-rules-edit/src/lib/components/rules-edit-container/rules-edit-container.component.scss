@@ -1,0 +1,13 @@
+.rules-edit {
+  padding: 40px 50px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+@media (max-width: 480px) {
+  .rules-edit {
+    padding: 20px 15px;
+  }
+}
