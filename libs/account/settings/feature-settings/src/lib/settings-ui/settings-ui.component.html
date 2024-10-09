@@ -94,6 +94,7 @@
               <p>{{ agencyVM.rules.departureTime ?? 'нет данных' }}</p>
             </div>
           </div>
+          @if (0 < agencyVM.rules.limitations.length) {
           <div class="rules-limitations">
             <span>Ограничения на бронирование</span>
             @for (limitation of agencyVM.rules.limitations; track $index) {
@@ -109,12 +110,14 @@
             </div>
             }
           </div>
+          } @if (0 < agencyVM.rules.seasons.length) {
           <div class="rules-seasons">
             <span>Сезоны</span>
             @for (season of agencyVM.rules.seasons; track $index) {
             <p>{{ season.title }}: {{ season.start }} - {{ season.end }}</p>
             }
           </div>
+          }
         </div>
         <a class="link-edit-button" [routerLink]="['contacts/edit']">Изменить</a>
       </div>

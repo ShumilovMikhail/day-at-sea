@@ -72,6 +72,7 @@
       "@account/settings/feature-email-edit": ["libs/account/settings/feature-email-edit/src/index.ts"],
       "@account/settings/feature-password-edit": ["libs/account/settings/feature-password-edit/src/index.ts"],
       "@account/settings/feature-requisites-edit": ["libs/account/settings/feature-requisites-edit/src/index.ts"],
+      "@account/settings/feature-rules-edit": ["libs/account/settings/feature-rules-edit/src/index.ts"],
       "@account/settings/feature-settings": ["libs/account/settings/feature-settings/src/index.ts"],
       "@account/settings/feature-staff-edit": ["libs/account/settings/feature-staff-edit/src/index.ts"],
       "@account/settings/feature-username-edit": ["libs/account/settings/feature-username-edit/src/index.ts"],
