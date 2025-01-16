@@ -85,6 +85,7 @@
       "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
       "@auth/feature-register": ["libs/core/auth/feature-register/src/index.ts"],
       "@dadata/data-access-address": ["libs/core/dadata/data-access-address/src/index.ts"],
+      "@home/feature-header": ["libs/home/layers/feature-home-header/src/index.ts"],
       "@http": ["libs/core/http/src/index.ts"],
       "@layers": ["libs/core/layers/src/index.ts"],
       "@notifications/data-access": ["libs/core/notifications/data-access/src/index.ts"],
