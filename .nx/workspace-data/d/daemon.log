@@ -1,0 +1,24 @@
+[NX Daemon Server] - 2025-01-19T10:20:03.092Z - Started listening on: \\.\pipe\nx\C:\Users\misha\AppData\Local\Temp\38f7da26e5e1b0747d5b\d.sock
+[NX Daemon Server] - 2025-01-19T10:20:03.095Z - [WATCHER]: Subscribed to changes within: D:\angular\day-at-sea (native)
+[NX Daemon Server] - 2025-01-19T10:20:03.112Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-01-19T10:20:03.117Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2025-01-19T10:20:03.119Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-01-19T10:20:03.121Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2025-01-19T10:20:03.123Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2025-01-19T10:20:03.123Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 2.
+[NX Daemon Server] - 2025-01-19T10:20:03.124Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2025-01-19T10:20:03.124Z - [WATCHER]: Stopping the watcher for D:\angular\day-at-sea (sources)
+[NX Daemon Server] - 2025-01-19T10:20:03.124Z - [WATCHER]: Stopping the watcher for D:\angular\day-at-sea (outputs)
+[NX Daemon Server] - 2025-01-19T10:20:03.124Z - Server stopped because: "Request to shutdown"
+[NX Daemon Server] - 2025-01-19T10:24:28.560Z - Started listening on: \\.\pipe\nx\C:\Users\misha\AppData\Local\Temp\38f7da26e5e1b0747d5b\d.sock
+[NX Daemon Server] - 2025-01-19T10:24:28.564Z - [WATCHER]: Subscribed to changes within: D:\angular\day-at-sea (native)
+[NX Daemon Server] - 2025-01-19T10:24:28.566Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-01-19T10:24:28.568Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2025-01-19T10:24:28.569Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-01-19T10:24:28.571Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2025-01-19T10:24:28.572Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2025-01-19T10:24:28.573Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 2.
+[NX Daemon Server] - 2025-01-19T10:24:28.573Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2025-01-19T10:24:28.573Z - [WATCHER]: Stopping the watcher for D:\angular\day-at-sea (sources)
+[NX Daemon Server] - 2025-01-19T10:24:28.573Z - [WATCHER]: Stopping the watcher for D:\angular\day-at-sea (outputs)
+[NX Daemon Server] - 2025-01-19T10:24:28.574Z - Server stopped because: "Request to shutdown"
