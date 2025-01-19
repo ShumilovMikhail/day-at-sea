@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onNextStep()">
-  @if (step === 1) {
+  @if (step() === 1) {
   <div class="step">
     <div class="inputs-container">
       <ui-forms-input
@@ -42,7 +42,7 @@
       Продолжить
     </button>
   </div>
-  } @if (step === 2) {
+  } @if (step() === 2) {
   <div class="step">
     <p>Похоже, что вы здесь впервые. Укажите ваши ФИО, чтобы мы могли вас запомнить.</p>
     <ui-forms-input
@@ -59,7 +59,7 @@
     <button class="submit-button" type="submit" [disabled]="!form.get('fullName')?.valid">Продолжить</button>
     <ng-container *ngTemplateOutlet="linkButton"></ng-container>
   </div>
-  } @if (step === 3) {
+  } @if (step() === 3) {
   <div class="step">
     <p>Безопасность ваших данных — наш приоритет. Пожалуйста, введите надёжный пароль для входа</p>
     <ui-forms-password
@@ -79,9 +79,9 @@
           : undefined
       "
     ></ui-forms-password>
-    <button class="submit-button" type="submit" [disabled]="!form.valid || !form.get('password')?.valid || isLoading">
+    <button class="submit-button" type="submit" [disabled]="!form.valid || !form.get('password')?.valid || isLoading()">
       Сохранить
-      <div class="spinner-loader" *ngIf="isLoading"></div>
+      <div class="spinner-loader" *ngIf="isLoading()"></div>
     </button>
     <ng-container *ngTemplateOutlet="linkButton"></ng-container>
   </div>

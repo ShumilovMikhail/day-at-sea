@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { PushPipe } from '@ngrx/component';
 
 import { ModalComponent } from '@layers';
 import { RegisterUiComponent } from '../register-ui/register-ui.component';
@@ -12,7 +10,7 @@ import {
   fullNameValidator,
   latinLettersValidator,
 } from '@utils/validators';
-import { AuthFacade, emailAvailableValidator, usernameAvailableValidator } from '@auth/data-access';
+import { AuthFacadeSignal, emailAvailableValidator, usernameAvailableValidator } from '@auth/data-access';
 import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
 
 interface RegisterForm {
@@ -25,15 +23,15 @@ interface RegisterForm {
 @Component({
   selector: 'auth-register-container',
   standalone: true,
-  imports: [CommonModule, ModalComponent, RegisterUiComponent, PushPipe, RegisterFormUiComponent],
+  imports: [CommonModule, ModalComponent, RegisterUiComponent, RegisterFormUiComponent],
   templateUrl: './register-container.component.html',
   styleUrl: './register-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterContainerComponent {
   private readonly fb = inject(FormBuilder);
-  private readonly authFacade = inject(AuthFacade);
-  public readonly isLoading$: Observable<boolean> = this.authFacade.loading$;
+  private readonly authFacade = inject(AuthFacadeSignal);
+  public readonly isLoading$: Signal<boolean> = this.authFacade.loading$;
   public readonly form = this.fb.nonNullable.group({
     username: [
       '',

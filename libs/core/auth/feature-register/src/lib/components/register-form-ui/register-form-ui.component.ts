@@ -2,10 +2,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   Input,
-  Output,
   inject,
+  input,
+  output,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -31,24 +32,29 @@ const STEP_COUNT = 3;
 })
 export class RegisterFormUiComponent {
   @Input({ required: true }) form!: FormGroup<RegisterForm>;
-  @Input() isLoading!: boolean | undefined;
-  @Output() submitEvent = new EventEmitter<void>();
-  public step = 1;
+  public isLoading = input<boolean>();
+  public submitEvent = output<void>();
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  public step = signal<number>(1);
 
   public onNextStep(): void {
-    if (this.step === STEP_COUNT) {
+    let step = this.step();
+    if (step === STEP_COUNT) {
       this.submitEvent.emit();
       return;
     }
-    this.step = this.step === STEP_COUNT ? this.step : ++this.step;
+    step = step === STEP_COUNT ? step : ++step;
+    this.step.set(step);
     this.changeDetectorRef.detectChanges();
   }
+
   public onPreviousStep(): void {
-    if (this.step === 1) {
+    let step = this.step();
+    if (step === 1) {
       return;
     }
-    this.step = this.step === 1 ? this.step : --this.step;
+    step = step === 1 ? step : --step;
+    this.step.set(step);
     this.changeDetectorRef.detectChanges();
   }
 }
