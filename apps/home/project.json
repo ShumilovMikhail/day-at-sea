@@ -19,10 +19,14 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/home/public"
+            "input": "./libs/shared/assets/",
+            "output": "./assets"
           }
         ],
         "styles": ["apps/home/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/styles"]
+        },
         "scripts": []
       },
       "configurations": {
