@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, take } from 'rxjs';
 
-import { AuthFacadeSignal, UserEntity, UserFacade } from '@auth/data-access';
+import { AuthFacade, UserEntity, UserFacade } from '@auth/data-access';
 import { HeaderContainerComponent } from '@account/layers/header';
 import { SideMenuContainerComponent } from '@account/layers/side-menu';
 import { AgencyFacade } from '@account/data-access-agency';
@@ -17,7 +17,7 @@ import { FeatureNotificationsComponent } from '@notifications/feature-notificati
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  private readonly authFacade = inject(AuthFacadeSignal);
+  private readonly authFacade = inject(AuthFacade);
   private readonly userFacade = inject(UserFacade);
   public readonly agencyFacade = inject(AgencyFacade);
   public readonly router = inject(Router);

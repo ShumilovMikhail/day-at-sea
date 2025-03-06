@@ -10,4 +10,4 @@ export * from './lib/types/register.models';
 export * from './lib/services/token.interceptor';
 export * from './lib/types/user.models';
 export * from './lib/services/auth.guard';
-export * from './lib/services/auth.facade-signal';
+export * from './lib/services/auth.facade';

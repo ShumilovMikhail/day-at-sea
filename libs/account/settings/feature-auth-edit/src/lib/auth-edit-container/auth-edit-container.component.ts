@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 
 import { AuthEditUiComponent } from '../auth-edit-ui/auth-edit-ui.component';
 import { UsernameEditContainerComponent } from '@account/settings/feature-username-edit';
-import { AuthFacadeSignal } from '@auth/data-access';
+import { AuthFacade } from '@auth/data-access';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
 import { EmailEditContainerComponent } from '@account/settings/feature-email-edit';
 import { PasswordEditContainerComponent } from '@account/settings/feature-password-edit';
@@ -26,7 +26,7 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthEditContainerComponent {
-  private readonly authFacade = inject(AuthFacadeSignal);
+  private readonly authFacade = inject(AuthFacade);
   private readonly router = inject(Router);
   public readonly isAuthenticate$: Signal<boolean> = this.authFacade.isAuthenticate$;
   constructor(title: Title) {

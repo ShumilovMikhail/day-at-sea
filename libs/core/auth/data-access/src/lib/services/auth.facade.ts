@@ -18,7 +18,7 @@ import { ResponseError } from '@http';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
-export class AuthFacadeSignal {
+export class AuthFacade {
   private readonly store = inject(Store);
 
   public readonly status$: Signal<AuthStatus | null> = toSignal(
