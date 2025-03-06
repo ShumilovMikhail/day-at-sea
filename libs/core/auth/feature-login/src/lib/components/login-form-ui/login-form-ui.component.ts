@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, Input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -15,9 +15,9 @@ import { FormControlPipe } from '@utils/pipes';
 })
 export class LoginFormUiComponent {
   @Input({ required: true }) form!: FormGroup;
-  @Input() isLoading!: boolean | undefined;
-  @Input() error!: string | null;
-  @Output() submitEvent = new EventEmitter<void>();
+  public isLoading = input<boolean>();
+  public error = input<string | null>();
+  public submitEvent = output<void>();
 
   public onSubmit(): void {
     this.submitEvent.emit();

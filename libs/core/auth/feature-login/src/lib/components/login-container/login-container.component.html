@@ -2,8 +2,8 @@
   <auth-login-ui>
     <auth-login-form-ui
       [form]="form"
-      [error]="errors$ | async"
-      [isLoading]="isLoading | ngrxPush"
+      [error]="errors$()"
+      [isLoading]="isLoading$()"
       (submitEvent)="onSubmit()"
     ></auth-login-form-ui>
   </auth-login-ui>
