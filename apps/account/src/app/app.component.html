@@ -1,10 +1,10 @@
 <div class="wrapper">
   <account-header-container
-    [isMobileButtonActive]="isSideMenuMobileOpen"
+    [isMobileButtonActive]="isSideMenuMobileOpen()"
     (menuOpenEvent)="onSideMenuMobileToggle($event)"
   ></account-header-container>
   <div class="content">
-    <account-side-menu-container [isModalOpen]="isSideMenuMobileOpen"></account-side-menu-container>
+    <account-side-menu-container [isModalOpen]="isSideMenuMobileOpen()"></account-side-menu-container>
     <router-outlet></router-outlet>
     <notifications-feature-notifications></notifications-feature-notifications>
   </div>

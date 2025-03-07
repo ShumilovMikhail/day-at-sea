@@ -1,3 +1,4 @@
+@if(mode(); as mode) {
 <div class="email-edit">
   <div class="header">
     <h2>E-mail</h2>
@@ -12,10 +13,10 @@
     </p>
     @switch (mode) { @case ('default') {
     <div class="email">
-      <p>{{ emailDefault }}</p>
+      <p>{{ emailDefault() }}</p>
       <button class="mobile-change-button" (click)="onChangeModeToEdit()">Изменить</button>
     </div>
-    } @case ('edit') {
+    } @case ('edit') { @if(form(); as form) {
     <form [formGroup]="form">
       <ui-forms-input
         [control]="form.get('email')! | formControl"
@@ -33,15 +34,16 @@
         <button
           class="button-submit"
           type="submit"
-          [disabled]="form.get('email')?.value === emailDefault || loading || form.get('email')?.errors"
+          [disabled]="form.get('email')?.value === emailDefault || loading() || form.get('email')?.errors"
           (click)="onSubmit()"
         >
           Сохранить
-          <div class="spinner-loader" *ngIf="loading"></div>
+          <div class="spinner-loader" *ngIf="loading()"></div>
         </button>
         <button class="button-cancel" type="button" (click)="onChangeModeToDefault()">Отмена</button>
       </div>
     </form>
-    } }
+    } } }
   </div>
 </div>
+}

@@ -1,8 +1,8 @@
-@if (email) {
+@if (email(); as email) {
 <account-email-edit-ui
   [email]="email"
   [form]="form"
-  [loading]="loading"
+  [loading]="loading()"
   (cancelChangeEmailEvent)="onCancelChangeEmail()"
   (submitEvent)="onSubmit()"
 ></account-email-edit-ui>
