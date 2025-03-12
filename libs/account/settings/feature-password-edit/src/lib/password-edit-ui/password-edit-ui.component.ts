@@ -1,23 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  EventEmitter,
-  inject,
-  input,
-  Input,
-  OnInit,
-  output,
-  Output,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, input, OnInit, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { UiFormsInputComponent } from '@ui/forms';
 import { FormControlPipe } from '@utils/pipes';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { takeUntil } from 'rxjs';
 
 enum Mode {
   DEFAULT = 'default',
