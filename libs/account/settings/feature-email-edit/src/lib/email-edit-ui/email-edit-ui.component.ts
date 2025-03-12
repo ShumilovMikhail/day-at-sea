@@ -36,10 +36,10 @@ export class EmailEditUiComponent implements OnInit {
   public loading = input.required<boolean>();
   public submitEvent = output<void>();
   public cancelChangeEmailEvent = output<void>();
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly email$: Observable<string> = toObservable(this.email);
   public mode: WritableSignal<Mode> = signal(Mode.DEFAULT);
   public emailDefault: WritableSignal<string> = signal('');
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly email$: Observable<string> = toObservable(this.email);
 
   ngOnInit(): void {
     this.email$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((email: string) => {
