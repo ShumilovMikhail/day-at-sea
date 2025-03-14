@@ -1,3 +1,4 @@
+@if(mode(); as mode) {
 <div class="username-edit">
   <div class="header">
     <h2>Имя пользователя</h2>
@@ -9,10 +10,10 @@
     <p class="text">Нужен, чтобы быстро войти в личный кабинет</p>
     @switch (mode) { @case ('default') {
     <div class="username">
-      <p>{{ usernameDefault }}</p>
+      <p>{{ usernameDefault() }}</p>
       <button class="mobile-change-button" (click)="onChangeModeToEdit()">Изменить</button>
     </div>
-    } @case ('edit') {
+    } @case ('edit') { @if(form(); as form) {
     <form [formGroup]="form">
       <ui-forms-input
         [control]="form.get('username')! | formControl"
@@ -33,15 +34,16 @@
         <button
           class="button-submit"
           type="submit"
-          [disabled]="form.get('username')?.value === usernameDefault || loading || form.get('username')?.errors"
+          [disabled]="form.get('username')?.value === usernameDefault() || loading() || form.get('username')?.errors"
           (click)="onSubmit()"
         >
           Сохранить
-          <div class="spinner-loader" *ngIf="loading"></div>
+          <div class="spinner-loader" *ngIf="loading()"></div>
         </button>
         <button class="button-cancel" type="button" (click)="onChangeModeToDefault()">Отмена</button>
       </div>
     </form>
-    } }
+    } } }
   </div>
 </div>
+}

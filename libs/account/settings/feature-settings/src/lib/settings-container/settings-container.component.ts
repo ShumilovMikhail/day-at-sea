@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Observable, map } from 'rxjs';
 
 import { SettingsUiComponent } from '../settings-ui/settings-ui.component';
-import { UserFacadeSignal } from '@auth/data-access';
+import { UserFacade } from '@auth/data-access';
 import { AgencyEntity, AgencyFacade } from '@account/data-access-agency';
 import { AgencyVM, UserVM } from '../types/settings.models';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
@@ -21,10 +21,10 @@ import { toSignal } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsContainerComponent {
-  private readonly userFacade = inject(UserFacadeSignal);
+  private readonly userFacade = inject(UserFacade);
   private readonly agencyFacade = inject(AgencyFacade);
   public readonly userVM: Signal<UserVM | null> = computed(() => {
-    const user = this.userFacade.user$();
+    const user = this.userFacade.user();
     if (!user) {
       return null;
     }

@@ -3,17 +3,16 @@ import {
   ChangeDetectorRef,
   Component,
   DestroyRef,
-  OnInit,
   WritableSignal,
+  effect,
   inject,
   signal,
+  untracked,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
-import { UserFacadeSignal } from '@auth/data-access';
-import { Observable, filter } from 'rxjs';
+import { UserFacade } from '@auth/data-access';
 import { conformPasswordValidator, containsSpacesValidator, latinLettersValidator } from '@utils/validators';
 import { PasswordEditUiComponent } from '../password-edit-ui/password-edit-ui.component';
 
@@ -25,28 +24,27 @@ import { PasswordEditUiComponent } from '../password-edit-ui/password-edit-ui.co
   styleUrl: './password-edit-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordEditContainerComponent implements OnInit {
+export class PasswordEditContainerComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly fb = inject(FormBuilder);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly userFacade = inject(UserFacadeSignal);
-  private readonly password$: Observable<string> = toObservable(this.userFacade.userPassword$).pipe(
-    filter((password: string | null): password is string => Boolean(password))
-  );
+  private readonly userFacade = inject(UserFacade);
   public readonly form = this.fb.nonNullable.group({
     password: ['', [Validators.required, Validators.minLength(8), containsSpacesValidator(), latinLettersValidator()]],
     conformPassword: ['', [Validators.required, conformPasswordValidator()]],
   });
   public loading = signal(false);
   public password: WritableSignal<string | null> = signal(null);
-
-  ngOnInit(): void {
-    this.password$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((password: string) => {
-      this.loading.set(false);
-      this.password.set(password);
-      this.changeDetectorRef.detectChanges();
+  private readonly passwordEffect = effect(() => {
+    const password = this.userFacade.userPassword();
+    untracked(() => {
+      if (password) {
+        this.loading.set(false);
+        this.password.set(password);
+        this.changeDetectorRef.detectChanges();
+      }
     });
-  }
+  });
 
   public onCancelChangePassword(): void {
     this.form.get('password')?.reset('');

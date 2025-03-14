@@ -2,18 +2,16 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  DestroyRef,
-  OnInit,
   WritableSignal,
+  effect,
   inject,
   signal,
+  untracked,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable, filter } from 'rxjs';
 
-import { emailAvailableValidator, UserFacadeSignal } from '@auth/data-access';
+import { emailAvailableValidator, UserFacade } from '@auth/data-access';
 import { EmailEditUiComponent } from '../email-edit-ui/email-edit-ui.component';
 
 @Component({
@@ -24,28 +22,26 @@ import { EmailEditUiComponent } from '../email-edit-ui/email-edit-ui.component';
   styleUrl: './email-edit-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmailEditContainerComponent implements OnInit {
-  private readonly destroyRef = inject(DestroyRef);
+export class EmailEditContainerComponent {
   private readonly fb = inject(FormBuilder);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly userFacade = inject(UserFacadeSignal);
-  private readonly email$: Observable<string> = toObservable(this.userFacade.userEmail$).pipe(
-    filter((email: string | null): email is string => Boolean(email))
-  );
+  private readonly userFacade = inject(UserFacade);
   public readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email], [emailAvailableValidator()]],
   });
   public loading: WritableSignal<boolean> = signal<boolean>(false);
   public email: WritableSignal<string | null> = signal<string | null>(null);
-
-  ngOnInit(): void {
-    this.email$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((email: string) => {
-      this.form.patchValue({ email });
-      this.loading.set(false);
-      this.email.set(email);
-      this.changeDetectorRef.detectChanges();
+  private readonly emailEffect = effect(() => {
+    const email = this.userFacade.userEmail();
+    untracked(() => {
+      if (email) {
+        this.form.patchValue({ email });
+        this.loading.set(false);
+        this.email.set(email);
+        this.changeDetectorRef.detectChanges();
+      }
     });
-  }
+  });
 
   public onSubmit(): void {
     if (this.form.valid) {

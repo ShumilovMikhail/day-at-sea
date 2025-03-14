@@ -1,13 +1,20 @@
-import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  WritableSignal,
+  effect,
+  inject,
+  signal,
+  untracked,
+} from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { filter, Observable, take } from 'rxjs';
 
-import { AuthFacade, UserEntity, UserFacadeSignal } from '@auth/data-access';
+import { AuthFacade, UserFacade } from '@auth/data-access';
 import { HeaderContainerComponent } from '@account/layers/header';
 import { SideMenuContainerComponent } from '@account/layers/side-menu';
 import { AgencyFacade } from '@account/data-access-agency';
 import { FeatureNotificationsComponent } from '@notifications/feature-notifications';
-import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   standalone: true,
@@ -19,23 +26,23 @@ import { toObservable } from '@angular/core/rxjs-interop';
 })
 export class AppComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
-  private readonly userFacade = inject(UserFacadeSignal);
-  private readonly user$: Observable<UserEntity | null> = toObservable(this.userFacade.user$);
+  private readonly userFacade = inject(UserFacade);
   public readonly agencyFacade = inject(AgencyFacade);
   public readonly router = inject(Router);
   public isSideMenuMobileOpen: WritableSignal<boolean> = signal(false);
   public userExist: WritableSignal<boolean> = signal(false);
+  private readonly userEffect = effect(() => {
+    const user = this.userFacade.user();
+    if (user) {
+      this.userEffect.destroy();
+      untracked(() => {
+        this.agencyFacade.init(user!.id);
+      });
+    }
+  });
 
   ngOnInit(): void {
     this.authFacade.init();
-    this.user$
-      .pipe(
-        filter((user: UserEntity | null) => Boolean(user)),
-        take(1)
-      )
-      .subscribe((user) => {
-        this.agencyFacade.init(user!.id);
-      });
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isSideMenuMobileOpen.set(false);

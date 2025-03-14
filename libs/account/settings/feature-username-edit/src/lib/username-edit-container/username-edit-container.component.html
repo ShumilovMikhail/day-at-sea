@@ -1,8 +1,8 @@
-@if (username) {
+@if (username(); as username) {
 <account-username-edit-ui
   [username]="username"
   [form]="form"
-  [loading]="loading"
+  [loading]="loading()"
   (cancelChangeUsernameEvent)="cancelChangeUsername()"
   (submitEvent)="onSubmit()"
 ></account-username-edit-ui>

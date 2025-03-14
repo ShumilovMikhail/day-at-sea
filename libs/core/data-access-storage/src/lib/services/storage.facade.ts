@@ -1,11 +1,11 @@
-import { inject, Injectable } from '@angular/core';
-import { filter, Observable, of, switchMap } from 'rxjs';
+import { effect, inject, Injectable } from '@angular/core';
+import { Observable, of, switchMap } from 'rxjs';
 
 import { LocalStorageService } from './local-storage.service';
 import { SessionStorageService } from './session-storage.service';
 import { RemoteStorageService } from './remote-storage.service';
 import { StorageList, StorageOperationClearConfig, StorageOperationConfig } from '../types/storage.models';
-import { UserEntity, UserFacade } from '@auth/data-access';
+import { UserFacade } from '@auth/data-access';
 
 @Injectable({ providedIn: 'root' })
 export class StorageFacade {
@@ -26,13 +26,14 @@ export class StorageFacade {
   }
 
   public init(): void {
-    this.userFacade.user$
-      .pipe(filter((user: UserEntity | null): user is UserEntity => Boolean(user)))
-      .subscribe((user) => {
+    effect(() => {
+      const user = this.userFacade.user();
+      if (user) {
         for (const key in this.storageList) {
           this.storageList[key].init(user.id);
         }
-      });
+      }
+    });
   }
 
   public setItem(
