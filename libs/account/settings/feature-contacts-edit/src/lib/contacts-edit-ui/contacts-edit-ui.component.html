@@ -1,5 +1,6 @@
 <div class="contacts-edit">
   <h1>Контакты, Сайт, Соцсети, Мессенжеры</h1>
+  @if (form(); as form) {
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-inner">
       <div class="phones form-block">
@@ -72,11 +73,12 @@
       </div>
     </div>
     <div class="buttons-container">
-      <button class="button-submit" type="submit" [disabled]="isLoading || form.invalid">
+      <button class="button-submit" type="submit" [disabled]="isLoading() || form.invalid">
         Сохранить
-        <div class="spinner-loader" *ngIf="isLoading"></div>
+        <div class="spinner-loader" *ngIf="isLoading()"></div>
       </button>
       <button class="button-cancel" type="button" (click)="onCancel()">Отменить</button>
     </div>
   </form>
+  }
 </div>

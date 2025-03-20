@@ -1,7 +1,7 @@
 @if (form) {
 <account-contacts-edit-ui
   [form]="form"
-  [isLoading]="(loading$ | async) ?? false"
+  [isLoading]="loading()"
   (submitEvent)="onSubmit()"
   (cancelEvent)="onCancel()"
   (addPhoneEvent)="onAddPhone()"

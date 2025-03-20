@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Signal, effect, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { Observable, filter, map, take } from 'rxjs';
 
-import { AgencyFacade, Contacts } from '@account/data-access-agency';
+import { AgencyFacadeSignal, Contacts } from '@account/data-access-agency';
 import { ContactsForm, ContactsVM } from '../types/contacts.models';
 import { ContactsEditUiComponent } from '../contacts-edit-ui/contacts-edit-ui.component';
 import { UiIndicatorsLoaderComponent } from '@ui/indicators';
@@ -21,31 +20,25 @@ export { contactsEntityToVM } from './contactsEntityToVM.adapter';
   styleUrl: './contacts-edit-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContactsEditContainerComponent implements OnInit {
+export class ContactsEditContainerComponent {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly agencyFacade = inject(AgencyFacade);
+  private readonly agencyFacade = inject(AgencyFacadeSignal);
   private readonly fb = inject(FormBuilder);
-  private readonly contactsVM$: Observable<Contacts | null> = this.agencyFacade.contacts$;
+  private readonly contactsVM: Signal<Contacts | null> = this.agencyFacade.contacts;
   private readonly router = inject(Router);
   public form!: FormGroup<ContactsForm>;
-  public readonly loading$ = this.agencyFacade.loading$;
+  public readonly loading: Signal<boolean> = this.agencyFacade.loading;
+  private readonly contactsVMEffect = effect(() => {
+    const contactsVM = this.contactsVM();
+    if (contactsVM) {
+      const contactsEntity = contactsEntityToVM.entityToVM(contactsVM);
+      this.initializeForm(contactsEntity);
+      this.contactsVMEffect.destroy();
+    }
+  });
 
   constructor(private readonly title: Title) {
     title.setTitle('Настройки - Контакты, Сайт, Соцсети, Мессенжеры');
-  }
-
-  ngOnInit(): void {
-    this.contactsVM$
-      .pipe(
-        filter((contactsVM: Contacts | null): contactsVM is Contacts => Boolean(contactsVM)),
-        take(1),
-        map((contactsEntity: Contacts): ContactsVM => {
-          return contactsEntityToVM.entityToVM(contactsEntity);
-        })
-      )
-      .subscribe((contactsVM: ContactsVM) => {
-        this.initializeForm(contactsVM);
-      });
   }
 
   public onAddPhone(): void {

@@ -27,7 +27,7 @@ import { agencyDTOAdapter } from '../+state/agency-dto.adapter';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
-export class AgencyFacade {
+export class AgencyFacadeSignal {
   private readonly store = inject(Store);
 
   public readonly status: Signal<AgencyStatus | null> = toSignal(

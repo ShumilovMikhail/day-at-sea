@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ContactsForm } from '../types/contacts.models';
 import { UiFormsInputComponent, UiFormsPhoneComponent } from '@ui/forms';
@@ -15,15 +15,15 @@ import { FormControlPipe } from '@utils/pipes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactsEditUiComponent {
-  @Input({ required: true }) form!: FormGroup<ContactsForm>;
-  @Input() isLoading = false;
-  @Output() submitEvent = new EventEmitter<void>();
-  @Output() cancelEvent = new EventEmitter<void>();
-  @Output() addPhoneEvent = new EventEmitter<void>();
-  @Output() deletePhone = new EventEmitter<number>();
+  public readonly form = input<FormGroup<ContactsForm>>();
+  public readonly isLoading = input<boolean>(false);
+  public readonly submitEvent = output<void>();
+  public readonly cancelEvent = output<void>();
+  public readonly addPhoneEvent = output<void>();
+  public readonly deletePhone = output<number>();
 
   get phones(): FormArray {
-    return this.form.get('phones') as FormArray;
+    return this.form()?.get('phones') as FormArray;
   }
 
   public onAddPhoneButtonClick(): void {
