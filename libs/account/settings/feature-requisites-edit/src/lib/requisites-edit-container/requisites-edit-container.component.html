@@ -1,7 +1,7 @@
-@if (requisites) {
+@if (requisites(); as requisites) {
 <account-requisites-edit-ui
   [formRequisites]="form"
-  [isLoading]="(loading$ | async) ?? false"
+  [isLoading]="loading()"
   (loadLogoEvent)="onLoadLogo($event)"
   (submitEvent)="onSubmit()"
   (cancelEvent)="onCancel()"

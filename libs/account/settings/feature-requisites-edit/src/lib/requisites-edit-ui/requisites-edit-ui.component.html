@@ -1,3 +1,4 @@
+@if (formRequisites(); as formRequisites) {
 <div class="requisites-edit">
   <h2>Реквизиты агенства</h2>
   <div class="inner">
@@ -45,11 +46,12 @@
     <button
       class="button-submit"
       (click)="onSubmit()"
-      [disabled]="formRequisites.get('contactPerson')!.errors || isLoading"
+      [disabled]="formRequisites.get('contactPerson')!.errors || isLoading()"
     >
       Сохранить
-      <div class="spinner-loader" *ngIf="isLoading"></div>
+      <div class="spinner-loader" *ngIf="isLoading()"></div>
     </button>
     <button class="button-cancel" (click)="onCancel()">Отменить</button>
   </div>
 </div>
+}

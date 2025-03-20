@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 
@@ -22,11 +22,11 @@ import { FormControlPipe } from '@utils/pipes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RequisitesEditUiComponent {
-  @Input({ required: true }) formRequisites!: FormGroup<RequisitesForm>;
-  @Input() isLoading = false;
-  @Output() cancelEvent = new EventEmitter<void>();
-  @Output() submitEvent = new EventEmitter<void>();
-  @Output() loadLogoEvent = new EventEmitter<File>();
+  public readonly formRequisites = input<FormGroup<RequisitesForm>>();
+  public readonly isLoading = input<boolean>(false);
+  public readonly cancelEvent = output<void>();
+  public readonly submitEvent = output<void>();
+  public readonly loadLogoEvent = output<File>();
 
   public onLogoChange(event: Event): void {
     const loadedLogo = (event.target as HTMLInputElement).files![0];
